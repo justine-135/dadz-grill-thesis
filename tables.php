@@ -2,7 +2,7 @@
 
 <div class="overlay">
     <div class="order-info">
-        <div class="head flex-row">
+        <div class="head flex-row modal-head">
             <h4 class="order-tbl-number"></h4>
             <button class="close-order-btn">Close</button>
         </div>
