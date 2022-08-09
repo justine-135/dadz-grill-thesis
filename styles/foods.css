@@ -13,26 +13,6 @@
   margin: 70px 0 0 20px;
 }
 
-.inventory-table {
-  border-collapse: collapse;
-}
-
-.inventory-table tr {
-  border-bottom: 1px solid rgba(128, 128, 128, 0.158);
-}
-
-.inventory-table thead th {
-  background-color: rgba(156, 156, 156, 0.089);
-  padding: 0.5rem 0rem;
-  font-size: 1rem;
-}
-
-.inventory-table td {
-  color: #444444;
-  text-align: center;
-  padding: 10px 0px;
-}
-
 .inventory-table tbody td:nth-child(9) {
   display: none;
 }
@@ -41,45 +21,10 @@
   display: none;
 }
 
-.inventory-table {
-  background-color: white;
-  width: 100%;
-  min-width: 880px;
-  padding: 10px 10px 0 10px;
-  overflow: auto;
-}
-
-.inventory-table thead {
-  width: 100%;
-  background-color: white;
-}
-
-.inventory-table thead th {
-  color: #242424;
-  background-color: rgba(156, 156, 156, 0.089);
-  padding: 0.5rem 0rem;
-  font-size: 1rem;
-}
-
-.inventory-table thead th:last-child {
-  width: 150px;
-}
-
-.ing-tbl tbody td:nth-child(7) span {
-  background-color: rgba(253, 253, 75, 0.603);
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-weight: 700;
-}
-
-.ing-tbl tbody td:nth-child(7) span.success {
-  background-color: rgba(75, 253, 84, 0.603);
-}
-
-.ing-tbl tbody td:nth-child(7) span.cancel {
-  background-color: rgba(253, 75, 75, 0.603);
-}
-
-.delete-message {
-  margin-bottom: 10px;
+.tbl-img-data {
+  margin-top: 5px;
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }

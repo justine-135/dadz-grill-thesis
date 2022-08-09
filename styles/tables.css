@@ -61,15 +61,15 @@
   font-weight: 600;
 }
 
-.action-td form input[type="submit"] {
+.action-td form input[type="submit"], .action-td button {
   font-family: "Nunito Sans", sans-serif;
   margin: auto;
-  color: white;
+  color: #444444;
   text-decoration: none;
   border-radius: 5px;
   font-weight: 700;
   font-size: 1rem;
-  padding: 0.5rem 0.8rem;
+  padding: 0.275rem 0.775rem;
   border: none;
   cursor: pointer;
 }
@@ -197,3 +197,21 @@
 .status-action-col{
   max-width: 175px;
 } */
+
+.orders-list .pad10{
+  padding-top: 12px;
+}
+
+.orders-table{
+  margin: auto;
+}
+
+.orders-table td{
+  text-align: left;
+  height: 30px;
+}
+
+.order-x-col{
+  width: 50px;
+  text-align: center !important; 
+}

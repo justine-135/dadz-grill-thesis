@@ -15,51 +15,6 @@
   padding: 10px 10px 0 10px;
 }
 
-.admin-table {
-  border-collapse: collapse;
-}
-
-.admin-table thead th {
-  background-color: rgba(156, 156, 156, 0.089);
-  padding: 0.5rem 0rem;
-  font-size: 1rem;
-}
-
-.admin-table td {
-  padding-left: 15px;
-  height: 65px;
-}
-
-.admin-table {
-  background-color: white;
-  width: 100%;
-  min-width: 880px;
-  /* padding: 10px 10px 0 10px; */
-  overflow: auto;
-}
-
-.admin-table thead {
-  width: 100%;
-  background-color: white;
-}
-
-.admin-table thead th {
-  color: #242424;
-  background-color: rgba(156, 156, 156, 0.089);
-  padding: 0.5rem 0rem;
-  font-size: 1rem;
-}
-
-.admin-table thead th:last-child {
-  width: 150px;
-}
-
-.admin-table td {
-  color: #444444;
-  padding-left: 15px;
-  padding-top: 10px;
-}
-
 .delete-account-form {
   width: 400px !important;
 }
@@ -70,14 +25,4 @@
 
 .info-text {
   margin-bottom: 5px;
-}
-
-.admin-action-table {
-  width: 30px !important;
-  min-width: 0px !important;
-  margin-left: -3px;
-}
-
-.add-admin-btn {
-  margin-left: auto !important;
 }
