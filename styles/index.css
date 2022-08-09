@@ -1,0 +1,128 @@
+h2 {
+  font-family: "Nunito Sans", sans-serif !important;
+}
+
+.main-content {
+  padding: 70px 0px 20px 240px;
+  transition: 200ms;
+}
+
+.main-content.shrink {
+  padding: 70px 0 0 80px;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-areas:
+    "sales sales sales purchase purchase purchase"
+    "tables tables tables . . .";
+  grid-gap: 1em;
+  width: 96%;
+  margin: 70px 0 0 10px;
+}
+
+.overview {
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 2px 0px rgba(202, 202, 202, 0.247);
+}
+
+.overview h6 {
+  font-size: 1.275rem;
+  padding-bottom: 20px;
+}
+
+.sales-overview {
+  grid-area: sales;
+}
+
+.purchase-overview {
+  grid-area: purchase;
+}
+
+.tables-overview {
+  grid-area: tables;
+}
+.stats-container {
+  display: grid;
+  grid-template-areas:
+    "sales rev"
+    "cost profs";
+  grid-gap: 1em;
+}
+
+.label-number .label {
+  color: #444444;
+}
+
+.label-number .number {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.sales {
+  grid-area: sales;
+  padding-bottom: 1em;
+  border-right: 1px solid rgba(128, 128, 128, 0.24);
+  background-image: linear-gradient(
+    rgba(128, 128, 128, 0.24),
+    rgba(128, 128, 128, 0.24)
+  );
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: 80% 1px;
+}
+
+.rev {
+  grid-area: rev;
+  padding-bottom: 1em;
+  background-image: linear-gradient(
+    rgba(128, 128, 128, 0.24),
+    rgba(128, 128, 128, 0.24)
+  );
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: 80% 1px;
+}
+
+.cost {
+  grid-area: cost;
+  border-right: 1px solid rgba(128, 128, 128, 0.24);
+}
+
+.profs {
+  grid-area: profs;
+}
+
+.table-color {
+  margin-right: 10px;
+}
+
+.table-circle.red {
+  width: 25px;
+  height: 25px;
+  background-color: #ff5555;
+  border-radius: 50%;
+}
+
+.table-circle.green {
+  width: 25px;
+  height: 25px;
+  background-color: #22f300;
+  border-radius: 50%;
+}
+
+.table-circle.yellow {
+  width: 25px;
+  height: 25px;
+  background-color: #ffe141;
+  border-radius: 50%;
+}
+
+.table-circle.blue {
+  width: 25px;
+  height: 25px;
+  background-color: #416bff;
+  border-radius: 50%;
+}

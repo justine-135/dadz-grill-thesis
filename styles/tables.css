@@ -1,0 +1,197 @@
+.tables-container {
+  padding: 50px 20px 20px 220px;
+  transition: 200ms;
+}
+
+.tables-container.shrink {
+  padding: 50px 20px 0 60px;
+}
+
+.tables {
+  display: flex;
+  position: relative;
+  width: 100%;
+  margin: 70px 0 0 20px;
+  padding: 10px 10px 0 10px;
+  align-items: flex-start !important;
+  overflow-x: auto;
+}
+
+.tables-table thead th {
+  background-color: rgba(156, 156, 156, 0.089);
+  padding: 0.5rem 0rem;
+  font-size: 1rem;
+}
+
+.tables-table td {
+  padding: 10px 0px;
+}
+
+.tables-table {
+  background-color: white;
+  width: 100%;
+  /* min-width: 880px; */
+  overflow: auto;
+  border-collapse: collapse;
+}
+
+.tables-table thead {
+  background-color: white;
+}
+
+.tables-table thead th {
+  color: #242424;
+  background-color: rgba(156, 156, 156, 0.089);
+  /* padding: 0.5rem 0rem; */
+  font-size: 1rem;
+}
+
+/* .tables-table thead th:last-child {
+  width: 150px;
+} */
+
+.tables-table td {
+  color: #444444;
+  text-align: center;
+}
+
+.action-td form input[type="submit"] {
+  font-family: "Nunito Sans", sans-serif;
+  margin: auto;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.5rem 0.8rem;
+  border: none;
+  cursor: pointer;
+}
+
+.table-data-status {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.table-data-status.red {
+  background-color: #ff5555;
+}
+
+.table-data-status.green {
+  background-color: #22f300;
+}
+
+.table-data-status.yellow {
+  background-color: #ffe141;
+}
+
+.table-data-status.blue {
+  background-color: #416bff;
+}
+
+.cashier-tbl-data {
+  min-width: 945px !important;
+}
+
+.cashier-tbl-data tr {
+  border-bottom: 1px solid rgba(128, 128, 128, 0.158);
+}
+
+.cashier-tbl-data td {
+  height: 58px;
+}
+
+.order-info {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 20%);
+  width: 500px;
+  height: 400px;
+  background-color: white;
+  padding: 20px;
+}
+
+.order-info .head {
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.24);
+  justify-content: space-between;
+}
+
+.order-info .body {
+  overflow: auto;
+  padding: 20px 0px;
+}
+
+.order-table {
+  min-width: 0px !important;
+  display: flex;
+  flex-flow: column;
+  border-collapse: collapse;
+}
+
+.order-table thead {
+  flex: 0 0 auto;
+  width: calc(100% - 0.9em);
+  display: table;
+  table-layout: fixed;
+}
+
+.order-table tbody {
+  flex: 1 1 auto;
+  display: block;
+  overflow-y: auto;
+  max-height: 270px;
+  scrollbar-color: rgb(224, 224, 224) rgb(255, 255, 255);
+  scrollbar-width: thin;
+}
+
+.order-table tbody tr {
+  width: 100%;
+  display: table;
+  table-layout: fixed;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.158);
+}
+
+.order-table th {
+  width: 30%;
+}
+
+.waiter-tbl {
+  align-items: flex-start !important;
+}
+
+.waiter-table td {
+  height: 58px;
+}
+
+.waiter-table tr {
+  border-bottom: 1px solid rgba(128, 128, 128, 0.158);
+}
+
+.show-action-btn tr {
+  border-bottom: 1px solid rgba(128, 128, 128, 0.158);
+}
+
+.tbl-status{
+  width: 150px;
+}
+
+.endtime{
+  color: red;
+}
+.warningtime{
+  color: rgb(255, 115, 0);
+
+}
+
+.table-timer-col{
+  min-width: 95px;
+}
+
+.status-action-col{
+  max-width: 175px;
+}
