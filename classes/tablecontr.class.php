@@ -14,5 +14,9 @@ class TableContr extends Table{
     public function initRequest($tblId){
         $this->setRequest($tblId);
     }
+
+    public function initClean($tblId){
+        $this->setClean($tblId);
+    }
 }
 ?>

@@ -46,7 +46,7 @@ class FoodsView extends Foods{
                     }
                 ?>
 
-                <td class="flex-row action-td">
+                <td class="action-td">
                     <button class="update-item-btn" type="button">Edit</button>
                     <button class="delete-item-btn" type="button">Delete</button>
                 </td>

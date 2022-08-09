@@ -7,10 +7,9 @@ class TableView extends Table{
         <thead>
             <tr>
                 <th>Table</th>
-                <th class="tbl-status">Status</th>
+                <th class="">Status</th>
                 <th>Time</th>
                 <th>Payment</th>
-                <th class="hide">Date</th>
                 <th>Order</th>
                 <th class="status-action-col">Status Action</th>
             </tr>
@@ -20,24 +19,27 @@ class TableView extends Table{
         ?>
         <tr>
             <td><span><?php echo $row['id'] ?></span></td>
-            <td class="flex-row tbl-status">
+            <td class="flex-row ">
             <?php
                 if ($row['table_status'] == "Occupied") {
             ?>
-            <span class="table-data-status red"></span><?php echo $row['table_status'] ?>
-                
+                <span class="table-data-status red"></span>
+                <span><?php echo $row['table_status'] ?></span>
             <?php
                 }elseif ($row['table_status'] == "Unoccupied") {
             ?>
-                <span class="table-data-status green"></span><?php echo $row['table_status'] ?>
+                <span class="table-data-status green"></span>
+                <span><?php echo $row['table_status'] ?></span>
             <?php
                 }elseif ($row['table_status'] == "Calling") {
             ?>
-                <span class="table-data-status yellow"></span>Need assistance
+                <span class="table-data-status yellow"></span>
+                <span>Need assistance</span>  
             <?php
                 }elseif ($row['table_status'] == "Dirty") {
             ?>
-                <span class="table-data-status blue"></span><?php echo $row['table_status'] ?>
+                <span class="table-data-status blue"></span>
+                <span><?php echo $row['table_status'] ?></span>
             <?php
             }
             ?>
@@ -106,7 +108,6 @@ class TableView extends Table{
             
             ?></td>
             <td><?php echo $row['payment'] ?></td>
-            <td class="table-date hide"><?php echo date($row['date']) ?></td>
             <td class="hide "><?php echo $row['is_started'] ?></td>
             <td class="action-td">
                 <form action="./includes/transactions-contr.inc.php" method="POST">
@@ -145,29 +146,30 @@ class TableView extends Table{
         ?>
         <tr>
             <td><span><?php echo $row['id'] ?></span></td>
-            <td class="waiter-tbl-status-col">
-                <div class="flex-row statul">
-                <?php
-                    if ($row['table_status'] == "Occupied") {
-                    ?>
-                    <span class="table-data-status red"></span><?php echo $row['table_status'] ?>
-                        
-                    <?php
-                        }elseif ($row['table_status'] == "Unoccupied") {
-                    ?>
-                        <span class="table-data-status green"></span><?php echo $row['table_status'] ?>
-                    <?php
-                        }elseif ($row['table_status'] == "Calling") {
-                    ?>
-                        <span class="table-data-status yellow"></span>Need assistance
-                    <?php
-                        }elseif ($row['table_status'] == "Dirty") {
-                    ?>
-                        <span class="table-data-status blue"></span><?php echo $row['table_status'] ?>
-                    <?php
-                    }
-                    ?>
-                </div>
+            <td class="flex-row ">
+            <?php
+                if ($row['table_status'] == "Occupied") {
+            ?>
+                <span class="table-data-status red"></span>
+                <span><?php echo $row['table_status'] ?></span>
+            <?php
+                }elseif ($row['table_status'] == "Unoccupied") {
+            ?>
+                <span class="table-data-status green"></span>
+                <span><?php echo $row['table_status'] ?></span>
+            <?php
+                }elseif ($row['table_status'] == "Calling") {
+            ?>
+                <span class="table-data-status yellow"></span>
+                <span>Need assistance</span>  
+            <?php
+                }elseif ($row['table_status'] == "Dirty") {
+            ?>
+                <span class="table-data-status blue"></span>
+                <span><?php echo $row['table_status'] ?></span>
+            <?php
+            }
+            ?>
             </td>
             <td class="table-<?php echo $row["id"]; ?>-time">
                 <?php
@@ -245,10 +247,9 @@ class TableView extends Table{
         <thead>
             <tr>
                 <th>Table</th>
-                <th class="tbl-status">Status</th>
+                <th class="">Status</th>
                 <th>Time</th>
                 <th>Payment</th>
-                <th class="hide">Date</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -257,24 +258,27 @@ class TableView extends Table{
         ?>
         <tr>
             <td><span><?php echo $row['id'] ?></span></td>
-            <td class="flex-row tbl-status">
+            <td class="flex-row ">
             <?php
                 if ($row['table_status'] == "Occupied") {
             ?>
-            <span class="table-data-status red"></span><?php echo $row['table_status'] ?>
-                
+                <span class="table-data-status red"></span>
+                <span><?php echo $row['table_status'] ?></span>
             <?php
                 }elseif ($row['table_status'] == "Unoccupied") {
             ?>
-                <span class="table-data-status green"></span><?php echo $row['table_status'] ?>
+                <span class="table-data-status green"></span>
+                <span><?php echo $row['table_status'] ?></span>
             <?php
                 }elseif ($row['table_status'] == "Calling") {
             ?>
-                <span class="table-data-status yellow"></span>Need assistance
+                <span class="table-data-status yellow"></span>
+                <span>Need assistance</span>  
             <?php
                 }elseif ($row['table_status'] == "Dirty") {
             ?>
-                <span class="table-data-status blue"></span><?php echo $row['table_status'] ?>
+                <span class="table-data-status blue"></span>
+                <span><?php echo $row['table_status'] ?></span>
             <?php
             }
             ?>
@@ -343,11 +347,10 @@ class TableView extends Table{
             
             ?></td>
             <td><?php echo $row['payment'] ?></td>
-            <td class="table-date hide"><?php echo date($row['date']) ?></td>
             <td class="hide "><?php echo $row['is_started'] ?></td>
             <td class="action-td status-action-col">
-                <form action="./phpincludes/table_status.php" method="POST">
-                    <input type="text" name="id" value=<?php echo $row['id'] ?> id="" hidden>
+                <form action="./includes/table-contr.inc.php" method="POST">
+                    <input type="text" name="table-id" value=<?php echo $row['id'] ?> id="" hidden>
                     <input type="submit" name="clean" value="Clean table">
                 </form>
             </td>

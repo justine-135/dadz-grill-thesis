@@ -95,6 +95,13 @@ class Table extends Dbh{
             $this->no_order($tblId);
         }
     }
+
+    protected function setCLean($tblId){
+        $sql = "UPDATE tables SET table_status = 'Unoccupied', payment = 'No order', order_status = 'No order' WHERE id = $tblId";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();           
+        header("location: ../dirty.php");  
+    }
 }
 
 ?>

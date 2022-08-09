@@ -51,7 +51,7 @@ class Transactions extends Dbh{
         $stmt->execute();
         $stmt = null;
 
-        header("location: ../tables.php");
+        header("location: ../tables.php?error=0");
         exit();
     }
 
@@ -65,6 +65,9 @@ class Transactions extends Dbh{
         foreach ($results as $row) {
             if ($row["payment"] == "Requesting") {
                 $this->has_request($id);
+            }
+            else{
+                header("location: ../tables.php?error=1");
             }
         }
     }

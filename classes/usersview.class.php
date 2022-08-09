@@ -67,7 +67,7 @@ class UsersView extends Users{
                         }
                     ?>
                 </td>
-                <td class="flex-row action-td">
+                <td class="action-td">
                     <button class="view-info-btn view-account-btn">View</button>
                     <button class="update-item-btn" type="button">Edit</button>
                     <button class="delete-item-btn delete-account-btn" type="button">Delete</button>

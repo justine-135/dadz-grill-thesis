@@ -5,8 +5,16 @@ class Purchase extends Dbh{
         $total_names='';
 
         for ($i=0; $i < count($names); $i++) { 
-            $total_names .= $names[$i] . ' x ' . $qty[$i] . '<br>';
+            $total_names .="<tr>" . "<td>" . $names[$i] . "</td>" . "<td class=".'"order-x-col"'.">x</td>" . "<td>" . $qty[$i] . "</td>". "</tr>";
         }
+
+        // $tableItems = "
+        // <table class='order-tbl-items'>
+        //     <tbody>
+        // ";
+
+        // $tableItems .= $total_names . "</tbody></table>";
+        // echo $tableItems;
     
         $sql = "INSERT INTO submitted_orders (table_id, item_name, total_purchase, order_status, waiter)
         VALUES ('$tableId', '$total_names', '$total', 'Pending', '$waiter')";
@@ -54,6 +62,12 @@ class Purchase extends Dbh{
         $sql = "UPDATE tables SET order_status = 'Pick-up' WHERE id = $id";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
+        $stmt = null;
+
+        $sql = "DELETE FROM submitted_orders WHERE table_id=$id";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+        $stmt = null;
     }
 }
 

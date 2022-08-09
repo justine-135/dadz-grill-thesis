@@ -6,8 +6,8 @@ class TransactionsView extends Transactions{
         ?>
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Table</th>
+                <th>Order number</th>
+                <th>Table number</th>
                 <th>Time</th>
                 <th>Order</th>
                 <th>Total</th>
