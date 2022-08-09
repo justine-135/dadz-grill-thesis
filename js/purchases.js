@@ -5,7 +5,7 @@ window.addEventListener("load", () => {
 
   const cancelBtn = document.querySelectorAll(".cancel-btn");
   const overlay = document.querySelector(".overlay");
-  const closeBtn = document.querySelector(".close-btn");
+  const closeBtn = document.querySelector(".close-add-form");
   const orderNumber = document.querySelector(".order-number");
   const orderId = document.querySelector(".table-order");
 
