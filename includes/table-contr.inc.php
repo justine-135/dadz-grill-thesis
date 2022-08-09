@@ -24,4 +24,10 @@
         $attended->initRequest($tblId);
     }
 
+    if (isset($_POST["clean"])) {
+        $tblId = $_POST["table-id"];
+
+        $clean = new TableContr();
+        $clean->initClean($tblId);
+    }   
 ?>
