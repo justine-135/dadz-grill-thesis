@@ -53,18 +53,18 @@ class Purchase extends Dbh{
         return $results;
     }
 
-    protected function setFinish($id){
-        $sql = "UPDATE series_orders SET is_ready = 1 WHERE table_id = $id";
+    protected function setFinish($oid, $tid){
+        $sql = "UPDATE series_orders SET is_ready = 1 WHERE table_id = $tid";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
 
-        $sql = "UPDATE tables SET order_status = 'Pick-up' WHERE id = $id";
+        $sql = "UPDATE tables SET order_status = 'Pick-up' WHERE id = $tid";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
 
-        $sql = "DELETE FROM submitted_orders WHERE table_id=$id";
+        $sql = "DELETE FROM submitted_orders WHERE sales_id=$oid";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
