@@ -11,7 +11,7 @@ class TransactionsView extends Transactions{
                 <th>Time</th>
                 <th>Order</th>
                 <th>Total</th>
-                <th>Paid</th>
+                <th>Status</th>
                 <th class="status-action-col">Status Action</th>
             </tr>
         </thead>
@@ -20,18 +20,26 @@ class TransactionsView extends Transactions{
         ?>
         <tbody>
             <tr>
-                <td><span><?php echo $row['id'] ?></span></td>
-                <td><?php echo $row['table_id'] ?></td>
-                <td ><?php echo $row['reg_date'] ?></td>
-                <td><?php echo $row['order'] ?></td>
-                <td><?php echo $row['total'] ?></td>
-                <td><?php if ($row['paid'] == 0) {
-                    echo "No";
+                <td class="pad10" valign="top"><span><?php echo $row['id'] ?></span></td>
+                <td class="pad10" valign="top"><?php echo $row['table_id'] ?></td>
+                <td class="pad10" valign="top"><?php echo $row['reg_date'] ?></td>
+                <td>
+                    <table class="orders-table">
+                        <tbody>
+                            <?php echo $row['order'] ?>
+                        </tbody>
+                    </table></td>
+                <td class="pad10" valign="top"><?php echo $row['total'] ?></td>
+                <td class="pad10" valign="top"><?php if ($row['paid'] == 0) {
+                    echo "Not paid";
                 }
-                else{
-                    echo "Yes";
+                elseif($row['paid'] == 1){
+                    echo "Paid";
+                }
+                elseif($row['paid'] == 3){
+                    echo "Cancelled";
                 }?></td>
-                <td class="action-td status-action-col">
+                <td valign="top" class="action-td status-action-col pad10">
                     <form action="./includes/transactions-contr.inc.php" method="POST">
                         <input type="text" name="id" value=<?php echo $row['id'] ?> id="" hidden>
                         <input type="text" name="table" value=<?php echo $row['table_id'] ?> id="" hidden>
