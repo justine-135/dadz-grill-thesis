@@ -29,7 +29,7 @@
                         <span class="label">
                             Total Sales
                         </span>
-                        <span class="number">0</span>
+                        <span class="sales-number number"></span>
                     </div>
                 </div>
                 <div class="stats rev flex-row">
@@ -37,7 +37,7 @@
                         <span class="label">
                             Total Orders
                         </span>
-                        <span class="number">0</span>
+                        <span class="order-number number"></span>
                     </div>
                 </div>     
                 <div class="stats cost flex-row">
@@ -45,7 +45,7 @@
                         <span class="label">
                             Cancelled Orders
                         </span>
-                        <span class="number">0</span>
+                        <span class="cancelled-number number"></span>
                     </div>
                 </div>         
                 <div class="stats profs flex-row">
@@ -53,7 +53,7 @@
                         <span class="label">
                             Success Orders
                         </span>
-                        <span class="number">0</span>
+                        <span class="success-number number"></span>
                     </div>
                 </div>
             </div>
