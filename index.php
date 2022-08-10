@@ -108,7 +108,7 @@
                         <span class="label">
                             Occupied
                         </span>
-                        <span class="number">0</span>
+                        <span class="occupied-number number">0</span>
                     </div>
                 </div>
                 <div class="stats rev cancel flex-row">
@@ -119,7 +119,7 @@
                         <span class="label">
                             Unoccupied
                         </span>
-                        <span class="number">0</span>
+                        <span class="unoccupied-number number">0</span>
                     </div>
                 </div>          
                 <div class="stats cost flex-row">
@@ -130,7 +130,7 @@
                         <span class="label">
                             Need assistance
                         </span> 
-                        <span class="number">0</span>
+                        <span class="call-number number">0</span>
                     </div>
                 </div>           
                 <div class="stats profs returns flex-row">
@@ -141,7 +141,7 @@
                         <span class="label">
                             Dirty
                         </span>
-                        <span class="number">0</span>
+                        <span class="dirty-number number">0</span>
                     </div>
                 </div>
             </div>
