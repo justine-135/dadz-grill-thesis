@@ -11,7 +11,7 @@
         </div>
         <form class="flex-row form-overlay-footer" action="./includes/purchase-contr.inc.php" method="post" enctype="multipart/form-data">
             <input class="table-order" type="text" name="table-order" id="" hidden>
-            <input type="submit" value="Submit" name="cancel">
+            <button type="button">Cancel</button>
             <input class="update-ing" type="submit" value="Submit" name="finish">
         </form>
     </div>
