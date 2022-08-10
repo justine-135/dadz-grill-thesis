@@ -6,10 +6,14 @@ class PurchaseContr extends Purchase{
         header("location: ../menu.php");
     }
 
-    public function initFinish($id){
-        $this->setFinish($id);
+    public function initFinish($oid, $tid){
+        $this->setFinish($oid, $tid);
         header("location: ../sales.php");
+    }
 
+    public function initCancel($id){
+        $this->setCancel($id);
+        header("location: ../sales.php");
     }
 }
 
