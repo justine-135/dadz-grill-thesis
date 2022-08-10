@@ -2,7 +2,7 @@
 
 class TableContr extends Table{
     public function initTableTimer(){
-        for ($i=0; $i < 8; $i++) { 
+        for ($i=0; $i < 9; $i++) { 
             $this->updateTableTimer($i);
         }
     }   
