@@ -1,7 +1,7 @@
 <?php
 
 class Dashboard extends Dbh{
-    protected function getSales(){
+    protected function getTransactions(){
         $sql = "SELECT * FROM transactions;";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
@@ -16,6 +16,15 @@ class Dashboard extends Dbh{
         $stmt->execute();
 
         $results = $stmt->rowCount();
+        return $results;
+    }
+
+    protected function getTables(){
+        $sql = "SELECT * FROM tables;";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll();
         return $results;
     }
 }
