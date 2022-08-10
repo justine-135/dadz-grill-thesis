@@ -14,10 +14,20 @@
     }
 
     if (isset($_POST["finish"])) {
-        $id = $_POST['table-order'];
+        $oid = $_POST['order-num'];
+        $tid = $_POST['table-order'];
 
         $finish = new PurchaseContr();
-        $finish->initFinish($id);
+        $finish->initFinish($oid, $tid);
+    }
+
+    if (isset($_POST["cancel"])) {
+        $oid = $_POST['order-num2'];
+        $tid = $_POST['table-order2'];
+
+        $cancel = new PurchaseContr();
+        $cancel->initCancel($oid, $tid);
+        echo $id;
     }
 
 ?>
