@@ -198,7 +198,7 @@
   max-width: 175px;
 } */
 
-.orders-list .pad10{
+.orders-list .pad10, .transaction-tbl-data .pad10{
   padding-top: 12px;
 }
 
