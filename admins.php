@@ -43,8 +43,8 @@
     <a href="registration.php?message" class="add-admin-btn">Add admin</a>
 
 </nav>
-<div class="main-content admin-container">
-    <div class="admins">
+<div class="main-content tables-container">
+    <div class="tables">
     <table class="tables-table admin-table-info">
     </table>
     </div>
