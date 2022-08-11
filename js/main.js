@@ -7,6 +7,7 @@ window.addEventListener("load", () => {
   const sideNavLinks = document.querySelector(".sidenav ul");
   const mainDivContainer = document.querySelector(".main-content");
   const titleNav = document.querySelector(".nav-page");
+  const table = document.querySelector(".tables");
 
   toggleBtn.addEventListener("click", () => {
     toggleBtn.classList.toggle("spin");
@@ -37,5 +38,6 @@ window.addEventListener("load", () => {
     });
     titleNav.classList.toggle("shrink");
     mainDivContainer.classList.toggle("shrink");
+    table.classList.toggle("shrink");
   });
 });
