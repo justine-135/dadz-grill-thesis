@@ -21,7 +21,7 @@
 
 <div class="main-content tables-container">
     <div class="tables flex-row">
-        <table class="tables-table cleaner-tbl-data">
+        <table class="tables-table cleaner-table">
         </table>
     </div>
 </div>
