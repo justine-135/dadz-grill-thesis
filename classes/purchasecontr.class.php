@@ -11,8 +11,8 @@ class PurchaseContr extends Purchase{
         header("location: ../sales.php");
     }
 
-    public function initCancel($id){
-        $this->setCancel($id);
+    public function initCancel($oid, $tid){
+        $this->setCancel($oid, $tid);
         header("location: ../sales.php");
     }
 }
