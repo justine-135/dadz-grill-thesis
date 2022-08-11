@@ -7,7 +7,7 @@ window.addEventListener("load", () => {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
           if (this.readyState == 4) {
-            document.querySelector(".cleaner-tbl-data").innerHTML =
+            document.querySelector(".cleaner-table").innerHTML =
               this.responseText;
     
           }
