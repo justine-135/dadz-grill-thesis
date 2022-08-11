@@ -49,7 +49,7 @@ input[type="text"]:focus {
   margin-top: 80px;
   height: auto;
   width: 65%;
-  padding: 3rem;
+  padding: 1rem 3rem;
 }
 
 .main-container h1 {

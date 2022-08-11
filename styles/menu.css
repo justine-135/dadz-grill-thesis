@@ -11,10 +11,10 @@
   position: absolute;
   left: 50%;
   transform: translate(-50%, 50%);
-  width: 500px;
   height: 150px;
   background-color: white;
   padding: 20px;
+  width: 440px;
 }
 
 .action-btn-modal .head {
@@ -56,53 +56,3 @@
   cursor: pointer;
   background-color: #f1f1f1;
 }
-
-/* .show-action-btn {
-  width: 30px !important;
-  min-width: 0px !important;
-  margin-left: -3px;
-}
-
-.waiter-table thead th {
-  background-color: rgba(156, 156, 156, 0.089);
-  padding: 0.5rem 0rem;
-  font-size: 1rem;
-}
-
-.waiter-table td {
-  padding: 10px 0px;
-}
-
-.waiter-table {
-  background-color: white;
-  width: 100%;
-  min-width: 710px;
-  overflow: auto;
-  border-collapse: collapse;
-}
-
-.waiter-table thead {
-  background-color: white;
-}
-
-.waiter-table thead th {
-  color: #242424;
-  background-color: rgba(156, 156, 156, 0.089);
-  font-size: 1rem;
-}
-
-.waiter-table td {
-  color: #444444;
-  text-align: center;
-  width: 200px;
-}
-
-.waiter-tbl-status-col{
-  display: flex;
-  justify-content: center;
-  margin: auto;
-
-}
-.statul{
-  width: 150px;
-} */

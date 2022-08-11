@@ -24,14 +24,12 @@
 }
 
 .tables-table td {
-  /* padding: 10px 0px; */
   height: 50px;
 }
 
 .tables-table {
   background-color: white;
   width: 100%;
-  /* min-width: 880px; */
   overflow: auto;
   border-collapse: collapse;
 }
@@ -43,13 +41,8 @@
 .tables-table thead th {
   color: #242424;
   background-color: rgba(156, 156, 156, 0.089);
-  /* padding: 0.5rem 0rem; */
   font-size: 1rem;
 }
-
-/* .tables-table thead th:last-child {
-  width: 150px;
-} */
 
 .tables-table tr{
   border-bottom: 1px solid rgba(128, 128, 128, 0.055);
@@ -98,18 +91,6 @@
 .table-data-status.blue {
   background-color: #416bff;
 }
-
-/* .cashier-tbl-data {
-  min-width: 945px !important;
-}
-
-.cashier-tbl-data tr {
-  border-bottom: 1px solid rgba(128, 128, 128, 0.158);
-}
-
-.cashier-tbl-data td {
-  height: 58px;
-} */
 
 .order-info {
   position: absolute;
@@ -166,22 +147,6 @@
   width: 30%;
 }
 
-/* .waiter-tbl {
-  align-items: flex-start !important;
-}
-
-.waiter-table td {
-  height: 58px;
-}
-
-.waiter-table tr {
-  border-bottom: 1px solid rgba(128, 128, 128, 0.158);
-} */
-/* 
-.tbl-status{
-  width: 150px;
-} */
-
 .endtime{
   color: red;
 }
@@ -189,14 +154,6 @@
   color: rgb(255, 115, 0);
 
 }
-
-/* .table-timer-col{
-  min-width: 95px;
-}
-
-.status-action-col{
-  max-width: 175px;
-} */
 
 .orders-list .pad10, .transaction-tbl-data .pad10{
   padding-top: 12px;
@@ -214,4 +171,30 @@
 .order-x-col{
   width: 50px;
   text-align: center !important; 
+}
+
+.waiter-table{
+  min-width: 496px;
+}
+
+.cleaner-table{
+  min-width: 447px;
+}
+
+.cashier-tbl-data{
+  min-width: 720px;
+}
+
+.foods-table{
+  min-width: 620px;
+}
+
+@media screen and (max-width: 1007px) {
+  .tables{
+    margin: 50px 0 0 20px;;
+  }
+
+  .tables-container.shrink{
+    padding: 50px 0px 0 0px;
+  }
 }

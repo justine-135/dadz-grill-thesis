@@ -10,6 +10,7 @@
   transition: 200ms ease;
   border-right: 1px solid rgba(128, 128, 128, 0.24);
   z-index: 5;
+  overflow-x: auto;
 }
 
 .sidenav.shrink {
@@ -104,6 +105,7 @@
 
 .header-logo h6.remove {
   opacity: 0;
+  cursor: default;
 }
 
 .header-toggle {
@@ -115,7 +117,7 @@
 }
 
 .header-toggle.spin {
-  transform: rotate(540deg);
+  transform: rotate(0deg);
 }
 
 .header-toggle svg {
@@ -154,7 +156,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(to right, #a4d8d8a9, #a4d8d84b);
+  background-color: #a4d8d85e;
   padding: 10px;
   margin-right: 10px;
   border-radius: 50%;
@@ -203,4 +205,43 @@
   font-weight: 700;
   cursor: pointer;
   font-size: 1rem;
+}
+
+@media screen and (max-width: 1007px) {
+  .header{
+    height: 50px;
+  }
+
+  .header-profilepic{
+    padding: 3px;
+  }
+
+  .sidenav{
+    margin-top: 50px;
+    padding-top: 0px;
+  }
+
+  .sidenav.shrink{
+    width: 0px;
+    opacity: 0;
+    cursor: none;
+  }
+
+  .tables.shrink{
+    margin: 50px 0 0 0px;
+  }
+
+  .header-logo.header-logo.shrink{
+    width: 0px;
+    opacity: 0;
+    cursor:default;
+  }
+
+  .header-toggle.spin{
+    margin-left: 0px;
+  }
+
+  .header-logo h6{
+    font-size: 1.175rem;
+  }
 }
