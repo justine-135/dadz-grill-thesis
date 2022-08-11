@@ -40,30 +40,11 @@ class Transactions extends Dbh{
             $newPrice .= $prices[$i] . "|";
         }
 
-        $sql = "INSERT INTO transactions (table_id, `order`, quantity, price, total)
-        VALUES ( '$id' , '$newOrder' , '$newQuantity' , '$newPrice' , '$total')";
+        $sql = "INSERT INTO transactions (table_id, `order`, quantity, price)
+        VALUES ( '$id' , '$newOrder' , '$newQuantity' , '$newPrice')";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
-
-        // $sql = "SELECT * FROM submitted_orders WHERE sales_id = $id";
-        // $stmt = $this->connection()->prepare($sql);
-        // $stmt->execute();
-        // $results = $stmt->fetchAll();
-        
-        // foreach ($results as $row) {        
-        //     $table_id = $row["table_id"];
-        //     $order = $row["item_name"];
-        //     $total_purchase = $row["total_purchase"];
-
-        //     $sql = "INSERT INTO transactions (order_id, table_id, `order`, quantity, price, total, paid)
-        //     VALUES ('$id', '$table_id', '$order', '0', '0', '$total_purchase', '0')";
-        //     $stmt = $this->connection()->prepare($sql);
-        //     $stmt->execute();    
-        //     $stmt = null;
-        // }
-
-        // echo $id;
 
         $sql = "UPDATE tables SET payment = 'Bill out', is_started = false WHERE id = $id";
         $stmt = $this->connection()->prepare($sql);
