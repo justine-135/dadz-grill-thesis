@@ -3,21 +3,17 @@
 class Purchase extends Dbh{
     protected function setPurchase($names, $tableId, $total, $waiter, $qty, $prc){
         $total_names='';
+        $quantities='';
+        $prices='';
 
         for ($i=0; $i < count($names); $i++) { 
-            $total_names .="<tr>" . "<td>" . $names[$i] . "</td>" . "<td class=".'"order-x-col"'.">x</td>" . "<td>" . $qty[$i] . "</td>". "</tr>";
+            $total_names .= $names[$i]."|";
+            $quantities .= $qty[$i]."|";
+            $prices .= $prc[$i]."|";
         }
 
-        // $tableItems = "
-        // <table class='order-tbl-items'>
-        //     <tbody>
-        // ";
-
-        // $tableItems .= $total_names . "</tbody></table>";
-        // echo $tableItems;
-    
-        $sql = "INSERT INTO submitted_orders (table_id, item_name, total_purchase, order_status, waiter)
-        VALUES ('$tableId', '$total_names', '$total', 'Pending', '$waiter')";
+        $sql = "INSERT INTO submitted_orders (table_id, item_name, quantity, total_purchase, order_status, waiter)
+        VALUES ('$tableId', '$total_names', '$quantities', '$prices', 'Pending', '$waiter')";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();    
         $stmt = null;
@@ -44,8 +40,8 @@ class Purchase extends Dbh{
         return $results;
     }
 
-    protected function getPurchase($oid){
-        $sql = "SELECT table_id, item_name FROM submitted_orders WHERE sales_id='$oid'";
+    protected function getPurchase($id){
+        $sql = "SELECT * FROM submitted_orders WHERE sales_id='$id'";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
@@ -67,6 +63,44 @@ class Purchase extends Dbh{
         $sql = "DELETE FROM submitted_orders WHERE sales_id=$oid";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
+        $stmt = null;
+    }
+
+    protected function setCancel($oid, $tid){
+        $sql = "SELECT * FROM submitted_orders WHERE sales_id='$oid'";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll();
+
+        $sid="";
+        $tid="";
+        $order="";
+        $quantities="";
+        $prices="";
+
+        foreach ($results as $row) {
+            $sid = $row["sales_id"];
+            $tid = $row["table_id"];
+            $order = $row["item_name"];
+            $quantities = $row["quantity"];
+            $prices = $row["total_purchase"];
+        }
+
+        $sql = "INSERT INTO transactions (table_id, `order`, quantity, price, paid)
+        VALUES ( '$tid' , '$order' , '$quantities' , '$prices' , 3)";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+        $stmt = null;
+
+        $sql = "DELETE FROM submitted_orders WHERE sales_id=$oid";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+        $stmt = null;
+
+        $sql = "UPDATE tables SET order_status = 'No order' WHERE id = $tid";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();   
         $stmt = null;
     }
 }
