@@ -27,7 +27,5 @@
 
         $cancel = new PurchaseContr();
         $cancel->initCancel($oid, $tid);
-        echo $id;
     }
-
 ?>
