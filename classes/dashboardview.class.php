@@ -34,8 +34,7 @@ class DashboardView extends Dashboard{
         $total = (int)$total;
         foreach ($results as $row) {
             if ($row["paid"] == 3) {
-                $val = (int)$row["paid"];
-                $total += (int)$val;
+                $total += 1;
             }
         }
 
@@ -91,7 +90,7 @@ class DashboardView extends Dashboard{
         $total = 0;
         $total = (int)$total;
         foreach ($results as $row) {
-            if ($row["table_status"] == "Call") {
+            if ($row["table_status"] == "Calling") {
                 $total += 1;
             }
         }
