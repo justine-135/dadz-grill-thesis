@@ -7,8 +7,8 @@ class PurchaseView extends Purchase{
         <table class="tables-table ing-tbl">
             <thead>
                 <tr>
-                    <th>Order Id</th>
-                    <th>Table number</th>
+                    <th>Order no.</th>
+                    <th>Table no.</th>
                     <th>Orders</th>
                     <th>Total</th>
                     <th>Waiter</th>
@@ -23,13 +23,48 @@ class PurchaseView extends Purchase{
                         <td class="pad10" valign="top"><?php echo $row['sales_id']; ?></td>
                         <td class="pad10" valign="top"><?php echo $row['table_id']; ?></td>
                         <td>
-                            <table class="orders-table">
-                                <tbody>
-                                    <?php echo $row['item_name']; ?>
-                                </tbody>
-                            </table>
+                            <?php 
+                                $result = explode("|",$row['item_name']);
+                                $result2 = explode("|",$row['quantity']);
+                                $result3 = explode("|",$row['quantity']);
+                            ?>
+                        <table class="orders-table">
+                            <tbody>
+                                <?php
+                                    for ($i=0; $i < (count($result) - 1); $i++) { 
+                                ?>
+                                    <tr>
+                                        <td>
+                                            <?php
+                                                echo $result[$i];
+                                            ?>
+                                        </td>
+                                        <td class="order-x-col">
+                                            x
+                                        </td>
+                                        <td>
+                                            <?php
+                                                echo $result2[$i];
+                                            ?>
+                                        </td>
+                                    </tr>
+                                <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
                         </td>
-                        <td class="pad10" valign="top"><?php echo $row['total_purchase']; ?></td>
+                        <td class="pad10" valign="top">
+                            <?php 
+                                $result = explode("|",$row['total_purchase']);
+                                $total = 0;
+                                for ($i=0; $i < (count($result) - 1); $i++) { 
+                                    $total += $result[$i];
+                                }
+
+                                echo $total;
+                            ?>
+                        </td>
                         <td class="pad10" valign="top"><?php echo $row['waiter']; ?></td>
                         <td valign="top" class="action-td pad10">
                             <button class="finish-btn">Finish</button>
@@ -39,10 +74,8 @@ class PurchaseView extends Purchase{
                     <?php
                             }
                     ?>
-
             </tbody>
         </table>
-
         <?php
     }
 
@@ -57,8 +90,32 @@ class PurchaseView extends Purchase{
             <span>-</span>
             <ul>
                 <table class="modal-orders-table">
+                    <?php 
+                        $result = explode("|",$row['item_name']);
+                        $result2 = explode("|",$row['quantity']);
+                    ?>
                     <tbody>
-                        <?php echo $row['item_name']; ?>
+                        <?php
+                            for ($i=0; $i < (count($result) - 1); $i++) { 
+                        ?>
+                            <tr>
+                                <td>
+                                    <?php
+                                        echo $result[$i];
+                                    ?>
+                                </td>
+                                <td class="order-x-col">
+                                    x
+                                </td>
+                                <td>
+                                    <?php
+                                        echo $result2[$i];
+                                    ?>
+                                </td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
                     </tbody>
                 </table>
             </ul>
