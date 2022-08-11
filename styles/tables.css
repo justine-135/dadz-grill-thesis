@@ -42,6 +42,7 @@
   color: #242424;
   background-color: rgba(156, 156, 156, 0.089);
   font-size: 1rem;
+  border-right: 1px solid rgba(128, 128, 128, 0.055);
 }
 
 .tables-table tr{
@@ -100,6 +101,7 @@
   height: 400px;
   background-color: white;
   padding: 20px;
+  border-radius: 10px;
 }
 
 .order-info .head {
@@ -174,19 +176,24 @@
 }
 
 .waiter-table{
-  min-width: 496px;
+  min-width: 536px;
 }
 
 .cleaner-table{
-  min-width: 447px;
+  min-width: 502px;
 }
 
 .cashier-tbl-data{
-  min-width: 720px;
+  min-width: 767px;
 }
 
 .foods-table{
   min-width: 620px;
+}
+
+.close-order-btn{
+  background-color: white;
+  border: none;
 }
 
 @media screen and (max-width: 1007px) {
@@ -198,3 +205,4 @@
     padding: 50px 0px 0 0px;
   }
 }
+

@@ -290,4 +290,8 @@ h2 {
   .form-overlay.open{
     top: 50%;
   }
+
+  h2{
+    font-size: 1.275rem;
+  }
 }
