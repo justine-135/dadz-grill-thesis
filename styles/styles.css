@@ -90,7 +90,7 @@ h2 {
 }
 
 .add-item-btn,
-.add-admin-btn, .transaction-btn {
+.add-admin-btn, .transaction-btn, .export-btn {
   padding: 0.5rem 1rem;
   color: #f8f8f8;
   background-color: #07df61dc;
