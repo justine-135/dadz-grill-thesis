@@ -1,8 +1,8 @@
 <?php
 
 class PurchaseContr extends Purchase{
-    public function initPurchase($names, $tableId, $total, $waiter, $qty, $prc){
-        $this->setPurchase($names, $tableId, $total, $waiter, $qty, $prc);
+    public function initPurchase($names, $tableId, $total, $waiter, $qty, $prc, $uid){
+        $this->setPurchase($names, $tableId, $total, $waiter, $qty, $prc, $uid);
         header("location: ../menu.php");
     }
 
