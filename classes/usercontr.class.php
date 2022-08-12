@@ -132,6 +132,7 @@ class UserContr extends Users{
         $_SESSION["is_waiter"] = $result[0]["is_waiter"];
         $_SESSION["is_cook"] = $result[0]["is_cook"];
         $_SESSION["is_cleaner"] = $result[0]["is_cleaner"];
+        $_SESSION["uid"] = $result[0]["id"];
         header("location: ../index.php");
 
     }
