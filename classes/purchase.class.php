@@ -1,7 +1,7 @@
 <?php
 
 class Purchase extends Dbh{
-    protected function setPurchase($names, $tableId, $total, $waiter, $qty, $prc){
+    protected function setPurchase($names, $tableId, $total, $waiter, $qty, $prc, $uid){
         $total_names='';
         $quantities='';
         $prices='';
@@ -29,6 +29,11 @@ class Purchase extends Dbh{
         $sql = "UPDATE tables SET order_status = 'Preparing' WHERE id = $tableId";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();    
+        $stmt = null;
+
+        $sql = "UPDATE users SET served = served + 1 WHERE id = $uid";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();  
     }
 
     protected function getPurchases(){
