@@ -44,11 +44,10 @@
                     </div>
                 </div>
                 <input type="submit" value="Done" name="purchase">
-
                 <input class="hide" type="text" name="table-id" id="" value="<?php echo $_GET["id"] ?>">
                 <input class="hide" type="text" name="waiter-name" id="" value="<?php echo $_SESSION["username"]; ?>">
                 <input class="hide" value="<?php echo $_GET['id']; ?>" type="text" name="table-id" id="" hidden>
-
+                <input class="hide" value="<?php echo $_SESSION["uid"]; ?>" type="text" name="uid" id="" hidden>
             </div>
         </form>
     </aside>
