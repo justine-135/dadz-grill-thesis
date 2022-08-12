@@ -44,7 +44,7 @@ class Table extends Dbh{
     }
 
     protected function has_order_request($id){
-        $sql = "UPDATE tables SET payment = 'Requesting', is_started = false WHERE id = $id";
+        $sql = "UPDATE tables SET payment = 'Requesting' WHERE id = $id";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();     
 
