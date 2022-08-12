@@ -28,7 +28,7 @@
             
         </div>
         <div class="form-overlay-footer flex-row">
-            <button class="form-footer-btn" type="button">Cancel</button>
+            <button class="form-footer-btn" type="button">Ok</button>
         </div>
     </div>
 </div>
