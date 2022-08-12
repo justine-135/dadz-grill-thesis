@@ -15,15 +15,24 @@ class DashboardView extends Dashboard{
     public function initSales(){
         $results = $this->getTransactions();
 
-        $total = 0;
-        $total = (int)$total;
+        $arrtotals = array();
         foreach ($results as $row) {
             if ($row["paid"] == 1) {
-                $val = (int)$row["total"];
-                $total += (int)$val;
+                array_push($arrtotals, $row["price"]);
             }
         }
 
+        $val = "";
+        for ($i=0; $i < count($arrtotals); $i++) { 
+            $arrval = $arrtotals[$i];
+            $val .= $arrval;
+        }
+        $arrtotal = explode("|",$val);
+
+        $total = 0;
+        for ($i=0; $i < count($arrtotal); $i++) { 
+            $total += (int)$arrtotal[$i];
+        }
         echo $total;
     }
 
