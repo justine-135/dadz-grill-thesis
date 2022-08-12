@@ -8,9 +8,10 @@
         $waiter = $_POST['waiter-name'];
         $qty = $_POST['quantities'];
         $prc = $_POST['prices'];
+        $uid = $_POST["uid"];
 
         $purchase = new PurchaseContr();
-        $purchase->initPurchase($names, $tableId, $total, $waiter, $qty, $prc);
+        $purchase->initPurchase($names, $tableId, $total, $waiter, $qty, $prc, $uid);
     }
 
     if (isset($_POST["finish"])) {
