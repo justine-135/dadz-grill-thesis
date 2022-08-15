@@ -92,3 +92,13 @@
 .err-text-login {
   text-align: center;
 }
+
+@media screen and (max-width: 650px) {
+  .login-form .head{
+    display: none;
+  }
+
+  .login-form .body{
+    width: 100%;
+  }
+}
