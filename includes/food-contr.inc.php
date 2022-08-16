@@ -67,7 +67,4 @@
         $foodItem->initDeleteFood();
     }
 
-    header("location: ../foods.php");
     exit();
-
-?>
