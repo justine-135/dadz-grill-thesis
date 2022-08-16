@@ -1,7 +1,9 @@
 <?php
 
-class Transactions extends Dbh{
-    protected function getTransactions(){
+class Transactions extends Dbh
+{
+    protected function getTransactions()
+    {
         $sql = "SELECT * FROM transactions";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
@@ -10,13 +12,14 @@ class Transactions extends Dbh{
         return $results;
     }
 
-    protected function has_request($id){
+    protected function has_request($id)
+    {
         $sql = "SELECT * FROM series_orders WHERE table_id = $id";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
         $results = $stmt->fetchAll();
-        
+
         $orders = array();
         $qtys = array();
         $prices = array();
@@ -32,7 +35,7 @@ class Transactions extends Dbh{
         $newQuantity = "";
         $newPrice = "";
 
-        for ($i=0; $i < count($orders); $i++) { 
+        for ($i = 0; $i < count($orders); $i++) {
             $price = (int)$prices[$i];
             $total += $price;
             $newOrder .= $orders[$i] . "|";
@@ -51,11 +54,12 @@ class Transactions extends Dbh{
         $stmt->execute();
         $stmt = null;
 
-        header("location: ../tables.php?error=0");
+        header("location: ../tables.php?alert=billout&id=" . $id);
         exit();
     }
 
-    protected function setTransactions($id){
+    protected function setTransactions($id)
+    {
         $sql = "SELECT * FROM tables WHERE id = $id";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
@@ -65,14 +69,14 @@ class Transactions extends Dbh{
         foreach ($results as $row) {
             if ($row["payment"] == "Requesting") {
                 $this->has_request($id);
-            }
-            else{
-                header("location: ../tables.php?error=1");
+            } else {
+                header("location: ../tables.php?alert=no_request&id=" . $id);
             }
         }
     }
 
-    protected function setPaid($id, $tbl){
+    protected function setPaid($id, $tbl)
+    {
         $sql = "UPDATE transactions SET paid = true WHERE id = $id";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
@@ -92,5 +96,3 @@ class Transactions extends Dbh{
         exit();
     }
 }
-
-?>
