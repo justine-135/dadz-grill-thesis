@@ -1,7 +1,9 @@
 <?php
 
-class Table extends Dbh{
-    protected function getTables(){
+class Table extends Dbh
+{
+    protected function getTables()
+    {
         $sql = "SELECT * FROM tables";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
@@ -10,54 +12,59 @@ class Table extends Dbh{
         return $results;
     }
 
-    protected function updateTableTimer($i){
+    protected function updateTableTimer($i)
+    {
         $sql = "SELECT is_started FROM tables WHERE id = $i";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
-    
+
         $result = $stmt->fetchAll();
         $increment = 1;
-        if ($result > 0){
+        if ($result > 0) {
             foreach ($result as $row) {
                 $started = $row["is_started"];
                 if ($started == 1) {
                     $sql = "UPDATE tables SET timer = timer + $increment WHERE id = $i";
                     $stmt = $this->connection()->prepare($sql);
-                    $stmt->execute();                
+                    $stmt->execute();
                 }
             }
         }
     }
 
-    protected function has_order_attended($id){
+    protected function has_order_attended($id)
+    {
         $sql = "UPDATE tables SET table_status = 'Occupied', payment = 'Pending', order_status = 'Done' WHERE id = $id";
         $stmt = $this->connection()->prepare($sql);
-        $stmt->execute();     
-        $stmt = null;   
-        
+        $stmt->execute();
+        $stmt = null;
+
         $sql = "UPDATE tables SET is_started = true WHERE id = $id";
         $stmt = $this->connection()->prepare($sql);
-        $stmt->execute();        
+        $stmt->execute();
         $stmt = null;
-        
+
         header("location: ../menu.php?alert=has_order&id=" . $id);
     }
 
-    protected function has_order_request($id){
+    protected function has_order_request($id)
+    {
         $sql = "UPDATE tables SET payment = 'Requesting' WHERE id = $id";
         $stmt = $this->connection()->prepare($sql);
-        $stmt->execute();     
+        $stmt->execute();
 
-        header("location: ../menu.php");
+        header("location: ../menu.php?alert=request&id=" . $id);
     }
 
-    protected function no_order($id){
-        header("location: ../menu.php?alert=no_order&id=" .$id);
+    protected function no_order($id)
+    {
+        header("location: ../menu.php?alert=no_order&id=" . $id);
     }
 
-    protected function setAttended($tblId){
-        $tblStatus;
-        $timerStarted;
+    protected function setAttended($tblId)
+    {
+        $tblStatus = "";
+        $timerStarted = "";
 
         $sql = "SELECT order_status, is_started FROM tables WHERE id = $tblId";
         $stmt = $this->connection()->prepare($sql);
@@ -68,17 +75,17 @@ class Table extends Dbh{
         foreach ($results as $row) {
             $tblStatus = $row["order_status"];
         }
-        
+
         if ($tblStatus == "Pick-up" || $tblStatus == "Done") {
             $this->has_order_attended($tblId);
-        }
-        else{
+        } else {
             $this->no_order($tblId);
         }
     }
 
-    protected function setRequest($tblId){
-        $sql = "SELECT order_status, is_started FROM tables WHERE id = $tblId";
+    protected function setRequest($tblId)
+    {
+        $sql = "SELECT payment, order_status, is_started FROM tables WHERE id = $tblId";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
@@ -86,22 +93,21 @@ class Table extends Dbh{
 
         foreach ($results as $row) {
             $tblStatus = $row["order_status"];
+            $paymentStatus = $row["payment"];
         }
-        
-        if ($tblStatus != "No order") {
+
+        if ($paymentStatus != "No order") {
             $this->has_order_request($tblId);
-        }
-        else{
+        } else {
             $this->no_order($tblId);
         }
     }
 
-    protected function setCLean($tblId){
+    protected function setCLean($tblId)
+    {
         $sql = "UPDATE tables SET table_status = 'Unoccupied', payment = 'No order', order_status = 'No order' WHERE id = $tblId";
         $stmt = $this->connection()->prepare($sql);
-        $stmt->execute();           
-        header("location: ../dirty.php");  
+        $stmt->execute();
+        header("location: ../dirty.php");
     }
 }
-
-?>
