@@ -244,15 +244,22 @@ h2 {
 }
 
 .query-notif{
-  position: fixed;
-  bottom: 5%;
-  left: 5%;
-  background-color: red;
   color: white;
   padding: 5px 10px;
   z-index: 600;
-  border-radius: 5px;
-  font-size: 0.975rem;
+  font-size: 0.875rem;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.query-notif.fail{
+  background-color: red;
+}
+
+.query-notif.success{
+  background-color: green;
 }
 
 .transaction-tbl-data tr{
