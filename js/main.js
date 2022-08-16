@@ -8,6 +8,7 @@ window.addEventListener("load", () => {
   const mainDivContainer = document.querySelector(".main-content");
   const titleNav = document.querySelector(".nav-page");
   const table = document.querySelector(".tables");
+  const alert = document.querySelector('.query-notif');
 
   toggleBtn.addEventListener("click", () => {
     toggleBtn.classList.toggle("spin");
@@ -40,4 +41,8 @@ window.addEventListener("load", () => {
     mainDivContainer.classList.toggle("shrink");
     table.classList.toggle("shrink");
   });
+
+  setTimeout(()=>{
+    alert.classList.add("hide");
+  },3000)
 });
