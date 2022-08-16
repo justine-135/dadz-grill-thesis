@@ -1,25 +1,26 @@
+<?php
 
-<?php 
-
-    include "header.php";
-    // session_start();
-    // if (empty($_SESSION["username"])) {
-    //     header("location: login.php?message=");
-    // }
+include "header.php";
+// session_start();
+// if (empty($_SESSION["username"])) {
+//     header("location: login.php?message=");
+// }
 ?>
 
 <nav class="dashboard-nav nav-page flex-row">
     <div class="title flex-row">
         <div class="circle-svg">
-            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="th-large" class="sidelink-svg svg-inline--fa fa-th-large fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M296 32h192c13.255 0 24 10.745 24 24v160c0 13.255-10.745 24-24 24H296c-13.255 0-24-10.745-24-24V56c0-13.255 10.745-24 24-24zm-80 0H24C10.745 32 0 42.745 0 56v160c0 13.255 10.745 24 24 24h192c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24zM0 296v160c0 13.255 10.745 24 24 24h192c13.255 0 24-10.745 24-24V296c0-13.255-10.745-24-24-24H24c-13.255 0-24 10.745-24 24zm296 184h192c13.255 0 24-10.745 24-24V296c0-13.255-10.745-24-24-24H296c-13.255 0-24 10.745-24 24v160c0 13.255 10.745 24 24 24z"></path></svg>
-        </div> 
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="th-large" class="sidelink-svg svg-inline--fa fa-th-large fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <path fill="currentColor" d="M296 32h192c13.255 0 24 10.745 24 24v160c0 13.255-10.745 24-24 24H296c-13.255 0-24-10.745-24-24V56c0-13.255 10.745-24 24-24zm-80 0H24C10.745 32 0 42.745 0 56v160c0 13.255 10.745 24 24 24h192c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24zM0 296v160c0 13.255 10.745 24 24 24h192c13.255 0 24-10.745 24-24V296c0-13.255-10.745-24-24-24H24c-13.255 0-24 10.745-24 24zm296 184h192c13.255 0 24-10.745 24-24V296c0-13.255-10.745-24-24-24H296c-13.255 0-24 10.745-24 24v160c0 13.255 10.745 24 24 24z"></path>
+            </svg>
+        </div>
         <h3>Dashboard</h3>
     </div>
     <button class="export-btn">Export</button>
 </nav>
 
 <div class="main-content dashboard-container">
-    
+
     <div class="dashboard">
         <div class="sales-overview overview">
             <h2>Orders</h2>
@@ -39,7 +40,7 @@
                         </span>
                         <span class="order-number number"></span>
                     </div>
-                </div>     
+                </div>
                 <div class="stats cost flex-row">
                     <div class="label-number flex-column">
                         <span class="label">
@@ -47,7 +48,7 @@
                         </span>
                         <span class="cancelled-number number"></span>
                     </div>
-                </div>         
+                </div>
                 <div class="stats profs flex-row">
                     <div class="label-number flex-column">
                         <span class="label">
@@ -77,16 +78,16 @@
                         </span>
                         <span class="number">0</span>
                     </div>
-                </div>          
+                </div>
                 <div class="stats cost flex-row">
 
                     <div class="label-number flex-column">
                         <span class="label">
                             Total served
-                        </span> 
+                        </span>
                         <span class="number">0</span>
                     </div>
-                </div>           
+                </div>
                 <div class="stats profs returns flex-row">
                     <div class="label-number flex-column">
                         <span class="label">
@@ -121,7 +122,7 @@
                         </span>
                         <span class="unoccupied-number number">0</span>
                     </div>
-                </div>          
+                </div>
                 <div class="stats cost flex-row">
                     <div class="table-color">
                         <div class="table-circle yellow"></div>
@@ -129,10 +130,10 @@
                     <div class="label-number flex-column">
                         <span class="label">
                             Need assistance
-                        </span> 
+                        </span>
                         <span class="call-number number">0</span>
                     </div>
-                </div>           
+                </div>
                 <div class="stats profs returns flex-row">
                     <div class="table-color">
                         <div class="table-circle blue"></div>
