@@ -61,6 +61,15 @@ class Table extends Dbh
         header("location: ../menu.php?alert=no_order&id=" . $id);
     }
 
+    protected function is_dirty($tblId)
+    {
+        $sql = "UPDATE tables SET table_status = 'Unoccupied', payment = 'No order', order_status = 'No order' WHERE id = $tblId";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+
+        header("location: ../dirty.php?alert=dirty&id=" . $tblId);
+    }
+
     protected function setAttended($tblId)
     {
         $tblStatus = "";
@@ -105,9 +114,24 @@ class Table extends Dbh
 
     protected function setCLean($tblId)
     {
-        $sql = "UPDATE tables SET table_status = 'Unoccupied', payment = 'No order', order_status = 'No order' WHERE id = $tblId";
+        $tblStatus = "";
+        
+        $sql = "SELECT table_status FROM tables WHERE id = $tblId";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
-        header("location: ../dirty.php");
+
+        $results = $stmt->fetchAll();
+
+        foreach ($results as $row) {
+            $tblStatus = $row["table_status"];
+        }
+
+        if ($tblStatus == 'Dirty') {
+            $this->is_dirty($tblId);
+        }
+        else{
+            header("location: ../dirty.php?alert=not_dirty&id=" . $tblId);
+        }
+        
     }
 }
