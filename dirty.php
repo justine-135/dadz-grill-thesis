@@ -28,4 +28,25 @@
         </table>
     </div>
 </div>
+
+    <div class="alert">
+
+        <?php
+
+        if (isset($_GET["alert"]) || isset($_GET["id"])) {
+            $alert = $_GET["alert"];
+            $id = $_GET["id"];
+            if ($alert == "dirty") {
+                echo "<span class='query-notif success'>Table " . $id . " has been cleaned!</span>";
+            } elseif ($alert == "not_dirty") {
+                echo "<span class='query-notif fail'>Table " . $id . " is not dirty!</span>";
+            } else {
+                echo "<span></span>";
+            }
+        }
+
+        ?>
+
+    </div>
+
 <script src="js/dirty.js"></script>
