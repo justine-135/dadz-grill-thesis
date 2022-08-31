@@ -6,7 +6,7 @@ if ($_SESSION["is_superuser"] == 1) {
 ?>
 
     <div class="overlay">
-        <form class="form-overlay delete-account-form" action="phpincludes/delete_admin.php" method="post" enctype="multipart/form-data">
+        <form class="form-overlay delete-account-form" action="includes/admin-contr.inc.php" method="post" enctype="multipart/form-data">
             <div class="head flex-row modal-head">
                 <h4>Delete</h4>
                 <button class="close-add-form" type="button"><svg class="sidelink-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
@@ -18,7 +18,7 @@ if ($_SESSION["is_superuser"] == 1) {
             </div>
             <div class="form-overlay-footer flex-row">
                 <button class="form-footer-btn" type="button">Cancel</button>
-                <input type="submit" value="Submit" name="submit">
+                <input type="submit" value="Submit" name="delete">
             </div>
         </form>
         <div class="form-overlay view-account-container">
@@ -54,6 +54,23 @@ if ($_SESSION["is_superuser"] == 1) {
             <table class="tables-table admin-table-info">
             </table>
         </div>
+    </div>
+
+    <div class="alert">
+
+    <?php
+
+    if (isset($_GET["alert"]) || isset($_GET["id"])) {
+        $alert = $_GET["alert"];
+        $id = $_GET["id"];
+        if ($alert == "deleted") {
+            echo "<span class='query-notif success'>User " . $id . " has been deleted!</span>";
+        } else {
+            echo "<span></span>";
+        }
+    }
+
+    ?>
 
     </div>
     <script src="js/admin.js"></script>
