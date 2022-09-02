@@ -127,6 +127,10 @@ class UserContr extends Users{
         session_start();
         $_SESSION["username"] = $result[0]["username"];
         $_SESSION["userFullname"] = $result[0]["fullname"];
+        $_SESSION["email"] = $result[0]["email"];
+        $_SESSION["contact"] = $result[0]["contact"];
+        $_SESSION["bday"] = $result[0]["birth_date"];
+        $_SESSION["address"] = $result[0]["location_address"];
         $_SESSION["is_superuser"] = $result[0]["is_superuser"];
         $_SESSION["is_cashier"] = $result[0]["is_cashier"];
         $_SESSION["is_waiter"] = $result[0]["is_waiter"];
