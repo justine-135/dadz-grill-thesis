@@ -12,8 +12,52 @@
 </nav>
 
 <div class="main-content tables-container">
-    <div class="tables flex-row">
-        <table class="tables-table cleaner-table">
-        </table>
+    <div class="tables flex-row edit-profile-div">
+        <div class="body flex-column edit-profileinfo-div">
+            <form action="includes/admin-contr.inc.php" class="flex-column" method="POST">
+                <div class="admin-info flex-row spacing">
+                    <div class="register-input edit-admin-input fullname-email-input flex-column">
+                        <span>Full name</span>
+                        <input type="text" name="fullname" id="" placeholder="Enter new name"  required>
+                    </div>
+                    <div class="register-input edit-admin-input fullname-email-input flex-column">
+                        <span>Email</span>
+                        <input type="text" name="email" id="" placeholder="sample@gmail.com"  required>
+                    </div>
+                </div>
+                <div class="admin-contacts flex-row spacing">
+                    <div class="register-input edit-admin-input flex-column">
+                        <span>Contact</span>
+                        <input type="text" name="contact" id="" placeholder="09XXXXXXXXX"  required>
+                    </div>
+                    <div class="register-input edit-admin-input flex-column">
+                        <span>Birth date</span>
+                        <input type="date" name="bdate" id=""  required>
+                    </div>
+                    <div class="register-input edit-admin-input flex-column">
+                        <span>Address</span>
+                        <input type="text" name="address" id="" placeholder="Enter new address"  required>
+                    </div>
+                </div>
+                <input type="text" name="id-value"  hidden>
+                <button class="ml-auto-btn" name="edit">Save</button>
+            </form>
+            
+            <form class="admin-userpass flex-row spacing">
+                <div class="register-input edit-admin-input flex-column">
+                    <span>Username</span>
+                    <input type="text" name="uname" id="" placeholder="Enter new username" required>
+                </div>
+                <div class="register-input edit-admin-input flex-column">
+                    <span>Password</span>
+                    <input type="password" name="pwd" id="" required>
+                </div>
+                <div class="register-input edit-admin-input flex-column">
+                    <span>Confirm Password</span>
+                    <input type="password" name="cpwd" id="" required>
+                </div>
+            </form>
+            <button class="ml-auto-btn">Save</button>
+        </div>
     </div>
 </div>
