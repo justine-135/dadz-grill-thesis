@@ -10,6 +10,36 @@
   margin-bottom: 5px;
 }
 
-.admin-table-info{
+.admin-table-info {
   min-width: 755px;
+}
+
+.edit-profile-div {
+  padding: 30px;
+}
+
+.ml-auto-btn {
+  margin-left: auto;
+}
+
+.edit-admin-input {
+  margin: 0px !important;
+}
+
+.edit-profileinfo-div {
+  width: 100%;
+  max-width: 800px;
+}
+
+.spacing {
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.edit-admin-input input {
+  width: 100% !important;
+}
+
+.fullname-email-input {
+  width: 48%;
 }

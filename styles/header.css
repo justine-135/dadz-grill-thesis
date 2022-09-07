@@ -190,17 +190,17 @@
   background-color: white;
 }
 
-.logout-form{
+.logout-form {
   height: 65%;
 }
 
-.logout-btn{
+.logout-btn {
   height: 100%;
   padding: 0 10px;
   color: white;
   border-radius: 50px;
-  border: 1px solid #FF5555;
-  background-color: #FF5555;
+  border: 1px solid #ff5555;
+  background-color: #ff5555;
   font-family: "Nunito Sans", sans-serif;
   font-weight: 700;
   cursor: pointer;
@@ -208,40 +208,40 @@
 }
 
 @media screen and (max-width: 1007px) {
-  .header{
+  .header {
     height: 50px;
   }
 
-  .header-profilepic{
+  .header-profilepic {
     padding: 3px;
   }
 
-  .sidenav{
+  .sidenav {
     margin-top: 50px;
     padding-top: 0px;
   }
 
-  .sidenav.shrink{
+  .sidenav.shrink {
     width: 0px;
     opacity: 0;
     cursor: none;
   }
 
-  .tables.shrink{
+  .tables.shrink {
     margin: 50px 0 0 0px;
   }
 
-  .header-logo.header-logo.shrink{
+  .header-logo.header-logo.shrink {
     width: 0px;
     opacity: 0;
-    cursor:default;
+    cursor: default;
   }
 
-  .header-toggle.spin{
+  .header-toggle.spin {
     margin-left: 0px;
   }
 
-  .header-logo h6{
+  .header-logo h6 {
     font-size: 1.175rem;
   }
 }
