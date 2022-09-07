@@ -30,7 +30,7 @@ include "header.php";
                         <span class="label">
                             Total Sales
                         </span>
-                        <span class="sales-number number"></span>
+                        <span class="sales-number number">0</span>
                     </div>
                 </div>
                 <div class="stats rev flex-row">
@@ -38,7 +38,7 @@ include "header.php";
                         <span class="label">
                             Total Orders
                         </span>
-                        <span class="order-number number"></span>
+                        <span class="order-number number">0</span>
                     </div>
                 </div>
                 <div class="stats cost flex-row">
@@ -46,7 +46,7 @@ include "header.php";
                         <span class="label">
                             Cancelled Orders
                         </span>
-                        <span class="cancelled-number number"></span>
+                        <span class="cancelled-number number">0</span>
                     </div>
                 </div>
                 <div class="stats profs flex-row">
@@ -54,7 +54,7 @@ include "header.php";
                         <span class="label">
                             Success Orders
                         </span>
-                        <span class="success-number number"></span>
+                        <span class="success-number number">0</span>
                     </div>
                 </div>
             </div>
