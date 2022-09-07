@@ -94,18 +94,18 @@ class Table extends Dbh
 
     protected function setRequest($tblId)
     {
-        $sql = "SELECT payment, order_status, is_started FROM tables WHERE id = $tblId";
+        $sql = "SELECT table_status, payment FROM tables WHERE id = $tblId";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
         $results = $stmt->fetchAll();
 
         foreach ($results as $row) {
-            $tblStatus = $row["order_status"];
+            $tblStatus = $row["table_status"];
             $paymentStatus = $row["payment"];
         }
 
-        if ($paymentStatus != "No order") {
+        if ($paymentStatus != "No order" || $tblStatus != "Dirty") {
             $this->has_order_request($tblId);
         } else {
             $this->no_order($tblId);
