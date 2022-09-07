@@ -45,5 +45,4 @@
         $loginUser = new UserContr($userName, $pass, $confirmPass, $fname, $lname, $fullName, $email, $contact, $bDate, $address, $userType);
         $loginUser->initLoginUser();
     }
-
 ?>
