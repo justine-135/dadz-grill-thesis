@@ -39,7 +39,7 @@
                         <input type="text" name="address" id="" placeholder="Enter new address"  required>
                     </div>
                 </div>
-                <input type="text" name="id-value"  hidden>
+                <input type="text" name="id-value" value="<?php echo $_SESSION["uid"] ?>"  hidden>
                 <button class="ml-auto-btn" name="edit">Save</button>
             </form>
             
