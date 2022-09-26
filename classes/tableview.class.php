@@ -128,7 +128,7 @@ class TableView extends Table
         ?>
         <thead>
             <tr>
-                <th>Table</th>
+                <th>Table #</th>
                 <th>Status</th>
                 <th>Time</th>
                 <th>Payment</th>
@@ -250,7 +250,7 @@ class TableView extends Table
         ?>
         <thead>
             <tr>
-                <th>Table</th>
+                <th>Table #</th>
                 <th class="">Status</th>
                 <th>Time</th>
                 <th>Payment</th>
