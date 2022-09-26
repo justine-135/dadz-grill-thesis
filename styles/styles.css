@@ -85,22 +85,60 @@ h2 {
   pointer-events: none;
 }
 
-.title a{
+.title a {
   margin-left: auto;
 }
 
 .add-item-btn,
-.add-admin-btn, .transaction-btn, .export-btn {
+.add-admin-btn,
+.transaction-btn,
+.export-btn {
   padding: 0.5rem 1rem;
   color: #f8f8f8;
   background-color: #07df61dc;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   border: none;
   border-radius: 5px;
-  margin-left: auto;
+  margin-left: 5px;
   cursor: pointer;
   text-decoration: none;
+}
+
+.legend-btn {
+  padding: 0.5rem 1rem;
+  color: #f8f8f8;
+  background-color: rgb(10, 10, 128);
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.legend-container {
+  position: relative;
+  margin-left: auto;
+  background-color: lightblue;
+}
+
+.legend-list {
+  display: none;
+  position: absolute;
+  background-color: white;
+  padding: 0.5rem;
+  width: 200px;
+  right: 0;
+  box-shadow: 1px 1px 5px rgba(128, 128, 128, 0.288);
+}
+
+.legend-list ul li {
+  margin-bottom: 5px;
+}
+
+.legend-list.open {
+  display: block;
 }
 
 .overlay {
@@ -239,11 +277,12 @@ h2 {
   display: none;
 }
 
-.table-time-td, .table-time-th{
+.table-time-td,
+.table-time-th {
   width: 80px;
 }
 
-.query-notif{
+.query-notif {
   color: white;
   padding: 5px 10px;
   z-index: 600;
@@ -254,51 +293,50 @@ h2 {
   transform: translateX(-50%);
 }
 
-.query-notif.fail{
+.query-notif.fail {
   background-color: red;
 }
 
-.query-notif.success{
+.query-notif.success {
   background-color: green;
 }
 
-.transaction-tbl-data tr{
+.transaction-tbl-data tr {
   border-bottom: 1px solid rgba(128, 128, 128, 0.158);
-
 }
 
-.modal-head button{
+.modal-head button {
   margin: 0 !important;
 }
 
 @media screen and (max-width: 1007px) {
-  .icons{
+  .icons {
     height: 17px;
     width: 17px;
   }
 
-  .nav-page{
+  .nav-page {
     top: 50px;
     height: 50px;
   }
 
-  .nav-page.shrink{
+  .nav-page.shrink {
     padding: 0 14px 0 14px;
   }
 
-  .title .circle-svg{
+  .title .circle-svg {
     padding: 6px;
   }
 
-  .title h3{
+  .title h3 {
     font-size: 1rem;
   }
 
-  .form-overlay.open{
+  .form-overlay.open {
     top: 50%;
   }
 
-  h2{
+  h2 {
     font-size: 1.275rem;
   }
 }
