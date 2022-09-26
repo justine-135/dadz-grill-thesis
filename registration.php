@@ -3,6 +3,8 @@
     if (empty($_SESSION["username"])) {
         header("location: login.php?message=");
     }
+
+    if ($_SESSION["is_superuser"] == 1) {
 ?>
 
 <!DOCTYPE html>
@@ -82,26 +84,28 @@
                 <div class="admin-create flex-column">
                     <input class="create-account-btn" name="register" type="submit" value="Create account">
                     <?php
-                        if ($_GET["message"] == "emptyinput") {
-                            echo"<p class='err-text-register'>Fill up all inputs!</p>";
-                        }
-                        elseif ($_GET["message"] == "invaliduser") {
-                            echo"<p class='err-text-register'>Invalid user.</p>";
-                        }
-                        elseif ($_GET["message"] == "invalidcontact") {
-                            echo"<p class='err-text-register'>Invalid contact format.</p>";
-                        }
-                        elseif ($_GET["message"] == "invalidemail") {
-                            echo"<p class='err-text-register'>Invalid email.</p>";
-                        }
-                        elseif ($_GET["message"] == "passwordmatch") {
-                            echo"<p class='err-text-register'>Password don't match.</p>";
-                        }
-                        elseif ($_GET["message"] == "userexist") {
-                            echo"<p class='err-text-register'>User already registered.</p>";
-                        }
-                        elseif ($_GET["message"] == "processfailed") {
-                            echo"<p class='err-text-register'>Something went wrong, try again.</p>";
+                        if (isset($_GET['message'])) {
+                            if ($_GET["message"] == "emptyinput") {
+                                echo"<p class='err-text-register'>Fill up all inputs!</p>";
+                            }
+                            elseif ($_GET["message"] == "invaliduser") {
+                                echo"<p class='err-text-register'>Invalid user.</p>";
+                            }
+                            elseif ($_GET["message"] == "invalidcontact") {
+                                echo"<p class='err-text-register'>Invalid contact format.</p>";
+                            }
+                            elseif ($_GET["message"] == "invalidemail") {
+                                echo"<p class='err-text-register'>Invalid email.</p>";
+                            }
+                            elseif ($_GET["message"] == "passwordmatch") {
+                                echo"<p class='err-text-register'>Password don't match.</p>";
+                            }
+                            elseif ($_GET["message"] == "userexist") {
+                                echo"<p class='err-text-register'>User already registered.</p>";
+                            }
+                            elseif ($_GET["message"] == "processfailed") {
+                                echo"<p class='err-text-register'>Something went wrong, try again.</p>";
+                            }
                         }
                     ?>
                 </div>
@@ -112,3 +116,7 @@
     <script src="./js/registration.js"></script>
 </body>
 </html>
+<?php } else {
+    header("location: admins.php");
+}
+?>
