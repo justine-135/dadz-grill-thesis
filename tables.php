@@ -23,6 +23,18 @@
         </div>
         <h3>Table monitoring</h3>
     </div>
+    <div class="legend-container">
+        <button class="legend-btn"><span>Legend</span></button>
+        <div class="legend-list">
+            <span>Table statuses</span>
+            <ul>
+                <li class="flex-row"><span class="table-data-status red"></span> <span>Occupied</span> </li>
+                <li class="flex-row"><span class="table-data-status green"></span> <span>Unoccupied</span> </li>
+                <li class="flex-row"><span class="table-data-status yellow"></span> <span>Calling assistance</span> </li>
+                <li class="flex-row"><span class="table-data-status blue"></span> <span>Dirty</span> </li>
+            </ul>
+        </div>
+    </div>
     <a class="transaction-btn" href="transactions.php">Transactions</a>
 </nav>
 
@@ -53,4 +65,3 @@
 
 </div>
 <script src="js/tables.js"></script>
-<script src="js/timer.js"></script>
