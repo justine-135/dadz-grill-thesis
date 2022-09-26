@@ -14,7 +14,7 @@ if ($_SESSION["is_superuser"] == 1 or $_SESSION["is_waiter"] == 1) {
                     </svg></button>
             </div>
             <div class="body flex-row">
-                <a class="menu-link" href="">Open menu</a>
+                <input type="submit" value="Menu" name="menu">
                 <input type="submit" value="Attended" name="attended">
                 <input type="submit" value="Request bill" name="request">
                 <input class="hide" type="text" id="table-id" name="table-id">
@@ -32,6 +32,18 @@ if ($_SESSION["is_superuser"] == 1 or $_SESSION["is_waiter"] == 1) {
             </div>
             <h3>Menu</h3>
         </div>
+        <div class="legend-container">
+        <button class="legend-btn"><span>Legend</span></button>
+        <div class="legend-list">
+            <span>Table statuses</span>
+            <ul>
+                <li class="flex-row"><span class="table-data-status red"></span> <span>Occupied</span> </li>
+                <li class="flex-row"><span class="table-data-status green"></span> <span>Unoccupied</span> </li>
+                <li class="flex-row"><span class="table-data-status yellow"></span> <span>Calling assistance</span> </li>
+                <li class="flex-row"><span class="table-data-status blue"></span> <span>Dirty</span> </li>
+            </ul>
+        </div>
+    </div>
     </nav>
     <div class="main-content tables-container waiter-tbl">
         <div class="tables waiter-tbl">
@@ -48,7 +60,7 @@ if ($_SESSION["is_superuser"] == 1 or $_SESSION["is_waiter"] == 1) {
             $alert = $_GET["alert"];
             $id = $_GET["id"];
             if ($alert == "no_order") {
-                echo "<span class='query-notif fail'>Table " . $id . " has no order!</span>";
+                echo "<span class='query-notif fail'>Table " . $id . " has not ordered, or has incomplete order.</span>";
             } elseif ($alert == "order_done") {
                 echo "<span class='query-notif success'>Table " . $id . " order has been submitted!</span>";
             } elseif ($alert == "has_order") {
@@ -69,9 +81,20 @@ if ($_SESSION["is_superuser"] == 1 or $_SESSION["is_waiter"] == 1) {
 <?php } else {
 ?>
     <nav class="inventory-nav nav-page flex-row">
-        <div class="main-content admin-container">
-            <p>You do not have permission.</p>
+        <div class="title flex-row">
+            <div class="circle-svg">
+                <svg class="sidelink-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                    <path d="M0 96C0 60.65 28.65 32 64 32H448C483.3 32 512 60.65 512 96V416C512 451.3 483.3 480 448 480H64C28.65 480 0 451.3 0 416V96zM64 160H128V96H64V160zM448 96H192V160H448V96zM64 288H128V224H64V288zM448 224H192V288H448V224zM64 416H128V352H64V416zM448 352H192V416H448V352z" />
+                </svg>
+            </div>
+            <h3>Menu</h3>
         </div>
     </nav>
+    <div class="main-content tables-container">
+        <div class="tables flex-row">
+            <span>You do not have permission.</span>
+        </div>
+    </div>
 <?php }
 ?>
