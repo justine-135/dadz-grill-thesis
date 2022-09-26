@@ -7,8 +7,8 @@ class PurchaseView extends Purchase{
         <table class="tables-table ing-tbl">
             <thead>
                 <tr>
-                    <th>Order no.</th>
-                    <th>Table no.</th>
+                    <th>Order #</th>
+                    <th>Table #</th>
                     <th>Orders</th>
                     <th>Total</th>
                     <th>Waiter</th>

@@ -6,8 +6,8 @@ class FoodsView extends Foods{
     ?>
         <thead>
             <tr>
-                <th>Food Id</th>
-                <th>Photo</th>
+                <th>Item #</th>
+                <th>Image</th>
                 <th>Name</th>
                 <th>Group</th>
                 <th>Price</th>
