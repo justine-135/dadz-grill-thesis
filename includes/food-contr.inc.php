@@ -46,7 +46,7 @@
         $foodItem->initSetFood();
     }
 
-    if (isset($_POST["update"])) {
+    elseif (isset($_POST["update"])) {
         $name = ucfirst($_POST['name']);
         $group = ucfirst($_POST['group']);
         $cost = $_POST['cost'];
@@ -58,13 +58,17 @@
         $foodItem->initUpdateFood();
     }
 
-    if (isset($_POST["delete"])) {
+    elseif (isset($_POST["delete"])) {
         $fid = $_POST['id-value'];
         $img = $_POST['img-value'];
         $img = '.'.$img;
 
         $foodItem = new FoodContr($name, $group, $cost, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img);
         $foodItem->initDeleteFood();
+    }
+
+    else{
+        header("location: ../foods.php");
     }
 
     exit();

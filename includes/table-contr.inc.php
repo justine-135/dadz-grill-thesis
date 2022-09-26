@@ -10,24 +10,40 @@
         }
     }
 
-    if (isset($_POST["attended"])) {
+    elseif (isset($_POST["menu"])) {
+        $tblId = $_POST["table-id"];
+
+        $menu = new TableContr();
+        $menu->initMenu($tblId);
+    }
+
+    elseif (isset($_POST["attended"])) {
         $tblId = $_POST["table-id"];
 
         $attended = new TableContr();
         $attended->initAttended($tblId);
     }
 
-    if (isset($_POST["request"])) {
+    elseif (isset($_POST["request"])) {
         $tblId = $_POST["table-id"];
 
         $attended = new TableContr();
         $attended->initRequest($tblId);
     }
 
-    if (isset($_POST["clean"])) {
+    elseif (isset($_POST["clean"])) {
         $tblId = $_POST["table-id"];
 
         $clean = new TableContr();
         $clean->initClean($tblId);
     }   
+
+    elseif (isset($_POST['TableStatus'])) {
+        $button1_click = new TableContr();
+        $button1_click->initNotify1();
+    }
+
+    else{
+        header("location: ../menu.php");
+    }
 ?>

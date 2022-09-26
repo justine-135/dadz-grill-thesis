@@ -8,12 +8,16 @@
         $billout->initBillout($id);
     }   
 
-    if (isset($_POST["paid"])) {
+    elseif (isset($_POST["paid"])) {
         $id = $_POST["id"];
         $tbl = $_POST["table"];
 
         $paid = new TransactionsContr();
         $paid->initPaid($id, $tbl);
     }   
+
+    else{
+        header("location: ../transactions.php");
+    }
 
 ?>

@@ -16,4 +16,9 @@
             $cashierTable->initTableCl();
         }
     }
+
+    if (isset($_POST['ID'])) {
+        $table1 = new TableView();
+        $table1->initTable1();    
+    }
 ?>
