@@ -103,7 +103,7 @@ class Purchase extends Dbh{
         $stmt->execute();
         $stmt = null;
 
-        $sql = "UPDATE tables SET order_status = 'No order' WHERE id = $tid";
+        $sql = "UPDATE tables SET pending_orders = pending_orders - 1 WHERE id = $tid";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();   
         $stmt = null;
