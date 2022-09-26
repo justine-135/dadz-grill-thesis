@@ -26,7 +26,7 @@ class Purchase extends Dbh{
         }
         $stmt = null;
 
-        $sql = "UPDATE tables SET order_status = 'Preparing' WHERE id = $tableId";
+        $sql = "UPDATE tables SET pending_orders = pending_orders + 1 WHERE id = $tableId";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();    
         $stmt = null;
@@ -60,7 +60,7 @@ class Purchase extends Dbh{
         $stmt->execute();
         $stmt = null;
 
-        $sql = "UPDATE tables SET order_status = 'Pick-up' WHERE id = $tid";
+        $sql = "UPDATE tables SET table_status = 'Occupied', payment = 'Pending', pending_orders = pending_orders - 1, done_orders = done_orders + 1 WHERE id = $tid";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;

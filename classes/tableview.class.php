@@ -33,7 +33,7 @@ class TableView extends Table
                         <span class="table-data-status green"></span>
                         <span><?php echo $row['table_status'] ?></span>
                     <?php
-                    } elseif ($row['table_status'] == "Calling") {
+                    } elseif ($row['table_status'] == "Call") {
                     ?>
                         <span class="table-data-status yellow"></span>
                         <span>Need assistance</span>
@@ -100,7 +100,7 @@ class TableView extends Table
                                                                                     }
                                                                                 }
 
-                                                                                ?></td>
+            ?></td>
                 <td><?php echo $row['payment'] ?></td>
                 <td class="hide "><?php echo $row['is_started'] ?></td>
                 <td class="action-td">
@@ -153,7 +153,7 @@ class TableView extends Table
                         <span class="table-data-status green"></span>
                         <span><?php echo $row['table_status'] ?></span>
                     <?php
-                    } elseif ($row['table_status'] == "Calling") {
+                    } elseif ($row['table_status'] == "Call") {
                     ?>
                         <span class="table-data-status yellow"></span>
                         <span>Need assistance</span>
@@ -219,7 +219,22 @@ class TableView extends Table
                     ?>
                 </td>
                 <td><?php echo $row['payment'] ?></td>
-                <td><?php echo $row['order_status'] ?></td>
+                <td>
+                    <?php 
+                        if ($row['pending_orders'] == 0 && $row['payment'] == 'Pending' && $row['done_orders'] == 0) {
+                            echo "Done";
+                        }
+                        elseif ($row['done_orders'] > 0) {
+                            echo "Pick Up (" . $row['done_orders'] . ")";
+                        }
+                        elseif ($row['pending_orders'] > 0) {
+                            echo "Preparing (" . $row['pending_orders'] . ")";
+                        }
+                        else{
+                            echo "No order";
+                        }
+                    ?>
+                </td>
                 <td class="action-td">
                     <span class="hide"><?php echo $row['id']; ?></span>
                     <button class="show-btn">Show</button>
@@ -259,7 +274,7 @@ class TableView extends Table
                         <span class="table-data-status green"></span>
                         <span><?php echo $row['table_status'] ?></span>
                     <?php
-                    } elseif ($row['table_status'] == "Calling") {
+                    } elseif ($row['table_status'] == "Call") {
                     ?>
                         <span class="table-data-status yellow"></span>
                         <span>Need assistance</span>
@@ -337,6 +352,22 @@ class TableView extends Table
                 </td>
             </tr>
 <?php
+        }
+    }
+
+    public function initTable1(){
+        $results = $this->getTable1();
+        ?>
+
+         <?php
+        foreach ($results as $row) {
+            if ($row['table_status'] == 'Occupied') {
+                echo "0";
+            }
+            else{
+                echo "1";
+            }
+
         }
     }
 }

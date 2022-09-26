@@ -18,5 +18,13 @@ class TableContr extends Table{
     public function initClean($tblId){
         $this->setClean($tblId);
     }
+
+    public function initMenu($tblId){
+        $this->openMenu($tblId);
+    }
+
+    public function initNotify1(){
+        $this->setNotify1();
+    }
 }
 ?>

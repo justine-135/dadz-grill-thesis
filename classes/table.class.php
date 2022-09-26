@@ -34,12 +34,7 @@ class Table extends Dbh
 
     protected function has_order_attended($id)
     {
-        $sql = "UPDATE tables SET table_status = 'Occupied', payment = 'Pending', order_status = 'Done' WHERE id = $id";
-        $stmt = $this->connection()->prepare($sql);
-        $stmt->execute();
-        $stmt = null;
-
-        $sql = "UPDATE tables SET is_started = true WHERE id = $id";
+        $sql = "UPDATE tables SET payment = 'Pending', done_orders = 0, is_started = true WHERE id = $id";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
@@ -63,7 +58,7 @@ class Table extends Dbh
 
     protected function is_dirty($tblId)
     {
-        $sql = "UPDATE tables SET table_status = 'Unoccupied', payment = 'No order', order_status = 'No order' WHERE id = $tblId";
+        $sql = "UPDATE tables SET table_status = 'Unoccupied', payment = 'No order', pending_orders = 0, done_orders = 0 WHERE id = $tblId";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
@@ -72,20 +67,18 @@ class Table extends Dbh
 
     protected function setAttended($tblId)
     {
-        $tblStatus = "";
-        $timerStarted = "";
-
-        $sql = "SELECT order_status, is_started FROM tables WHERE id = $tblId";
+        $sql = "SELECT payment, done_orders FROM tables WHERE id = $tblId";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
         $results = $stmt->fetchAll();
 
         foreach ($results as $row) {
-            $tblStatus = $row["order_status"];
+            $payment = $row["payment"];
+            $doneOrder = $row['done_orders'];
         }
 
-        if ($tblStatus == "Pick-up" || $tblStatus == "Done") {
+        if ($payment == "Pending" && $doneOrder > 0) {
             $this->has_order_attended($tblId);
         } else {
             $this->no_order($tblId);
@@ -94,7 +87,7 @@ class Table extends Dbh
 
     protected function setRequest($tblId)
     {
-        $sql = "SELECT table_status, payment FROM tables WHERE id = $tblId";
+        $sql = "SELECT table_status, pending_orders, done_orders, is_started FROM tables WHERE id = $tblId";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
@@ -102,10 +95,12 @@ class Table extends Dbh
 
         foreach ($results as $row) {
             $tblStatus = $row["table_status"];
-            $paymentStatus = $row["payment"];
+            $tableStarted = $row["is_started"];
+            $pendingOrder = $row['pending_orders'];
+            $doneOrder = $row['done_orders'];
         }
 
-        if ($paymentStatus != "No order" || $tblStatus != "Dirty") {
+        if ($tableStarted != 0 && $pendingOrder == 0 && $doneOrder == 0) {
             $this->has_order_request($tblId);
         } else {
             $this->no_order($tblId);
@@ -133,5 +128,42 @@ class Table extends Dbh
             header("location: ../dirty.php?alert=not_dirty&id=" . $tblId);
         }
         
+    }
+
+    protected function openMenu($tblId)
+    {
+        $sql = "SELECT payment FROM tables WHERE id = $tblId";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll();
+
+        foreach ($results as $row) {
+            $payment = $row["payment"];
+        }
+
+        if ($payment != 'Bill out') {
+            header("location: ../store.php?id=" . $tblId);
+        }
+        else{
+            header("location: ../menu.php");
+        }
+    }
+
+    protected function setNotify1()
+    {
+        $sql = "UPDATE tables SET table_status = 'Call' WHERE id = 1";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+    }
+
+    protected function getTable1()
+    {
+        $sql = "SELECT * FROM tables WHERE id = 1";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+        $results = $stmt->fetchAll();
+        return $results;
+
     }
 }
