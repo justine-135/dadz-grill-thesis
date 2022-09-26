@@ -25,24 +25,30 @@ window.addEventListener("load", () => {
       if (this.readyState == 4) {
         document.querySelector(".cashier-tbl-data").innerHTML =
           this.responseText;
-          const viewOrderBtn = document.querySelectorAll(".view-order-btn");
+        const viewOrderBtn = document.querySelectorAll(".view-order-btn");
 
-          viewOrderBtn.forEach((element) => {
-            element.addEventListener("click", () => {
-              let tbl = element.previousElementSibling.value;
-              overlay.classList.add("open");
-              tableNumber.innerHTML = "Table " + tbl + " - Order";
-              infoServer(tbl);
-            });
+        viewOrderBtn.forEach((element) => {
+          element.addEventListener("click", () => {
+            let tbl = element.previousElementSibling.value;
+            overlay.classList.add("open");
+            tableNumber.innerHTML = "Table " + tbl + " - Order";
+            infoServer(tbl);
           });
-        
-          closeOrderBtn.addEventListener("click", () => {
-            overlay.classList.remove("open");
-          });
+        });
 
+        closeOrderBtn.addEventListener("click", () => {
+          overlay.classList.remove("open");
+        });
       }
     };
-    xmlhttp.open("GET", "./includes/table-view.inc.php?user="+1, true);
+    xmlhttp.open("GET", "./includes/table-view.inc.php?user=" + 1, true);
     xmlhttp.send();
   }, 1000);
+
+  const toggleLegendBtn = document.querySelector(".legend-btn");
+  const legendStatus = document.querySelector(".legend-list");
+
+  toggleLegendBtn.addEventListener("click", () => {
+    legendStatus.classList.toggle("open");
+  });
 });
