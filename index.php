@@ -16,7 +16,6 @@ include "header.php";
         </div>
         <h3>Dashboard</h3>
     </div>
-    <button class="export-btn">Export</button>
 </nav>
 
 <div class="main-content dashboard-container">
