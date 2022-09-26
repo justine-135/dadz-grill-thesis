@@ -3,6 +3,10 @@ session_start();
 if (empty($_SESSION["username"])) {
     header("location: login.php?message=");
 }
+
+if (!isset($_GET['id'])){
+    header("location: menu.php");
+}
 ?>
 
 <!DOCTYPE html>
