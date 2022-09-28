@@ -1,10 +1,7 @@
 <?php
 
 include "header.php";
-// session_start();
-// if (empty($_SESSION["username"])) {
-//     header("location: login.php?message=");
-// }
+
 ?>
 
 <nav class="dashboard-nav nav-page flex-row">
