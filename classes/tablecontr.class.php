@@ -23,8 +23,32 @@ class TableContr extends Table{
         $this->openMenu($tblId);
     }
 
-    public function initNotify1(){
-        $this->setNotify1();
+    public function initOccupy($tblId){
+        $this->setOccupy($tblId);
+    }
+
+    public function initUnoccupy($tblId){
+        $this->setUnoccupy($tblId);
+    }
+    
+    public function initCall($tblId){
+        $this->setCall($tblId);
+    }
+
+    public function initNotify($id){
+        $this->setNotify($id);
+    }
+
+    public function initGetId($id){
+        $results = $this->setGetId($id);
+        foreach ($results as $row) {
+            if ($row['table_status'] == 'Occupied') {
+                echo "0";
+            }
+            else{
+                echo "1";
+            }
+        }
     }
 }
 ?>
