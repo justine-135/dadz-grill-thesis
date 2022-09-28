@@ -21,7 +21,7 @@ if ($_SESSION["is_superuser"] == 1) {
                 <input type="submit" value="Submit" name="delete">
             </div>
         </form>
-        <div class="form-overlay view-account-container">
+        <form class="form-overlay view-account-container" action="includes/admin-contr.inc.php" method="post" enctype="multipart/form-data">
             <div class="head flex-row modal-head">
                 <h4>Information</h4>
                 <button class="close-add-form" type="button"><svg class="sidelink-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
@@ -32,9 +32,10 @@ if ($_SESSION["is_superuser"] == 1) {
 
             </div>
             <div class="form-overlay-footer flex-row">
-                <button class="form-footer-btn" type="button">Ok</button>
+                <button class="form-footer-btn" type="button">Close</button>
+                <input type="submit" name="edit-role" value="Submit">
             </div>
-        </div>
+        </form>
     </div>
 
     <nav class="inventory-nav nav-page flex-row">
