@@ -150,20 +150,61 @@ class Table extends Dbh
         }
     }
 
-    protected function setNotify1()
+    protected function setOccupy($tblId)
     {
-        $sql = "UPDATE tables SET table_status = 'Call' WHERE id = 1";
+        $sql = "UPDATE tables SET table_status = 'Occupied' WHERE id = $tblId";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
+        header("location: ../tables.php");
+
+        exit();
     }
 
-    protected function getTable1()
+    protected function setUnoccupy($tblId)
     {
-        $sql = "SELECT * FROM tables WHERE id = 1";
+        $sql = "UPDATE tables SET table_status = 'Unoccupied' WHERE id = $tblId";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+        header("location: ../tables.php");
+
+        exit();
+    }
+
+    protected function setCall($tblId)
+    {
+        $sql = "UPDATE tables SET table_status = 'Call' WHERE id = $tblId";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+        header("location: ../tables.php");
+
+        exit();
+    }
+
+    protected function setNotify($id)
+    {
+        $sql = "SELECT * FROM tables WHERE id = $id";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll();
+
+        foreach ($results as $row) {
+            $tblStatus = $row["table_status"];
+        }
+
+        if ($tblStatus != 'Unoccupied') {
+            $sql = "UPDATE tables SET table_status = 'Call' WHERE id = $id";
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute();
+        }
+    }
+
+    protected function setGetId($id)
+    {
+        $sql = "SELECT * FROM tables WHERE id = $id";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $results = $stmt->fetchAll();
         return $results;
-
     }
 }
