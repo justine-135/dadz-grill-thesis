@@ -2,12 +2,12 @@
   width: 400px !important;
 }
 
-.action-td button {
-  margin: 0 3px;
-}
-
 .info-text {
   margin-bottom: 5px;
+}
+
+.info-text .span {
+  margin-right: auto;
 }
 
 .admin-table-info {
@@ -42,4 +42,13 @@
 
 .fullname-email-input {
   width: 48%;
+}
+
+.user-role-div ul {
+  display: none;
+  position: absolute;
+}
+
+.user-role-div ul.open {
+  display: block;
 }

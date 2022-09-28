@@ -49,6 +49,10 @@ h2 {
   height: 20px;
 }
 
+.title {
+  margin-right: auto;
+}
+
 .nav-page {
   position: fixed;
   width: 100%;
@@ -92,7 +96,9 @@ h2 {
 .add-item-btn,
 .add-admin-btn,
 .transaction-btn,
-.export-btn {
+.legend-btn,
+.export-btn,
+.roles-btn {
   padding: 0.5rem 1rem;
   color: #f8f8f8;
   background-color: #07df61dc;
@@ -106,21 +112,27 @@ h2 {
 }
 
 .legend-btn {
-  padding: 0.5rem 1rem;
-  color: #f8f8f8;
   background-color: rgb(10, 10, 128);
-  font-size: 1rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  text-decoration: none;
+  margin: 0;
+}
+
+.roles-btn {
+  align-items: center;
+  background-color: #e4e4e4;
+  color: #444444;
+  padding: 0.2rem 0.8rem;
+}
+
+.roles-btn svg {
+  height: 2px;
+  width: 2px;
+  margin-left: 5px;
+  transform: rotate(90deg);
 }
 
 .legend-container {
   position: relative;
   margin-left: auto;
-  background-color: lightblue;
 }
 
 .legend-list {
@@ -129,7 +141,6 @@ h2 {
   background-color: white;
   padding: 0.5rem;
   width: 200px;
-  right: 0;
   box-shadow: 1px 1px 5px rgba(128, 128, 128, 0.288);
 }
 
@@ -275,6 +286,10 @@ h2 {
 
 .hide {
   display: none;
+}
+
+table thead tr th {
+  background-color: red;
 }
 
 .table-time-td,
