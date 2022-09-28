@@ -12,7 +12,7 @@ class Users extends Dbh{
     }
 
     protected function getUser($uid){
-        $sql = "SELECT fullname, email, contact, birth_date, location_address FROM users WHERE id=$uid";
+        $sql = "SELECT * FROM users WHERE id=$uid";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 

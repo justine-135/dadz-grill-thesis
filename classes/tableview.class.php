@@ -46,59 +46,60 @@ class TableView extends Table
                     }
                     ?>
                 </td>
-                <td class="table-timer-col table-<?php echo $row['id'] ?>-time"><?php
-                                                                                $time = $row["timer"];
+                <td class="table-timer-col table-<?php echo $row['id'] ?>-time">
+                <?php
+                        $time = $row["timer"];
 
-                                                                                $hh = floor($time / 3600) . ':';
-                                                                                $time = $time % 3600;
-                                                                                $mm = floor($time / 60) . ':';
-                                                                                $time = $time % 60;
-                                                                                $ss = $time;
+                        $hh = floor($time / 3600) . ':';
+                        $time = $time % 3600;
+                        $mm = floor($time / 60) . ':';
+                        $time = $time % 60;
+                        $ss = $time;
 
-                                                                                $hh_length = strlen((string)$hh);
-                                                                                $mm_length = strlen((string)$mm);
-                                                                                $ss_length = strlen((string)$ss);
+                        $hh_length = strlen((string)$hh);
+                        $mm_length = strlen((string)$mm);
+                        $ss_length = strlen((string)$ss);
 
-                                                                                $showHour = "";
-                                                                                if ($hh_length == 2) {
-                                                                                    $showHour = "0" . (string)$hh;
-                                                                                } else {
-                                                                                    $showHour = $hh;
-                                                                                }
+                        $showHour = "";
+                        if ($hh_length == 2) {
+                            $showHour = "0" . (string)$hh;
+                        } else {
+                            $showHour = $hh;
+                        }
 
-                                                                                $showMinutes = "";
-                                                                                if ($mm_length == 2) {
-                                                                                    $showMinutes = "0" . (string)$mm;
-                                                                                } else {
-                                                                                    $showMinutes = $mm;
-                                                                                }
+                        $showMinutes = "";
+                        if ($mm_length == 2) {
+                            $showMinutes = "0" . (string)$mm;
+                        } else {
+                            $showMinutes = $mm;
+                        }
 
-                                                                                $showSeconds = "";
-                                                                                if ($ss_length == 1) {
-                                                                                    $showSeconds = "0" . $ss;
-                                                                                } else {
-                                                                                    $showSeconds = $ss;
-                                                                                }
+                        $showSeconds = "";
+                        if ($ss_length == 1) {
+                            $showSeconds = "0" . $ss;
+                        } else {
+                            $showSeconds = $ss;
+                        }
 
-                                                                                $finalTime = $showHour . $showMinutes . $showSeconds;
-                                                                                if ($row["is_started"] != 0) {
-                                                                                    if ($row['timer'] >= 7200) {
-                                                                                        $endtime = "endtime";
-                                                                                        echo "<span class='" . $endtime . "'>" . $finalTime . "</span>";
-                                                                                    } elseif ($row['timer'] >= 6300) {
-                                                                                        $endtime = "warningtime";
-                                                                                        echo "<span class='" . $endtime . "'>" . $finalTime . "</span>";
-                                                                                    } else {
-                                                                                        $endtime = "running";
-                                                                                        echo "<span class='" . $endtime . "'>" . $finalTime . "</span>";
-                                                                                    }
-                                                                                } else {
-                                                                                    if ($row["timer"] != 0) {
-                                                                                        echo $finalTime;
-                                                                                    } else {
-                                                                                        echo "00:00:00";
-                                                                                    }
-                                                                                }
+                        $finalTime = $showHour . $showMinutes . $showSeconds;
+                        if ($row["is_started"] != 0) {
+                            if ($row['timer'] >= 7200) {
+                                $endtime = "endtime";
+                                echo "<span class='" . $endtime . "'>" . $finalTime . "</span>";
+                            } elseif ($row['timer'] >= 6300) {
+                                $endtime = "warningtime";
+                                echo "<span class='" . $endtime . "'>" . $finalTime . "</span>";
+                            } else {
+                                $endtime = "running";
+                                echo "<span class='" . $endtime . "'>" . $finalTime . "</span>";
+                            }
+                        } else {
+                            if ($row["timer"] != 0) {
+                                echo $finalTime;
+                            } else {
+                                echo "00:00:00";
+                            }
+                        }
 
             ?></td>
                 <td><?php echo $row['payment'] ?></td>
@@ -111,8 +112,8 @@ class TableView extends Table
                     </form>
                 </td>
                 <td class="action-td status-action-col">
-                    <form action="./phpincludes/table_status.php" method="POST">
-                        <input type="text" name="id" value=<?php echo $row['id'] ?> id="" hidden>
+                    <form action="./includes/table-contr.inc.php" method="POST">
+                        <input type="text" name="table-id" value=<?php echo $row['id'] ?> id="" hidden>
                         <input type="submit" name="occupy" value="Occupy">
                         <input type="submit" name="unoccupy" value="Unoccupy">
                         <input type="submit" name="call" value="Call">
@@ -352,22 +353,6 @@ class TableView extends Table
                 </td>
             </tr>
 <?php
-        }
-    }
-
-    public function initTable1(){
-        $results = $this->getTable1();
-        ?>
-
-         <?php
-        foreach ($results as $row) {
-            if ($row['table_status'] == 'Occupied') {
-                echo "0";
-            }
-            else{
-                echo "1";
-            }
-
         }
     }
 }

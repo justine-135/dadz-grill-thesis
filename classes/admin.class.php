@@ -14,6 +14,36 @@ class Admin extends Dbh{
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
     }
+
+    protected function editRole($id, $role){
+        switch ($role) {
+            case 'Cashier':
+                $sql = "UPDATE users SET is_cashier = 1, is_waiter = 0, is_cleaner = 0, is_cook = 0 WHERE id = $id";
+                $stmt = $this->connection()->prepare($sql);
+                $stmt->execute();
+                break;
+            case 'Waiter':
+                $sql = "UPDATE users SET is_cashier = 0, is_waiter = 1, is_cleaner = 0, is_cook = 0 WHERE id = $id";
+                $stmt = $this->connection()->prepare($sql);
+                $stmt->execute();
+                break;
+            case 'Cleaner':
+                $sql = "UPDATE users SET is_cashier = 0, is_waiter = 0, is_cleaner = 1, is_cook = 0 WHERE id = $id";
+                $stmt = $this->connection()->prepare($sql);
+                $stmt->execute();
+                break;
+            case 'Cook':
+                $sql = "UPDATE users SET is_cashier = 0, is_waiter = 0, is_cleaner = 0, is_cook = 1 WHERE id = $id";
+                $stmt = $this->connection()->prepare($sql);
+                $stmt->execute();
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+
+    }
 }
 
 ?>

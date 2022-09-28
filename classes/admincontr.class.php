@@ -19,6 +19,11 @@ class AdminContr extends Admin
         $_SESSION["bday"] = $result[0]["birth_date"];
         $_SESSION["address"] = $result[0]["location_address"];
         header("location: ../profile.php?alert=updated&id=" . $id);
+    }
 
+    public function initEditRole($id, $role)
+    {
+        $this->editRole($id, $role);
+        header("location: ../admins.php");
     }
 }
