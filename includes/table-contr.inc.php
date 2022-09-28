@@ -38,9 +38,39 @@
         $clean->initClean($tblId);
     }   
 
+    elseif (isset($_POST['occupy'])) {
+        $tblId = $_POST["table-id"];
+
+        $occupy = new TableContr();
+        $occupy->initOccupy($tblId);
+    }
+
+    elseif (isset($_POST['unoccupy'])) {
+        $tblId = $_POST["table-id"];
+
+        $unoccupy = new TableContr();
+        $unoccupy->initUnoccupy($tblId);
+    }
+
+    elseif (isset($_POST['call'])) {
+        $tblId = $_POST["table-id"];
+
+        $call = new TableContr();
+        $call->initCall($tblId);
+    }
+
     elseif (isset($_POST['TableStatus'])) {
-        $button1_click = new TableContr();
-        $button1_click->initNotify1();
+        $id = $_POST['TableStatus'];
+
+        $buttonClick = new TableContr($id);
+        $buttonClick->initNotify($id);
+    }
+
+    elseif (isset($_POST['getID'])){
+        $id = $_POST['getID'];
+
+        $getID = new TableContr($id);
+        $getID->initGetId($id);
     }
 
     else{

@@ -18,4 +18,11 @@
         $editAdmin = new AdminContr();
         $editAdmin->initEdit($id, $fullname, $email, $contact, $bday, $address);
     }
+
+    if (isset($_POST['edit-role'])) {
+        $role = $_POST["role"];
+
+        $editRole = new AdminContr();
+        $editRole->initEditRole($id, $role);
+    }
 ?>
