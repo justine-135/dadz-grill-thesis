@@ -3,10 +3,18 @@
 
     if (isset($_GET["contr"])) {
         $contr = $_GET["contr"];
+        $id = $_GET["id"];
 
         if ($contr == 1) {
-            $timer = new TableContr();
-            $timer->initTableTimer();
+            $timer = new TableContr($id);
+            $timer->initStopTableTimer($id);
+        }
+
+        if ($contr == 2) {
+            $duration = $_GET["duration"];
+            echo $duration;
+            $timer = new TableContr($id, $duration);
+            $timer->initTimerDuration($id, $duration);
         }
     }
 
