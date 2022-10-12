@@ -1,4 +1,6 @@
 <?php
+// set the default timezone to use.
+date_default_timezone_set('Asia/Manila');
 
 class Table extends Dbh
 {
@@ -12,32 +14,47 @@ class Table extends Dbh
         return $results;
     }
 
-    protected function updateTableTimer($i)
-    {
-        $sql = "SELECT is_started FROM tables WHERE id = $i";
-        $stmt = $this->connection()->prepare($sql);
-        $stmt->execute();
-
-        $result = $stmt->fetchAll();
-        $increment = 1;
-        if ($result > 0) {
-            foreach ($result as $row) {
-                $started = $row["is_started"];
-                if ($started == 1) {
-                    $sql = "UPDATE tables SET timer = timer + $increment WHERE id = $i";
-                    $stmt = $this->connection()->prepare($sql);
-                    $stmt->execute();
-                }
-            }
-        }
-    }
-
     protected function has_order_attended($id)
     {
-        $sql = "UPDATE tables SET payment = 'Pending', done_orders = 0, is_started = true WHERE id = $id";
+        // Prints something like: Monday 8th of August 2005 03:12:46 PM
+        $hms = date('h:i:s');  
+        $res = 0;
+        $arr = explode(':', $hms);
+        if (count($arr) === 3) {
+            echo "hour:" . $arr[0] . "<br>";
+            echo "min:" . $arr[1] . "<br>";
+            echo "sec:" . $arr[2] . "<br>";
+
+            $res = $arr[0] * 3600 + $arr[1] * 60 + $arr[2];59;
+        }
+        
+        $warning_time = $res + 6300;
+        $end_time = $res + 7200;
+
+        $sql = "SELECT is_started FROM tables WHERE id = $id";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
+
+        $results = $stmt->fetchAll();
+
         $stmt = null;
+
+        foreach ($results as $row) {
+            $is_started = $row["is_started"];
+        }
+
+        if ($is_started != 1) {
+            $sql = "UPDATE tables SET timer = '$res', warning_time = '$warning_time', end_time = '$end_time', payment = 'Pending', done_orders = 0, is_started = true WHERE id = $id";
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute();
+            $stmt = null;
+        } 
+        else{
+            $sql = "UPDATE tables SET done_orders = 0 WHERE id = $id";
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute();
+            $stmt = null;
+        }
 
         header("location: ../menu.php?alert=has_order&id=" . $id);
     }
@@ -142,7 +159,7 @@ class Table extends Dbh
             $payment = $row["payment"];
         }
 
-        if ($payment != 'Bill out') {
+        if ($payment != 'Requesting') {
             header("location: ../store.php?id=" . $tblId);
         }
         else{
@@ -198,6 +215,25 @@ class Table extends Dbh
             $stmt->execute();
         }
     }
+
+    protected function setStopTimer($id)
+    {
+        $sql = "UPDATE tables SET is_started = false WHERE id = $id";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+        $stmt = null;
+
+        header("location: ../menu.php");
+    }
+
+    protected function setTimerDuration($id, $duration)
+    {
+        $sql = "UPDATE tables SET duration_timer = '$duration' WHERE id = $id";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+        $stmt = null;
+    }
+
 
     protected function setGetId($id)
     {

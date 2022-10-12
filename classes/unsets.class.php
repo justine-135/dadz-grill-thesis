@@ -2,42 +2,42 @@
 
 class Unsets extends Dbh{
     public function unset(){
-        $sql = "UPDATE tables SET table_status = 'Unoccupied', timer = 0, payment = 'No order', pending_orders = 0, done_orders = 0, is_started = 0 WHERE id = '1'";
+        $sql = "UPDATE tables SET table_status = 'Unoccupied', timer = 0, warning_time = 0, end_time = 0, duration_timer = 0, payment = 'No order', pending_orders = 0, done_orders = 0, is_started = 0 WHERE id = '1'";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
     
-        $sql = "UPDATE tables SET table_status = 'Unoccupied', timer = 0, payment = 'No order', pending_orders = 0, done_orders = 0, is_started = 0 WHERE id = '2'";
+        $sql = "UPDATE tables SET table_status = 'Unoccupied', timer = 0, warning_time = 0, end_time = 0, duration_timer = 0, payment = 'No order', pending_orders = 0, done_orders = 0, is_started = 0 WHERE id = '2'";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
     
-        $sql = "UPDATE tables SET table_status = 'Unoccupied', timer = 0, payment = 'No order', pending_orders = 0, done_orders = 0, is_started = 0 WHERE id = '3'";
+        $sql = "UPDATE tables SET table_status = 'Unoccupied', timer = 0, warning_time = 0, end_time = 0, duration_timer = 0, payment = 'No order', pending_orders = 0, done_orders = 0, is_started = 0 WHERE id = '3'";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
         
-        $sql = "UPDATE tables SET table_status = 'Unoccupied', timer = 0, payment = 'No order', pending_orders = 0, done_orders = 0, is_started = 0 WHERE id = '4'";
+        $sql = "UPDATE tables SET table_status = 'Unoccupied', timer = 0, warning_time = 0, end_time = 0, duration_timer = 0, payment = 'No order', pending_orders = 0, done_orders = 0, is_started = 0 WHERE id = '4'";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
         
-        $sql = "UPDATE tables SET table_status = 'Unoccupied', timer = 0, payment = 'No order', pending_orders = 0, done_orders = 0, is_started = 0 WHERE id = '5'";
+        $sql = "UPDATE tables SET table_status = 'Unoccupied', timer = 0, warning_time = 0, end_time = 0, duration_timer = 0, payment = 'No order', pending_orders = 0, done_orders = 0, is_started = 0 WHERE id = '5'";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
         
-        $sql = "UPDATE tables SET table_status = 'Unoccupied', timer = 0, payment = 'No order', pending_orders = 0, done_orders = 0, is_started = 0 WHERE id = '6'";
+        $sql = "UPDATE tables SET table_status = 'Unoccupied', timer = 0, warning_time = 0, end_time = 0, duration_timer = 0, payment = 'No order', pending_orders = 0, done_orders = 0, is_started = 0 WHERE id = '6'";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
         
-        $sql = "UPDATE tables SET table_status = 'Unoccupied', timer = 0, payment = 'No order', pending_orders = 0, done_orders = 0, is_started = 0 WHERE id = '7'";
+        $sql = "UPDATE tables SET table_status = 'Unoccupied', timer = 0, warning_time = 0, end_time = 0, duration_timer = 0, payment = 'No order', pending_orders = 0, done_orders = 0, is_started = 0 WHERE id = '7'";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
         
-        $sql = "UPDATE tables SET table_status = 'Unoccupied', timer = 0, payment = 'No order', pending_orders = 0, done_orders = 0, is_started = 0 WHERE id = '8'";
+        $sql = "UPDATE tables SET table_status = 'Unoccupied', timer = 0, warning_time = 0, end_time = 0, duration_timer = 0, payment = 'No order', pending_orders = 0, done_orders = 0, is_started = 0 WHERE id = '8'";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;

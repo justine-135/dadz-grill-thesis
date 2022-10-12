@@ -46,62 +46,33 @@ class TableView extends Table
                     }
                     ?>
                 </td>
-                <td class="table-timer-col table-<?php echo $row['id'] ?>-time">
-                <?php
-                        $time = $row["timer"];
-
-                        $hh = floor($time / 3600) . ':';
-                        $time = $time % 3600;
-                        $mm = floor($time / 60) . ':';
-                        $time = $time % 60;
-                        $ss = $time;
-
-                        $hh_length = strlen((string)$hh);
-                        $mm_length = strlen((string)$mm);
-                        $ss_length = strlen((string)$ss);
-
-                        $showHour = "";
-                        if ($hh_length == 2) {
-                            $showHour = "0" . (string)$hh;
-                        } else {
-                            $showHour = $hh;
-                        }
-
-                        $showMinutes = "";
-                        if ($mm_length == 2) {
-                            $showMinutes = "0" . (string)$mm;
-                        } else {
-                            $showMinutes = $mm;
-                        }
-
-                        $showSeconds = "";
-                        if ($ss_length == 1) {
-                            $showSeconds = "0" . $ss;
-                        } else {
-                            $showSeconds = $ss;
-                        }
-
-                        $finalTime = $showHour . $showMinutes . $showSeconds;
-                        if ($row["is_started"] != 0) {
-                            if ($row['timer'] >= 7200) {
-                                $endtime = "endtime";
-                                echo "<span class='" . $endtime . "'>" . $finalTime . "</span>";
-                            } elseif ($row['timer'] >= 6300) {
-                                $endtime = "warningtime";
-                                echo "<span class='" . $endtime . "'>" . $finalTime . "</span>";
-                            } else {
-                                $endtime = "running";
-                                echo "<span class='" . $endtime . "'>" . $finalTime . "</span>";
-                            }
-                        } else {
-                            if ($row["timer"] != 0) {
-                                echo $finalTime;
-                            } else {
-                                echo "00:00:00";
-                            }
-                        }
-
-            ?></td>
+                <?php 
+                $to_sec_warning = gmdate("H:i:s", $row['warning_time']);
+                $to_sec_end = gmdate("H:i:s", $row['end_time']);
+                $local_time = date("h:i:s");;
+                if ($to_sec_end <= $local_time) {
+                    if ($row['is_started'] == 1) {
+                    ?>
+                    <td class="table-timer-col table-<?php echo $row['id'] ?>-time endtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                    <?php
+                    }
+                    else{
+                    ?>
+                    <td class="table-timer-col table-<?php echo $row['id'] ?>-time" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                    <?php
+                    }
+                }
+                elseif($to_sec_warning <= $local_time){
+                    ?>
+                    <td class="table-timer-col table-<?php echo $row['id'] ?>-time warningtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                    <?php
+                }
+                else{
+                    ?>
+                    <td class="table-timer-col table-<?php echo $row['id'] ?>-time runningtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                    <?php
+                }
+                ?>
                 <td><?php echo $row['payment'] ?></td>
                 <td class="hide "><?php echo $row['is_started'] ?></td>
                 <td class="action-td">
@@ -167,58 +138,33 @@ class TableView extends Table
                     }
                     ?>
                 </td>
-                <td class="table-<?php echo $row["id"]; ?>-time">
-                    <?php
-                    $time = $row["timer"];
-                    $hh = floor($time / 3600) . ':';
-                    $time = $time % 3600;
-                    $mm = floor($time / 60) . ':';
-                    $time = $time % 60;
-                    $ss = $time;
-                    $hh_length = strlen((string)$hh);
-                    $mm_length = strlen((string)$mm);
-                    $ss_length = strlen((string)$ss);
-
-                    $showHour = "";
-                    if ($hh_length == 2) {
-                        $showHour = "0" . (string)$hh;
-                    } else {
-                        $showHour = $hh;
-                    }
-
-                    $showMinutes = "";
-                    if ($mm_length == 2) {
-                        $showMinutes = "0" . (string)$mm;
-                    } else {
-                        $showMinutes = $mm;
-                    }
-                    $showSeconds = "";
-                    if ($ss_length == 1) {
-                        $showSeconds = "0" . $ss;
-                    } else {
-                        $showSeconds = $ss;
-                    }
-                    $finalTime = $showHour . $showMinutes . $showSeconds;
-                    if ($row["is_started"] != 0) {
-                        if ($row['timer'] >= 7200) {
-                            $endtime = "endtime";
-                            echo "<span class='" . $endtime . "'>" . $finalTime . "</span>";
-                        } elseif ($row['timer'] >= 6300) {
-                            $endtime = "warningtime";
-                            echo "<span class='" . $endtime . "'>" . $finalTime . "</span>";
-                        } else {
-                            $endtime = "running";
-                            echo "<span class='" . $endtime . "'>" . $finalTime . "</span>";
-                        }
-                    } else {
-                        if ($row["timer"] != 0) {
-                            echo $finalTime;
-                        } else {
-                            echo "00:00:00";
-                        }
-                    }
+                <?php 
+                $to_sec_warning = gmdate("H:i:s", $row['warning_time']);
+                $to_sec_end = gmdate("H:i:s", $row['end_time']);
+                $local_time = date("h:i:s");;
+                if ($to_sec_end <= $local_time) {
+                    if ($row['is_started'] == 1) {
                     ?>
-                </td>
+                    <td class="table-timer-col table-<?php echo $row['id'] ?>-time endtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                    <?php
+                    }
+                    else{
+                    ?>
+                    <td class="table-timer-col table-<?php echo $row['id'] ?>-time" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                    <?php
+                    }
+                }
+                elseif($to_sec_warning <= $local_time){
+                    ?>
+                    <td class="table-timer-col table-<?php echo $row['id'] ?>-time warningtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                    <?php
+                }
+                else{
+                    ?>
+                    <td class="table-timer-col table-<?php echo $row['id'] ?>-time runningtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                    <?php
+                }
+                ?>
                 <td><?php echo $row['payment'] ?></td>
                 <td>
                     <?php 
@@ -288,61 +234,33 @@ class TableView extends Table
                     }
                     ?>
                 </td>
-                <td class="table-timer-col table-<?php echo $row['id'] ?>-time"><?php
-                                                                                $time = $row["timer"];
-
-                                                                                $hh = floor($time / 3600) . ':';
-                                                                                $time = $time % 3600;
-                                                                                $mm = floor($time / 60) . ':';
-                                                                                $time = $time % 60;
-                                                                                $ss = $time;
-
-                                                                                $hh_length = strlen((string)$hh);
-                                                                                $mm_length = strlen((string)$mm);
-                                                                                $ss_length = strlen((string)$ss);
-
-                                                                                $showHour = "";
-                                                                                if ($hh_length == 2) {
-                                                                                    $showHour = "0" . (string)$hh;
-                                                                                } else {
-                                                                                    $showHour = $hh;
-                                                                                }
-
-                                                                                $showMinutes = "";
-                                                                                if ($mm_length == 2) {
-                                                                                    $showMinutes = "0" . (string)$mm;
-                                                                                } else {
-                                                                                    $showMinutes = $mm;
-                                                                                }
-
-                                                                                $showSeconds = "";
-                                                                                if ($ss_length == 1) {
-                                                                                    $showSeconds = "0" . $ss;
-                                                                                } else {
-                                                                                    $showSeconds = $ss;
-                                                                                }
-
-                                                                                $finalTime = $showHour . $showMinutes . $showSeconds;
-                                                                                if ($row["is_started"] != 0) {
-                                                                                    if ($row['timer'] >= 7200) {
-                                                                                        $endtime = "endtime";
-                                                                                        echo "<span class='" . $endtime . "'>" . $finalTime . "</span>";
-                                                                                    } elseif ($row['timer'] >= 6300) {
-                                                                                        $endtime = "warningtime";
-                                                                                        echo "<span class='" . $endtime . "'>" . $finalTime . "</span>";
-                                                                                    } else {
-                                                                                        $endtime = "running";
-                                                                                        echo "<span class='" . $endtime . "'>" . $finalTime . "</span>";
-                                                                                    }
-                                                                                } else {
-                                                                                    if ($row["timer"] != 0) {
-                                                                                        echo $finalTime;
-                                                                                    } else {
-                                                                                        echo "00:00:00";
-                                                                                    }
-                                                                                }
-
-                                                                                ?></td>
+                <?php 
+                $to_sec_warning = gmdate("H:i:s", $row['warning_time']);
+                $to_sec_end = gmdate("H:i:s", $row['end_time']);
+                $local_time = date("h:i:s");;
+                if ($to_sec_end <= $local_time) {
+                    if ($row['is_started'] == 1) {
+                    ?>
+                    <td class="table-timer-col table-<?php echo $row['id'] ?>-time endtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                    <?php
+                    }
+                    else{
+                    ?>
+                    <td class="table-timer-col table-<?php echo $row['id'] ?>-time" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                    <?php
+                    }
+                }
+                elseif($to_sec_warning <= $local_time){
+                    ?>
+                    <td class="table-timer-col table-<?php echo $row['id'] ?>-time warningtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                    <?php
+                }
+                else{
+                    ?>
+                    <td class="table-timer-col table-<?php echo $row['id'] ?>-time runningtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                    <?php
+                }
+                ?>
                 <td><?php echo $row['payment'] ?></td>
                 <td class="hide "><?php echo $row['is_started'] ?></td>
                 <td class="action-td status-action-col">

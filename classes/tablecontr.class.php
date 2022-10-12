@@ -1,11 +1,11 @@
 <?php
 
 class TableContr extends Table{
-    public function initTableTimer(){
-        for ($i=0; $i < 9; $i++) { 
-            $this->updateTableTimer($i);
-        }
-    }   
+    // public function initTableTimer(){
+    //     for ($i=0; $i < 9; $i++) { 
+    //         $this->updateTableTimer($i);
+    //     }
+    // }   
 
     public function initAttended($tblId){
         $this->setAttended($tblId);
@@ -37,6 +37,14 @@ class TableContr extends Table{
 
     public function initNotify($id){
         $this->setNotify($id);
+    }
+
+    public function initStopTableTimer($id){
+        $this->setStopTimer($id);
+    }
+
+    public function initTimerDuration($id, $duration){
+        $this->setTimerDuration($id, $duration);
     }
 
     public function initGetId($id){
