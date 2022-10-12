@@ -45,7 +45,7 @@
   border-right: 1px solid rgba(128, 128, 128, 0.055);
 }
 
-.tables-table tr{
+.tables-table tr {
   border-bottom: 1px solid rgba(128, 128, 128, 0.055);
 }
 
@@ -55,7 +55,8 @@
   font-weight: 600;
 }
 
-.action-td form input[type="submit"], .action-td button {
+.action-td form input[type="submit"],
+.action-td button {
   font-family: "Nunito Sans", sans-serif;
   margin: auto;
   color: #444444;
@@ -149,60 +150,85 @@
   width: 30%;
 }
 
-.endtime{
+.table-timer-col.table-1-time.endtime,
+.table-timer-col.table-2-time.endtime,
+.table-timer-col.table-3-time.endtime,
+.table-timer-col.table-4-time.endtime,
+.table-timer-col.table-5-time.endtime,
+.table-timer-col.table-6-time.endtime,
+.table-timer-col.table-7-time.endtime,
+.table-timer-col.table-8-time.endtime {
   color: red;
 }
-.warningtime{
-  color: rgb(255, 115, 0);
 
+.table-timer-col.table-1-time.warningtime,
+.table-timer-col.table-2-time.warningtime,
+.table-timer-col.table-3-time.warningtime,
+.table-timer-col.table-4-time.warningtime,
+.table-timer-col.table-5-time.warningtime,
+.table-timer-col.table-6-time.warningtime,
+.table-timer-col.table-7-time.warningtime,
+.table-timer-col.table-8-time.warningtime {
+  color: rgb(255, 115, 0);
 }
 
-.orders-list .pad10, .transaction-tbl-data .pad10{
+.table-timer-col.table-1-time.runningtime,
+.table-timer-col.table-2-time.runningtime,
+.table-timer-col.table-3-time.runningtime,
+.table-timer-col.table-4-time.runningtime,
+.table-timer-col.table-5-time.runningtime,
+.table-timer-col.table-6-time.runningtime,
+.table-timer-col.table-7-time.runningtime,
+.table-timer-col.table-8-time.runningtime {
+  color: rgb(17, 0, 255);
+}
+
+.orders-list .pad10,
+.transaction-tbl-data .pad10 {
   padding-top: 12px;
 }
 
-.orders-table{
+.orders-table {
   margin: auto;
 }
 
-.orders-table td{
+.orders-table td {
   text-align: left;
   height: 30px;
 }
 
-.order-x-col{
+.order-x-col {
   width: 50px;
-  text-align: center !important; 
+  text-align: center !important;
 }
 
-.waiter-table{
+.waiter-table {
   min-width: 536px;
 }
 
-.cleaner-table{
+.cleaner-table {
   min-width: 502px;
 }
 
-.cashier-tbl-data{
+.cashier-tbl-data {
   min-width: 767px;
 }
 
-.foods-table{
+.foods-table {
   min-width: 620px;
 }
 
-.close-order-btn{
+.close-order-btn {
   background-color: white;
   border: none;
 }
 
 @media screen and (max-width: 1007px) {
-  .tables{
-    margin: 50px 0 0 20px;;
+  .tables {
+    margin: 50px 0 0 20px;
   }
 
-  .tables-container.shrink{
+  .tables-container.shrink {
     padding: 50px 0px 0 0px;
   }
 }
-
