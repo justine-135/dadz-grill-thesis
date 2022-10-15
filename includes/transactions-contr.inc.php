@@ -14,7 +14,12 @@
 
         $paid = new TransactionsContr();
         $paid->initPaid($id, $tbl);
-    }   
+    }  
+    
+    elseif (isset($_POST["process"])) {
+        $id = $_POST["id"];
+        header("location: ../bill.php?id=".$id);
+    }  
 
     else{
         header("location: ../transactions.php");
