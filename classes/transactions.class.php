@@ -95,4 +95,15 @@ class Transactions extends Dbh
         header("location: ../transactions.php");
         exit();
     }
+
+    protected function getInvoice($id)
+    {
+        $sql = "SELECT * FROM transactions WHERE id = ?";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute([$id]);
+
+        $results = $stmt->fetchAll();
+        return $results;
+    }
+
 }
