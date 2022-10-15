@@ -47,7 +47,7 @@ if ($_SESSION["is_superuser"] == 1) {
             </div>
             <h3>Accounts</h3>
         </div>
-        <a href="registration.php?message" class="add-admin-btn">Add admin</a>
+        <a href="registration.php?message" class="add-admin-btn">Add crew</a>
     </nav>
 
     <div class="main-content tables-container">
