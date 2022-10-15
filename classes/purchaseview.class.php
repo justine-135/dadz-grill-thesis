@@ -40,11 +40,11 @@ class PurchaseView extends Purchase{
                                             ?>
                                         </td>
                                         <td class="order-x-col">
-                                            x
+                                            -
                                         </td>
                                         <td>
                                             <?php
-                                                echo $result2[$i];
+                                                echo "(" . $result2[$i] . ")";
                                             ?>
                                         </td>
                                     </tr>
