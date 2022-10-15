@@ -44,11 +44,31 @@
   width: 48%;
 }
 
+.user-role-div {
+  position: relative;
+}
+
 .user-role-div ul {
   display: none;
   position: absolute;
+  background-color: white;
+  list-style: none;
+  width: 100%;
+  margin-top: 5px;
 }
 
 .user-role-div ul.open {
   display: block;
+}
+
+.user-role-div ul.open input {
+  width: 100%;
+  color: #444444;
+  font-weight: 500;
+  background-color: #e4e4e4;
+  padding: 0.2rem 0.8rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 2px;
 }
