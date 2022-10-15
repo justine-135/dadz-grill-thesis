@@ -75,7 +75,7 @@ class Table extends Dbh
 
     protected function is_dirty($tblId)
     {
-        $sql = "UPDATE tables SET table_status = 'Unoccupied', payment = 'No order', pending_orders = 0, done_orders = 0 WHERE id = $tblId";
+        $sql = "UPDATE tables SET table_status = 'Unoccupied', timer = 0, warning_time = 0, end_time = 0, duration_timer = 0, payment = 'No order', pending_orders = 0, done_orders = 0 WHERE id = $tblId";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
@@ -159,7 +159,7 @@ class Table extends Dbh
             $payment = $row["payment"];
         }
 
-        if ($payment != 'Requesting') {
+        if ($payment != 'Requesting' && $payment != 'Bill out') {
             header("location: ../store.php?id=" . $tblId);
         }
         else{
