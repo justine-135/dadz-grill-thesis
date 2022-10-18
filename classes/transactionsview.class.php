@@ -267,7 +267,7 @@ for ($i=0; $i < (count($result) - 1); $i++) {
                     foreach ($results as $row) {
 $result = explode("|",$row['order']);
 $result2 = explode("|",$row['quantity']);
-$result3 = explode("|",$row['price']);
+$result3 = explode("|",$row['original_price']);
 for ($i=0; $i < (count($result) - 1); $i++) { 
                     ?>
                     <tr>
