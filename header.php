@@ -18,7 +18,7 @@ if (empty($_SESSION["username"])) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="./styles/styles.css">
+    <link rel="stylesheet" href="./styles/styles.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="./img/icons/cube-solid.svg" type="image/x-icon">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>Inventory</title>
