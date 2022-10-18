@@ -35,6 +35,7 @@ window.addEventListener("load", () => {
             element.value;
           element.parentElement.parentElement.previousElementSibling.childNodes[1].innerHTML =
             element.value;
+          element.parentElement.parentElement.classList.toggle("open");
         });
       });
     };

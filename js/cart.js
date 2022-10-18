@@ -15,19 +15,22 @@ window.addEventListener("load", () => {
       let price =
         element.childNodes[3].childNodes[5].childNodes[1].childNodes[3]
           .innerHTML;
-      // let quantity =
-      //   element.childNodes[3].childNodes[5].childNodes[3].childNodes[1]
-      //     .innerHTML;
+
       let id = element.childNodes[3].childNodes[3].value;
       let quantity = 0;
-      addCart(url, name, price, quantity, id);
+
+      let origPrice =
+        element.childNodes[3].childNodes[5].childNodes[1].childNodes[3]
+          .innerHTML;
+
+      addCart(url, name, price, quantity, id, origPrice);
     });
   }
 
   // add item to cart
   let exec = 0;
 
-  const addCart = (url, name, price, quantity, id) => {
+  const addCart = (url, name, price, quantity, id, origPrice) => {
     const createItem = document.createElement("div");
 
     // do not allow duplicate items
@@ -48,6 +51,8 @@ window.addEventListener("load", () => {
             <div class="price">
                 <span class="cart-item-price" id="${price}">${price}</span>
                 <input type="text" value="${price}" name="prices[]" id="" hidden>
+                <input type="text" value="${origPrice}" name="orig_price[]" id="" hidden>
+                
             </div>
             <div class="control flex-row">
                 <button class="decrement" type="button">-</button>
@@ -95,8 +100,9 @@ window.addEventListener("load", () => {
       let incremented = price * value;
       button.parentElement.parentElement.childNodes[3].childNodes[1].innerHTML =
         incremented;
-      button.parentElement.parentElement.childNodes[3].childNodes[3].value = incremented;
-      
+      button.parentElement.parentElement.childNodes[3].childNodes[3].value =
+        incremented;
+
       calcTotal();
     });
 
