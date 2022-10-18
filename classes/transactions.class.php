@@ -23,17 +23,20 @@ class Transactions extends Dbh
         $orders = array();
         $qtys = array();
         $prices = array();
+        $original_prices = array();
 
         foreach ($results as $row) {
             array_push($orders, $row["order"]);
             array_push($qtys, $row["quantity"]);
             array_push($prices, $row["price"]);
+            array_push($original_prices, $row["original_price"]);
         }
 
         $total = 0;
         $newOrder = "";
         $newQuantity = "";
         $newPrice = "";
+        $newOrgPrice = "";
 
         for ($i = 0; $i < count($orders); $i++) {
             $price = (int)$prices[$i];
@@ -41,10 +44,11 @@ class Transactions extends Dbh
             $newOrder .= $orders[$i] . "|";
             $newQuantity .= $qtys[$i] . "|";
             $newPrice .= $prices[$i] . "|";
+            $newOrgPrice .= $original_prices[$i] . "|";
         }
 
-        $sql = "INSERT INTO transactions (table_id, `order`, quantity, price)
-        VALUES ( '$id' , '$newOrder' , '$newQuantity' , '$newPrice')";
+        $sql = "INSERT INTO transactions (table_id, `order`, 'original_price', quantity, price)
+        VALUES ( '$id' , '$newOrder' , '$newOrgPrice' , '$newQuantity' , '$newPrice')";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
