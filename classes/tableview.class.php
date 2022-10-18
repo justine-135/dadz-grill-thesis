@@ -50,30 +50,59 @@ class TableView extends Table
                 $to_sec_warning = gmdate("H:i:s", $row['warning_time']);
                 $to_sec_end = gmdate("H:i:s", $row['end_time']);
                 $local_time = date("h:i:s");;
-                if ($to_sec_end <= $local_time) {
-                    if ($row['is_started'] == 1) {
-                    ?>
-                    <td class="table-timer-col table-<?php echo $row['id'] ?>-time endtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
-                    <?php
+                if ($row['is_started'] == 1) {
+                    if ($row['timer'] > 0) {
+                        if ($to_sec_end <= $local_time) {
+                            ?>
+                            <td class="table-timer-col table-<?php echo $row['id'] ?>-time endtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                            <?php
+                        }
+                        elseif($to_sec_warning <= $local_time){
+                            ?>
+                            <td class="table-timer-col table-<?php echo $row['id'] ?>-time warningtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                            <?php
+                        }
+                        else{
+                            ?>
+                            <td class="table-timer-col table-<?php echo $row['id'] ?>-time runningtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                            <?php
+                        }
                     }
-                    else{
-                    ?>
-                    <td class="table-timer-col table-<?php echo $row['id'] ?>-time" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
-                    <?php
-                    }
-                }
-                elseif($to_sec_warning <= $local_time){
-                    ?>
-                    <td class="table-timer-col table-<?php echo $row['id'] ?>-time warningtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
-                    <?php
                 }
                 else{
-                    ?>
-                    <td class="table-timer-col table-<?php echo $row['id'] ?>-time runningtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
-                    <?php
+                    if ($row['timer'] == 0) {
+                        ?>
+                        <td class="table-timer-col table-<?php echo $row['id'] ?>-time" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                        <?php
+                    }
+                    elseif ($row['timer'] > 0){
+                        ?>
+                        <td class="table-timer-col table-<?php echo $row['id'] ?>-time runningtimeend" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                        <?php
+                    }
                 }
                 ?>
-                <td><?php echo $row['payment'] ?></td>
+            <td><?php
+                    if ($row['payment'] == "Requesting") {
+                        ?>
+                    <span class="requesting"> Requesting</span>
+                        <?php
+                    } elseif ($row['payment'] == "Bill out"){
+                        ?>
+                    <span class="completed">Completed</span>
+                        <?php
+                    } elseif ($row['payment'] == "Pending"){
+                        ?>
+                    <span class="pending">Pending</span>
+                        <?php
+                    }
+                    else{
+                        ?>
+                    <span class="noorder">No order</span>
+                        <?php
+                    }
+                    ?>
+                </td>
                 <td class="hide "><?php echo $row['is_started'] ?></td>
                 <td class="action-td">
                     <form action="./includes/transactions-contr.inc.php" method="POST">
@@ -142,43 +171,82 @@ class TableView extends Table
                 $to_sec_warning = gmdate("H:i:s", $row['warning_time']);
                 $to_sec_end = gmdate("H:i:s", $row['end_time']);
                 $local_time = date("h:i:s");;
-                if ($to_sec_end <= $local_time) {
-                    if ($row['is_started'] == 1) {
-                    ?>
-                    <td class="table-timer-col table-<?php echo $row['id'] ?>-time endtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
-                    <?php
+                if ($row['is_started'] == 1) {
+                    if ($row['timer'] > 0) {
+                        if ($to_sec_end <= $local_time) {
+                            ?>
+                            <td class="table-timer-col table-<?php echo $row['id'] ?>-time endtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                            <?php
+                        }
+                        elseif($to_sec_warning <= $local_time){
+                            ?>
+                            <td class="table-timer-col table-<?php echo $row['id'] ?>-time warningtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                            <?php
+                        }
+                        else{
+                            ?>
+                            <td class="table-timer-col table-<?php echo $row['id'] ?>-time runningtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                            <?php
+                        }
                     }
-                    else{
-                    ?>
-                    <td class="table-timer-col table-<?php echo $row['id'] ?>-time" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
-                    <?php
-                    }
-                }
-                elseif($to_sec_warning <= $local_time){
-                    ?>
-                    <td class="table-timer-col table-<?php echo $row['id'] ?>-time warningtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
-                    <?php
                 }
                 else{
-                    ?>
-                    <td class="table-timer-col table-<?php echo $row['id'] ?>-time runningtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
-                    <?php
+                    if ($row['timer'] == 0) {
+                        ?>
+                        <td class="table-timer-col table-<?php echo $row['id'] ?>-time" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                        <?php
+                    }
+                    elseif ($row['timer'] > 0){
+                        ?>
+                        <td class="table-timer-col table-<?php echo $row['id'] ?>-time runningtimeend" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                        <?php
+                    }
                 }
                 ?>
-                <td><?php echo $row['payment'] ?></td>
+                
+                <td>
+                <?php
+                    if ($row['payment'] == "Requesting") {
+                        ?>
+                    <span class="requesting"> Requested</span>
+                        <?php
+                    } elseif ($row['payment'] == "Bill out"){
+                        ?>
+                    <span class="completed">Completed</span>
+                        <?php
+                    } elseif ($row['payment'] == "Pending"){
+                        ?>
+                    <span class="pending">Pending</span>
+                        <?php
+                    }
+                    else{
+                        ?>
+                    <span class="noorder">No order</span>
+                        <?php
+                    }
+                    ?>
+                </td>
                 <td>
                     <?php 
                         if ($row['pending_orders'] == 0 && $row['payment'] == 'Pending' && $row['done_orders'] == 0) {
-                            echo "Done";
+                            ?>
+                        <span class="completed">Completed</span>
+                            <?php               
                         }
                         elseif ($row['done_orders'] > 0) {
-                            echo "Pick Up (" . $row['done_orders'] . ")";
+                            ?>
+                        <span class="requesting"><?php echo "Pick Up (" . $row['done_orders'] . ")" ?></span>
+                            <?php               
                         }
                         elseif ($row['pending_orders'] > 0) {
-                            echo "Preparing (" . $row['pending_orders'] . ")";
+                           ?>
+                        <span class="pending"><?php echo "Pending (" . $row['pending_orders'] . ")"; ?></span>
+                           <?php
                         }
                         else{
-                            echo "No order";
+                            ?>
+                        <span class="noorder">No order</span>
+                            <?php
                         }
                     ?>
                 </td>
@@ -238,30 +306,60 @@ class TableView extends Table
                 $to_sec_warning = gmdate("H:i:s", $row['warning_time']);
                 $to_sec_end = gmdate("H:i:s", $row['end_time']);
                 $local_time = date("h:i:s");;
-                if ($to_sec_end <= $local_time) {
-                    if ($row['is_started'] == 1) {
-                    ?>
-                    <td class="table-timer-col table-<?php echo $row['id'] ?>-time endtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
-                    <?php
+                if ($row['is_started'] == 1) {
+                    if ($row['timer'] > 0) {
+                        if ($to_sec_end <= $local_time) {
+                            ?>
+                            <td class="table-timer-col table-<?php echo $row['id'] ?>-time endtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                            <?php
+                        }
+                        elseif($to_sec_warning <= $local_time){
+                            ?>
+                            <td class="table-timer-col table-<?php echo $row['id'] ?>-time warningtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                            <?php
+                        }
+                        else{
+                            ?>
+                            <td class="table-timer-col table-<?php echo $row['id'] ?>-time runningtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                            <?php
+                        }
                     }
-                    else{
-                    ?>
-                    <td class="table-timer-col table-<?php echo $row['id'] ?>-time" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
-                    <?php
-                    }
-                }
-                elseif($to_sec_warning <= $local_time){
-                    ?>
-                    <td class="table-timer-col table-<?php echo $row['id'] ?>-time warningtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
-                    <?php
                 }
                 else{
-                    ?>
-                    <td class="table-timer-col table-<?php echo $row['id'] ?>-time runningtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
-                    <?php
+                    if ($row['timer'] == 0) {
+                        ?>
+                        <td class="table-timer-col table-<?php echo $row['id'] ?>-time" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                        <?php
+                    }
+                    elseif ($row['timer'] > 0){
+                        ?>
+                        <td class="table-timer-col table-<?php echo $row['id'] ?>-time runningtimeend" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                        <?php
+                    }
                 }
                 ?>
-                <td><?php echo $row['payment'] ?></td>
+                <td>
+                <?php
+                    if ($row['payment'] == "Requesting") {
+                        ?>
+                    <span class="requesting"> Requested</span>
+                        <?php
+                    } elseif ($row['payment'] == "Bill out"){
+                        ?>
+                    <span class="completed">Completed</span>
+                        <?php
+                    } elseif ($row['payment'] == "Pending"){
+                        ?>
+                    <span class="pending">Pending</span>
+                        <?php
+                    }
+                    else{
+                        ?>
+                    <span class="noorder">No order</span>
+                        <?php
+                    }
+                    ?>
+                </td>
                 <td class="hide "><?php echo $row['is_started'] ?></td>
                 <td class="action-td status-action-col">
                     <form action="./includes/table-contr.inc.php" method="POST">
