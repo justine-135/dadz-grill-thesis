@@ -47,7 +47,7 @@ class Transactions extends Dbh
             $newOrgPrice .= $original_prices[$i] . "|";
         }
 
-        $sql = "INSERT INTO transactions (table_id, `order`, 'original_price', quantity, price)
+        $sql = "INSERT INTO transactions (table_id, `order`, original_price, quantity, price)
         VALUES ( '$id' , '$newOrder' , '$newOrgPrice' , '$newQuantity' , '$newPrice')";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
