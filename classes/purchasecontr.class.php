@@ -2,9 +2,9 @@
 
 class PurchaseContr extends Purchase
 {
-    public function initPurchase($names, $tableId, $total, $waiter, $qty, $prc, $uid)
+    public function initPurchase($names, $tableId, $orgPrc, $total, $waiter, $qty, $prc, $uid)
     {
-        $this->setPurchase($names, $tableId, $total, $waiter, $qty, $prc, $uid);
+        $this->setPurchase($names, $tableId, $orgPrc, $total, $waiter, $qty, $prc, $uid);
         header("location: ../menu.php?alert=order_done&id=" . $tableId);
     }
 
