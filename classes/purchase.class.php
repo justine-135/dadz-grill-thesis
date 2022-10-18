@@ -1,26 +1,27 @@
 <?php
 
 class Purchase extends Dbh{
-    protected function setPurchase($names, $tableId, $total, $waiter, $qty, $prc, $uid){
+    protected function setPurchase($names, $tableId, $orgPrc, $total, $waiter, $qty, $prc, $uid){
         $total_names='';
         $quantities='';
         $prices='';
+        $original_price='';
 
         for ($i=0; $i < count($names); $i++) { 
             $total_names .= $names[$i]."|";
             $quantities .= $qty[$i]."|";
             $prices .= $prc[$i]."|";
+            $original_price .= $orgPrc[$i]."|";
         }
-
-        $sql = "INSERT INTO submitted_orders (table_id, item_name, quantity, total_purchase, order_status, waiter)
-        VALUES ('$tableId', '$total_names', '$quantities', '$prices', 'Pending', '$waiter')";
+        $sql = "INSERT INTO submitted_orders (table_id, item_name, quantity, original_price, total_purchase, order_status, waiter)
+        VALUES ('$tableId', '$total_names', '$quantities', '$original_price' ,'$prices', 'Pending', '$waiter')";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();    
         $stmt = null;
 
         for ($i=0; $i < count($names); $i++) { 
-            $sql = "INSERT INTO series_orders (table_id, `order`, quantity, price, waiter, is_ready)
-            VALUES ( '$tableId' , '$names[$i]' , '$qty[$i]' , '$prc[$i]' , '$waiter', 0)";
+            $sql = "INSERT INTO series_orders (table_id, `order`, original_price, quantity, price, waiter, is_ready)
+            VALUES ( '$tableId' , '$names[$i]' , '$orgPrc[$i]' , '$qty[$i]' , '$prc[$i]' , '$waiter', 0)";
             $stmt = $this->connection()->prepare($sql);
             $stmt->execute();
         }
