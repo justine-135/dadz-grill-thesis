@@ -14,10 +14,11 @@ window.addEventListener("load", () => {
       let amountTotal = document.querySelector("#amount-total");
 
       let id = document.querySelector("#id");
+      let tableId = document.querySelector("#table").value;
+
       let totalInput = document.querySelector("#total");
       let changeInput = document.querySelector("#change");
       let paymentInput = document.querySelector("#payment");
-      console.log(id);
 
       let totalPriceValue = parseFloat(amountTotal.innerHTML)
         .toFixed(2)
@@ -26,6 +27,7 @@ window.addEventListener("load", () => {
 
       amountTotal.innerHTML = totalPriceValue;
       totalInput.value = totalPriceValue;
+      console.log(parseFloat(amountTotal.innerHTML));
 
       let sub = 0;
 
@@ -49,7 +51,11 @@ window.addEventListener("load", () => {
 
         amountPaid.innerHTML = amountPaidValue;
 
-        sub = parseFloat(e.target.value) - parseFloat(amountTotal.innerHTML);
+        sub =
+          parseFloat(e.target.value) -
+          parseFloat(amountTotal.innerHTML.replace(",", ""));
+        console.log(parseFloat(amountTotal.innerHTML));
+
         if (isNaN(sub)) {
           amountChange.innerHTML = 0;
           changeInput.value = 0;
@@ -64,31 +70,53 @@ window.addEventListener("load", () => {
             .toString()
             .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-
-        // let div = document.createElement("div");
-        // div.innerHTML = "This is receipt";
       });
 
-      const receipt = document.querySelector("#receipt");
       const printBtn = document.querySelector("#print");
+      const saveBtn = document.querySelector("#save");
+      const alert = document.querySelector(".query-notif");
 
       printBtn.addEventListener("click", () => {
-        const xhttp = new XMLHttpRequest();
-        xhttp.onload = function () {
-          let receiptPaper = document.createElement("div");
-          receiptPaper.innerHTML = this.responseText;
-          let windowPrint = window.open("", "", "height=auto,width=500");
-          windowPrint.document.write(receiptPaper.innerHTML);
-          windowPrint.print();
-        };
-        xhttp.open("POST", "./includes/receipt-view.inc.php");
-        xhttp.setRequestHeader(
-          "Content-type",
-          "application/x-www-form-urlencoded"
-        );
-        xhttp.send(
-          `&id=${id.value}&change=${changeInput.value}&payment=${paymentInput.value}&total=${totalInput.value}`
-        );
+        if (
+          parseFloat(paymentInput.value.replace(",", "")) >=
+          parseFloat(totalInput.value.replace(",", ""))
+        ) {
+          const xhttp = new XMLHttpRequest();
+          xhttp.onload = function () {
+            let receiptPaper = document.createElement("div");
+            receiptPaper.innerHTML = this.responseText;
+            let windowPrint = window.open("", "", "height=auto,width=500");
+            windowPrint.document.write(receiptPaper.innerHTML);
+            windowPrint.print();
+          };
+          xhttp.open("POST", "./includes/receipt-view.inc.php");
+          xhttp.setRequestHeader(
+            "Content-type",
+            "application/x-www-form-urlencoded"
+          );
+          xhttp.send(
+            `&print=print&id=${id.value}&change=${changeInput.value}&payment=${paymentInput.value}&total=${totalInput.value}`
+          );
+        }
+      });
+
+      saveBtn.addEventListener("click", () => {
+        if (
+          parseFloat(paymentInput.value.replace(",", "")) >=
+          parseFloat(totalInput.value.replace(",", ""))
+        ) {
+          alert.classList.remove("hide");
+          alert.classList.add("success");
+          const xhttp = new XMLHttpRequest();
+          xhttp.open("POST", "./includes/transactions-contr.inc.php");
+          xhttp.setRequestHeader(
+            "Content-type",
+            "application/x-www-form-urlencoded"
+          );
+          xhttp.send(
+            `&save=save&table_id=${tableId}&id=${id.value}&change=${changeInput.value}&payment=${paymentInput.value}&total=${totalInput.value}`
+          );
+        }
       });
     }
   };
