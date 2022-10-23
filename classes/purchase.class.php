@@ -56,15 +56,36 @@ class Purchase extends Dbh{
     }
 
     protected function setFinish($oid, $tid){
+        $sql = "SELECT * FROM tables WHERE id='$tid'";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll();
+
+        foreach ($results as $row) {
+            $tableStatus = $row['table_status'];
+        }
+        
+
         $sql = "UPDATE series_orders SET is_ready = 1 WHERE table_id = $tid";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
 
-        $sql = "UPDATE tables SET table_status = 'Occupied', payment = 'Pending', pending_orders = pending_orders - 1, done_orders = done_orders + 1 WHERE id = $tid";
-        $stmt = $this->connection()->prepare($sql);
-        $stmt->execute();
-        $stmt = null;
+        if ($tableStatus == "Unoccupied" || $tableStatus == "Occupied") {
+            $sql = "UPDATE tables SET table_status = 'Occupied', payment = 'Pending', pending_orders = pending_orders - 1, done_orders = done_orders + 1 WHERE id = $tid";
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute();
+            $stmt = null;
+        }
+        else {
+            $sql = "UPDATE tables SET payment = 'Pending', pending_orders = pending_orders - 1, done_orders = done_orders + 1 WHERE id = $tid";
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute();
+            $stmt = null;
+        }
+
+        
 
         $sql = "DELETE FROM submitted_orders WHERE sales_id=$oid";
         $stmt = $this->connection()->prepare($sql);
