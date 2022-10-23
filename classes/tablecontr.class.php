@@ -53,8 +53,14 @@ class TableContr extends Table{
             if ($row['table_status'] == 'Occupied') {
                 echo "0";
             }
-            else{
+            elseif($row['table_status'] == 'Unoccupied'){
                 echo "1";
+            }
+            elseif($row['table_status'] == 'Call'){
+                echo "2";
+            }
+            else{
+                echo "3";
             }
         }
     }
