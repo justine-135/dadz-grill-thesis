@@ -20,9 +20,9 @@ class Users extends Dbh{
         return $results;    
     }
 
-    protected function setUser($userName, $pass, $confirmPass, $fullName, $email, $contact, $bDate, $address, $userType){
-        $sql = "INSERT INTO users (username, pwd, fullname, email, contact, birth_date, location_address, 
-        is_superuser, is_cashier, is_waiter, is_cook, is_cleaner, is_active, served) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    protected function setUser($userName, $pass, $confirmPass, $fname, $lname, $fullName, $email, $contact, $bDate, $address, $userType){
+        $sql = "INSERT INTO users (username, pwd, fname, lname, fullname, email, contact, birth_date, location_address, 
+        is_superuser, is_cashier, is_waiter, is_cook, is_cleaner, is_active, served) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         $stmt = $this->connection()->prepare($sql);
 
         $status = 0;
@@ -32,22 +32,22 @@ class Users extends Dbh{
 
         if ($userType == "cashier") {
             $stmt = $this->connection()->prepare($sql);
-            $stmt->execute([$userName, $hashedPass, $fullName, $email, $contact, $bDate, $address, 
+            $stmt->execute([$userName, $hashedPass, $fname, $lname, $fullName, $email, $contact, $bDate, $address, 
             $status, $status_true, $status, $status, $status, $status, $status]);   
         }
         if ($userType == "waiter") {  
             $stmt = $this->connection()->prepare($sql);
-            $stmt->execute([$userName, $hashedPass, $fullName, $email, $contact, $bDate, $address, 
+            $stmt->execute([$userName, $hashedPass, $fname, $lname, $fullName, $email, $contact, $bDate, $address, 
             $status, $status, $status_true, $status, $status, $status, $status]);  
         }
         if ($userType == "cook") {
             $stmt = $this->connection()->prepare($sql);
-            $stmt->execute([$userName, $hashedPass, $fullName, $email, $contact, $bDate, $address, 
+            $stmt->execute([$userName, $hashedPass, $fname, $lname, $fullName, $email, $contact, $bDate, $address, 
             $status, $status, $status, $status_true, $status, $status, $status]);         
         }
         if ($userType == "cleaner") {
             $stmt = $this->connection()->prepare($sql);
-            $stmt->execute([$userName, $hashedPass, $fullName, $email, $contact, $bDate, $address, 
+            $stmt->execute([$userName, $hashedPass, $fname, $lname, $fullName, $email, $contact, $bDate, $address, 
             $status, $status, $status, $status, $status_true, $status, $status]); 
         }
         header("location: ../admins.php");
