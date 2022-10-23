@@ -28,31 +28,15 @@ class TransactionsView extends Transactions{
                         $result = explode("|",$row['order']);
                         $result2 = explode("|",$row['quantity']);
                     ?>
-                    <table class="orders-table">
-                        <tbody>
-                            <?php
-                                for ($i=0; $i < (count($result) - 1); $i++) { 
-                            ?>
-                                <tr>
-                                    <td>
-                                        <?php
-                                            echo $result[$i];
-                                        ?>
-                                    </td>
-                                    <td class="order-x-col">
-                                            -
-                                    </td>
-                                    <td>
-                                        <?php
-                                            echo "(" . $result2[$i] . ")";
-                                        ?>
-                                    </td>
-                                </tr>
-                            <?php
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+                    <p style="width: 200px; text-align: left;" >
+                        <?php
+                        for ($i=0; $i < (count($result) - 1); $i++) { 
+                    echo $result[$i] . "(" . $result2[$i] . ")"; ?>
+                       <?php
+                        }
+                    ?>
+                    </p>
+                                     
                 </td>
                 <td class="pad10" valign="top">
                 <?php 
@@ -162,6 +146,7 @@ for ($i=0; $i < (count($result) - 1); $i++) {
                         <input type="text" name="payment" id="payment" hidden>
                         <input type="text" name="change" id="change" hidden>
                         <input type="text" name="id" id="id" value="<?php echo $row['id'] ?>" hidden>
+                        <input type="text" name="table" id="table" value="<?php echo $row['table_id'] ?>" hidden>
                         <button id="print">Print</button>
                         <input type="button" name="save" id="save" value="Save">  
                     </td>
@@ -229,11 +214,16 @@ for ($i=0; $i < (count($result) - 1); $i++) {
         text-align: right;
     }
 
-    @media print and (width: 70cm) and (height: 11in) {
+    .payment-div{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    /* @media print and (width: 70cm) and (height: 11in) {
         @page {
             margin: 1in;
         }
-}
+} */
 
     </style>
     <title>Document</title>
