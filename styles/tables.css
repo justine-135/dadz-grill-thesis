@@ -161,7 +161,7 @@
   display: block;
   border-radius: 5px;
   background-color: rgba(241, 241, 142, 0.295);
-  color: rgb(209, 206, 2);
+  color: rgb(255, 166, 0);
   border: 2px solid rgb(245, 242, 59);
   width: 100px;
   margin: auto;
@@ -172,7 +172,7 @@
   display: block;
   border-radius: 5px;
   background-color: rgba(241, 241, 71, 0.295);
-  color: rgb(209, 206, 2);
+  color: rgb(255, 166, 0);
   width: 100px;
   margin: auto;
   font-weight: 700;
@@ -182,7 +182,7 @@
   display: block;
   border-radius: 5px;
   background-color: rgba(155, 250, 142, 0.137);
-  color: rgb(30, 245, 48);
+  color: rgb(5, 172, 19);
   width: 100px;
   margin: auto;
   font-weight: 700;

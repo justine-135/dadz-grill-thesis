@@ -1,0 +1,55 @@
+.bill-tbl-data {
+  position: relative;
+  width: 100%;
+}
+
+.bill-tbl-data nav {
+  position: fixed;
+  background-color: white;
+  width: 100%;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.24);
+  padding: 10px 250px 10px 20px;
+}
+
+.bill-tbl-data nav div:nth-child(2),
+.bill-tbl-data nav div:nth-child(3) {
+  margin-left: 60px;
+}
+
+.bill-tbl-data nav div span {
+  color: #444444;
+}
+
+.bill-details span:nth-child(1),
+.bill-final-span {
+  font-weight: 700;
+  color: #0d6464;
+  margin-bottom: 5px;
+}
+
+#bill-input {
+  height: 30px;
+  width: 160px;
+  font-size: 1rem;
+  padding: 0 0.5rem;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid rgb(201, 201, 201);
+}
+
+.bill-order-tbl {
+  margin-top: 77px;
+}
+
+.bill-td-submit input[type="submit"] {
+  font-family: "Nunito Sans", sans-serif;
+  margin: auto;
+  color: #444444;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.275rem 0.775rem;
+  border: none;
+  cursor: pointer;
+}
