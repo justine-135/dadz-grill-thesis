@@ -4,6 +4,8 @@ class UserContr extends Users{
     private $userName;
     private $pass;
     private $confirmPass;
+    private $fname;
+    private $lname;
     private $fullName;
     private $email;
     private $contact;
@@ -56,7 +58,7 @@ class UserContr extends Users{
             exit();
         }
         else{
-            $this->setUser($this->userName, $this->pass, $this->confirmPass, $this->fullName, $this->email, $this->contact, $this->bDate, $this->address, $this->userType);
+            $this->setUser($this->userName, $this->pass, $this->confirmPass, $this->fname, $this->lname, $this->fullName, $this->email, $this->contact, $this->bDate, $this->address, $this->userType);
         }
     }
 
@@ -137,6 +139,9 @@ class UserContr extends Users{
         $_SESSION["is_cook"] = $result[0]["is_cook"];
         $_SESSION["is_cleaner"] = $result[0]["is_cleaner"];
         $_SESSION["uid"] = $result[0]["id"];
+        $_SESSION["fname"] = $result[0]["fname"];
+        $_SESSION["lname"] = $result[0]["lname"];
+
         header("location: ../index.php");
 
     }
