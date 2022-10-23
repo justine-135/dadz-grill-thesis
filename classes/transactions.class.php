@@ -96,7 +96,6 @@ class Transactions extends Dbh
         $stmt->execute();
         $stmt = null;
 
-        header("location: ../transactions.php");
         exit();
     }
 
