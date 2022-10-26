@@ -13,18 +13,17 @@ class Purchase extends Dbh{
             $prices .= $prc[$i]."|";
             $original_price .= $orgPrc[$i]."|";
         }
+
         $sql = "INSERT INTO submitted_orders (table_id, item_name, quantity, original_price, total_purchase, order_status, waiter)
         VALUES ('$tableId', '$total_names', '$quantities', '$original_price' ,'$prices', 'Pending', '$waiter')";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();    
         $stmt = null;
 
-        for ($i=0; $i < count($names); $i++) { 
-            $sql = "INSERT INTO series_orders (table_id, `order`, original_price, quantity, price, waiter, is_ready)
-            VALUES ( '$tableId' , '$names[$i]' , '$orgPrc[$i]' , '$qty[$i]' , '$prc[$i]' , '$waiter', 0)";
-            $stmt = $this->connection()->prepare($sql);
-            $stmt->execute();
-        }
+        $sql = "INSERT INTO series_orders (table_id, `order`, original_price, quantity, price, waiter, is_ready)
+        VALUES ( '$tableId' , '$total_names' , '$original_price' , '$quantities' , '$prices' , '$waiter', 0)";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
         $stmt = null;
 
         $sql = "UPDATE tables SET pending_orders = pending_orders + 1 WHERE id = $tableId";
@@ -56,6 +55,9 @@ class Purchase extends Dbh{
     }
 
     protected function setFinish($oid, $tid){
+        date_default_timezone_set('Asia/Manila');
+        $curr_date = date("D M j Y H:i:s");
+
         $sql = "SELECT * FROM tables WHERE id='$tid'";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
@@ -73,7 +75,7 @@ class Purchase extends Dbh{
         $stmt = null;
 
         if ($tableStatus == "Unoccupied" || $tableStatus == "Occupied") {
-            $sql = "UPDATE tables SET table_status = 'Occupied', payment = 'Pending', pending_orders = pending_orders - 1, done_orders = done_orders + 1 WHERE id = $tid";
+            $sql = "UPDATE tables SET table_status = 'Occupied', curr_date = '$curr_date', payment = 'Pending', pending_orders = pending_orders - 1, done_orders = done_orders + 1 WHERE id = $tid";
             $stmt = $this->connection()->prepare($sql);
             $stmt->execute();
             $stmt = null;
