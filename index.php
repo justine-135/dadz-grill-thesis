@@ -63,7 +63,7 @@ include "header.php";
                         <span class="label">
                             Total crew
                         </span>
-                        <span class="number">0</span>
+                        <span class="total-crews-number number">0</span>
                     </div>
                 </div>
                 <div class="stats rev cancel flex-row">
@@ -72,7 +72,7 @@ include "header.php";
                         <span class="label">
                             Active crew
                         </span>
-                        <span class="number">0</span>
+                        <span class="total-active-crews-number number">0</span>
                     </div>
                 </div>
                 <div class="stats cost flex-row">
@@ -81,7 +81,7 @@ include "header.php";
                         <span class="label">
                             Total served
                         </span>
-                        <span class="number">0</span>
+                        <span class="total-served-number number">0</span>
                     </div>
                 </div>
                 <div class="stats profs returns flex-row">
@@ -89,7 +89,7 @@ include "header.php";
                         <span class="label">
                             My role
                         </span>
-                        <span class="number">0</span>
+                        <span class="crew-role number">0</span>
                     </div>
                 </div>
             </div>
