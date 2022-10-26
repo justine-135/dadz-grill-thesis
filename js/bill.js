@@ -116,6 +116,10 @@ window.addEventListener("load", () => {
           xhttp.send(
             `&save=save&table_id=${tableId}&id=${id.value}&change=${changeInput.value}&payment=${paymentInput.value}&total=${totalInput.value}`
           );
+        } else {
+          alert.classList.remove("hide");
+          alert.classList.add("fail");
+          alert.innerHTML = "Process failed.";
         }
       });
     }
