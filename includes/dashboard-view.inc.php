@@ -43,5 +43,25 @@
             $dirty = new DashboardView();
             $dirty->initDirty();
         }
+
+        if ($grid == 9) {
+            $dirty = new DashboardView();
+            $dirty->initCrew();
+        }
+
+        if ($grid == 10) {
+            $dirty = new DashboardView();
+            $dirty->initActiveCrew();
+        }
+
+        if ($grid == 11) {
+            $dirty = new DashboardView();
+            $dirty->initTotalServed();
+        }
+        
+        if ($grid == 12) {
+            $dirty = new DashboardView();
+            $dirty->initCrewRole();
+        }
     }
 ?>
