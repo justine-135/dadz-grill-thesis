@@ -120,6 +120,62 @@ class DashboardView extends Dashboard{
 
         echo $total;
     }
+
+    public function initCrew(){
+        $results = $this->getCrews();
+
+        $total = 0;
+        $total = (int)$total;
+        foreach ($results as $row) {
+            $total += 1;
+        }
+
+        echo $total;
+    }
+
+    public function initActiveCrew(){
+        $results = $this->getCrews();
+
+        $total = 0;
+        $total = (int)$total;
+        foreach ($results as $row) {
+            if ($row["is_active"] == 1) {
+                $total += 1;
+            }
+        }
+
+        echo $total;
+    }
+
+    public function initTotalServed(){
+        $results = $this->getTotalServed();
+
+        foreach ($results as $row) {
+            echo $row["served"];
+        }
+    }
+    
+    public function initCrewRole(){
+        $results = $this->getTotalServed();
+
+        foreach ($results as $row) {
+            if ($row['is_superuser'] == 1) {
+                echo "Manager";
+            }
+            elseif ($row['is_cashier'] == 1) {
+                echo "Cashier";
+            }
+            elseif ($row['is_cook'] == 1) {
+                echo "Cook";
+            }
+            elseif ($row['is_waiter'] == 1) {
+                echo "Waiter";
+            }
+            else{
+                echo "Cleaner";
+            }
+        }
+    }
 }
 
 ?>
