@@ -45,7 +45,13 @@ class Transactions extends Dbh
             $newQuantity .= $qtys[$i] . "|";
             $newPrice .= $prices[$i] . "|";
             $newOrgPrice .= $original_prices[$i] . "|";
+            // echo "<br>" . $orders[$i];
         }
+
+        $newOrder = rtrim($newOrder, "|");
+        $newQuantity = rtrim($newQuantity, "|");
+        $newPrice = rtrim($newPrice, "|");
+        $newOrgPrice = rtrim($newOrgPrice, "|");
 
         $sql = "INSERT INTO transactions (table_id, `order`, original_price, quantity, price)
         VALUES ( '$id' , '$newOrder' , '$newOrgPrice' , '$newQuantity' , '$newPrice')";
