@@ -30,7 +30,7 @@ class TransactionsView extends Transactions{
                     ?>
                     <p style="width: 200px; text-align: left;" >
                         <?php
-                        for ($i=0; $i < (count($result) - 1); $i++) { 
+                        for ($i=0; $i < (count($result)); $i++) { 
                     echo $result[$i] . "(" . $result2[$i] . ")"; ?>
                        <?php
                         }
@@ -42,8 +42,8 @@ class TransactionsView extends Transactions{
                 <?php 
                     $result = explode("|",$row['price']);
                     $total = 0;
-                    for ($i=0; $i < (count($result) - 1); $i++) { 
-                        $total += $result[$i];
+                    for ($i=0; $i < (count($result)); $i++) { 
+                        $total += (int)$result[$i];
                     }
 
                     echo $total;
@@ -111,8 +111,8 @@ $result = explode("|",$row['order']);
 $result2 = explode("|",$row['quantity']);
 $result3 = explode("|",$row['price']);
 $total = 0;
-for ($i=0; $i < (count($result) - 1); $i++) { 
-    $total += $result3[$i];
+for ($i=0; $i < (count($result)); $i++) { 
+    $total += (int)$result3[$i];
                 ?>
                 <tr>
                     <td style="text-align: left;padding-left: 20px"><?php echo $result[$i] ?></td>
@@ -258,7 +258,7 @@ for ($i=0; $i < (count($result) - 1); $i++) {
 $result = explode("|",$row['order']);
 $result2 = explode("|",$row['quantity']);
 $result3 = explode("|",$row['original_price']);
-for ($i=0; $i < (count($result) - 1); $i++) { 
+for ($i=0; $i < (count($result)); $i++) { 
                     ?>
                     <tr>
                         <td><?php echo $result[$i] ?></td>
