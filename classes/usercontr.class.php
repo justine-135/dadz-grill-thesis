@@ -166,7 +166,10 @@ class UserContr extends Users{
         unset($_SESSION["is_waiter"]);
         unset($_SESSION["is_cook"]);
         unset($_SESSION["is_cleaner"]);
-    
+        unset($_SESSION["uid"]);
+        unset($_SESSION["fname"]);
+        unset($_SESSION["lname"]);
+        
         header("location: ../login.php?message=");
     }
     
