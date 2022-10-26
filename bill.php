@@ -15,6 +15,8 @@ if ($_SESSION["is_superuser"] == 1 or $_SESSION["is_cashier"] == 1) {
         </div>
         <h3>Bill</h3>
     </div>
+    <a class="transaction-btn" href="transactions.php">Transactions</a>
+
 </nav>
 
 <div class="main-content tables-container">
@@ -23,7 +25,9 @@ if ($_SESSION["is_superuser"] == 1 or $_SESSION["is_cashier"] == 1) {
     </div>
 </div>
 
-<div id="receipt"></div>
+<div class="alert">
+    <span class='query-notif'>Order has been paid.</span>
+</div>
 
 <script src="js/bill.js"></script>
 
