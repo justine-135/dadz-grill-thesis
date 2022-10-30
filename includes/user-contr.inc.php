@@ -45,4 +45,15 @@
         $loginUser = new UserContr($userName, $pass, $confirmPass, $fname, $lname, $fullName, $email, $contact, $bDate, $address, $userType);
         $loginUser->initLoginUser();
     }
+
+    if (isset($_POST["curr_time"])) {
+        session_start();
+        $userName = $_SESSION["username"];
+        $checkTime = time() - $_SESSION["last_login_timestamp"];
+        echo $checkTime;
+        if ($checkTime > 60) {
+            $logoutUser = new UserContr($userName, $pass, $confirmPass, $fname, $lname, $fullName, $email, $contact, $bDate, $address, $userType);
+            $logoutUser->initLogoutUser();
+        }
+    }
 ?>
