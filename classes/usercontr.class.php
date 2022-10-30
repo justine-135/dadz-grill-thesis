@@ -141,6 +141,7 @@ class UserContr extends Users{
         $_SESSION["uid"] = $result[0]["id"];
         $_SESSION["fname"] = $result[0]["fname"];
         $_SESSION["lname"] = $result[0]["lname"];
+        $_SESSION["last_login_timestamp"] = time();
 
         header("location: ../index.php");
 
@@ -166,11 +167,11 @@ class UserContr extends Users{
         unset($_SESSION["is_waiter"]);
         unset($_SESSION["is_cook"]);
         unset($_SESSION["is_cleaner"]);
-        unset($_SESSION["uid"]);
+        // unset($_SESSION["uid"]);
         unset($_SESSION["fname"]);
         unset($_SESSION["lname"]);
         
-        header("location: ../login.php?message=");
+        header("location: ../login.php");
     }
     
 }
