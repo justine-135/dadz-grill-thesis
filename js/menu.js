@@ -5,7 +5,6 @@ window.addEventListener("load", () => {
 
   const overlay = document.querySelector(".overlay");
   const modalHead = document.querySelector(".action-modal-head");
-  //const menuLink = document.querySelector(".menu-link");
   const closeModal = document.querySelector(".action-btn-modal .head button");
   const tableId = document.querySelector("#table-id");
 
