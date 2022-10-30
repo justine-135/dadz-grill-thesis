@@ -110,7 +110,7 @@ class Users extends Dbh{
             exit();
         }
         elseif($checkPass === true){
-            $sql = "UPDATE users SET is_active=1 WHERE username='$userName'";
+            $sql = "UPDATE users SET is_active = is_active + 1 WHERE username='$userName'";
             $stmt = $this->connection()->prepare($sql);
             $stmt->execute();
             $stmt = null;
@@ -133,7 +133,7 @@ class Users extends Dbh{
     }
 
     protected function logoutUser($username){
-        $sql = "UPDATE users SET is_active=0 WHERE username='$username'";
+        $sql = "UPDATE users SET is_active = is_active - 1 WHERE username='$username'";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
     }
