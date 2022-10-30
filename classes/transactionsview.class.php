@@ -31,7 +31,9 @@ class TransactionsView extends Transactions{
                     <p style="width: 200px; text-align: left;" >
                         <?php
                         for ($i=0; $i < (count($result)); $i++) { 
-                    echo $result[$i] . "(" . $result2[$i] . ")"; ?>
+                            if ($result[$i] != "") {
+                                echo $result[$i] . "(" . $result2[$i] . ")";                            }
+                         ?>
                        <?php
                         }
                     ?>
@@ -115,9 +117,21 @@ for ($i=0; $i < (count($result)); $i++) {
     $total += (int)$result3[$i];
                 ?>
                 <tr>
+                    <?php if ($result[$i] != "") {
+                        ?>
                     <td style="text-align: left;padding-left: 20px"><?php echo $result[$i] ?></td>
-                    <td><?php echo $result2[$i] ?></td>
-                    <td>₱ <?php echo $result3[$i] ?></td>
+                        <?php
+                    } ?>
+                    <?php if ($result2[$i] != "") {
+                        ?>
+                    <td><?php echo $result2[$i]; ?> </td>
+                        <?php
+                    } ?>
+                    <?php if ($result3[$i] != "") {
+                        ?>
+                    <td>₱ <?php echo $result3[$i]; ?> </td>
+                        <?php
+                    } ?>
                 </tr>
                 <?php } ?>
                 <tr style="border-bottom: none">
