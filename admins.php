@@ -47,6 +47,7 @@ if ($_SESSION["is_superuser"] == 1) {
             </div>
             <h3>Accounts</h3>
         </div>
+        <a href="login_history.php" class="add-admin-btn">History</a>
         <a href="registration.php?message" class="add-admin-btn">Add crew</a>
     </nav>
 
@@ -86,7 +87,6 @@ if ($_SESSION["is_superuser"] == 1) {
             </div>
             <h3>Accounts</h3>
         </div>
-        <a href="registration.php?message" class="add-admin-btn">Add admin</a>
     </nav>
     <div class="main-content tables-container">
         <div class="tables flex-row">
