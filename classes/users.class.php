@@ -20,6 +20,15 @@ class Users extends Dbh{
         return $results;    
     }
 
+    protected function getHistory(){
+        $sql = "SELECT * FROM login_history";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll();
+        return $results;    
+    }
+
     protected function setUser($userName, $pass, $confirmPass, $fname, $lname, $fullName, $email, $contact, $bDate, $address, $userType){
         $sql = "INSERT INTO users (username, pwd, fname, lname, fullname, email, contact, birth_date, location_address, 
         is_superuser, is_cashier, is_waiter, is_cook, is_cleaner, is_active, served) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
@@ -110,7 +119,11 @@ class Users extends Dbh{
             exit();
         }
         elseif($checkPass === true){
-            $sql = "UPDATE users SET is_active = is_active + 1 WHERE username='$userName'";
+            $browser = include "../includes/getbrowser.inc.php";
+            date_default_timezone_set('Asia/Manila');
+            $dateNow = date("Y-m-d h:i:sa");
+            $savedLogin = date("Y-m-d h:i:sa");
+            $sql = "UPDATE users SET reg_date = reg_date, last_login = '$dateNow', is_active = is_active + 1 WHERE username='$userName'";
             $stmt = $this->connection()->prepare($sql);
             $stmt->execute();
             $stmt = null;
@@ -121,10 +134,14 @@ class Users extends Dbh{
             if (!$stmt->execute(array($userName, $userName, $pass))) {
                 $stmt = null;
                 header("location: ../login.php?message=processfailed");
-                exit();
             }
 
             $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $sql = "INSERT INTO login_history (`user_id`, fullname, last_login, browser) VALUES (?,?,?,?);";    
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute([$user[0]["id"], $user[0]["fullname"], $dateNow, $browser]);   
+            $stmt = null;
 
             return $user;
 
@@ -133,7 +150,25 @@ class Users extends Dbh{
     }
 
     protected function logoutUser($username){
-        $sql = "UPDATE users SET is_active = is_active - 1 WHERE username='$username'";
+        date_default_timezone_set('Asia/Manila');
+        $dateNow = date("Y-m-d h:i:sa");
+        $sql = "UPDATE users SET reg_date = reg_date, last_logout = '$dateNow', is_active = is_active - 1 WHERE username='$username'";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+
+        $id = $_SESSION["uid"];
+        
+        $sql = "SELECT * FROM users WHERE id=$id";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll();
+        foreach ($results as $row) {
+            $lastLogin = $row["last_login"];
+        }
+        $stmt = null;
+
+        $sql = "UPDATE login_history SET last_logout = '$dateNow' WHERE last_login='$lastLogin'";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
     }
