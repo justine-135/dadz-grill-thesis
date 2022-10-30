@@ -9,13 +9,6 @@
             $timer = new TableContr($id);
             $timer->initStopTableTimer($id);
         }
-
-        if ($contr == 2) {
-            $duration = $_GET["duration"];
-            echo $duration;
-            $timer = new TableContr($id, $duration);
-            $timer->initTimerDuration($id, $duration);
-        }
     }
 
     elseif (isset($_POST["menu"])) {
