@@ -55,9 +55,6 @@ class Purchase extends Dbh{
     }
 
     protected function setFinish($oid, $tid){
-        date_default_timezone_set('Asia/Manila');
-        $curr_date = date("D M j Y H:i:s");
-
         $sql = "SELECT * FROM tables WHERE id='$tid'";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
@@ -68,14 +65,13 @@ class Purchase extends Dbh{
             $tableStatus = $row['table_status'];
         }
         
-
         $sql = "UPDATE series_orders SET is_ready = 1 WHERE table_id = $tid";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
 
         if ($tableStatus == "Unoccupied" || $tableStatus == "Occupied") {
-            $sql = "UPDATE tables SET table_status = 'Occupied', curr_date = '$curr_date', payment = 'Pending', pending_orders = pending_orders - 1, done_orders = done_orders + 1 WHERE id = $tid";
+            $sql = "UPDATE tables SET table_status = 'Occupied', payment = 'Pending', pending_orders = pending_orders - 1, done_orders = done_orders + 1 WHERE id = $tid";
             $stmt = $this->connection()->prepare($sql);
             $stmt->execute();
             $stmt = null;
@@ -86,8 +82,6 @@ class Purchase extends Dbh{
             $stmt->execute();
             $stmt = null;
         }
-
-        
 
         $sql = "DELETE FROM submitted_orders WHERE sales_id=$oid";
         $stmt = $this->connection()->prepare($sql);
