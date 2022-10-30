@@ -163,7 +163,6 @@ if ($_SESSION["is_superuser"] == 1) {
             </div>
             <h3>Foods</h3>
         </div>
-        <button class="add-item-btn">Add item</button>
     </nav>
     <div class="main-content tables-container">
         <div class="tables flex-row">
