@@ -6,12 +6,12 @@ class FoodsView extends Foods{
     ?>
         <thead>
             <tr>
-                <th>Item #</th>
+                <th style="text-align: left; padding-left: 10px">Item #</th>
                 <th>Image</th>
-                <th>Name</th>
-                <th>Group</th>
-                <th>Price</th>
-                <th>Show</th>
+                <th style="text-align: left; padding-left: 10px">Name</th>
+                <th style="text-align: left; padding-left: 10px">Group</th>
+                <th style="text-align: left; padding-left: 10px">Price</th>
+                <th style="text-align: left; padding-left: 10px">Show</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -21,27 +21,27 @@ class FoodsView extends Foods{
     ?>
         <tbody>
             <tr id ="<?php echo $row['fid']; ?>">
-                <td><?php echo $row['fid']; ?></td>
+                <td style="text-align: left; padding-left: 10px"><?php echo $row['fid']; ?></td>
                 <td>
                     <img name="item-img" class="tbl-img-data" src="./img/temp/<?php echo $row['photo']; ?>" alt="">    
                 </td>
-                <td class="name"><?php echo $row['item_name']; ?></td>
-                <td><?php echo $row['item_group']; ?></td>
-                <td><?php echo $row['cost']; ?></td>
+                <td class="name" style="text-align: left; padding-left: 10px"><?php echo $row['item_name']; ?></td>
+                <td style="text-align: left; padding-left: 10px"><?php echo $row['item_group']; ?></td>
+                <td style="text-align: left; padding-left: 10px"><?php echo $row['cost']; ?></td>
                 <?php
                     if($row['order_status'] == 'Active'){
                 ?>
-                    <td><span class="success"><?php echo $row['order_status']; ?></span></td>
+                    <td style="text-align: left; padding-left: 10px"><span class="success"><?php echo $row['order_status']; ?></span></td>
                 <?php
                     }
                     elseif($row['order_status'] == 'Cancel'){
                 ?>
-                    <td><span class="cancel"><?php echo $row['order_status']; ?></span></td>
+                    <td style="text-align: left; padding-left: 10px"><span class="cancel"><?php echo $row['order_status']; ?></span></td>
                 <?php
                     }
                     else{
                 ?>
-                    <td><span><?php echo $row['order_status']; ?></span></td>
+                    <td style="text-align: left; padding-left: 10px"><span><?php echo $row['order_status']; ?></span></td>
                 <?php
                     }
                 ?>
