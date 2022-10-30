@@ -172,6 +172,8 @@ class UserContr extends Users{
         unset($_SESSION["lname"]);
         
         header("location: ../login.php");
+
+        exit();
     }
     
 }
