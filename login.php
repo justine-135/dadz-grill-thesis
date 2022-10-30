@@ -36,14 +36,19 @@
                 </div>
                 <input type="submit" name="login" value="Submit">
                 <?php
-                    if ($_GET["message"] == "emptyinput") {
-                        echo"<p class='err-text-register err-text-login'>Fill up all inputs!</p>";
-                    }
-                    elseif ($_GET["message"] == "invalidlogin") {
-                        echo"<p class='err-text-register err-text-login'>Invalid user.</p>";
+                    if (isset($_GET["message"])) {
+                        if ($_GET["message"] == "emptyinput") {
+                            echo"<p class='err-text-register err-text-login show'>Fill up all inputs!</p>";
+                        }
+                        elseif ($_GET["message"] == "invalidlogin") {
+                            echo"<p class='err-text-register err-text-login show'>Invalid user.</p>";
+                        }
+                        else{
+                            echo"<p class='err-text-register err-text-login'>No err</p>";
+                        }
                     }
                     else{
-                        echo"<p class='err-text-register err-text-login'></p>";
+                        echo"<p class='err-text-register err-text-login'>No err</p>";
                     }
                 ?>
             </div>
