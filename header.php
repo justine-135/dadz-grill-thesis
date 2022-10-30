@@ -5,6 +5,8 @@ session_start();
 if (empty($_SESSION["username"])) {
     header("location: login.php?message=");
 }
+
+$_SESSION["last_login_timestamp"] = time();
 ?>
 
 <!DOCTYPE html>
@@ -120,6 +122,9 @@ if (empty($_SESSION["username"])) {
             </li>
         </ul>
     </nav>
+
+    <span class="last_timestamp hide"><?php echo $_SESSION["last_login_timestamp"] ?></span>
+    <span class="time_now hide"><?php echo time() ?></span>
 
     <script src="./js/main.js"></script>
 
