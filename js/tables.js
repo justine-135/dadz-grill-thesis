@@ -39,6 +39,7 @@ window.addEventListener("load", () => {
         closeOrderBtn.addEventListener("click", () => {
           overlay.classList.remove("open");
         });
+
         for (let i = 1; i < 9; i++) {
           let timer = document.querySelector(`.table-${i}-time`);
           if (timer.getAttribute("started") != 1) {
@@ -79,22 +80,21 @@ window.addEventListener("load", () => {
             let timeEnd = timer.getAttribute("endtime");
             let duration = timeEnd - seconds;
 
+            console.log(duration);
             if (duration <= 0) {
               timer.innerHTML = "00:00:00";
-              console.log("end");
+              var xmlhttp = new XMLHttpRequest();
+              xmlhttp.open(
+                "GET",
+                `./includes/table-contr.inc.php?contr=1&id=${i}`,
+                true
+              );
+              xmlhttp.send();
             } else {
-              console.log(duration);
               let durationValue = new Date(duration * 1000)
                 .toISOString()
                 .substring(11, 19);
               timer.innerHTML = durationValue;
-              var xmlhttp = new XMLHttpRequest();
-              xmlhttp.open(
-                "GET",
-                `./includes/table-contr.inc.php?contr=2&id=${i}&duration=${durationValue}`,
-                true
-              );
-              xmlhttp.send();
             }
           }
         }
