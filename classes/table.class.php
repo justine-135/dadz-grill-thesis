@@ -31,7 +31,7 @@ class Table extends Dbh
         $warning_time = $res + 6300;
         $end_time = $res + 7200;
 
-        $sql = "SELECT is_started FROM tables WHERE id = $id";
+        $sql = "SELECT is_started, payment FROM tables WHERE id = $id";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
@@ -41,22 +41,29 @@ class Table extends Dbh
 
         foreach ($results as $row) {
             $is_started = $row["is_started"];
+            $payment = $row["payment"];
         }
 
         if ($is_started != 1) {
-            $sql = "UPDATE tables SET timer = '$res', warning_time = '$warning_time', end_time = '$end_time', payment = 'Pending', done_orders = 0, is_started = true WHERE id = $id";
-            $stmt = $this->connection()->prepare($sql);
-            $stmt->execute();
-            $stmt = null;
+            if ($payment != "Requesting") {
+                $sql = "UPDATE tables SET timer = '$res', warning_time = '$warning_time', end_time = '$end_time', payment = 'Pending', done_orders = 0, is_started = true WHERE id = $id";
+                $stmt = $this->connection()->prepare($sql);
+                $stmt->execute();
+                $stmt = null;
+                header("location: ../menu.php?alert=has_order&id=" . $id);
+
+            }else{
+                header("location: ../menu.php?alert=no_order&id=" . $id);
+            }
         } 
         else{
             $sql = "UPDATE tables SET table_status = 'Occupied', done_orders = 0 WHERE id = $id";
             $stmt = $this->connection()->prepare($sql);
             $stmt->execute();
             $stmt = null;
+            header("location: ../menu.php?alert=has_order&id=" . $id);
         }
 
-        header("location: ../menu.php?alert=has_order&id=" . $id);
     }
 
     protected function has_order_request($id)
@@ -97,7 +104,7 @@ class Table extends Dbh
 
     protected function is_dirty($tblId)
     {
-        $sql = "UPDATE tables SET table_status = 'Unoccupied', timer = 0, warning_time = 0, end_time = 0, duration_timer = 0, payment = 'No order', pending_orders = 0, done_orders = 0 WHERE id = $tblId";
+        $sql = "UPDATE tables SET table_status = 'Unoccupied', timer = 0, warning_time = 0, end_time = 0, payment = 'No order', pending_orders = 0, done_orders = 0 WHERE id = $tblId";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
@@ -190,7 +197,7 @@ class Table extends Dbh
                 header("location: ../store.php?id=" . $tblId);
             }
             else {
-                return;
+                header("location: ../menu.php");
             }
         }
         else{
@@ -256,15 +263,6 @@ class Table extends Dbh
 
         header("location: ../menu.php");
     }
-
-    protected function setTimerDuration($id, $duration)
-    {
-        $sql = "UPDATE tables SET duration_timer = '$duration' WHERE id = $id";
-        $stmt = $this->connection()->prepare($sql);
-        $stmt->execute();
-        $stmt = null;
-    }
-
 
     protected function setGetId($id)
     {
