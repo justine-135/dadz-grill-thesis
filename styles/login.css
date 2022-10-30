@@ -90,15 +90,20 @@
 }
 
 .err-text-login {
+  opacity: 0;
   text-align: center;
 }
 
+.err-text-login.show {
+  opacity: 1;
+}
+
 @media screen and (max-width: 650px) {
-  .login-form .head{
+  .login-form .head {
     display: none;
   }
 
-  .login-form .body{
+  .login-form .body {
     width: 100%;
   }
 }
