@@ -89,7 +89,7 @@ include "header.php";
                         <span class="label">
                             My role
                         </span>
-                        <span class="crew-role number">0</span>
+                        <span class="crew-role number">-</span>
                     </div>
                 </div>
             </div>
