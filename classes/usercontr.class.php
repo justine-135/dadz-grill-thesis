@@ -128,7 +128,7 @@ class UserContr extends Users{
         $result = $this->loginUser($this->userName, $this->pass);
         session_start();
         $_SESSION["username"] = $result[0]["username"];
-        $_SESSION["userFullname"] = $result[0]["fullname"];
+        $_SESSION["fullname"] = $result[0]["fullname"];
         $_SESSION["email"] = $result[0]["email"];
         $_SESSION["contact"] = $result[0]["contact"];
         $_SESSION["bday"] = $result[0]["birth_date"];
