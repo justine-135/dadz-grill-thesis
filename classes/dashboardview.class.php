@@ -139,7 +139,7 @@ class DashboardView extends Dashboard{
         $total = 0;
         $total = (int)$total;
         foreach ($results as $row) {
-            if ($row["is_active"] == 1) {
+            if ($row["is_active"] >= 1) {
                 $total += 1;
             }
         }
