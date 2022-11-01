@@ -10,7 +10,6 @@
   transition: 200ms ease;
   border-right: 1px solid rgba(128, 128, 128, 0.24);
   z-index: 5;
-  overflow-x: auto;
 }
 
 .sidenav.shrink {
@@ -24,6 +23,7 @@
   width: 100%;
   padding-left: 10px;
   z-index: 1000;
+  height: calc(100vh - 60px);
 }
 
 .sidenav ul li {
@@ -136,8 +136,12 @@
   fill: #129292a2;
 }
 
-.header-account {
+.profile-logout {
   margin-left: auto;
+  height: 100%;
+}
+
+.header-account {
   width: auto;
   height: 65%;
   padding: 0 10px 0px 5px;
@@ -230,6 +234,10 @@
     padding-top: 0px;
   }
 
+  .sidenav ul {
+    overflow-y: scroll;
+  }
+
   .sidenav.shrink {
     width: 0px;
     opacity: 0;
@@ -254,3 +262,16 @@
     font-size: 1.175rem;
   }
 }
+
+@media screen and (max-width: 820px) {
+  .header-logo h6 {
+    font-size: 1rem;
+    margin-left: 10px;
+    white-space: nowrap;
+  }
+}
+
+/* @media screen and (max-height: 375px) {
+  .sidenav ul {
+  }
+} */
