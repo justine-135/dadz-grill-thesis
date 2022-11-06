@@ -25,12 +25,21 @@ if ($_SESSION["is_superuser"] == 1 || $_SESSION["is_cashier"]) {
             </div>
             <h3>Transactions</h3>
         </div>
+        <input type="date" name="" id="" class="search-transaction">
+        <select id="transaction-export" class="select">
+            <option value="export-transaction-opt">Transaction</option>
+            <option value="export-sales-report-opt">Sales Report</option>
+        </select>
+        <button class="add-item-btn csvHtml5-transaction">Export</button>
     </nav>
 
     <div class="main-content tables-container">
         <div class="tables flex-row">
-            <table class="tables-table transaction-tbl-data">
-            </table>
+            <table class="tables-table transaction-tbl-data"></table>
+            <table class="tables-table transaction-tbl-data-date hide"></table>
+            <table class="export-transaction-tbl hide"></table>
+            <table class="export-transaction-tbl-date hide"></table>
+            <table class="export-sales-report-tbl hide"></table>
         </div>
     </div>
 
