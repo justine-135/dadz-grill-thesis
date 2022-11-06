@@ -82,7 +82,6 @@ if ($_SESSION["is_superuser"] == 1) {
                 <input class="upd-ing-id hide" type="text" name="upd-ing-id" id="">
             </div>
             <div class="form-overlay-footer flex-row">
-                <button class="form-footer-btn" type="button">Cancel</button>
                 <input type="submit" value="Submit" name="update">
             </div>
         </form>
