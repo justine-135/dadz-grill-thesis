@@ -138,6 +138,8 @@ class Users extends Dbh{
 
             $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+            session_start();
+            $_SESSION["last_login_datetime"] = $dateNow;
             $sql = "INSERT INTO login_history (`user_id`, fullname, last_login, browser) VALUES (?,?,?,?);";    
             $stmt = $this->connection()->prepare($sql);
             $stmt->execute([$user[0]["id"], $user[0]["fullname"], $dateNow, $browser]);   
@@ -168,7 +170,9 @@ class Users extends Dbh{
         }
         $stmt = null;
 
-        $sql = "UPDATE login_history SET last_logout = '$dateNow' WHERE last_login='$lastLogin'";
+        session_start();
+        $last_login_datetime = $_SESSION["last_login_datetime"];
+        $sql = "UPDATE login_history SET last_logout = '$dateNow' WHERE last_login='$last_login_datetime'";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
     }
