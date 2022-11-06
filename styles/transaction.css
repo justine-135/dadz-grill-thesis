@@ -1,0 +1,27 @@
+.select {
+  padding: 0.5rem 1rem;
+  color: #444444;
+  background-color: rgb(245, 245, 245);
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.select[value="hide"] {
+  display: none;
+}
+
+.search-transaction {
+  width: 135px;
+  color: #222222;
+  font-weight: 500;
+  background-color: rgb(245, 245, 245);
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
