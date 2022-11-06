@@ -6,26 +6,23 @@ class FoodsView extends Foods{
     ?>
         <thead>
             <tr>
-                <th style="text-align: left; padding-left: 10px">Item #</th>
-                <th>Image</th>
                 <th style="text-align: left; padding-left: 10px">Name</th>
+                <th>Image</th>
                 <th style="text-align: left; padding-left: 10px">Group</th>
                 <th style="text-align: left; padding-left: 10px">Price</th>
                 <th style="text-align: left; padding-left: 10px">Show</th>
                 <th>Actions</th>
             </tr>
         </thead>
+        <tbody>
     <?php
-
     foreach ($results as $row) {
     ?>
-        <tbody>
             <tr id ="<?php echo $row['fid']; ?>">
-                <td style="text-align: left; padding-left: 10px"><?php echo $row['fid']; ?></td>
+                <td class="name" style="text-align: left; padding-left: 10px"><?php echo $row['item_name']; ?></td>
                 <td>
                     <img name="item-img" class="tbl-img-data" src="./img/temp/<?php echo $row['photo']; ?>" alt="">    
                 </td>
-                <td class="name" style="text-align: left; padding-left: 10px"><?php echo $row['item_name']; ?></td>
                 <td style="text-align: left; padding-left: 10px"><?php echo $row['item_group']; ?></td>
                 <td style="text-align: left; padding-left: 10px"><?php echo $row['cost']; ?></td>
                 <?php
@@ -51,10 +48,13 @@ class FoodsView extends Foods{
                     <button class="delete-item-btn" type="button">Delete</button>
                 </td>
             </tr>
-        </tbody>
         
 <?php
         }
+        ?>
+        </tbody>
+
+        <?php
     }
 
     public function initReadAll(){
