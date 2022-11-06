@@ -9,15 +9,26 @@ window.addEventListener("load", () => {
   const titleNav = document.querySelector(".nav-page");
   const table = document.querySelector(".tables");
   const alert = document.querySelector(".query-notif");
-  const width = window.innerWidth > 0 ? window.innerWidth : screen.width;
+  const profileLogout = document.querySelector(".profile-logout");
+
+  let height = window.innerHeight > 0 ? window.innerHeight : screen.height;
+  let width = window.innerWidth > 0 ? window.innerWidth : screen.width;
+  setInterval(() => {
+    height = window.innerHeight > 0 ? window.innerHeight : screen.height;
+    width = window.innerWidth > 0 ? window.innerWidth : screen.width;
+  }, 100);
 
   let bool = false;
+  let bool2 = false;
 
   const toggleComponents = () => {
     toggleBtn.classList.toggle("spin");
     logo.classList.toggle("shrink");
     logoName.classList.toggle("remove");
     sideNav.classList.toggle("shrink");
+    if (bool2 == true) {
+      profileLogout.classList.toggle("hide");
+    }
     sideNavLinks.childNodes.forEach((element) => {
       if (
         element.classList == "dashboard-li flex-row" ||
@@ -28,14 +39,15 @@ window.addEventListener("load", () => {
         element.classList == "menu-li flex-row active" ||
         element.classList == "dirty-li flex-row" ||
         element.classList == "dirty-li flex-row active" ||
-        element.classList == "inventory-li flex-row" ||
-        element.classList == "inventory-li flex-row active" ||
         element.classList == "sales-li flex-row" ||
         element.classList == "sales-li flex-row active" ||
+        element.classList == "inventory-li flex-row" ||
+        element.classList == "inventory-li flex-row active" ||
         element.classList == "admin-li flex-row" ||
         element.classList == "admin-li flex-row active"
       ) {
         if (bool != true) {
+          console.log(element);
           element.childNodes[3].classList.toggle("remove");
         }
       } else {
@@ -44,20 +56,35 @@ window.addEventListener("load", () => {
     });
     titleNav.classList.toggle("shrink");
     mainDivContainer.classList.toggle("shrink");
-    table.classList.toggle("shrink");
+    if (table != null) {
+      table.classList.toggle("shrink");
+    }
   };
-
-  toggleBtn.addEventListener("click", () => {
-    toggleComponents();
-  });
 
   if (width <= 820) {
     bool = true;
     toggleComponents(bool);
   }
 
+  toggleBtn.addEventListener("click", () => {
+    if (width <= 530) {
+      bool2 = true;
+      toggleComponents(bool2);
+    } else {
+      bool2 = false;
+      toggleComponents();
+    }
+    const legendStatus = document.querySelector(".legend-list");
+
+    if (legendStatus != null) {
+      legendStatus.classList.remove("open");
+    }
+  });
+
   setTimeout(() => {
-    alert.classList.add("hide");
+    if (alert != null) {
+      alert.classList.add("hide");
+    }
   }, 3000);
 
   const time_stamp = document.querySelector(".last_timestamp");
@@ -71,6 +98,5 @@ window.addEventListener("load", () => {
     xhttp.open("POST", "./includes/user-contr.inc.php");
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(`&curr_time=${curr_time}`);
-    console.log("timeout");
   }, 3000);
 });
