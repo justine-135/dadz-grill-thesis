@@ -10,6 +10,7 @@
 @import url("./order-confirm.css");
 @import url("./bill.css");
 @import url("./receipt.css");
+@import url("./transaction.css");
 
 * {
   margin: 0%;

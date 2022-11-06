@@ -265,7 +265,8 @@
 }
 
 .orders-list .pad10,
-.transaction-tbl-data .pad10 {
+.transaction-tbl-data .pad10,
+.transaction-tbl-data-date .pad10 {
   padding-top: 12px;
 }
 
