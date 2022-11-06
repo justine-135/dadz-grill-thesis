@@ -18,7 +18,9 @@ class DashboardView extends Dashboard{
         $arrtotals = array();
         foreach ($results as $row) {
             if ($row["paid"] == 1) {
-                array_push($arrtotals, $row["price"]);
+                if ($row['price'] != "") {
+                    array_push($arrtotals, $row["price"] . "|");
+                }
             }
         }
 
