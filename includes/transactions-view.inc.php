@@ -15,6 +15,30 @@
             $billView = new TransactionsView();
             $billView->initInvoice($id);
         }
+
+        if ($view == 3) {
+
+            $billView = new TransactionsView();
+            $billView->exportTransactions();
+        }
+
+        if ($view == 4) {
+
+            $billView = new TransactionsView();
+            $billView->exportSalesReport();
+        }
+
+        if ($view == 5) {
+            $date = $_GET['date'];
+            $billView = new TransactionsView();
+            $billView->initTransactionsDate($date);
+        }
+
+        if ($view == 6) {
+            $date = $_GET['date'];
+            $billView = new TransactionsView();
+            $billView->exportTransactionsDate($date);
+        }
     }
 
     elseif (isset($_POST["print"])) {
