@@ -12,6 +12,17 @@ class Transactions extends Dbh
         return $results;
     }
 
+    protected function getTransactionsDate($date)
+    {
+        $dateLike = $date . "%";
+        $sql = "SELECT * FROM transactions WHERE reg_date LIKE '$dateLike'";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll();
+        return $results;
+    }
+
     protected function has_request($id)
     {
         $sql = "SELECT * FROM series_orders WHERE table_id = $id";
@@ -20,19 +31,25 @@ class Transactions extends Dbh
 
         $results = $stmt->fetchAll();
 
+        $item_ids = array();
         $orders = array();
         $qtys = array();
         $prices = array();
         $original_prices = array();
 
         foreach ($results as $row) {
-            array_push($orders, $row["order"]);
-            array_push($qtys, $row["quantity"]);
-            array_push($prices, $row["price"]);
-            array_push($original_prices, $row["original_price"]);
+            if ($row['is_ready'] == 1) {
+                array_push($item_ids, $row["item_id"]);
+                array_push($orders, $row["order"]);
+                array_push($qtys, $row["quantity"]);
+                array_push($prices, $row["price"]);
+                array_push($original_prices, $row["original_price"]);
+            }
         }
 
+
         $total = 0;
+        $newItemId = "";
         $newOrder = "";
         $newQuantity = "";
         $newPrice = "";
@@ -41,20 +58,21 @@ class Transactions extends Dbh
         for ($i = 0; $i < count($orders); $i++) {
             $price = (int)$prices[$i];
             $total += $price;
-            $newOrder .= $orders[$i] . "|";
-            $newQuantity .= $qtys[$i] . "|";
-            $newPrice .= $prices[$i] . "|";
-            $newOrgPrice .= $original_prices[$i] . "|";
-            // echo "<br>" . $orders[$i];
+            $newItemId .= $item_ids[$i];
+            $newOrder .= $orders[$i] . "";
+            $newQuantity .= $qtys[$i] . "";
+            $newPrice .= $prices[$i] . "";
+            $newOrgPrice .= $original_prices[$i] . "";
         }
 
+        $newItemId = rtrim($newItemId, "|");
         $newOrder = rtrim($newOrder, "|");
         $newQuantity = rtrim($newQuantity, "|");
         $newPrice = rtrim($newPrice, "|");
         $newOrgPrice = rtrim($newOrgPrice, "|");
 
-        $sql = "INSERT INTO transactions (table_id, `order`, original_price, quantity, price)
-        VALUES ( '$id' , '$newOrder' , '$newOrgPrice' , '$newQuantity' , '$newPrice')";
+        $sql = "INSERT INTO transactions (table_id, food_id, `order`, original_price, quantity, price)
+        VALUES ( '$id' , '$newItemId' , '$newOrder' , '$newOrgPrice' , '$newQuantity' , '$newPrice')";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
@@ -110,6 +128,16 @@ class Transactions extends Dbh
         $sql = "SELECT * FROM transactions WHERE id = ?";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute([$id]);
+
+        $results = $stmt->fetchAll();
+        return $results;
+    }
+
+    protected function getSalesReport()
+    {
+        $sql = "SELECT * FROM inventory";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
 
         $results = $stmt->fetchAll();
         return $results;
