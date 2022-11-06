@@ -61,13 +61,15 @@ window.addEventListener("load", () => {
       const id = document.querySelector(".upd-ing-id");
       const img = document.querySelector(".upd-ing-img");
 
-      name.value = element.parentElement.parentElement.childNodes[5].innerHTML;
-      group.value = element.parentElement.parentElement.childNodes[7].innerHTML;
+      console.log();
+
+      name.value = element.parentElement.parentElement.childNodes[1].innerHTML;
+      group.value = element.parentElement.parentElement.childNodes[5].innerHTML;
 
       status.value =
-        element.parentElement.parentElement.childNodes[11].firstChild.innerHTML;
-      cost.value = element.parentElement.parentElement.childNodes[9].innerHTML;
-      id.value = element.parentElement.parentElement.childNodes[1].innerHTML;
+        element.parentElement.parentElement.childNodes[9].firstChild.innerHTML;
+      cost.value = element.parentElement.parentElement.childNodes[7].innerHTML;
+      id.value = element.parentElement.parentElement.id;
     });
   });
 
