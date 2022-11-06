@@ -113,7 +113,7 @@ class Table extends Dbh
 
     protected function setAttended($tblId)
     {
-        $sql = "SELECT table_status, payment, done_orders FROM tables WHERE id = $tblId";
+        $sql = "SELECT table_status, payment, done_orders, is_started FROM tables WHERE id = $tblId";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
@@ -123,10 +123,16 @@ class Table extends Dbh
             $payment = $row["payment"];
             $doneOrder = $row['done_orders'];
             $tableStatus = $row['table_status'];
+            $started = $row['is_started'];
         }
         
         if ($tableStatus != "Unoccupied" && $tableStatus != "Dirty") {
-            $this->has_order_attended($tblId);
+            if ($doneOrder != "Requesting") {
+                $this->has_order_attended($tblId);
+            }
+            else{
+                $this->no_order($tblId);
+            }
         }
         else {
             $this->no_order($tblId);
