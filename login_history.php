@@ -13,6 +13,8 @@ if ($_SESSION["is_superuser"] == 1) {
             </div>
             <h3>History</h3>
         </div>
+        <button class="add-item-btn csvHtml5">Export</button>
+
     </nav>
 
     <div class="main-content tables-container">
