@@ -6,12 +6,13 @@ class TransactionsView extends Transactions{
         ?>
         <thead>
             <tr>
-                <th>Order #</th>
-                <th>Table #</th>
-                <th>Time</th>
+                <th style="text-align: left; padding-left: 10px">#</th>
+                <th style="text-align: left; padding-left: 10px">Table #</th>
+                <th style="text-align: left; padding-left: 10px">Time</th>
+                <th style="text-align: left; padding-left: 10px">Customer Name</th>
                 <th>Orders</th>
-                <th>Total</th>
-                <th>Status</th>
+                <th style="text-align: left; padding-left: 10px">Total</th>
+                <th style="text-align: left; padding-left: 10px">Status</th>
                 <th class="status-action-col">Status Action</th>
             </tr>
         </thead>
@@ -20,9 +21,10 @@ class TransactionsView extends Transactions{
         ?>
         <tbody>
             <tr>
-                <td class="pad10" valign="top"><span><?php echo $row['id'] ?></span></td>
-                <td class="pad10" valign="top"><?php echo $row['table_id'] ?></td>
-                <td class="pad10" valign="top"><?php echo $row['reg_date'] ?></td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><span><?php echo $row['id'] ?></span></td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['table_id'] ?></td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['reg_date'] ?></td>
+                <td></td>
                 <td>
                     <?php 
                         $result = explode("|",$row['order']);
@@ -40,7 +42,7 @@ class TransactionsView extends Transactions{
                     </p>
                                      
                 </td>
-                <td class="pad10" valign="top">
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px">
                 <?php 
                     $result = explode("|",$row['price']);
                     $total = 0;
@@ -51,11 +53,85 @@ class TransactionsView extends Transactions{
                     echo $total;
                 ?>    
                 </td>
-                <td class="pad10" valign="top"><?php if ($row['paid'] == 0) {
-                    echo "Not paid";
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php if ($row['paid'] == 0) {
+                    echo "Pending";
                 }
                 elseif($row['paid'] == 1){
-                    echo "Paid";
+                    echo "Complete";
+                }
+                elseif($row['paid'] == 3){
+                    echo "Cancelled";
+                }?></td>
+                <td valign="top" class="action-td status-action-col pad10">
+                    <form action="./includes/transactions-contr.inc.php" method="POST">
+                        <input type="text" name="id" value=<?php echo $row['id'] ?> id="" hidden>   
+                        <input type="submit" name="process" value="Process">
+                        <input type="submit" name="delete" value="Delete">
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+        <?php
+        }
+    }
+
+    public function initTransactionsDate($date){
+        $results = $this->getTransactionsDate($date);
+        ?>
+        <thead>
+            <tr>
+                <th style="text-align: left; padding-left: 10px">#</th>
+                <th style="text-align: left; padding-left: 10px">Table #</th>
+                <th style="text-align: left; padding-left: 10px">Time</th>
+                <th style="text-align: left; padding-left: 10px">Customer Name</th>
+                <th>Orders</th>
+                <th style="text-align: left; padding-left: 10px">Total</th>
+                <th style="text-align: left; padding-left: 10px">Status</th>
+                <th class="status-action-col">Status Action</th>
+            </tr>
+        </thead>
+        <?php
+        foreach ($results as $row) {
+        ?>
+        <tbody>
+            <tr>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><span><?php echo $row['id'] ?></span></td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['table_id'] ?></td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['reg_date'] ?></td>
+                <td></td>
+                <td>
+                    <?php 
+                        $result = explode("|",$row['order']);
+                        $result2 = explode("|",$row['quantity']);
+                    ?>
+                    <p style="width: 200px; text-align: left;" >
+                        <?php
+                        for ($i=0; $i < (count($result)); $i++) { 
+                            if ($result[$i] != "") {
+                                echo $result[$i] . "(" . $result2[$i] . ")";                            }
+                         ?>
+                       <?php
+                        }
+                    ?>
+                    </p>
+                                     
+                </td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px">
+                <?php 
+                    $result = explode("|",$row['price']);
+                    $total = 0;
+                    for ($i=0; $i < (count($result)); $i++) { 
+                        $total += (int)$result[$i];
+                    }
+
+                    echo $total;
+                ?>    
+                </td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php if ($row['paid'] == 0) {
+                    echo "Pending";
+                }
+                elseif($row['paid'] == 1){
+                    echo "Complete";
                 }
                 elseif($row['paid'] == 3){
                     echo "Cancelled";
@@ -103,8 +179,8 @@ class TransactionsView extends Transactions{
             <thead >
                 <tr>
                     <th style="width:50%; text-align:left; padding-left: 20px">Item</th>
-                    <th style="width:10%">Amount</th>
-                    <th style="width:20%">₱ Price</th>
+                    <th style="width:10%; text-align: left; padding-left: 10px">Amount</th>
+                    <th style="width:20%; text-align: left; padding-left: 10px">₱ Price</th>
                 </tr>
             </thead>
             <tbody>
@@ -124,35 +200,35 @@ for ($i=0; $i < (count($result)); $i++) {
                     } ?>
                     <?php if ($result2[$i] != "") {
                         ?>
-                    <td><?php echo $result2[$i]; ?> </td>
+                    <td style="text-align: left; padding-left: 10px"><?php echo $result2[$i]; ?> </td>
                         <?php
                     } ?>
                     <?php if ($result3[$i] != "") {
                         ?>
-                    <td>₱ <?php echo $result3[$i]; ?> </td>
+                    <td style="text-align: left; padding-left: 10px">₱ <?php echo $result3[$i]; ?> </td>
                         <?php
                     } ?>
                 </tr>
                 <?php } ?>
                 <tr style="border-bottom: none">
                     <td></td>
-                    <td class="bill-final-span" style="text-align:left"><span class="bill-final-span">Total:</span></td>
-                    <td>₱ <span id="amount-total"><?php echo $total; ?></span></td>
+                    <td class="bill-final-span" style="text-align: left; padding-left: 10px"><span class="bill-final-span">Total:</span></td>
+                    <td style="text-align: left; padding-left: 10px">₱ <span id="amount-total"><?php echo $total; ?></span></td>
                 </tr>
                 <tr style="border-bottom: none">
                     <td></td>
-                    <td style="text-align:left"> <span class="bill-final-span">Payment:</span></td>
-                    <td>₱ <span id="amount-paid">0</span></td>
+                    <td style="text-align: left; padding-left: 10px"> <span class="bill-final-span" >Payment:</span></td>
+                    <td style="text-align: left; padding-left: 10px">₱ <span id="amount-paid">0</span></td>
                 </tr>
                 <tr style="border-bottom: none">
                     <td></td>
-                    <td class="bill-final-span" style="text-align:left"><span class="bill-final-span">Change:</span></td>
-                    <td>₱ <span id="amount-change">0</span></td>
+                    <td class="bill-final-span" style="text-align: left; padding-left: 10px"><span class="bill-final-span">Change:</span></td>
+                    <td style="text-align: left; padding-left: 10px">₱ <span id="amount-change">0</span></td>
                 </tr>
                 <tr>
                     <td></td>
                     <td></td>
-                    <td class="bill-td-submit">
+                    <td class="bill-td-submit" >
                     <!-- <form action="./includes/transactions-view.inc.php" id="form-save-receipt" method="POST">
                         
                     </form> -->
@@ -303,6 +379,231 @@ for ($i=0; $i < (count($result)); $i++) {
         </div>
         </body>
 </html>
+        <?php
+    }
+
+    public function exportTransactions(){
+        $results = $this->getTransactions();
+        ?>
+        <thead>
+            <tr>
+                <th style="text-align: left">Order #</th>
+                <th style="text-align: left">Table #</th>
+                <th style="text-align: left">Time</th>
+                <th>Orders</th>
+                <th style="text-align: left">Total</th>
+                <th style="text-align: left">Status</th>
+            </tr>
+        </thead>
+        <?php
+        foreach ($results as $row) {
+        ?>
+        <tbody>
+            <tr>
+            <!-- (" ","/",$row["reg_date"]) -->
+                <td class="pad10" valign="top" style="text-align: left"><span><?php echo $row['id'] ?></span></td>
+                <td class="pad10" valign="top" style="text-align: left"><?php echo $row['table_id'] ?></td>
+                <td class="pad10" valign="top" style="text-align: left"><?php echo $row['reg_date'] ?></td>
+                <td style="text-align: left">
+                    <?php 
+                        $result = explode("|",$row['order']);
+                        $result2 = explode("|",$row['quantity']);
+                    ?>
+                    <p style="width: 200px; text-align: left;" >
+                        <?php
+                        for ($i=0; $i < (count($result)); $i++) { 
+                            if ($result[$i] != "") {
+                                if ($i+1 == count($result)) {
+                                    echo $result[$i] . "(" . $result2[$i] . ")";   
+                                }                      
+                                else{
+                                    echo $result[$i] . "(" . $result2[$i] . "),";   
+                                }   
+                            }
+                        }
+                    ?>
+                    </p>
+                </td>
+                <td class="pad10" valign="top" style="text-align: left">
+                <?php 
+                    $result = explode("|",$row['price']);
+                    $total = 0;
+                    for ($i=0; $i < (count($result)); $i++) { 
+                        $total += (int)$result[$i];
+                    }
+
+                    echo $total;
+                ?>    
+                </td>
+                <td class="pad10" valign="top" style="text-align: left"><?php if ($row['paid'] == 0) {
+                    echo "Pending";
+                }
+                elseif($row['paid'] == 1){
+                    echo "Complete";
+                }
+                elseif($row['paid'] == 3){
+                    echo "Cancelled";
+                }?></td>
+
+            </tr>
+        </tbody>
+        <?php
+        }
+    }
+
+    public function exportTransactionsDate($date){
+        $results = $this->getTransactionsDate($date);
+        ?>
+        <thead>
+            <tr>
+                <th style="text-align: left; padding-left: 10px">#</th>
+                <th style="text-align: left; padding-left: 10px">Table #</th>
+                <th style="text-align: left; padding-left: 10px">Time</th>
+                <th style="text-align: left; padding-left: 10px">Customer Name</th>
+                <th>Orders</th>
+                <th style="text-align: left; padding-left: 10px">Total</th>
+                <th style="text-align: left; padding-left: 10px">Status</th>
+            </tr>
+        </thead>
+        <?php
+        foreach ($results as $row) {
+        ?>
+        <tbody>
+            <tr>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><span><?php echo $row['id'] ?></span></td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['table_id'] ?></td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['reg_date'] ?></td>
+                <td></td>
+                <td>
+                    <?php 
+                        $result = explode("|",$row['order']);
+                        $result2 = explode("|",$row['quantity']);
+                    ?>
+                    <p style="width: 200px; text-align: left;" >
+                        <?php
+                        for ($i=0; $i < (count($result)); $i++) { 
+                            if ($result[$i] != "") {
+                                echo $result[$i] . "(" . $result2[$i] . ")";                            }
+                         ?>
+                       <?php
+                        }
+                    ?>
+                    </p>
+                                     
+                </td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px">
+                <?php 
+                    $result = explode("|",$row['price']);
+                    $total = 0;
+                    for ($i=0; $i < (count($result)); $i++) { 
+                        $total += (int)$result[$i];
+                    }
+
+                    echo $total;
+                ?>    
+                </td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php if ($row['paid'] == 0) {
+                    echo "Pending";
+                }
+                elseif($row['paid'] == 1){
+                    echo "Complete";
+                }
+                elseif($row['paid'] == 3){
+                    echo "Cancelled";
+                }?></td>
+            </tr>
+        </tbody>
+        <?php
+        }
+    }
+
+    public function exportSalesReport(){
+        $results = $this->getSalesReport();
+        ?>
+        <thead>
+            <tr>
+                <th style="text-align: left"></th>
+                <th style="text-align: left"></th>
+                <th style="text-align: left">Total Success</th>
+                <th style="text-align: left"></th>
+                <th style="text-align: left"></th>
+            </tr>
+            <tr>
+                <th style="text-align: left">Item</th>
+                <th style="text-align: left">Group</th>
+                <th style="text-align: left">Cost</th>
+                <th style="text-align: left">Quantity</th>
+                <th style="text-align: left">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+        foreach ($results as $row) {
+        ?>
+            <tr>
+                <td class="pad10" valign="top" style="text-align: left"><span><?php echo $row['item_name'] ?></span></td>
+                <td class="pad10" valign="top" style="text-align: left"><?php echo $row['item_group'] ?></td>
+                <td class="pad10" valign="top" style="text-align: left"><?php echo $row['cost'] ?></td>
+                <td class="pad10" valign="top" style="text-align: left"><?php echo $row['success'] ?></td>
+                <td class="pad10 total-success-count" valign="top" style="text-align: left"><?php $total = 0;$total = $row['cost'] * $row['success'];echo $total;?></td>
+            </tr>
+        <?php } ?>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td class="pad10" valign="top" style="text-align: left"></td>
+            <td class="pad10" valign="top" style="text-align: left"></td>
+            <td class="pad10" valign="top" style="text-align: left"></td>
+            <th class="pad10" valign="top" style="text-align: left">Total Sum</>
+            <td class="pad10" valign="top" style="text-align: left">
+                <span class="total-sold-success"></span>
+            </td>
+        </tr>
+        </tfoot>
+
+        <tr></tr>
+        <tr></tr>
+
+        <thead>
+            <tr>
+                <th style="text-align: left"></th>
+                <th style="text-align: left"></th>
+                <th style="text-align: left">Total Cancelled</th>
+                <th style="text-align: left"></th>
+                <th style="text-align: left"></th>
+            </tr>
+            <tr>
+                <th style="text-align: left">Item</th>
+                <th style="text-align: left">Group</th>
+                <th style="text-align: left">Cost</th>
+                <th style="text-align: left">Quantity</th>
+                <th style="text-align: left">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+        foreach ($results as $row) {
+        ?>
+            <tr>
+                <td class="pad10" valign="top" style="text-align: left"><span><?php echo $row['item_name'] ?></span></td>
+                <td class="pad10" valign="top" style="text-align: left"><?php echo $row['item_group'] ?></td>
+                <td class="pad10" valign="top" style="text-align: left"><?php echo $row['cost'] ?></td>
+                <td class="pad10" valign="top" style="text-align: left"><?php echo $row['cancel'] ?></td>
+                <td class="pad10 total-cancel-count" valign="top" style="text-align: left"><?php $total = 0;$total = $row['cost'] * $row['cancel'];echo $total;?></td>
+            </tr>
+        <?php } ?>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td class="pad10" valign="top" style="text-align: left"></td>
+            <td class="pad10" valign="top" style="text-align: left"></td>
+            <td class="pad10" valign="top" style="text-align: left"></td>
+            <th class="pad10" valign="top" style="text-align: left">Total Sum</>
+            <td class="pad10" valign="top" style="text-align: left">
+                <span class="total-sold-cancel"></span>
+            </td>
+        </tr>
+        </tfoot>
         <?php
     }
 }
