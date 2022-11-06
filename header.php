@@ -23,6 +23,7 @@ $_SESSION["last_login_timestamp"] = time();
     <link rel="stylesheet" href="./styles/styles.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="./img/icons/cube-solid.svg" type="image/x-icon">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/table2excel.js"></script>
     <title>Inventory</title>
 </head>
 
