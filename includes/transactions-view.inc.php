@@ -22,12 +22,6 @@
             $billView->exportTransactions();
         }
 
-        if ($view == 4) {
-
-            $billView = new TransactionsView();
-            $billView->exportSalesReport();
-        }
-
         if ($view == 5) {
             $date = $_GET['date'];
             $billView = new TransactionsView();
