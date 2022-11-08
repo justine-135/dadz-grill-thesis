@@ -29,6 +29,16 @@ class Users extends Dbh{
         return $results;    
     }
 
+    protected function getHistoryDate($date){
+        $dateLike = $date . "%";
+        $sql = "SELECT * FROM login_history WHERE last_login LIKE '$dateLike'";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll();
+        return $results;    
+    }
+
     protected function setUser($userName, $pass, $confirmPass, $fname, $lname, $fullName, $email, $contact, $bDate, $address, $userType){
         $sql = "INSERT INTO users (username, pwd, fname, lname, fullname, email, contact, birth_date, location_address, 
         is_superuser, is_cashier, is_waiter, is_cook, is_cleaner, is_active, served) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
