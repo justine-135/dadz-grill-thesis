@@ -253,6 +253,8 @@ class TableView extends Table
                 <td class="action-td">
                     <span class="hide"><?php echo $row['id']; ?></span>
                     <button class="show-btn">Show</button>
+                    <!-- <button class="show-btn">Menu</button>
+                    <button class="show-btn">Request bill</button> -->
                 </td>
             </tr>
         <?php
