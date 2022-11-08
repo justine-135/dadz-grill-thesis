@@ -35,11 +35,12 @@ if ($_SESSION["is_superuser"] == 1 || $_SESSION["is_cashier"]) {
 
     <div class="main-content tables-container">
         <div class="tables flex-row">
-            <table class="tables-table transaction-tbl-data"></table>
-            <table class="tables-table transaction-tbl-data-date hide"></table>
+            <table class="tables-table transaction-tbl-data hide"></table>
+            <table class="tables-table transaction-tbl-data-date"></table>
             <table class="export-transaction-tbl hide"></table>
             <table class="export-transaction-tbl-date hide"></table>
             <table class="export-sales-report-tbl hide"></table>
+            <table class="export-sales-report-tbl-date hide"></table>
         </div>
     </div>
 
