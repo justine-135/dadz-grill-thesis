@@ -52,7 +52,7 @@ window.addEventListener("load", () => {
                 <span class="cart-item-price" id="${price}">${price}</span>
                 <input type="text" value="${price}" name="prices[]" id="" hidden>
                 <input type="text" value="${origPrice}" name="orig_price[]" id="" hidden>
-                <input type="text" value="${id}" name="item_id[]" id="">
+                <input type="text" value="${id}" name="item_id[]" id="" hidden>
             </div>
             <div class="control flex-row">
                 <button class="decrement" type="button">-</button>
