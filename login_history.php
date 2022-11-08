@@ -13,13 +13,16 @@ if ($_SESSION["is_superuser"] == 1) {
             </div>
             <h3>History</h3>
         </div>
+        <input type="date" name="" id="" class="search-login-history">
         <button class="add-item-btn csvHtml5">Export</button>
 
     </nav>
 
     <div class="main-content tables-container">
         <div class="tables">
-            <table class="tables-table loginhistory-table-info">
+            <table class="tables-table loginhistory-table-info hide">
+            </table>
+            <table class="tables-table loginhistory-table-info-date">
             </table>
         </div>
     </div>
