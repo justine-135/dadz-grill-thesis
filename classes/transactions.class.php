@@ -105,6 +105,42 @@ class Transactions extends Dbh
 
     protected function setPaid($id, $tbl)
     {
+        $sql = "SELECT * FROM transactions WHERE id = ?";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute([$id]);
+
+        $results = $stmt->fetchAll();
+
+        foreach ($results as $row) {
+            $item_ids = explode("|",$row["food_id"]);
+            $quantities = explode("|",$row["quantity"]);
+            $original_prices = explode("|",$row["original_price"]);
+            $prices = explode("|",$row["price"]);
+        }
+
+        $date = date("Y/m/d");
+        for ($i=0; $i < count($item_ids); $i++) { 
+
+            $sql = "SELECT * FROM sales_report WHERE date_time = '$date' AND food_id = '$item_ids[$i]' ";
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+
+            if (count($result) == 0) {
+                $sql = "INSERT INTO sales_report (food_id, success)
+                VALUES ('$item_ids[$i]', '$quantities[$i]')";
+                $stmt = $this->connection()->prepare($sql);
+                $stmt->execute();
+                $stmt = null;
+            }
+            else{
+                $sql = "UPDATE sales_report SET success = success + $quantities[$i] WHERE food_id = $item_ids[$i] AND date_time = '$date'";
+                $stmt = $this->connection()->prepare($sql);
+                $stmt->execute();
+                $stmt = null;
+            }
+        }
+
         $sql = "UPDATE transactions SET paid = true WHERE id = $id";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
