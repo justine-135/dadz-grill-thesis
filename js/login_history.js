@@ -1,4 +1,6 @@
 window.addEventListener("load", () => {
+  let yourDate = new Date();
+  let date = yourDate.toISOString().split("T")[0];
   setInterval(() => {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
@@ -7,9 +9,89 @@ window.addEventListener("load", () => {
           this.responseText;
       }
     };
-    xmlhttp.open("GET", "./includes/loginhistory-view.inc.php", true);
+    xmlhttp.open("GET", "./includes/loginhistory-view.inc.php?view=" + 1, true);
+    xmlhttp.send();
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+      if (this.readyState == 4) {
+        document.querySelector(".loginhistory-table-info-date").innerHTML =
+          this.responseText;
+      }
+    };
+    xmlhttp.open(
+      "GET",
+      "./includes/loginhistory-view.inc.php?view=" + 2 + "&date=" + date,
+      true
+    );
     xmlhttp.send();
   }, 1000);
+
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function () {
+    if (this.readyState == 4) {
+      document.querySelector(".loginhistory-table-info").innerHTML =
+        this.responseText;
+    }
+  };
+  xmlhttp.open("GET", "./includes/loginhistory-view.inc.php?view=" + 1, true);
+  xmlhttp.send();
+
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function () {
+    if (this.readyState == 4) {
+      document.querySelector(".loginhistory-table-info-date").innerHTML =
+        this.responseText;
+    }
+  };
+  xmlhttp.open(
+    "GET",
+    "./includes/loginhistory-view.inc.php?view=" + 2 + "&date=" + date,
+    true
+  );
+  xmlhttp.send();
+
+  // Get search input
+  const searchHistory = document.querySelector(".search-login-history");
+
+  // Get tables
+  const historyTable = document.querySelector(".loginhistory-table-info");
+  const historyTableDate = document.querySelector(
+    ".loginhistory-table-info-date"
+  );
+
+  // Set boolean
+  let isSearched = true;
+  console.log(isSearched);
+  // Search event
+  searchHistory.addEventListener("change", (e) => {
+    date = e.target.value;
+    if (date == "") {
+      isSearched = false;
+      historyTable.classList.remove("hide");
+      historyTableDate.classList.add("hide");
+    } else {
+      isSearched = true;
+      historyTable.classList.add("hide");
+      historyTableDate.classList.remove("hide");
+
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4) {
+          document.querySelector(".loginhistory-table-info-date").innerHTML =
+            this.responseText;
+        }
+      };
+      xmlhttp.open(
+        "GET",
+        "./includes/loginhistory-view.inc.php?view=" + 2 + "&date=" + date,
+        true
+      );
+      xmlhttp.send();
+    }
+  });
+
+  searchHistory.value = date;
 
   const exportBtn = document.querySelector(".csvHtml5");
 
@@ -35,9 +117,18 @@ window.addEventListener("load", () => {
   let fileName = month + " " + day + " Login History";
 
   exportBtn.addEventListener("click", () => {
-    var table2excel = new Table2Excel({
-      defaultFileName: fileName,
-    });
-    table2excel.export(document.querySelectorAll(".loginhistory-table-info"));
+    if (isSearched != true) {
+      var table2excel = new Table2Excel({
+        defaultFileName: fileName,
+      });
+      table2excel.export(document.querySelectorAll(".loginhistory-table-info"));
+    } else {
+      var table2excel = new Table2Excel({
+        defaultFileName: fileName,
+      });
+      table2excel.export(
+        document.querySelectorAll(".loginhistory-table-info-date")
+      );
+    }
   });
 });
