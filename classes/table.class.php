@@ -127,7 +127,7 @@ class Table extends Dbh
         }
         
         if ($tableStatus != "Unoccupied" && $tableStatus != "Dirty") {
-            if ($doneOrder != "Requesting") {
+            if ($payment != "Requesting" && $payment != "Bill out") {
                 $this->has_order_attended($tblId);
             }
             else{
@@ -186,6 +186,7 @@ class Table extends Dbh
 
     protected function openMenu($tblId)
     {
+        $tblId2 = $tblId;
         $sql = "SELECT table_status, payment, timer FROM tables WHERE id = $tblId";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
@@ -200,7 +201,12 @@ class Table extends Dbh
 
         if ($tableStatus != "Dirty") {
             if ($payment != 'Requesting' && $payment != 'Bill out') {
-                header("location: ../store.php?id=" . $tblId);
+                if ($tblId2 == $tblId) {
+                    header("location: ../store.php?id=" . $tblId);
+                }
+                else{
+                    header("location: ../menu.php");
+                }
             }
             else {
                 header("location: ../menu.php");
