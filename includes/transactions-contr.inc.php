@@ -19,7 +19,7 @@
         
         $paid = new TransactionsContr();
         $paid->initPaid($id, $tbl);
-        header("location: ../index.php");
+        // header("location: ../index.php");
 
     }
 
