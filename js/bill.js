@@ -106,7 +106,10 @@ window.addEventListener("load", () => {
           parseFloat(totalInput.value.replace(",", ""))
         ) {
           alert.classList.remove("hide");
+          alert.classList.remove("fail");
           alert.classList.add("success");
+          alert.innerHTML = "Order has been paid.";
+
           const xhttp = new XMLHttpRequest();
           xhttp.open("POST", "./includes/transactions-contr.inc.php");
           xhttp.setRequestHeader(
@@ -118,6 +121,7 @@ window.addEventListener("load", () => {
           );
         } else {
           alert.classList.remove("hide");
+          alert.classList.remove("success");
           alert.classList.add("fail");
           alert.innerHTML = "Process failed.";
         }
