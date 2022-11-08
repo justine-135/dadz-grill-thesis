@@ -14,11 +14,6 @@ class Purchase extends Dbh{
             $prices .= $prc[$i]."|";
             $original_price .= $orgPrc[$i]."|";
             $item_ids .= $item_id[$i]."|";
-
-            $sql = "UPDATE inventory SET quantity = quantity + '$qty[$i]', sold = quantity * cost WHERE fid = $item_id[$i]";
-            $stmt = $this->connection()->prepare($sql);
-            $stmt->execute();    
-            $stmt = null;
         }
 
         $sql = "INSERT INTO submitted_orders (table_id, item_id, item_name, quantity, original_price, total_purchase, order_status, waiter)
@@ -80,18 +75,6 @@ class Purchase extends Dbh{
         $stmt->execute();
 
         $results = $stmt->fetchAll();
-        
-        foreach ($results as $row) {
-            $item_ids = explode("|",$row["item_id"]);
-            $quantities = explode("|",$row["quantity"]);
-        }
-
-        for ($i=0; $i < (count($item_ids) - 1); $i++) { 
-            $sql = "UPDATE inventory SET success = success + $quantities[$i] WHERE fid = '$item_ids[$i]'";
-            $stmt = $this->connection()->prepare($sql);
-            $stmt->execute();    
-            $stmt = null;
-        }
 
         $sql = "UPDATE series_orders SET is_ready = 1 WHERE table_id = $tid";
         $stmt = $this->connection()->prepare($sql);
@@ -131,11 +114,35 @@ class Purchase extends Dbh{
         $prices="";
 
         foreach ($results as $row) {
+            $item_ids = explode("|",$row["item_id"]);
             $sid = $row["sales_id"];
             $tid = $row["table_id"];
             $order = $row["item_name"];
+            $quantities = explode("|",$row["quantity"]);
             $quantities_transaction = $row["quantity"];
             $prices = $row["total_purchase"];
+        }
+
+        $date = date("Y/m/d");
+        for ($i=0; $i < count($item_ids)-1; $i++) { 
+            $sql = "SELECT * FROM sales_report WHERE date_time = '$date' AND food_id = '$item_ids[$i]' ";
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+
+            if (count($result) == 0) {
+                $sql = "INSERT INTO sales_report (food_id, cancel)
+                VALUES ('$item_ids[$i]', '$quantities[$i]')";
+                $stmt = $this->connection()->prepare($sql);
+                $stmt->execute();
+                $stmt = null;
+            }
+            else{
+                $sql = "UPDATE sales_report SET cancel = cancel + $quantities[$i] WHERE `food_id` = $item_ids[$i] AND date_time = '$date'";
+                $stmt = $this->connection()->prepare($sql);
+                $stmt->execute();
+                $stmt = null;
+            }
         }
 
         $sql = "SELECT * FROM submitted_orders WHERE sales_id='$oid'";
@@ -145,19 +152,6 @@ class Purchase extends Dbh{
         $results = $stmt->fetchAll();
         $stmt = null;
         
-        foreach ($results as $row) {
-            $item_ids = explode("|",$row["item_id"]);
-            $quantities_items = explode("|",$row["quantity"]);
-        }
-
-        for ($i=0; $i < (count($item_ids) - 1); $i++) { 
-            $sql = "UPDATE inventory SET cancel = cancel + $quantities_items[$i] WHERE fid = '$item_ids[$i]'";
-            $stmt = $this->connection()->prepare($sql);
-            $stmt->execute();    
-            $stmt = null;
-        }
-
-
         $sql = "INSERT INTO transactions (table_id, `order`, quantity, price, paid)
         VALUES ( '$tid' , '$order' , '$quantities_transaction' , '$prices' , 3)";
         $stmt = $this->connection()->prepare($sql);
