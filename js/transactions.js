@@ -1,5 +1,7 @@
 window.addEventListener("load", () => {
-  let date;
+  let yourDate = new Date();
+  let date = yourDate.toISOString().split("T")[0];
+
   // Update data every 1 second
   setInterval(() => {
     var xmlhttp = new XMLHttpRequest();
@@ -49,7 +51,7 @@ window.addEventListener("load", () => {
       let tfootTotalCancel = document.querySelector(".total-sold-cancel");
       tfootTotalCancel.innerHTML = totalCancel;
     };
-    xmlhttp.open("GET", "./includes/transactions-view.inc.php?view=4", true);
+    xmlhttp.open("GET", "./includes/sales-view.inc.php?view=1", true);
     xmlhttp.send();
 
     // Get transaction for a selected date
@@ -81,6 +83,40 @@ window.addEventListener("load", () => {
       true
     );
     xmlhttp.send();
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+      if (this.readyState == 4) {
+        document.querySelector(".export-sales-report-tbl-date").innerHTML =
+          this.responseText;
+      }
+      let totalSuccess = 0;
+      let totalCancel = 0;
+
+      let tdSuccess = document.querySelectorAll(".total-success-count");
+      tdSuccess.forEach((element) => {
+        let successValue = parseFloat(element.innerHTML);
+        totalSuccess += successValue;
+      });
+
+      let tdCancel = document.querySelectorAll(".total-cancel-count");
+      tdCancel.forEach((element) => {
+        let cancelValue = parseFloat(element.innerHTML);
+        totalCancel += cancelValue;
+      });
+
+      let tfootTotalSuccess = document.querySelector(".total-sold-success");
+      tfootTotalSuccess.innerHTML = totalSuccess;
+
+      let tfootTotalCancel = document.querySelector(".total-sold-cancel");
+      tfootTotalCancel.innerHTML = totalCancel;
+    };
+    xmlhttp.open(
+      "GET",
+      "./includes/sales-view.inc.php?view=2&date=" + date,
+      true
+    );
+    xmlhttp.send();
   }, 1000);
 
   // Load initial table data
@@ -92,6 +128,21 @@ window.addEventListener("load", () => {
     }
   };
   xmlhttp.open("GET", "./includes/transactions-view.inc.php?view=1", true);
+  xmlhttp.send();
+
+  // Load initial table data
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function () {
+    if (this.readyState == 4) {
+      document.querySelector(".transaction-tbl-data-date").innerHTML =
+        this.responseText;
+    }
+  };
+  xmlhttp.open(
+    "GET",
+    "./includes/transactions-view.inc.php?view=5&date=" + date,
+    true
+  );
   xmlhttp.send();
 
   // Load initial table data
@@ -133,14 +184,49 @@ window.addEventListener("load", () => {
     let tfootTotalCancel = document.querySelector(".total-sold-cancel");
     tfootTotalCancel.innerHTML = totalCancel;
   };
-  xmlhttp.open("GET", "./includes/transactions-view.inc.php?view=4", true);
+  xmlhttp.open("GET", "./includes/sales-view.inc.php?view=1", true);
+  xmlhttp.send();
+
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function () {
+    if (this.readyState == 4) {
+      document.querySelector(".export-sales-report-tbl-date").innerHTML =
+        this.responseText;
+    }
+    let totalSuccess = 0;
+    let totalCancel = 0;
+
+    let tdSuccess = document.querySelectorAll(".total-success-count");
+    tdSuccess.forEach((element) => {
+      let successValue = parseFloat(element.innerHTML);
+      totalSuccess += successValue;
+    });
+
+    let tdCancel = document.querySelectorAll(".total-cancel-count");
+    tdCancel.forEach((element) => {
+      let cancelValue = parseFloat(element.innerHTML);
+      totalCancel += cancelValue;
+    });
+
+    let tfootTotalSuccess = document.querySelector(".total-sold-success");
+    tfootTotalSuccess.innerHTML = totalSuccess;
+
+    let tfootTotalCancel = document.querySelector(".total-sold-cancel");
+    tfootTotalCancel.innerHTML = totalCancel;
+  };
+  xmlhttp.open(
+    "GET",
+    "./includes/sales-view.inc.php?view=2&date=" + date,
+    true
+  );
   xmlhttp.send();
 
   // Get search input
   const searchTransction = document.querySelector(".search-transaction");
 
   // Set boolean
-  let isSearched = false;
+  let isSearched = true;
+  console.log(isSearched);
 
   // Search event
   searchTransction.addEventListener("change", (e) => {
@@ -173,6 +259,7 @@ window.addEventListener("load", () => {
       );
       xmlhttp.send();
 
+      // Load transaction table with date
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
@@ -186,21 +273,54 @@ window.addEventListener("load", () => {
         true
       );
       xmlhttp.send();
+
+      // Load sales report table with date
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4) {
+          document.querySelector(".export-sales-report-tbl-date").innerHTML =
+            this.responseText;
+        }
+        let totalSuccess = 0;
+        let totalCancel = 0;
+
+        let tdSuccess = document.querySelectorAll(".total-success-count");
+        tdSuccess.forEach((element) => {
+          let successValue = parseFloat(element.innerHTML);
+          totalSuccess += successValue;
+        });
+
+        let tdCancel = document.querySelectorAll(".total-cancel-count");
+        tdCancel.forEach((element) => {
+          let cancelValue = parseFloat(element.innerHTML);
+          totalCancel += cancelValue;
+        });
+
+        let tfootTotalSuccess = document.querySelector(".total-sold-success");
+        tfootTotalSuccess.innerHTML = totalSuccess;
+
+        let tfootTotalCancel = document.querySelector(".total-sold-cancel");
+        tfootTotalCancel.innerHTML = totalCancel;
+      };
+      xmlhttp.open(
+        "GET",
+        "./includes/sales-view.inc.php?view=2&date=" + date,
+        true
+      );
+      xmlhttp.send();
     }
   });
 
+  searchTransction.value = date;
+
   // Get button
   const exportTransaction = document.querySelector(".csvHtml5-transaction");
-  // const exportSalesReport = document.querySelector(".csvHtml5-sales-report");
   const selectExport = document.querySelector("#transaction-export");
 
   let selectValue = selectExport.value;
   selectExport.addEventListener("change", (e) => {
     selectValue = e.target.value;
-    console.log(selectValue);
   });
-
-  console.log(selectValue);
 
   // Set month name for index number
   const months = [
@@ -257,15 +377,35 @@ window.addEventListener("load", () => {
           .classList.add("hide");
       }
     } else {
-      document
-        .querySelector(".export-sales-report-tbl")
-        .classList.remove("hide");
-      var table2excel = new Table2Excel({
-        defaultFileName: fileNameSalesReport,
-      });
+      if (isSearched != true) {
+        document
+          .querySelector(".export-sales-report-tbl")
+          .classList.remove("hide");
+        var table2excel = new Table2Excel({
+          defaultFileName: fileNameSalesReport,
+        });
 
-      table2excel.export(document.querySelectorAll(".export-sales-report-tbl"));
-      document.querySelector(".export-sales-report-tbl").classList.add("hide");
+        table2excel.export(
+          document.querySelectorAll(".export-sales-report-tbl")
+        );
+        document
+          .querySelector(".export-sales-report-tbl")
+          .classList.add("hide");
+      } else {
+        document
+          .querySelector(".export-sales-report-tbl-date")
+          .classList.remove("hide");
+        var table2excel = new Table2Excel({
+          defaultFileName: fileNameSalesReport,
+        });
+
+        table2excel.export(
+          document.querySelectorAll(".export-sales-report-tbl-date")
+        );
+        document
+          .querySelector(".export-sales-report-tbl-date")
+          .classList.add("hide");
+      }
     }
   });
 });
