@@ -19,11 +19,13 @@ $_SESSION["last_login_timestamp"] = time();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="bootstrap-5.2.2-dist/css/bootstrap.min.css">
+    <script rel="text/javascript" src="bootstrap-5.2.2-dist/js/jquery-3.6.1.min.js"></script>
+    <script rel="text/javascript" src="bootstrap-5.2.2-dist/js/popper.js"></script>
+    <script rel="text/javascript" src="bootstrap-5.2.2-dist/js/bootstrap.min.js"></script>
+    <script src="js/table2excel.js"></script>
     <link rel="stylesheet" href="./styles/styles.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="./img/icons/cube-solid.svg" type="image/x-icon">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="js/table2excel.js"></script>
     <title>Inventory</title>
 </head>
 
@@ -128,7 +130,6 @@ $_SESSION["last_login_timestamp"] = time();
 
     <span class="last_timestamp hide"><?php echo $_SESSION["last_login_timestamp"] ?></span>
     <span class="time_now hide"><?php echo time() ?></span>
-
     <script src="./js/main.js"></script>
 
 </body>
