@@ -15,7 +15,11 @@ window.addEventListener("load", () => {
           this.responseText;
       }
     };
-    xmlhttp.open("GET", "./includes/orders-view.inc.php?id=" + table, true);
+    xmlhttp.open(
+      "GET",
+      "./includes/orders-view.inc.php?view=" + 1 + "&id=" + table,
+      true
+    );
     xmlhttp.send();
   };
 

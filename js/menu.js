@@ -7,6 +7,33 @@ window.addEventListener("load", () => {
   const modalHead = document.querySelector(".action-modal-head");
   const closeModal = document.querySelector(".action-btn-modal .head button");
   const tableId = document.querySelector("#table-id");
+  const attendBtn = document.querySelector("#attend");
+  const attendBtn2 = document.querySelector("#attend2");
+  let id;
+
+  let notAttended;
+
+  const form = document.querySelector("#waiter-form");
+
+  // form.addEventListener("submit", (e) => {
+  //   if (notAttended >= 1) {
+  //     e.preventDefault();
+  //   }
+  // });
+
+  // attendBtn.addEventListener("click", () => {
+  //   document.querySelector(".action-btn-modal").classList.add("attended-table");
+  //   if (notAttended >= 1) {
+  //     document.querySelector(".btn-group").classList.add("hide");
+  //     document.querySelector(".series-orders-attend").classList.remove("hide");
+  //   } else {
+  //     document
+  //       .querySelector(".action-btn-modal")
+  //       .classList.remove("attended-table");
+  //     document.querySelector(".btn-group").classList.remove("hide");
+  //     document.querySelector(".series-orders-attend").classList.add("hide");
+  //   }
+  // });
 
   setInterval(() => {
     var xmlhttp = new XMLHttpRequest();
@@ -15,20 +42,64 @@ window.addEventListener("load", () => {
         document.querySelector(".waiter-tbl-data").innerHTML =
           this.responseText;
         const showBtn = document.querySelectorAll(".show-btn");
+        const ordersBtn = document.querySelectorAll(".view-orders");
 
         showBtn.forEach((element) => {
           element.addEventListener("click", (e) => {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+              if (this.readyState == 4) {
+                notAttended = this.responseText;
+              }
+            };
+            xmlhttp.open(
+              "GET",
+              "./includes/orders-view.inc.php?view=" +
+                3 +
+                "&id=" +
+                element.previousElementSibling.innerHTML,
+              true
+            );
+            xmlhttp.send();
+
+            console.log(notAttended);
+            id = element.previousElementSibling.innerHTML;
             modalHead.innerHTML =
               "Table no. " + element.previousElementSibling.innerHTML;
             overlay.classList.add("open");
             tableId.value = element.previousElementSibling.innerHTML;
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+              if (this.readyState == 4) {
+                document.querySelector(".series-orders-attend").innerHTML =
+                  this.responseText;
+              }
+            };
+            xmlhttp.open(
+              "GET",
+              "./includes/orders-view.inc.php?view=" + 2 + "&id=" + id,
+              true
+            );
+            xmlhttp.send();
           });
+        });
+
+        ordersBtn.forEach((element) => {
+          element.addEventListener("click", () => {});
         });
 
         for (let i = 1; i < 9; i++) {
           let timer = document.querySelector(`.table-${i}-time`);
           if (timer.getAttribute("started") != 1) {
             timer.innerHTML = "00:00:00";
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open(
+              "GET",
+              `./includes/table-contr.inc.php?contr=1&id=${i}`,
+              true
+            );
+            xmlhttp.send();
           } else {
             let currentDate = new Date();
             let hour = currentDate.getHours();
@@ -67,6 +138,13 @@ window.addEventListener("load", () => {
 
             if (duration <= 0) {
               timer.innerHTML = "00:00:00";
+              var xmlhttp = new XMLHttpRequest();
+              xmlhttp.open(
+                "GET",
+                `./includes/table-contr.inc.php?contr=1&id=${i}`,
+                true
+              );
+              xmlhttp.send();
             } else {
               let durationValue = new Date(duration * 1000)
                 .toISOString()
@@ -90,6 +168,11 @@ window.addEventListener("load", () => {
 
   closeModal.addEventListener("click", () => {
     overlay.classList.remove("open");
+    document
+      .querySelector(".action-btn-modal")
+      .classList.remove("attended-table");
+    document.querySelector(".btn-group").classList.remove("hide");
+    document.querySelector(".series-orders-attend").classList.add("hide");
   });
 
   const toggleLegendBtn = document.querySelector(".legend-btn");

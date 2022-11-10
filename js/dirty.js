@@ -52,6 +52,13 @@ window.addEventListener("load", () => {
 
           if (duration <= 0) {
             timer.innerHTML = "00:00:00";
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open(
+              "GET",
+              `./includes/table-contr.inc.php?contr=1&id=${i}`,
+              true
+            );
+            xmlhttp.send();
           } else {
             let durationValue = new Date(duration * 1000)
               .toISOString()

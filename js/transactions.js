@@ -1,6 +1,10 @@
 window.addEventListener("load", () => {
   let yourDate = new Date();
+  yourDate.toLocaleString("en-US", {
+    timeZone: "Asia/Manila",
+  });
   let date = yourDate.toISOString().split("T")[0];
+  let date2 = yourDate.toISOString().split("T")[0];
 
   // Update data every 1 second
   setInterval(() => {
@@ -30,26 +34,6 @@ window.addEventListener("load", () => {
         document.querySelector(".export-sales-report-tbl").innerHTML =
           this.responseText;
       }
-      let totalSuccess = 0;
-      let totalCancel = 0;
-
-      let tdSuccess = document.querySelectorAll(".total-success-count");
-      tdSuccess.forEach((element) => {
-        let successValue = parseFloat(element.innerHTML);
-        totalSuccess += successValue;
-      });
-
-      let tdCancel = document.querySelectorAll(".total-cancel-count");
-      tdCancel.forEach((element) => {
-        let cancelValue = parseFloat(element.innerHTML);
-        totalCancel += cancelValue;
-      });
-
-      let tfootTotalSuccess = document.querySelector(".total-sold-success");
-      tfootTotalSuccess.innerHTML = totalSuccess;
-
-      let tfootTotalCancel = document.querySelector(".total-sold-cancel");
-      tfootTotalCancel.innerHTML = totalCancel;
     };
     xmlhttp.open("GET", "./includes/sales-view.inc.php?view=1", true);
     xmlhttp.send();
@@ -64,7 +48,10 @@ window.addEventListener("load", () => {
     };
     xmlhttp.open(
       "GET",
-      "./includes/transactions-view.inc.php?view=5&date=" + date,
+      "./includes/transactions-view.inc.php?view=5&date=" +
+        date +
+        "&date2=" +
+        date2,
       true
     );
     xmlhttp.send();
@@ -79,7 +66,10 @@ window.addEventListener("load", () => {
     };
     xmlhttp.open(
       "GET",
-      "./includes/transactions-view.inc.php?view=6&date=" + date,
+      "./includes/transactions-view.inc.php?view=6&date=" +
+        date +
+        "&date2=" +
+        date2,
       true
     );
     xmlhttp.send();
@@ -90,30 +80,10 @@ window.addEventListener("load", () => {
         document.querySelector(".export-sales-report-tbl-date").innerHTML =
           this.responseText;
       }
-      let totalSuccess = 0;
-      let totalCancel = 0;
-
-      let tdSuccess = document.querySelectorAll(".total-success-count");
-      tdSuccess.forEach((element) => {
-        let successValue = parseFloat(element.innerHTML);
-        totalSuccess += successValue;
-      });
-
-      let tdCancel = document.querySelectorAll(".total-cancel-count");
-      tdCancel.forEach((element) => {
-        let cancelValue = parseFloat(element.innerHTML);
-        totalCancel += cancelValue;
-      });
-
-      let tfootTotalSuccess = document.querySelector(".total-sold-success");
-      tfootTotalSuccess.innerHTML = totalSuccess;
-
-      let tfootTotalCancel = document.querySelector(".total-sold-cancel");
-      tfootTotalCancel.innerHTML = totalCancel;
     };
     xmlhttp.open(
       "GET",
-      "./includes/sales-view.inc.php?view=2&date=" + date,
+      "./includes/sales-view.inc.php?view=2&date=" + date + "&date2=" + date2,
       true
     );
     xmlhttp.send();
@@ -140,7 +110,10 @@ window.addEventListener("load", () => {
   };
   xmlhttp.open(
     "GET",
-    "./includes/transactions-view.inc.php?view=5&date=" + date,
+    "./includes/transactions-view.inc.php?view=5&date=" +
+      date +
+      "&date2=" +
+      date2,
     true
   );
   xmlhttp.send();
@@ -163,72 +136,37 @@ window.addEventListener("load", () => {
       document.querySelector(".export-sales-report-tbl").innerHTML =
         this.responseText;
     }
-    let totalSuccess = 0;
-    let totalCancel = 0;
-
-    let tdSuccess = document.querySelectorAll(".total-success-count");
-    tdSuccess.forEach((element) => {
-      let successValue = parseFloat(element.innerHTML);
-      totalSuccess += successValue;
-    });
-
-    let tdCancel = document.querySelectorAll(".total-cancel-count");
-    tdCancel.forEach((element) => {
-      let cancelValue = parseFloat(element.innerHTML);
-      totalCancel += cancelValue;
-    });
-
-    let tfootTotalSuccess = document.querySelector(".total-sold-success");
-    tfootTotalSuccess.innerHTML = totalSuccess;
-
-    let tfootTotalCancel = document.querySelector(".total-sold-cancel");
-    tfootTotalCancel.innerHTML = totalCancel;
   };
   xmlhttp.open("GET", "./includes/sales-view.inc.php?view=1", true);
   xmlhttp.send();
 
+  // Load initial data
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function () {
     if (this.readyState == 4) {
       document.querySelector(".export-sales-report-tbl-date").innerHTML =
         this.responseText;
     }
-    let totalSuccess = 0;
-    let totalCancel = 0;
-
-    let tdSuccess = document.querySelectorAll(".total-success-count");
-    tdSuccess.forEach((element) => {
-      let successValue = parseFloat(element.innerHTML);
-      totalSuccess += successValue;
-    });
-
-    let tdCancel = document.querySelectorAll(".total-cancel-count");
-    tdCancel.forEach((element) => {
-      let cancelValue = parseFloat(element.innerHTML);
-      totalCancel += cancelValue;
-    });
-
-    let tfootTotalSuccess = document.querySelector(".total-sold-success");
-    tfootTotalSuccess.innerHTML = totalSuccess;
-
-    let tfootTotalCancel = document.querySelector(".total-sold-cancel");
-    tfootTotalCancel.innerHTML = totalCancel;
   };
   xmlhttp.open(
     "GET",
-    "./includes/sales-view.inc.php?view=2&date=" + date,
+    "./includes/sales-view.inc.php?view=2&date=" + date + "&date2=" + date2,
     true
   );
   xmlhttp.send();
 
   // Get search input
   const searchTransction = document.querySelector(".search-transaction");
+  const searchTransction2 = document.querySelector(".search-transaction-2");
 
   // Set boolean
   let isSearched = true;
   console.log(isSearched);
 
   // Search event
+  searchTransction2.addEventListener("change", (e) => {
+    date2 = e.target.value;
+  });
   searchTransction.addEventListener("change", (e) => {
     date = e.target.value;
     const transactionTbl = document.querySelector(".transaction-tbl-data");
@@ -254,7 +192,10 @@ window.addEventListener("load", () => {
       };
       xmlhttp.open(
         "GET",
-        "./includes/transactions-view.inc.php?view=5&date=" + date,
+        "./includes/transactions-view.inc.php?view=5&date=" +
+          date +
+          "&date2=" +
+          date2,
         true
       );
       xmlhttp.send();
@@ -269,7 +210,10 @@ window.addEventListener("load", () => {
       };
       xmlhttp.open(
         "GET",
-        "./includes/transactions-view.inc.php?view=6&date=" + date,
+        "./includes/transactions-view.inc.php?view=6&date=" +
+          date +
+          "&date2=" +
+          date2,
         true
       );
       xmlhttp.send();
@@ -281,30 +225,10 @@ window.addEventListener("load", () => {
           document.querySelector(".export-sales-report-tbl-date").innerHTML =
             this.responseText;
         }
-        let totalSuccess = 0;
-        let totalCancel = 0;
-
-        let tdSuccess = document.querySelectorAll(".total-success-count");
-        tdSuccess.forEach((element) => {
-          let successValue = parseFloat(element.innerHTML);
-          totalSuccess += successValue;
-        });
-
-        let tdCancel = document.querySelectorAll(".total-cancel-count");
-        tdCancel.forEach((element) => {
-          let cancelValue = parseFloat(element.innerHTML);
-          totalCancel += cancelValue;
-        });
-
-        let tfootTotalSuccess = document.querySelector(".total-sold-success");
-        tfootTotalSuccess.innerHTML = totalSuccess;
-
-        let tfootTotalCancel = document.querySelector(".total-sold-cancel");
-        tfootTotalCancel.innerHTML = totalCancel;
       };
       xmlhttp.open(
         "GET",
-        "./includes/sales-view.inc.php?view=2&date=" + date,
+        "./includes/sales-view.inc.php?view=2&date=" + date + "&date2=" + date2,
         true
       );
       xmlhttp.send();
@@ -312,6 +236,7 @@ window.addEventListener("load", () => {
   });
 
   searchTransction.value = date;
+  searchTransction2.value = date2;
 
   // Get button
   const exportTransaction = document.querySelector(".csvHtml5-transaction");

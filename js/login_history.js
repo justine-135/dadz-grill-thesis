@@ -1,7 +1,13 @@
 window.addEventListener("load", () => {
   let yourDate = new Date();
   let date = yourDate.toISOString().split("T")[0];
+  let date2 = yourDate.toISOString().split("T")[0];
+
   setInterval(() => {
+    loadData();
+  }, 1000);
+
+  const loadData = () => {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
       if (this.readyState == 4) {
@@ -21,38 +27,20 @@ window.addEventListener("load", () => {
     };
     xmlhttp.open(
       "GET",
-      "./includes/loginhistory-view.inc.php?view=" + 2 + "&date=" + date,
+      "./includes/loginhistory-view.inc.php?view=" +
+        2 +
+        "&date=" +
+        date +
+        "&date2=" +
+        date2,
       true
     );
     xmlhttp.send();
-  }, 1000);
-
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function () {
-    if (this.readyState == 4) {
-      document.querySelector(".loginhistory-table-info").innerHTML =
-        this.responseText;
-    }
   };
-  xmlhttp.open("GET", "./includes/loginhistory-view.inc.php?view=" + 1, true);
-  xmlhttp.send();
-
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function () {
-    if (this.readyState == 4) {
-      document.querySelector(".loginhistory-table-info-date").innerHTML =
-        this.responseText;
-    }
-  };
-  xmlhttp.open(
-    "GET",
-    "./includes/loginhistory-view.inc.php?view=" + 2 + "&date=" + date,
-    true
-  );
-  xmlhttp.send();
 
   // Get search input
   const searchHistory = document.querySelector(".search-login-history");
+  const searchHistory2 = document.querySelector(".search-login-history-2");
 
   // Get tables
   const historyTable = document.querySelector(".loginhistory-table-info");
@@ -75,23 +63,16 @@ window.addEventListener("load", () => {
       historyTable.classList.add("hide");
       historyTableDate.classList.remove("hide");
 
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.onreadystatechange = function () {
-        if (this.readyState == 4) {
-          document.querySelector(".loginhistory-table-info-date").innerHTML =
-            this.responseText;
-        }
-      };
-      xmlhttp.open(
-        "GET",
-        "./includes/loginhistory-view.inc.php?view=" + 2 + "&date=" + date,
-        true
-      );
-      xmlhttp.send();
+      loadData();
     }
   });
 
+  searchHistory2.addEventListener("change", () => {
+    date2 = e.target.value;
+  });
+
   searchHistory.value = date;
+  searchHistory2.value = date2;
 
   const exportBtn = document.querySelector(".csvHtml5");
 
@@ -131,4 +112,6 @@ window.addEventListener("load", () => {
       );
     }
   });
+
+  loadData();
 });
