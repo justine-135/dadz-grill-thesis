@@ -259,12 +259,6 @@
   }
 
   .header-logo h6 {
-    font-size: 1.175rem;
-  }
-}
-
-@media screen and (max-width: 820px) {
-  .header-logo h6 {
     font-size: 1rem;
     margin-left: 10px;
     white-space: nowrap;
