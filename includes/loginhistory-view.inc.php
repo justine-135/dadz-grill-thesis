@@ -10,9 +10,12 @@
         }
 
         if ($view == 2) {
-            $date = $_GET["date"];
-            $loginHistory = new UsersView();
-            $loginHistory->initGetHistoryDate($date);
+            if (isset($_GET["date"]) && isset($_GET["date2"])) {
+                $date = $_GET["date"];
+                $date2 = $_GET["date2"];
+                $loginHistory = new UsersView();
+                $loginHistory->initGetHistoryDate($date, $date2);
+            }
         }
     }
 ?>

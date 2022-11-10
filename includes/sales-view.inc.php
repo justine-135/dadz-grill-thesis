@@ -12,7 +12,8 @@ if (isset($_GET["view"])) {
 
     if ($view == 2) {
         $date = $_GET["date"];
+        $date2 = $_GET["date2"];
         $salesReport = new SalesView();
-        $salesReport->initSalesReportDate($date);
+        $salesReport->initSalesReportDate($date, $date2);
     }
 }

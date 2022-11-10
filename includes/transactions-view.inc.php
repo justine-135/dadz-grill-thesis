@@ -23,15 +23,21 @@
         }
 
         if ($view == 5) {
-            $date = $_GET['date'];
-            $billView = new TransactionsView();
-            $billView->initTransactionsDate($date);
+            if (isset($_GET["date"]) && isset($_GET["date2"])) {
+                $date = $_GET['date'];
+                $date2 = $_GET['date2'];
+                $billView = new TransactionsView();
+                $billView->initTransactionsDate($date, $date2);
+            }
         }
 
         if ($view == 6) {
-            $date = $_GET['date'];
-            $billView = new TransactionsView();
-            $billView->exportTransactionsDate($date);
+            if (isset($_GET["date"]) && isset($_GET["date2"])) {
+                $date = $_GET['date'];
+                $date2 = $_GET['date2'];
+                $billView = new TransactionsView();
+                $billView->exportTransactionsDate($date, $date2);
+            }
         }
     }
 

@@ -5,23 +5,39 @@
         $grid = $_GET["grid"];
 
         if ($grid == 1) {
-            $order = new DashboardView();
-            $order->initSales();
+            if (isset($_GET["date"]) && isset($_GET["date2"])) {
+                $date = $_GET['date'];
+                $date2 = $_GET['date2'];
+                $order = new DashboardView();
+                $order->initSales($date, $date2);
+            }
         }
 
         if ($grid == 2) {
-            $order = new DashboardView();
-            $order->initOrders();
+            if (isset($_GET["date"]) && isset($_GET["date2"])) {
+                $date = $_GET['date'];
+                $date2 = $_GET['date2'];
+                $order = new DashboardView();
+                $order->initOrders($date, $date2);
+            }
         }
 
         if ($grid == 3) {
-            $order = new DashboardView();
-            $order->initCancels();
+            if (isset($_GET["date"]) && isset($_GET["date2"])) {
+                $date = $_GET['date'];
+                $date2 = $_GET['date2'];
+                $order = new DashboardView();
+                $order->initCancels($date, $date2);
+            }
         }
 
         if ($grid == 4) {
-            $order = new DashboardView();
-            $order->initSuccess();
+            if (isset($_GET["date"]) && isset($_GET["date2"])) {
+                $date = $_GET['date'];
+                $date2 = $_GET['date2'];
+                $order = new DashboardView();
+                $order->initSuccess($date, $date2);
+            }
         }
 
         if ($grid == 5) {
