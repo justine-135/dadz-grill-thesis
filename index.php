@@ -11,7 +11,22 @@ include "header.php";
                 <path fill="currentColor" d="M296 32h192c13.255 0 24 10.745 24 24v160c0 13.255-10.745 24-24 24H296c-13.255 0-24-10.745-24-24V56c0-13.255 10.745-24 24-24zm-80 0H24C10.745 32 0 42.745 0 56v160c0 13.255 10.745 24 24 24h192c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24zM0 296v160c0 13.255 10.745 24 24 24h192c13.255 0 24-10.745 24-24V296c0-13.255-10.745-24-24-24H24c-13.255 0-24 10.745-24 24zm296 184h192c13.255 0 24-10.745 24-24V296c0-13.255-10.745-24-24-24H296c-13.255 0-24 10.745-24 24v160c0 13.255 10.745 24 24 24z"></path>
             </svg>
         </div>
-        <h3>Dashboard</h3>
+        <h4>Dashboard</h4>
+    </div>
+    <div class="dropdown date-dashboard ">
+        <button class="btn dropdown-toggle border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Select date
+        </button>
+        <ul class="dropdown-menu">
+            <li class="ps-2">
+                <span>Start time:</span>
+                <input type="date" name="" id="" class="search-dashboard" placeholder="start date">
+            </li>
+            <li class="ps-2 mt-2">
+                <span>End time:</span>
+                <input type="date" name="" id="" class="search-dashboard-2" placeholder="start date">
+            </li>
+        </ul>
     </div>
 </nav>
 
@@ -56,45 +71,7 @@ include "header.php";
             </div>
         </div>
         <div class="purchase-overview overview">
-            <h2>Registered Crews</h2>
-            <div class="stats-container">
-                <div class="stats sales purchase flex-row">
-                    <div class="label-number flex-column">
-                        <span class="label">
-                            Total crew
-                        </span>
-                        <span class="total-crews-number number">0</span>
-                    </div>
-                </div>
-                <div class="stats rev cancel flex-row">
 
-                    <div class="label-number flex-column">
-                        <span class="label">
-                            Active crew
-                        </span>
-                        <span class="total-active-crews-number number">0</span>
-                    </div>
-                </div>
-                <div class="stats cost flex-row">
-
-                    <div class="label-number flex-column">
-                        <span class="label">
-                            Total served
-                        </span>
-                        <span class="total-served-number number">0</span>
-                    </div>
-                </div>
-                <div class="stats profs returns flex-row">
-                    <div class="label-number flex-column">
-                        <span class="label">
-                            My role
-                        </span>
-                        <span class="crew-role number">-</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="tables-overview overview">
             <h2>Table status</h2>
             <div class="stats-container">
                 <div class="stats sales purchase flex-row">
@@ -143,6 +120,46 @@ include "header.php";
                 </div>
             </div>
         </div>
+        <div class="tables-overview overview">
+        <h2>Registered Crews</h2>
+            <div class="stats-container">
+                <div class="stats sales purchase flex-row">
+                    <div class="label-number flex-column">
+                        <span class="label">
+                            Total crew
+                        </span>
+                        <span class="total-crews-number number">0</span>
+                    </div>
+                </div>
+                <div class="stats rev cancel flex-row">
+
+                    <div class="label-number flex-column">
+                        <span class="label">
+                            Active crew
+                        </span>
+                        <span class="total-active-crews-number number">0</span>
+                    </div>
+                </div>
+                <div class="stats cost flex-row">
+
+                    <div class="label-number flex-column">
+                        <span class="label">
+                            Total served
+                        </span>
+                        <span class="total-served-number number">0</span>
+                    </div>
+                </div>
+                <div class="stats profs returns flex-row">
+                    <div class="label-number flex-column">
+                        <span class="label">
+                            My role
+                        </span>
+                        <span class="crew-role number">-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     </div>
 </div>
 
