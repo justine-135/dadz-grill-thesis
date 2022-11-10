@@ -9,7 +9,6 @@ class TransactionsView extends Transactions{
                 <th style="text-align: left; padding-left: 10px">#</th>
                 <th style="text-align: left; padding-left: 10px">Table #</th>
                 <th style="text-align: left; padding-left: 10px">Time</th>
-                <th style="text-align: left; padding-left: 10px">Customer Name</th>
                 <th>Orders</th>
                 <th style="text-align: left; padding-left: 10px">Total</th>
                 <th style="text-align: left; padding-left: 10px">Status</th>
@@ -24,22 +23,25 @@ class TransactionsView extends Transactions{
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><span><?php echo $row['id'] ?></span></td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['table_id'] ?></td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['reg_date'] ?></td>
-                <td></td>
-                <td>
+                <td class="pad10" style="text-align: left; padding-left: 10px; width: 200px">
                     <?php 
                         $result = explode("|",$row['order']);
                         $result2 = explode("|",$row['quantity']);
+                        $order = "";
                     ?>
-                    <p style="width: 200px; text-align: left;" >
                         <?php
                         for ($i=0; $i < (count($result)); $i++) { 
                             if ($result[$i] != "") {
-                                echo $result[$i] . "(" . $result2[$i] . ")";                            }
+                                $order .= $result[$i] ."(".$result2[$i]."),";  
+                            }
                          ?>
+
+                         
                        <?php
+                       
                         }
+                        echo $order;
                     ?>
-                    </p>
                                      
                 </td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px">
@@ -74,15 +76,14 @@ class TransactionsView extends Transactions{
         }
     }
 
-    public function initTransactionsDate($date){
-        $results = $this->getTransactionsDate($date);
+    public function initTransactionsDate($date, $date2){
+        $results = $this->getTransactionsDate($date, $date2);
         ?>
         <thead>
             <tr>
                 <th style="text-align: left; padding-left: 10px">#</th>
                 <th style="text-align: left; padding-left: 10px">Table #</th>
                 <th style="text-align: left; padding-left: 10px">Time</th>
-                <th style="text-align: left; padding-left: 10px">Customer Name</th>
                 <th>Orders</th>
                 <th style="text-align: left; padding-left: 10px">Total</th>
                 <th style="text-align: left; padding-left: 10px">Status</th>
@@ -97,22 +98,25 @@ class TransactionsView extends Transactions{
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><span><?php echo $row['id'] ?></span></td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['table_id'] ?></td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['reg_date'] ?></td>
-                <td></td>
-                <td>
+                <td class="pad10" style="text-align: left; padding-left: 10px; width: 200px">
                     <?php 
                         $result = explode("|",$row['order']);
                         $result2 = explode("|",$row['quantity']);
+                        $order = "";
                     ?>
-                    <p style="width: 200px; text-align: left;" >
                         <?php
                         for ($i=0; $i < (count($result)); $i++) { 
                             if ($result[$i] != "") {
-                                echo $result[$i] . "(" . $result2[$i] . ")";                            }
+                                $order .= $result[$i] ."(".$result2[$i]."),";  
+                            }
                          ?>
+
+                         
                        <?php
+                       
                         }
+                        echo $order;
                     ?>
-                    </p>
                                      
                 </td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px">
@@ -406,19 +410,20 @@ for ($i=0; $i < (count($result)); $i++) {
                     <?php 
                         $result = explode("|",$row['order']);
                         $result2 = explode("|",$row['quantity']);
+                        $order = "";
                     ?>
-                    <p style="width: 200px; text-align: left;" >
                         <?php
                         for ($i=0; $i < (count($result)); $i++) { 
                             if ($result[$i] != "") {
-                                if ($i+1 == count($result)) {
-                                    echo $result[$i] . "(" . $result2[$i] . ")";   
-                                }                      
-                                else{
-                                    echo $result[$i] . "(" . $result2[$i] . "),";   
-                                }   
+                                $order .= $result[$i] ."(".$result2[$i]."),";  
                             }
+                         ?>
+
+                         
+                       <?php
+                       
                         }
+                        echo $order;
                     ?>
                     </p>
                 </td>
@@ -449,15 +454,14 @@ for ($i=0; $i < (count($result)); $i++) {
         }
     }
 
-    public function exportTransactionsDate($date){
-        $results = $this->getTransactionsDate($date);
+    public function exportTransactionsDate($date, $date2){
+        $results = $this->getTransactionsDate($date, $date2);
         ?>
         <thead>
             <tr>
                 <th style="text-align: left; padding-left: 10px">Transaction #</th>
                 <th style="text-align: left; padding-left: 10px">Table #</th>
                 <th style="text-align: left; padding-left: 10px">Time</th>
-                <th style="text-align: left; padding-left: 10px">Customer Name</th>
                 <th>Orders</th>
                 <th style="text-align: left; padding-left: 10px">Total</th>
                 <th style="text-align: left; padding-left: 10px">Status</th>
@@ -471,20 +475,24 @@ for ($i=0; $i < (count($result)); $i++) {
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><span><?php echo $row['id'] ?></span></td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['table_id'] ?></td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['reg_date'] ?></td>
-                <td></td>
                 <td>
-                    <?php 
+                <?php 
                         $result = explode("|",$row['order']);
                         $result2 = explode("|",$row['quantity']);
+                        $order = "";
                     ?>
-                    <p style="width: 200px; text-align: left;" >
                         <?php
                         for ($i=0; $i < (count($result)); $i++) { 
                             if ($result[$i] != "") {
-                                echo $result[$i] . "(" . $result2[$i] . ")";                            }
+                                $order .= $result[$i] ."(".$result2[$i]."),";  
+                            }
                          ?>
+
+                         
                        <?php
+                       
                         }
+                        echo $order;
                     ?>
                     </p>
                                      

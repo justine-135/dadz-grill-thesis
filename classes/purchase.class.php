@@ -33,9 +33,13 @@ class Purchase extends Dbh{
         $stmt->execute();    
         $stmt = null;
 
-        $sql = "UPDATE users SET served = served + 1 WHERE id = $uid";
+        session_start();
+        $id = $_SESSION["uid"];
+        $sql = "INSERT INTO served (`user_id`, served)
+        VALUES ('$id', 1)";
         $stmt = $this->connection()->prepare($sql);
-        $stmt->execute();  
+        $stmt->execute();
+        $stmt = null;  
     }
 
     protected function getPurchases(){
@@ -76,7 +80,7 @@ class Purchase extends Dbh{
 
         $results = $stmt->fetchAll();
 
-        $sql = "UPDATE series_orders SET is_ready = 1 WHERE table_id = $tid";
+        $sql = "UPDATE series_orders SET is_ready = 1, is_attended = 0 WHERE table_id = $tid";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;

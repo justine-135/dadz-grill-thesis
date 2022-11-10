@@ -1,8 +1,8 @@
 <?php
 
 class DashboardView extends Dashboard{
-    public function initOrders(){
-        $results = $this->getOrders();
+    public function initOrders($date, $date2){
+        $results = $this->getOrders($date, $date2);
 
         echo $results;
     }
@@ -12,8 +12,8 @@ class DashboardView extends Dashboard{
 
     }
 
-    public function initSales(){
-        $results = $this->getTransactions();
+    public function initSales($date, $date2){
+        $results = $this->getTransactions($date, $date2);
 
         $arrtotals = array();
         foreach ($results as $row) {
@@ -38,8 +38,8 @@ class DashboardView extends Dashboard{
         echo $total;
     }
 
-    public function initCancels(){
-        $results = $this->getTransactions();
+    public function initCancels($date, $date2){
+        $results = $this->getTransactions($date, $date2);
 
         $total = 0;
         $total = (int)$total;
@@ -52,8 +52,8 @@ class DashboardView extends Dashboard{
         echo $total;
     }
 
-    public function initSuccess(){
-        $results = $this->getTransactions();
+    public function initSuccess($date, $date2){
+        $results = $this->getTransactions($date, $date2);
 
         $total = 0;
         $total = (int)$total;

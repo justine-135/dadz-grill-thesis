@@ -5,7 +5,7 @@ class OrdersView extends Orders{
         $results = $this->getOrder($oid);
         ?>
 
-        <table class="tables-table order-table" style="height: 300px">
+        <table class="tables-table order-table table" style="height: 300px">
             <thead>
                 <th style="width:15%">Crew</th>
                 <th>Order</th>
@@ -37,6 +37,50 @@ class OrdersView extends Orders{
             </tbody>
         </table>
         <?php
+    }
+    public function initGetOrderAttend($oid){
+        $results = $this->getOrder($oid);
+        ?>
+
+        <table class="tables-table order-table" style="height: 300px">
+            <thead>
+                <th>Order</th>
+                <th>Action</th>
+            </thead>
+            <?php
+            ?>
+            <tbody>
+                <?php 
+                    foreach ($results as $row) {
+                    if($row['is_attended'] == 0 ) {
+                ?>
+                <tr style="overflow-y:hidden;">
+                    <td style="text-align: left;"><?php 
+                    $result2 = explode("|",$row['order']);
+                    $result3 = explode("|",$row['quantity']);
+                    for ($i=0; $i < (count($result2) - 1); $i++) {
+                    echo $result2[$i] . "(" . $result3[$i] . ")"; 
+                    }
+                    ?></td>
+                    <td><input type="submit" name="attend" value="Attend"></td>
+                </tr>
+                <?php
+                }
+            }
+                ?>
+            </tbody>
+        </table>
+        <?php
+    }
+    public function initPendingOrders($oid){
+        $results = $this->getOrder($oid);
+        $count = 0;
+        foreach ($results as $row) {
+            if ($row["is_attended"] == 0) {
+                $count += 1;
+            };
+        }
+        echo $count;
     }
 }
 

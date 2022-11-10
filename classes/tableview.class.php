@@ -8,7 +8,7 @@ class TableView extends Table
 ?>
         <thead>
             <tr>
-                <th>Table #</th>
+                <th>#</th>
                 <th class="">Status</th>
                 <th>Time</th>
                 <th>Payment</th>
@@ -21,7 +21,8 @@ class TableView extends Table
         ?>
             <tr>
                 <td><span><?php echo $row['id'] ?></span></td>
-                <td class="flex-row ">
+                <td>
+                    <div class="flex-row">
                     <?php
                     if ($row['table_status'] == "Occupied") {
                     ?>
@@ -45,6 +46,7 @@ class TableView extends Table
                     <?php
                     }
                     ?>
+                    </div>
                 </td>
                 <?php 
                 $to_sec_warning = gmdate("H:i:s", $row['warning_time']);
@@ -129,7 +131,7 @@ class TableView extends Table
         ?>
         <thead>
             <tr>
-                <th>Table #</th>
+                <th>#</th>
                 <th>Status</th>
                 <th>Time</th>
                 <th>Payment</th>
@@ -142,30 +144,32 @@ class TableView extends Table
         ?>
             <tr>
                 <td><span><?php echo $row['id'] ?></span></td>
-                <td class="flex-row ">
-                    <?php
-                    if ($row['table_status'] == "Occupied") {
-                    ?>
-                        <span class="table-data-status red"></span>
-                        <span><?php echo $row['table_status'] ?></span>
-                    <?php
-                    } elseif ($row['table_status'] == "Unoccupied") {
-                    ?>
-                        <span class="table-data-status green"></span>
-                        <span><?php echo $row['table_status'] ?></span>
-                    <?php
-                    } elseif ($row['table_status'] == "Call") {
-                    ?>
-                        <span class="table-data-status yellow"></span>
-                        <span>Need assistance</span>
-                    <?php
-                    } elseif ($row['table_status'] == "Dirty") {
-                    ?>
-                        <span class="table-data-status blue"></span>
-                        <span><?php echo $row['table_status'] ?></span>
-                    <?php
-                    }
-                    ?>
+                <td>
+                    <div class="flex-row">
+                        <?php
+                        if ($row['table_status'] == "Occupied") {
+                        ?>
+                            <span class="table-data-status red"></span>
+                            <span><?php echo $row['table_status'] ?></span>
+                        <?php
+                        } elseif ($row['table_status'] == "Unoccupied") {
+                        ?>
+                            <span class="table-data-status green"></span>
+                            <span><?php echo $row['table_status'] ?></span>
+                        <?php
+                        } elseif ($row['table_status'] == "Call") {
+                        ?>
+                            <span class="table-data-status yellow"></span>
+                            <span>Need assistance</span>
+                        <?php
+                        } elseif ($row['table_status'] == "Dirty") {
+                        ?>
+                            <span class="table-data-status blue"></span>
+                            <span><?php echo $row['table_status'] ?></span>
+                        <?php
+                        }
+                        ?>
+                    </div>
                 </td>
                 <?php 
                 $to_sec_warning = gmdate("H:i:s", $row['warning_time']);
@@ -252,6 +256,7 @@ class TableView extends Table
                 </td>
                 <td class="action-td">
                     <span class="hide"><?php echo $row['id']; ?></span>
+                    <!-- <button class="view-orders">Orders</button> -->
                     <button class="show-btn">Show</button>
                     <!-- <button class="show-btn">Menu</button>
                     <button class="show-btn">Request bill</button> -->
@@ -267,7 +272,7 @@ class TableView extends Table
         ?>
         <thead>
             <tr>
-                <th>Table #</th>
+                <th>#</th>
                 <th class="">Status</th>
                 <th>Time</th>
                 <th>Payment</th>
@@ -279,30 +284,32 @@ class TableView extends Table
         ?>
             <tr>
                 <td><span><?php echo $row['id'] ?></span></td>
-                <td class="flex-row ">
-                    <?php
-                    if ($row['table_status'] == "Occupied") {
-                    ?>
-                        <span class="table-data-status red"></span>
-                        <span><?php echo $row['table_status'] ?></span>
-                    <?php
-                    } elseif ($row['table_status'] == "Unoccupied") {
-                    ?>
-                        <span class="table-data-status green"></span>
-                        <span><?php echo $row['table_status'] ?></span>
-                    <?php
-                    } elseif ($row['table_status'] == "Call") {
-                    ?>
-                        <span class="table-data-status yellow"></span>
-                        <span>Need assistance</span>
-                    <?php
-                    } elseif ($row['table_status'] == "Dirty") {
-                    ?>
-                        <span class="table-data-status blue"></span>
-                        <span><?php echo $row['table_status'] ?></span>
-                    <?php
-                    }
-                    ?>
+                <td>
+                    <div class="flex-row">
+                        <?php
+                        if ($row['table_status'] == "Occupied") {
+                        ?>
+                            <span class="table-data-status red"></span>
+                            <span><?php echo $row['table_status'] ?></span>
+                        <?php
+                        } elseif ($row['table_status'] == "Unoccupied") {
+                        ?>
+                            <span class="table-data-status green"></span>
+                            <span><?php echo $row['table_status'] ?></span>
+                        <?php
+                        } elseif ($row['table_status'] == "Call") {
+                        ?>
+                            <span class="table-data-status yellow"></span>
+                            <span>Need assistance</span>
+                        <?php
+                        } elseif ($row['table_status'] == "Dirty") {
+                        ?>
+                            <span class="table-data-status blue"></span>
+                            <span><?php echo $row['table_status'] ?></span>
+                        <?php
+                        }
+                        ?>
+                    </div>
                 </td>
                 <?php 
                 $to_sec_warning = gmdate("H:i:s", $row['warning_time']);

@@ -16,7 +16,12 @@ class SalesView extends Sales{
             </tr>
         </thead>
         <?php
+        $total = 0;
         foreach ($results as $row) {
+            $tmp = 0;
+
+            $tmp += $row['success'] * $row['cost']; 
+            $total += $tmp;
         ?>
         <tbody>
             <tr>
@@ -26,7 +31,7 @@ class SalesView extends Sales{
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['date_time'] ?></td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['cost'] ?></td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['success'] ?></td>
-                <td class="pad10 total-success-count" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['success'] * $row['cost'] ?></td>
+                <td class="pad10 total-success-count" valign="top" style="text-align: left; padding-left: 10px"><?php echo $tmp ?></td>
             </tr>
         </tbody>
         <?php
@@ -41,7 +46,8 @@ class SalesView extends Sales{
             <td class="pad10" valign="top" style="text-align: left"></td>
             <th class="pad10" valign="top" style="text-align: left">Total Sum</>
             <td class="pad10" valign="top" style="text-align: left">
-                <span class="total-sold-success"></span>
+                <span class="total-sold-success"><?php echo $total; ?>
+                </span>
             </td>
         </tr>
         </tfoot>
@@ -61,7 +67,12 @@ class SalesView extends Sales{
             </tr>
         </thead>
         <?php
-        foreach ($results as $row) {
+            $total2 = 0;
+            foreach ($results as $row) {
+                $tmp2 = 0;
+    
+                $tmp2 += $row['cancel'] * $row['cost']; 
+                $total2 += $tmp2;
         ?>
         <tbody>
             <tr>
@@ -71,7 +82,7 @@ class SalesView extends Sales{
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['date_time'] ?></td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['cost'] ?></td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['cancel'] ?></td>
-                <td class="pad10 total-cancel-count" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['cancel'] * $row['cost'] ?></td>
+                <td class="pad10 total-cancel-count" valign="top" style="text-align: left; padding-left: 10px"><?php echo $tmp2 ?></td>
             </tr>
         </tbody>
         <?php
@@ -86,14 +97,14 @@ class SalesView extends Sales{
             <td class="pad10" valign="top" style="text-align: left"></td>
             <th class="pad10" valign="top" style="text-align: left">Total Sum</>
             <td class="pad10" valign="top" style="text-align: left">
-                <span class="total-sold-cancel"></span>
+                <span class="total-sold-cancel"><?php echo $total2 ?></span>
             </td>
         </tr>
         </tfoot>
         <?php
     }
-    public function initSalesReportDate($date){
-        $results = $this->getSalesReportDate($date);
+    public function initSalesReportDate($date, $date2){
+        $results = $this->getSalesReportDate($date, $date);
         ?>
         <thead>
             <tr>
@@ -107,7 +118,12 @@ class SalesView extends Sales{
             </tr>
         </thead>
         <?php
+        $total = 0;
         foreach ($results as $row) {
+            $tmp = 0;
+
+            $tmp += $row['success'] * $row['cost']; 
+            $total += $tmp;
         ?>
         <tbody>
             <tr>
@@ -117,7 +133,7 @@ class SalesView extends Sales{
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['date_time'] ?></td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['cost'] ?></td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['success'] ?></td>
-                <td class="pad10 total-success-count" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['success'] * $row['cost'] ?></td>
+                <td class="pad10 total-success-count" valign="top" style="text-align: left; padding-left: 10px"><?php echo $tmp ?></td>
             </tr>
         </tbody>
         <?php
@@ -132,7 +148,7 @@ class SalesView extends Sales{
             <td class="pad10" valign="top" style="text-align: left"></td>
             <th class="pad10" valign="top" style="text-align: left">Total Sum</>
             <td class="pad10" valign="top" style="text-align: left">
-                <span class="total-sold-success"></span>
+                <span class="total-sold-success"><?php echo $total ?></span>
             </td>
         </tr>
         </tfoot>
@@ -152,7 +168,12 @@ class SalesView extends Sales{
             </tr>
         </thead>
         <?php
+        $total2 = 0;
         foreach ($results as $row) {
+            $tmp2 = 0;
+
+            $tmp2 += $row['cancel'] * $row['cost']; 
+            $total2 += $tmp2;
         ?>
         <tbody>
             <tr>
@@ -162,7 +183,7 @@ class SalesView extends Sales{
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['date_time'] ?></td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['cost'] ?></td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['cancel'] ?></td>
-                <td class="pad10 total-cancel-count" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['cancel'] * $row['cost'] ?></td>
+                <td class="pad10 total-cancel-count" valign="top" style="text-align: left; padding-left: 10px"><?php echo $tmp2 ?></td>
             </tr>
         </tbody>
         <?php
@@ -177,7 +198,7 @@ class SalesView extends Sales{
             <td class="pad10" valign="top" style="text-align: left"></td>
             <th class="pad10" valign="top" style="text-align: left">Total Sum</>
             <td class="pad10" valign="top" style="text-align: left">
-                <span class="total-sold-cancel"></span>
+                <span class="total-sold-cancel"><?php echo $total2 ?></span>
             </td>
         </tr>
         </tfoot>

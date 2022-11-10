@@ -4,10 +4,10 @@ class PurchaseView extends Purchase{
     public function initGetPurchases(){
         $results = $this->getPurchases();
         ?>
-        <table class="tables-table ing-tbl">
+        <table class="tables-table ing-tbl table">
             <thead>
                 <tr>
-                    <th>Order #</th>
+                    <th>#</th>
                     <th>Table #</th>
                     <th>Orders</th>
                     <th>Total</th>

@@ -29,9 +29,10 @@ class Users extends Dbh{
         return $results;    
     }
 
-    protected function getHistoryDate($date){
-        $dateLike = $date . "%";
-        $sql = "SELECT * FROM login_history WHERE last_login LIKE '$dateLike'";
+    protected function getHistoryDate($date, $date2){
+        // $sql = "SELECT * FROM login_history WHERE last_login LIKE '$dateLike'";
+        $sql = "SELECT * FROM login_history WHERE DATE(last_login) BETWEEN '$date' AND '$date2'";
+
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 

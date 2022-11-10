@@ -12,10 +12,12 @@ class Transactions extends Dbh
         return $results;
     }
 
-    protected function getTransactionsDate($date)
+    protected function getTransactionsDate($date, $date2)
     {
-        $dateLike = $date . "%";
-        $sql = "SELECT * FROM transactions WHERE reg_date LIKE '$dateLike'";
+        $dateLike = $date;
+        $dateLike2 = $date2;
+
+        $sql = "SELECT * FROM transactions WHERE DATE(reg_date) BETWEEN '$dateLike' AND '$dateLike2'";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 

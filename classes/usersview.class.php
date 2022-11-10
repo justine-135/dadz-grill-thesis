@@ -194,8 +194,8 @@ class UsersView extends Users{
         }
     }
 
-    public function initGetHistoryDate($date){
-        $results = $this->getHistoryDate($date);
+    public function initGetHistoryDate($date, $date2){
+        $results = $this->getHistoryDate($date, $date2);
         ?>
         <thead>
             <tr>

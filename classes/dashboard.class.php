@@ -1,22 +1,46 @@
 <?php
 
 class Dashboard extends Dbh{
-    protected function getTransactions(){
-        $sql = "SELECT * FROM transactions;";
-        $stmt = $this->connection()->prepare($sql);
-        $stmt->execute();
+    protected function getTransactions($date, $date2){
+        // echo $date . " " . $date2;
+        if (empty($date) || empty($date2)) {
+            $sql = "SELECT * FROM transactions;";
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute();
+    
+            $results = $stmt->fetchAll();
+            return $results;
+        }
+        else{
+            $sql = "SELECT * FROM transactions WHERE DATE(reg_date) BETWEEN '$date' AND '$date2'";
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute();
+    
+            $results = $stmt->fetchAll();
+            return $results;
+        }
 
-        $results = $stmt->fetchAll();
-        return $results;
     }
 
-    protected function getOrders(){
-        $sql = "SELECT * FROM transactions;";
-        $stmt = $this->connection()->prepare($sql);
-        $stmt->execute();
+    protected function getOrders($date, $date2){
 
-        $results = $stmt->rowCount();
-        return $results;
+        if (empty($date) || empty($date2)) {
+            $sql = "SELECT * FROM transactions;";
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute();
+    
+            $results = $stmt->rowCount();
+            return $results;
+        }
+        else{
+            $sql = "SELECT * FROM transactions WHERE DATE(reg_date) BETWEEN '$date' AND '$date2'";
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute();
+    
+            $results = $stmt->rowCount();
+            return $results;
+        }
+
     }
 
     protected function getTables(){
