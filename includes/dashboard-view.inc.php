@@ -70,14 +70,23 @@
             $dirty->initActiveCrew();
         }
 
-        if ($grid == 11) {
-            $dirty = new DashboardView();
-            $dirty->initTotalServed();
-        }
+        // if ($grid == 11) {
+        //     $dirty = new DashboardView();
+        //     $dirty->initTotalServed();
+        // }
         
         if ($grid == 12) {
             $dirty = new DashboardView();
             $dirty->initCrewRole();
+        }
+
+        if ($grid == 11) {
+            if (isset($_GET["date"]) && isset($_GET["date2"])) {
+                $date = $_GET['date'];
+                $date2 = $_GET['date2'];
+                $served = new DashboardView();
+                $served->initTotalServed($date, $date2);
+            }
         }
     }
 ?>
