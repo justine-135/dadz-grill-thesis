@@ -21,7 +21,8 @@ if (!isset($_GET['id'])){
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Passion+One:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/styles.css">
-    <title>Document</title>
+    <link rel="shortcut icon" href="./img/icons/cube-solid.svg" type="image/x-icon">
+    <title>Dadz Grillhouse</title>
 </head>
 
 <body>
