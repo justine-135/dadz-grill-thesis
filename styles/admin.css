@@ -79,7 +79,9 @@
   width: 100%;
 }
 
-.profile-li h4 {
+.profile-li h5 {
+  font-size: 1rem !important;
+  font-weight: 600;
   width: 150px;
   color: #0d6464;
 }

@@ -186,6 +186,7 @@
 .table-timer-col.table-7-time.endtime,
 .table-timer-col.table-8-time.endtime {
   color: red;
+  font-weight: 700;
 }
 
 .table-timer-col.table-1-time.warningtime,
@@ -197,6 +198,7 @@
 .table-timer-col.table-7-time.warningtime,
 .table-timer-col.table-8-time.warningtime {
   color: rgb(255, 115, 0);
+  font-weight: 700;
 }
 
 .table-timer-col.table-1-time.runningtime,
@@ -288,7 +290,11 @@
 }
 
 .cashier-tbl-data {
-  min-width: 767px;
+  min-width: 782px;
+}
+
+.ing-table {
+  min-width: 900px;
 }
 
 .foods-table {
