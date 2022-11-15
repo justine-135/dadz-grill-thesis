@@ -26,7 +26,7 @@ $_SESSION["last_login_timestamp"] = time();
     <script src="js/table2excel.js"></script>
     <link rel="stylesheet" href="./styles/styles.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="./img/icons/cube-solid.svg" type="image/x-icon">
-    <title>Inventory</title>
+    <title>Dadz Grillhouse</title>
 </head>
 
 <body>
