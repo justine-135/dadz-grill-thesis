@@ -177,7 +177,7 @@ class TransactionsView extends Transactions{
 
             </div>
         </nav>
-        <table class="tables-table bill-order-tbl">
+        <table class="tables-table bill-order-tbl table">
             <thead >
                 <tr>
                     <th style="width:50%; text-align:left; padding-left: 20px">Item</th>
@@ -212,17 +212,17 @@ for ($i=0; $i < (count($result)); $i++) {
                     } ?>
                 </tr>
                 <?php } ?>
-                <tr style="border-bottom: none">
+                <tr>
                     <td></td>
                     <td class="bill-final-span" style="text-align: left; padding-left: 10px"><span class="bill-final-span">Total:</span></td>
                     <td style="text-align: left; padding-left: 10px">₱ <span id="amount-total"><?php echo $total; ?></span></td>
                 </tr>
-                <tr style="border-bottom: none">
+                <tr>
                     <td></td>
                     <td style="text-align: left; padding-left: 10px"> <span class="bill-final-span" >Payment:</span></td>
                     <td style="text-align: left; padding-left: 10px">₱ <span id="amount-paid">0</span></td>
                 </tr>
-                <tr style="border-bottom: none">
+                <tr>
                     <td></td>
                     <td class="bill-final-span" style="text-align: left; padding-left: 10px"><span class="bill-final-span">Change:</span></td>
                     <td style="text-align: left; padding-left: 10px">₱ <span id="amount-change">0</span></td>
@@ -239,8 +239,8 @@ for ($i=0; $i < (count($result)); $i++) {
                         <input type="text" name="change" id="change" hidden>
                         <input type="text" name="id" id="id" value="<?php echo $row['id'] ?>" hidden>
                         <input type="text" name="table" id="table" value="<?php echo $row['table_id'] ?>" hidden>
-                        <button id="print">Print</button>
-                        <input type="button" name="save" id="save" value="Save">  
+                        <button class="btn" id="print">Print</button>
+                        <input class="btn" type="button" name="save" id="save" value="Save">  
                     </td>
                 </tr>
             </tbody>

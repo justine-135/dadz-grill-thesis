@@ -28,8 +28,8 @@ class Table extends Dbh
             $res = $arr[0] * 3600 + $arr[1] * 60 + $arr[2];59;
         }
         
-        $warning_time = $res + 6300;
-        $end_time = $res + 7200;
+        $warning_time = $res + 7200;
+        $end_time = $res + 8100;
 
         $sql = "SELECT is_started, payment FROM tables WHERE id = $id";
         $stmt = $this->connection()->prepare($sql);
@@ -259,7 +259,7 @@ class Table extends Dbh
             $tblStatus = $row["table_status"];
         }
 
-        if ($tblStatus != 'Unoccupied') {
+        if ($tblStatus != 'Unoccupied' && $tblStatus != 'Dirty') {
             $sql = "UPDATE tables SET table_status = 'Call' WHERE id = $id";
             $stmt = $this->connection()->prepare($sql);
             $stmt->execute();
@@ -272,6 +272,8 @@ class Table extends Dbh
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
+
+         $this->has_order_request($id);
 
         header("location: ../menu.php");
     }

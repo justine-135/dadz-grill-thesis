@@ -143,7 +143,7 @@ class Transactions extends Dbh
             }
         }
 
-        $sql = "UPDATE transactions SET paid = true WHERE id = $id";
+        $sql = "UPDATE transactions SET reg_date = reg_date, paid = true WHERE id = $id";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
