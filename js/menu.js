@@ -91,16 +91,12 @@ window.addEventListener("load", () => {
 
         for (let i = 1; i < 9; i++) {
           let timer = document.querySelector(`.table-${i}-time`);
+          let bool = false;
+
           if (timer.getAttribute("started") != 1) {
             timer.innerHTML = "00:00:00";
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open(
-              "GET",
-              `./includes/table-contr.inc.php?contr=1&id=${i}`,
-              true
-            );
-            xmlhttp.send();
           } else {
+            bool = false;
             let currentDate = new Date();
             let hour = currentDate.getHours();
             let minutes = currentDate.getMinutes();
@@ -134,9 +130,10 @@ window.addEventListener("load", () => {
 
             const seconds = arr[0] * 3600 + arr[1] * 60 + +arr[2]; // converting
             let timeEnd = timer.getAttribute("endtime");
+            console.log("time end: ", timeEnd);
             let duration = timeEnd - seconds;
-
-            if (duration <= 0) {
+            console.log(seconds);
+            if (duration <= 0 || seconds >= timeEnd) {
               timer.innerHTML = "00:00:00";
               var xmlhttp = new XMLHttpRequest();
               xmlhttp.open(
@@ -145,6 +142,7 @@ window.addEventListener("load", () => {
                 true
               );
               xmlhttp.send();
+              console.log("bloew");
             } else {
               let durationValue = new Date(duration * 1000)
                 .toISOString()
@@ -176,9 +174,15 @@ window.addEventListener("load", () => {
   });
 
   const toggleLegendBtn = document.querySelector(".legend-btn");
+  const toggleLegendBtn2 = document.querySelector(".legend-btn2");
+
   const legendStatus = document.querySelector(".legend-list");
 
   toggleLegendBtn.addEventListener("click", () => {
+    legendStatus.classList.toggle("open");
+  });
+
+  toggleLegendBtn2.addEventListener("click", () => {
     legendStatus.classList.toggle("open");
   });
 });

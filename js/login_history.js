@@ -67,7 +67,7 @@ window.addEventListener("load", () => {
     }
   });
 
-  searchHistory2.addEventListener("change", () => {
+  searchHistory2.addEventListener("change", (e) => {
     date2 = e.target.value;
   });
 

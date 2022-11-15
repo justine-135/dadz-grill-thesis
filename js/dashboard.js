@@ -186,7 +186,16 @@ window.addEventListener("load", () => {
           .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       }
     };
-    xmlhttp.open("GET", "./includes/dashboard-view.inc.php?grid=" + 11, true);
+    xmlhttp.open(
+      "GET",
+      "./includes/dashboard-view.inc.php?grid=" +
+        11 +
+        "&date=" +
+        date +
+        "&date2=" +
+        date2,
+      true
+    );
     xmlhttp.send();
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {

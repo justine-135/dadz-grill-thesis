@@ -50,7 +50,7 @@ window.addEventListener("load", () => {
           let timeEnd = timer.getAttribute("endtime");
           let duration = timeEnd - seconds;
 
-          if (duration <= 0) {
+          if (duration <= 0 || seconds >= timeEnd) {
             timer.innerHTML = "00:00:00";
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.open(
@@ -80,9 +80,15 @@ window.addEventListener("load", () => {
   }, 1000);
 
   const toggleLegendBtn = document.querySelector(".legend-btn");
+  const toggleLegendBtn2 = document.querySelector(".legend-btn2");
+
   const legendStatus = document.querySelector(".legend-list");
 
   toggleLegendBtn.addEventListener("click", () => {
+    legendStatus.classList.toggle("open");
+  });
+
+  toggleLegendBtn2.addEventListener("click", () => {
     legendStatus.classList.toggle("open");
   });
 });
