@@ -26,7 +26,9 @@ if ($_SESSION["is_superuser"] == 1 or $_SESSION["is_cashier"] == 1) {
 </div>
 
 <div class="alert">
-    <span class='query-notif'>Order has been paid.</span>
+    <div class="alert alert-success d-flex align-items-center position-fixed top-0 start-50 translate-middle-x query-notif hide" style="z-index: 5; height: 10px" role="alert">
+        Order paid successfully.
+    </div>
 </div>
 
 <script src="js/bill.js"></script>
