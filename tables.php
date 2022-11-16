@@ -78,6 +78,11 @@ if ($_SESSION["is_superuser"] == 1 || $_SESSION["is_cashier"]) {
         </div>
     </div>
 </div>
+
+<div class="alert alert-warning alert-warning-notify position-fixed bottom-0 d-flex align-items-center hide" style="height: 10px" role="alert">
+  Table requested an assistance .
+</div>
+
 <div class="main-content tables-container">
     <div class="tables flex-row">
         <table class="tables-table cashier-tbl-data table">
@@ -85,7 +90,7 @@ if ($_SESSION["is_superuser"] == 1 || $_SESSION["is_cashier"]) {
     </div>
 </div>
 
-<div class="alert">
+<div class="alert-div">
 
     <?php
 
@@ -93,16 +98,24 @@ if ($_SESSION["is_superuser"] == 1 || $_SESSION["is_cashier"]) {
         $alert = $_GET["alert"];
         $id = $_GET["id"];
         if ($alert == "billout") {
-            echo "<span class='query-notif success'>Created transaction for table " . $id . "!</span>";
+            ?>
+            <!-- echo "<span class='query-notif fail'>No bill request for table " . $id . "!</span>"; -->
+            <div class="alert alert-success d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
+            Created transaction for table <strong class="ms-1"><?php echo $id ?></strong>.
+            </div>
+            <?php
         } elseif ($alert == "no_request") {
-            echo "<span class='query-notif fail'>No bill request for table " . $id . "!</span>";
+            ?>
+            <!-- echo "<span class='query-notif fail'>No bill request for table " . $id . "!</span>"; -->
+            <div class="alert alert-danger d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
+            No bill request for table <strong class="ms-1"><?php echo $id ?></strong>.
+            </div>
+            <?php
         } else {
             echo "<span></span>";
         }
     }
-
     ?>
-
 </div>
 
 <script src="js/tables.js"></script>
