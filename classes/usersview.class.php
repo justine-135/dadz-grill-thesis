@@ -104,8 +104,7 @@ class UsersView extends Users{
             </div>
             <div class="info-text flex-row">
                 <div class="span">Role: </div>
-                <div class="user-role-div">
-                    <input type="text" name="role" id="role" value="<?php 
+                <input type="text" name="role" id="role" value="<?php 
                             if ($row["is_cashier"] == 1) {
                                 echo "Cashier";
                             } 
@@ -118,22 +117,28 @@ class UsersView extends Users{
                             elseif ($row["is_cleaner"] == 1) {
                                 echo "Cleaner";
                             }
-                        ?>" 
-                    hidden>
-                    <button type="button" class="roles-btn flex-row"> 
-                        <span>Role</span> 
-                        <svg class="sidelink-svg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path></svg>
-                    </button>
-                    
-                    <ul>
-                        <li><input class="role-input" type="button" name="cashier" value="Cashier"></li>
-                        <li><input class="role-input" type="button" name="waiter" value="Waiter"></li>
-                        <li><input class="role-input" type="button" name="cook" value="Cook"></li>
-                        <li><input class="role-input" type="button" name="cleaner" value="Cleaner"></li>
-                    </ul>
-                </div>
+                        ?>">
 
-            </div>
+                <select class="form-select role-input" aria-label="Default select example">
+                <option selected><?php 
+                            if ($row["is_cashier"] == 1) {
+                                echo "Cashier";
+                            } 
+                            elseif ($row["is_waiter"] == 1) {
+                                echo "Waiter";
+                            }
+                            elseif ($row["is_cook"] == 1) {
+                                echo "Cook";
+                            }
+                            elseif ($row["is_cleaner"] == 1) {
+                                echo "Cleaner";
+                            }
+                        ?></option>
+                <option value="Cashier">Cashier</option>
+                <option value="Waiter">Waiter</option>
+                <option value="Cook">Cook</option>
+                <option value="Cleaner">Cleaner</option>
+                </select>
         <?php
         }
     }

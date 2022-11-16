@@ -127,7 +127,7 @@ class Table extends Dbh
         }
         
         if ($tableStatus != "Unoccupied" && $tableStatus != "Dirty") {
-            if ($payment != "Requesting" && $payment != "Bill out") {
+            if ($payment != "Requesting" && $payment != "Bill out" && $payment != "No order") {
                 $this->has_order_attended($tblId);
             }
             else{
@@ -202,7 +202,9 @@ class Table extends Dbh
         if ($tableStatus != "Dirty") {
             if ($payment != 'Requesting' && $payment != 'Bill out') {
                 if ($tblId2 == $tblId) {
-                    header("location: ../store.php?id=" . $tblId);
+                    session_start();
+                    $_SESSION["table"] = $tblId;
+                    header("location: ../store.php");
                 }
                 else{
                     header("location: ../menu.php");
@@ -263,6 +265,8 @@ class Table extends Dbh
             $sql = "UPDATE tables SET table_status = 'Call' WHERE id = $id";
             $stmt = $this->connection()->prepare($sql);
             $stmt->execute();
+
+            header("location: ../menu?alert=1");
         }
     }
 

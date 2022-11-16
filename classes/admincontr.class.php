@@ -22,7 +22,7 @@ class AdminContr extends Admin
             $_SESSION["fname"] = $result[0]["fname"];
             $_SESSION["lname"] = $result[0]["lname"];
     
-            header("location: ../profile.php?alert=updated&id=" . $id);
+            header("location: ../profile.php?message=success");
         }
     }
 
@@ -45,7 +45,31 @@ class AdminContr extends Admin
             session_start();
             $_SESSION["username"] = $result[0]["username"];
     
-            header("location: ../profile.php?alert=updated&id=" . $id);
+            header("location: ../profile.php?message=success");
+        }
+
+    }
+
+    public function initEditEmail($id, $email)
+    {
+
+        if ($this->emptyInputEmail($email) !== false) {
+            header("location: ../profile.php?message=emptyinput");
+            exit();
+        }
+    
+        if ($this->invalidEmail($email)!==false) {
+            header("location: ../profile.php?message=invalidformat");
+            exit();
+        }
+
+        else{
+            $result = $this->editEmail($id, $email);
+
+            session_start();
+            $_SESSION["email"] = $result[0]["email"];
+
+            header("location: ../profile.php?message=success");
         }
 
     }
@@ -120,6 +144,15 @@ class AdminContr extends Admin
         return $result;
     }
 
+    protected function emptyInputEmail($email){
+        $result;
+        if (empty($email)) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
+    }
     protected function emptyInputContact($contact){
         $result;
         if (empty($contact)) {
@@ -160,6 +193,16 @@ class AdminContr extends Admin
         return $result;
     }
 
+    protected function invalidEmail($email){
+        $result;
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
+    }
+    
     protected function invalidContact($contact){
         $result;
         if (strlen($contact) != 11) {

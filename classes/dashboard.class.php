@@ -75,16 +75,54 @@ class Dashboard extends Dbh{
     protected function getTotalServed2($date, $date2){
         session_start();
         $id = $_SESSION["uid"];
-        $sql = "SELECT users.id, users.username, served.served, served.date_time
-        FROM `served`, `users` 
-        WHERE users.id = served.user_id
-        AND users.id = '$id'
-        AND DATE(served.date_time) BETWEEN '$date' AND '$date2'";
+
+
+        if (empty($date) || empty($date2)) {
+            $sql = "SELECT users.id, users.username, served.served, served.date_time
+            FROM `served`, `users` 
+            WHERE users.id = served.user_id
+            AND users.id = '$id'";
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute();
+    
+            $results = $stmt->fetchAll();
+            return $results;
+        }
+        else{
+            $sql = "SELECT users.id, users.username, served.served, served.date_time
+            FROM `served`, `users` 
+            WHERE users.id = served.user_id
+            AND users.id = '$id'
+            AND DATE(served.date_time) BETWEEN '$date' AND '$date2'";
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute();
+    
+            $results = $stmt->fetchAll();
+            return $results;
+        }
+    }
+
+    protected function getTotalServedAll(){
+
+        $sql = "SELECT * FROM users";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
-        $results = $stmt->fetchAll();
-        return $results;
+        $result = $stmt->fetchAll();
+
+        foreach ($result as $row) {
+            // $sql = "SELECT users.id, users.username, served.served, served.date_time
+            // FROM `served`, `users` 
+            // WHERE users.id = served.user_id
+            // AND users.id = '$row['id']'";
+            // $stmt = $this->connection()->prepare($sql);
+            // $stmt->execute();
+    
+            // $results = $stmt->fetchAll();
+            return $results;
+        }
+
+
     }
 }
 

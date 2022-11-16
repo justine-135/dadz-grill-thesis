@@ -67,6 +67,21 @@ class Admin extends Dbh{
 
     }
 
+    protected function editEmail($id, $email){
+        $sql = "UPDATE users SET reg_date = reg_date, email = '$email' WHERE id = $id";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+        $stmt = null;
+
+        $sql = "SELECT * FROM users WHERE id=?";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute([$id]);
+
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $results;
+    }
+    
     protected function editContact($id, $contact){
         $sql = "UPDATE users SET reg_date = reg_date, contact = '$contact' WHERE id = $id";
         $stmt = $this->connection()->prepare($sql);

@@ -239,8 +239,8 @@ for ($i=0; $i < (count($result)); $i++) {
                         <input type="text" name="change" id="change" hidden>
                         <input type="text" name="id" id="id" value="<?php echo $row['id'] ?>" hidden>
                         <input type="text" name="table" id="table" value="<?php echo $row['table_id'] ?>" hidden>
-                        <button class="btn" id="print">Print</button>
-                        <input class="btn" type="button" name="save" id="save" value="Save">  
+                        <button class="btn btn-primary" id="print">Print</button>
+                        <input class="btn btn-primary" type="button" name="save" id="save" value="Save">  
                     </td>
                 </tr>
             </tbody>

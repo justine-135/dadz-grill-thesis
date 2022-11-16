@@ -158,6 +158,14 @@ class DashboardView extends Dashboard{
         }
         echo $total;
     }
+
+    public function initTotalServedAll(){
+        $results = $this->getTotalServedAll();
+        foreach ($results as $row) {
+            echo $row['id'];
+        }
+
+    }
     
     public function initCrewRole(){
         $results = $this->getTotalServed();

@@ -27,22 +27,22 @@ class TableView extends Table
                     if ($row['table_status'] == "Occupied") {
                     ?>
                         <span class="table-data-status red"></span>
-                        <span><?php echo $row['table_status'] ?></span>
+                        <span class="table-status"><?php echo $row['table_status'] ?></span>
                     <?php
                     } elseif ($row['table_status'] == "Unoccupied") {
                     ?>
                         <span class="table-data-status green"></span>
-                        <span><?php echo $row['table_status'] ?></span>
+                        <span class="table-status"><?php echo $row['table_status'] ?></span>
                     <?php
                     } elseif ($row['table_status'] == "Call") {
                     ?>
                         <span class="table-data-status yellow"></span>
-                        <span>Need assistance</span>
+                        <span class="table-status">Need assistance</span>
                     <?php
                     } elseif ($row['table_status'] == "Dirty") {
                     ?>
                         <span class="table-data-status blue"></span>
-                        <span><?php echo $row['table_status'] ?></span>
+                        <span class="table-status"><?php echo $row['table_status'] ?></span>
                     <?php
                     }
                     ?>
@@ -150,22 +150,22 @@ class TableView extends Table
                         if ($row['table_status'] == "Occupied") {
                         ?>
                             <span class="table-data-status red"></span>
-                            <span><?php echo $row['table_status'] ?></span>
+                            <span class="table-status"><?php echo $row['table_status'] ?></span>
                         <?php
                         } elseif ($row['table_status'] == "Unoccupied") {
                         ?>
                             <span class="table-data-status green"></span>
-                            <span><?php echo $row['table_status'] ?></span>
+                            <span class="table-status"><?php echo $row['table_status'] ?></span>
                         <?php
                         } elseif ($row['table_status'] == "Call") {
                         ?>
                             <span class="table-data-status yellow"></span>
-                            <span>Need assistance</span>
+                            <span class="table-status">Need assistance</span>
                         <?php
                         } elseif ($row['table_status'] == "Dirty") {
                         ?>
                             <span class="table-data-status blue"></span>
-                            <span><?php echo $row['table_status'] ?></span>
+                            <span class="table-status"><?php echo $row['table_status'] ?></span>
                         <?php
                         }
                         ?>
@@ -290,22 +290,22 @@ class TableView extends Table
                         if ($row['table_status'] == "Occupied") {
                         ?>
                             <span class="table-data-status red"></span>
-                            <span><?php echo $row['table_status'] ?></span>
+                            <span class="table-status"><?php echo $row['table_status'] ?></span>
                         <?php
                         } elseif ($row['table_status'] == "Unoccupied") {
                         ?>
                             <span class="table-data-status green"></span>
-                            <span><?php echo $row['table_status'] ?></span>
+                            <span class="table-status"><?php echo $row['table_status'] ?></span>
                         <?php
                         } elseif ($row['table_status'] == "Call") {
                         ?>
                             <span class="table-data-status yellow"></span>
-                            <span>Need assistance</span>
+                            <span class="table-status">Need assistance</span>
                         <?php
                         } elseif ($row['table_status'] == "Dirty") {
                         ?>
                             <span class="table-data-status blue"></span>
-                            <span><?php echo $row['table_status'] ?></span>
+                            <span class="table-status"><?php echo $row['table_status'] ?></span>
                         <?php
                         }
                         ?>
