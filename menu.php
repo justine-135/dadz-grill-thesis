@@ -108,6 +108,11 @@ if ($_SESSION["is_superuser"] == 1 || $_SESSION["is_waiter"] == 1) {
         </div>
     </div>
 </div>
+
+<div class="alert alert-warning alert-warning-notify position-fixed bottom-0 d-flex align-items-center hide" style="height: 10px" role="alert">
+  Table requested an assistance .
+</div>
+
     <div class="main-content tables-container waiter-tbl">
         <div class="tables waiter-tbl">
             <table class="tables-table waiter-table waiter-tbl-data table">
@@ -115,7 +120,7 @@ if ($_SESSION["is_superuser"] == 1 || $_SESSION["is_waiter"] == 1) {
         </div>
     </div>
 
-    <div class="alert">
+    <div class="alert-div">
 
         <?php
 
@@ -123,13 +128,33 @@ if ($_SESSION["is_superuser"] == 1 || $_SESSION["is_waiter"] == 1) {
             $alert = $_GET["alert"];
             $id = $_GET["id"];
             if ($alert == "no_order") {
-                echo "<span class='query-notif fail'>Table " . $id . " has not ordered, or has incomplete order.</span>";
+                ?>
+                <!-- echo "<span class='query-notif fail'>No bill request for table " . $id . "!</span>"; -->
+                <div class="alert alert-danger d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
+                Table <strong class="mx-1"><?php echo $id ?></strong> order is incomplete.
+                </div>
+                <?php
             } elseif ($alert == "order_done") {
-                echo "<span class='query-notif success'>Table " . $id . " order has been submitted!</span>";
+                ?>
+                <!-- echo "<span class='query-notif fail'>No bill request for table " . $id . "!</span>"; -->
+                <div class="alert alert-success d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
+                Table <strong class="mx-1"><?php echo $id ?></strong> submitted an order.
+                </div>
+                <?php
             } elseif ($alert == "has_order") {
-                echo "<span class='query-notif success'>Table " . $id . " has been attended!</span>";
+                ?>
+                <!-- echo "<span class='query-notif fail'>No bill request for table " . $id . "!</span>"; -->
+                <div class="alert alert-success d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
+                Table <strong class="mx-1"><?php echo $id ?></strong> is attended.
+                </div>
+                <?php
             } elseif ($alert == "request") {
-                echo "<span class='query-notif success'>Table " . $id . " has submitted a bill request!</span>";
+                ?>
+                <!-- echo "<span class='query-notif fail'>No bill request for table " . $id . "!</span>"; -->
+                <div class="alert alert-success d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
+                Table <strong class="mx-1"><?php echo $id ?></strong> submitted bill request.
+                </div>
+                <?php
             } else {
                 echo "<span></span>";
             }
