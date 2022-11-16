@@ -34,7 +34,7 @@ include "header.php";
 
     <div class="dashboard">
         <div class="sales-overview overview">
-            <h2>Orders</h2>
+            <h4>Orders</h4>
             <div class="stats-container">
                 <div class="stats sales flex-row">
                     <div class="label-number flex-column">
@@ -72,7 +72,7 @@ include "header.php";
         </div>
         <div class="purchase-overview overview">
 
-            <h2>Table status</h2>
+            <h4>Table status</h4>
             <div class="stats-container">
                 <div class="stats sales purchase flex-row">
                     <div class="table-color">
@@ -121,7 +121,7 @@ include "header.php";
             </div>
         </div>
         <div class="tables-overview overview">
-        <h2>Registered Crews</h2>
+        <h4>Registered Crews</h4>
             <div class="stats-container">
                 <div class="stats sales purchase flex-row">
                     <div class="label-number flex-column">
