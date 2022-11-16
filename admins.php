@@ -17,7 +17,6 @@ if ($_SESSION["is_superuser"] == 1) {
 
             </div>
             <div class="form-overlay-footer flex-row">
-                <button class="form-footer-btn" type="button">Cancel</button>
                 <input type="submit" value="Submit" name="delete">
             </div>
         </form>
@@ -32,7 +31,6 @@ if ($_SESSION["is_superuser"] == 1) {
 
             </div>
             <div class="form-overlay-footer flex-row">
-                <button class="form-footer-btn" type="button">Close</button>
                 <input type="submit" name="edit-role" value="Submit">
             </div>
         </form>
