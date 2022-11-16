@@ -13,7 +13,7 @@
 
     elseif (isset($_POST["menu"])) {
         $tblId = $_POST["table-id"];
-
+        
         $menu = new TableContr();
         $menu->initMenu($tblId);
     }

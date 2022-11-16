@@ -89,4 +89,9 @@
             }
         }
     }
+
+    if (isset($_GET["sample"])) {
+        $allServed = new DashboardView();
+        $allServed->initTotalServedAll();
+    }
 ?>

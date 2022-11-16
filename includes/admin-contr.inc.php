@@ -23,6 +23,13 @@
         $editUserName->initEditUserName($id, $username);
     }
 
+    if (isset($_POST["email-change"])) {
+        $email = $_POST["email"];
+
+        $editEmail = new AdminContr();
+        $editEmail->initEditEmail($id, $email);
+    }
+    
     if (isset($_POST["contact-change"])) {
         $contact = $_POST["contact"];
 
