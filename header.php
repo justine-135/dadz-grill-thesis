@@ -2,6 +2,7 @@
 include './includes/autoload.inc.php';
 
 session_start();
+unset($_SESSION["table"]);
 if (empty($_SESSION["username"])) {
     header("location: login.php?message=");
 }
