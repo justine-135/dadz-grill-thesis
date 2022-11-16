@@ -30,12 +30,14 @@ window.addEventListener("load", () => {
       const roleInputs = document.querySelectorAll(".role-input");
 
       roleInputs.forEach((element) => {
-        element.addEventListener("click", () => {
-          element.parentElement.parentElement.previousElementSibling.previousElementSibling.value =
-            element.value;
-          element.parentElement.parentElement.previousElementSibling.childNodes[1].innerHTML =
-            element.value;
-          element.parentElement.parentElement.classList.toggle("open");
+        element.addEventListener("change", () => {
+          console.log(element.previousElementSibling.value);
+          element.previousElementSibling.value = element.value;
+          // element.parentElement.parentElement.previousElementSibling.previousElementSibling.value =
+          //   element.value;
+          // element.parentElement.parentElement.previousElementSibling.childNodes[1].innerHTML =
+          //   element.value;
+          // element.parentElement.parentElement.classList.toggle("open");
         });
       });
     };

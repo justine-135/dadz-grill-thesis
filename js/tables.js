@@ -7,23 +7,9 @@ window.addEventListener("load", () => {
   const tableNumber = document.querySelector(".order-tbl-number");
   const closeOrderBtn = document.querySelector(".close-order-btn");
 
-  const infoServer = (table) => {
-    let xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-      if (this.readyState == 4) {
-        document.querySelector(".order-information").innerHTML =
-          this.responseText;
-      }
-    };
-    xmlhttp.open(
-      "GET",
-      "./includes/orders-view.inc.php?view=" + 1 + "&id=" + table,
-      true
-    );
-    xmlhttp.send();
-  };
+  let statuses = [];
 
-  setInterval(() => {
+  const loadTable = () => {
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
       if (this.readyState == 4) {
@@ -44,8 +30,15 @@ window.addEventListener("load", () => {
           overlay.classList.remove("open");
         });
 
+        let tblStatus = document.querySelectorAll(".table-status");
+
+        tblStatus.forEach((element) => {
+          statuses.push(element.innerHTML);
+        });
+
         for (let i = 1; i < 9; i++) {
           let timer = document.querySelector(`.table-${i}-time`);
+
           if (timer.getAttribute("started") != 1) {
             timer.innerHTML = "00:00:00";
           } else {
@@ -84,7 +77,6 @@ window.addEventListener("load", () => {
             let timeEnd = timer.getAttribute("endtime");
             let duration = timeEnd - seconds;
 
-            console.log(duration);
             if (duration <= 0 || seconds >= timeEnd) {
               timer.innerHTML = "00:00:00";
               var xmlhttp = new XMLHttpRequest();
@@ -106,7 +98,45 @@ window.addEventListener("load", () => {
     };
     xmlhttp.open("GET", "./includes/table-view.inc.php?user=" + 1, true);
     xmlhttp.send();
+  };
+
+  const infoServer = (table) => {
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+      if (this.readyState == 4) {
+        document.querySelector(".order-information").innerHTML =
+          this.responseText;
+      }
+    };
+    xmlhttp.open(
+      "GET",
+      "./includes/orders-view.inc.php?view=" + 1 + "&id=" + table,
+      true
+    );
+    xmlhttp.send();
+  };
+
+  const checkStatuses = () => {
+    if (statuses.includes("Need assistance")) {
+      document.querySelector(".alert-warning-notify").classList.remove("hide");
+    } else {
+      document.querySelector(".alert-warning-notify").classList.add("hide");
+    }
+    statuses = [];
+  };
+
+  setInterval(() => {
+    loadTable();
+    checkStatuses();
   }, 1000);
+
+  loadTable();
+  infoServer();
+  checkStatuses();
+
+  setTimeout(() => {
+    document.querySelector(".alert-div").classList.add("hide");
+  }, 3000);
 
   const toggleLegendBtn = document.querySelector(".legend-btn");
   const toggleLegendBtn2 = document.querySelector(".legend-btn2");

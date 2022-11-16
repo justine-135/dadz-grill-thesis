@@ -3,11 +3,19 @@ window.addEventListener("load", () => {
   dirtyLi.classList.add("active");
   dirtyLi.querySelector(".inactive-link").className = "active-link";
 
-  setInterval(() => {
+  let statuses = [];
+
+  const loadTable = () => {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
       if (this.readyState == 4) {
         document.querySelector(".cleaner-table").innerHTML = this.responseText;
+
+        let tblStatus = document.querySelectorAll(".table-status");
+
+        tblStatus.forEach((element) => {
+          statuses.push(element.innerHTML);
+        });
       }
 
       for (let i = 1; i < 9; i++) {
@@ -77,7 +85,25 @@ window.addEventListener("load", () => {
     };
     xmlhttp.open("GET", "./includes/table-view.inc.php?user=" + 3, true);
     xmlhttp.send();
+  };
+
+  const checkStatuses = () => {
+    if (statuses.includes("Need assistance")) {
+      document.querySelector(".alert-warning-notify").classList.remove("hide");
+    } else {
+      document.querySelector(".alert-warning-notify").classList.add("hide");
+    }
+    console.log(statuses);
+    statuses = [];
+  };
+
+  setInterval(() => {
+    loadTable();
+    checkStatuses();
   }, 1000);
+
+  loadTable();
+  checkStatuses();
 
   const toggleLegendBtn = document.querySelector(".legend-btn");
   const toggleLegendBtn2 = document.querySelector(".legend-btn2");

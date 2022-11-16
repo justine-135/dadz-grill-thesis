@@ -7,35 +7,9 @@ window.addEventListener("load", () => {
   const modalHead = document.querySelector(".action-modal-head");
   const closeModal = document.querySelector(".action-btn-modal .head button");
   const tableId = document.querySelector("#table-id");
-  const attendBtn = document.querySelector("#attend");
-  const attendBtn2 = document.querySelector("#attend2");
-  let id;
 
-  let notAttended;
-
-  const form = document.querySelector("#waiter-form");
-
-  // form.addEventListener("submit", (e) => {
-  //   if (notAttended >= 1) {
-  //     e.preventDefault();
-  //   }
-  // });
-
-  // attendBtn.addEventListener("click", () => {
-  //   document.querySelector(".action-btn-modal").classList.add("attended-table");
-  //   if (notAttended >= 1) {
-  //     document.querySelector(".btn-group").classList.add("hide");
-  //     document.querySelector(".series-orders-attend").classList.remove("hide");
-  //   } else {
-  //     document
-  //       .querySelector(".action-btn-modal")
-  //       .classList.remove("attended-table");
-  //     document.querySelector(".btn-group").classList.remove("hide");
-  //     document.querySelector(".series-orders-attend").classList.add("hide");
-  //   }
-  // });
-
-  setInterval(() => {
+  let statuses = [];
+  const loadTable = () => {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
       if (this.readyState == 4) {
@@ -43,6 +17,12 @@ window.addEventListener("load", () => {
           this.responseText;
         const showBtn = document.querySelectorAll(".show-btn");
         const ordersBtn = document.querySelectorAll(".view-orders");
+
+        let tblStatus = document.querySelectorAll(".table-status");
+
+        tblStatus.forEach((element) => {
+          statuses.push(element.innerHTML);
+        });
 
         showBtn.forEach((element) => {
           element.addEventListener("click", (e) => {
@@ -62,7 +42,6 @@ window.addEventListener("load", () => {
             );
             xmlhttp.send();
 
-            console.log(notAttended);
             id = element.previousElementSibling.innerHTML;
             modalHead.innerHTML =
               "Table no. " + element.previousElementSibling.innerHTML;
@@ -130,9 +109,7 @@ window.addEventListener("load", () => {
 
             const seconds = arr[0] * 3600 + arr[1] * 60 + +arr[2]; // converting
             let timeEnd = timer.getAttribute("endtime");
-            console.log("time end: ", timeEnd);
             let duration = timeEnd - seconds;
-            console.log(seconds);
             if (duration <= 0 || seconds >= timeEnd) {
               timer.innerHTML = "00:00:00";
               var xmlhttp = new XMLHttpRequest();
@@ -142,7 +119,6 @@ window.addEventListener("load", () => {
                 true
               );
               xmlhttp.send();
-              console.log("bloew");
             } else {
               let durationValue = new Date(duration * 1000)
                 .toISOString()
@@ -162,7 +138,29 @@ window.addEventListener("load", () => {
     };
     xmlhttp.open("GET", "./includes/table-view.inc.php?user=" + 2, true);
     xmlhttp.send();
+  };
+
+  const checkStatuses = () => {
+    if (statuses.includes("Need assistance")) {
+      document.querySelector(".alert-warning-notify").classList.remove("hide");
+    } else {
+      document.querySelector(".alert-warning-notify").classList.add("hide");
+    }
+    console.log(statuses);
+    statuses = [];
+  };
+
+  setInterval(() => {
+    loadTable();
+    checkStatuses();
   }, 1000);
+
+  loadTable();
+  checkStatuses();
+
+  setTimeout(() => {
+    document.querySelector(".alert-div").classList.add("hide");
+  }, 3000);
 
   closeModal.addEventListener("click", () => {
     overlay.classList.remove("open");

@@ -1,5 +1,6 @@
 window.addEventListener("load", () => {
   let id = document.querySelector("#bill-id");
+  const alert = document.querySelector(".query-notif");
 
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function () {
@@ -74,7 +75,6 @@ window.addEventListener("load", () => {
 
       const printBtn = document.querySelector("#print");
       const saveBtn = document.querySelector("#save");
-      const alert = document.querySelector(".query-notif");
 
       printBtn.addEventListener("click", () => {
         if (
@@ -106,8 +106,8 @@ window.addEventListener("load", () => {
           parseFloat(totalInput.value.replace(",", ""))
         ) {
           alert.classList.remove("hide");
-          alert.classList.remove("fail");
-          alert.classList.add("success");
+          alert.classList.remove("alert-danger");
+          alert.classList.add("alert-success");
           alert.innerHTML = "Order has been paid.";
 
           const xhttp = new XMLHttpRequest();
@@ -121,9 +121,9 @@ window.addEventListener("load", () => {
           );
         } else {
           alert.classList.remove("hide");
-          alert.classList.remove("success");
-          alert.classList.add("fail");
-          alert.innerHTML = "Process failed.";
+          alert.classList.remove("alert-success");
+          alert.classList.add("alert-danger");
+          alert.innerHTML = "Payment process failed.";
         }
       });
     }
@@ -134,4 +134,8 @@ window.addEventListener("load", () => {
     true
   );
   xmlhttp.send();
+
+  setTimeout(() => {
+    alert.classList.add("hide");
+  }, 5000);
 });
