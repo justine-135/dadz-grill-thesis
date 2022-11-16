@@ -19,7 +19,6 @@ if ($_SESSION["is_superuser"] == 1 or $_SESSION["is_cook"] == 1) {
         <form class="flex-row form-overlay-footer" action="./includes/purchase-contr.inc.php" method="post" enctype="multipart/form-data">
             <input class="order-num" type="text" name="order-num" id="" hidden>
             <input class="table-order" type="text" name="table-order" id="" hidden>
-            <button type="button">Cancel</button>
             <input class="update-ing" type="submit" value="Submit" name="finish">
         </form>
     </div>
@@ -37,7 +36,6 @@ if ($_SESSION["is_superuser"] == 1 or $_SESSION["is_cook"] == 1) {
         <form class="flex-row form-overlay-footer" action="./includes/purchase-contr.inc.php" method="post" enctype="multipart/form-data">
             <input class="order-num2" type="text" name="order-num2" id="" hidden>
             <input class="table-order2" type="text" name="table-order2" id="" hidden>
-            <button type="button">Cancel</button>
             <input class="update-ing" type="submit" value="Submit" name="cancel">
         </form>
     </div>
