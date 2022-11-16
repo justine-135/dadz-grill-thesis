@@ -4,7 +4,7 @@ if (empty($_SESSION["username"])) {
     header("location: login.php?message=");
 }
 
-if (!isset($_GET['id'])){
+if (!isset($_SESSION["table"])){
     header("location: menu.php");
 }
 ?>
@@ -38,7 +38,7 @@ if (!isset($_GET['id'])){
         <form class="submit-sale flex-column" action="includes/purchase-contr.inc.php" method="post" enctype="multipart/form-data">
             <div class="cart-body flex-column">
                 <div class="cart-intro-text">
-                    <h2>Table no. <?php echo $_GET['id'] ?></h2>
+                    <h2>Table no. <?php echo $_SESSION["table"] ?></h2>
                 </div>
                 <div class="cart-list">
                 </div>
@@ -52,9 +52,9 @@ if (!isset($_GET['id'])){
                     </div>
                 </div>
                 <input type="submit" value="Done" name="purchase">
-                <input class="hide" type="text" name="table-id" id="" value="<?php echo $_GET["id"] ?>">
+                <input class="hide" type="text" name="table-id" id="" value="<?php echo $_SESSION["table"] ?>">
                 <input class="hide" type="text" name="waiter-name" id="" value="<?php echo $_SESSION["username"]; ?>">
-                <input class="hide" value="<?php echo $_GET['id']; ?>" type="text" name="table-id" id="" hidden>
+                <input class="hide" value="<?php echo $_SESSION["table"]; ?>" type="text" name="table-id" id="" hidden>
                 <input class="hide" value="<?php echo $_SESSION["uid"]; ?>" type="text" name="uid" id="" hidden>
             </div>
         </form>
