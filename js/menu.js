@@ -110,6 +110,7 @@ window.addEventListener("load", () => {
             const seconds = arr[0] * 3600 + arr[1] * 60 + +arr[2]; // converting
             let timeEnd = timer.getAttribute("endtime");
             let duration = timeEnd - seconds;
+
             if (duration <= 0 || seconds >= timeEnd) {
               timer.innerHTML = "00:00:00";
               var xmlhttp = new XMLHttpRequest();
@@ -146,7 +147,6 @@ window.addEventListener("load", () => {
     } else {
       document.querySelector(".alert-warning-notify").classList.add("hide");
     }
-    console.log(statuses);
     statuses = [];
   };
 

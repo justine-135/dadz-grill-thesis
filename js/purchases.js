@@ -17,7 +17,7 @@ window.addEventListener("load", () => {
   const finishDiv = document.querySelector(".confirm-finish-cancel");
   const cancelDiv = document.querySelector(".confirm-finish-cancel2");
 
-  closeBtn.forEach(element => {
+  closeBtn.forEach((element) => {
     element.addEventListener("click", () => {
       overlay.classList.remove("open");
     });
@@ -66,9 +66,12 @@ window.addEventListener("load", () => {
             orderNumber.innerHTML = "Finish order - " + id;
             orderId.value =
               element.parentElement.parentElement.childNodes[1].innerHTML;
-            tableId.value = element.parentElement.parentElement.childNodes[3].innerHTML;
+            tableId.value =
+              element.parentElement.parentElement.childNodes[3].innerHTML;
 
-            console.log(element.parentElement.parentElement.childNodes[3].innerHTML);
+            console.log(
+              element.parentElement.parentElement.childNodes[3].innerHTML
+            );
             confirmOrder(id);
           });
         });
@@ -83,18 +86,23 @@ window.addEventListener("load", () => {
             orderNumber2.innerHTML = "Cancel order - " + id;
             orderId2.value =
               element.parentElement.parentElement.childNodes[1].innerHTML;
-              tableId2.value = element.parentElement.parentElement.childNodes[3].innerHTML;
+            tableId2.value =
+              element.parentElement.parentElement.childNodes[3].innerHTML;
 
             cancelOrder(id);
           });
         });
       }
     };
-    xmlhttp.open("GET", "./includes/purchase-view.inc.php?view="+1, true);
+    xmlhttp.open("GET", "./includes/purchase-view.inc.php?view=" + 1, true);
     xmlhttp.send();
   };
 
   setInterval(() => {
     loadOrders();
   }, 1000);
+
+  setTimeout(() => {
+    document.querySelector(".alert-div").classList.add("hide");
+  }, 3000);
 });

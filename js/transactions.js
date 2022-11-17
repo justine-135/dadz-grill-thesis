@@ -166,9 +166,11 @@ window.addEventListener("load", () => {
   // Search event
   searchTransction2.addEventListener("change", (e) => {
     date2 = e.target.value;
+    console.log(date2);
   });
   searchTransction.addEventListener("change", (e) => {
     date = e.target.value;
+    console.log(date);
     const transactionTbl = document.querySelector(".transaction-tbl-data");
     const transactionTblDate = document.querySelector(
       ".transaction-tbl-data-date"
