@@ -6,7 +6,7 @@ class UsersView extends Users{
         ?>
         <thead>
             <tr>
-                <th style="text-align: left; padding-left: 10px">Account #</th>
+                <th style="text-align: left; padding-left: 10px">#</th>
                 <th style="text-align: left; padding-left: 10px">Full name</th>
                 <th style="text-align: left; padding-left: 10px">Username</th>
                 <th style="text-align: left; padding-left: 10px">Email</th>

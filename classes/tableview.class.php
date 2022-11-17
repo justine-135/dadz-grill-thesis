@@ -87,20 +87,20 @@ class TableView extends Table
             <td><?php
                     if ($row['payment'] == "Requesting") {
                         ?>
-                    <span class="requesting"> Requesting</span>
+                    <span class="requesting text-center"> Requesting</span>
                         <?php
                     } elseif ($row['payment'] == "Bill out"){
                         ?>
-                    <span class="completed">Completed</span>
+                    <span class="completed text-center">Completed</span>
                         <?php
                     } elseif ($row['payment'] == "Pending"){
                         ?>
-                    <span class="pending">Pending</span>
+                    <span class="pending text-center">Pending</span>
                         <?php
                     }
                     else{
                         ?>
-                    <span class="noorder">No order</span>
+                    <span class="noorder text-center">No order</span>
                         <?php
                     }
                     ?>
@@ -212,20 +212,20 @@ class TableView extends Table
                 <?php
                     if ($row['payment'] == "Requesting") {
                         ?>
-                    <span class="requesting"> Requested</span>
+                    <span class="requesting text-center"> Requested</span>
                         <?php
                     } elseif ($row['payment'] == "Bill out"){
                         ?>
-                    <span class="completed">Completed</span>
+                    <span class="completed text-center">Completed</span>
                         <?php
                     } elseif ($row['payment'] == "Pending"){
                         ?>
-                    <span class="pending">Pending</span>
+                    <span class="pending text-center">Pending</span>
                         <?php
                     }
                     else{
                         ?>
-                    <span class="noorder">No order</span>
+                    <span class="noorder text-center">No order</span>
                         <?php
                     }
                     ?>
@@ -234,22 +234,22 @@ class TableView extends Table
                     <?php 
                         if ($row['pending_orders'] == 0 && $row['payment'] == 'Pending' && $row['done_orders'] == 0) {
                             ?>
-                        <span class="completed">Completed</span>
+                        <span class="completed text-center">Completed</span>
                             <?php               
                         }
                         elseif ($row['done_orders'] > 0) {
                             ?>
-                        <span class="requesting"><?php echo "Pick Up (" . $row['done_orders'] . ")" ?></span>
+                        <span class="requesting text-center"><?php echo "Pick Up (" . $row['done_orders'] . ")" ?></span>
                             <?php               
                         }
                         elseif ($row['pending_orders'] > 0) {
                            ?>
-                        <span class="pending"><?php echo "Pending (" . $row['pending_orders'] . ")"; ?></span>
+                        <span class="pending text-center"><?php echo "Pending (" . $row['pending_orders'] . ")"; ?></span>
                            <?php
                         }
                         else{
                             ?>
-                        <span class="noorder">No order</span>
+                        <span class="noorder text-center">No order</span>
                             <?php
                         }
                     ?>
@@ -351,20 +351,20 @@ class TableView extends Table
                 <?php
                     if ($row['payment'] == "Requesting") {
                         ?>
-                    <span class="requesting"> Requested</span>
+                    <span class="requesting text-center"> Requested</span>
                         <?php
                     } elseif ($row['payment'] == "Bill out"){
                         ?>
-                    <span class="completed">Completed</span>
+                    <span class="completed text-center">Completed</span>
                         <?php
                     } elseif ($row['payment'] == "Pending"){
                         ?>
-                    <span class="pending">Pending</span>
+                    <span class="pending text-center">Pending</span>
                         <?php
                     }
                     else{
                         ?>
-                    <span class="noorder">No order</span>
+                    <span class="noorder text-center">No order</span>
                         <?php
                     }
                     ?>

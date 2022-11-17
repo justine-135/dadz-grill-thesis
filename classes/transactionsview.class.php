@@ -59,7 +59,7 @@ class TransactionsView extends Transactions{
                     echo "Pending";
                 }
                 elseif($row['paid'] == 1){
-                    echo "Complete";
+                    echo "Completed";
                 }
                 elseif($row['paid'] == 3){
                     echo "Cancelled";
@@ -134,7 +134,7 @@ class TransactionsView extends Transactions{
                     echo "Pending";
                 }
                 elseif($row['paid'] == 1){
-                    echo "Complete";
+                    echo "Completed";
                 }
                 elseif($row['paid'] == 3){
                     echo "Cancelled";
@@ -442,7 +442,7 @@ for ($i=0; $i < (count($result)); $i++) {
                     echo "Pending";
                 }
                 elseif($row['paid'] == 1){
-                    echo "Complete";
+                    echo "Completed";
                 }
                 elseif($row['paid'] == 3){
                     echo "Cancelled";
@@ -512,7 +512,7 @@ for ($i=0; $i < (count($result)); $i++) {
                     echo "Pending";
                 }
                 elseif($row['paid'] == 1){
-                    echo "Complete";
+                    echo "Completed";
                 }
                 elseif($row['paid'] == 3){
                     echo "Cancelled";

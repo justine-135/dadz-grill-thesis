@@ -104,7 +104,7 @@ class SalesView extends Sales{
         <?php
     }
     public function initSalesReportDate($date, $date2){
-        $results = $this->getSalesReportDate($date, $date);
+        $results = $this->getSalesReportDate($date, $date2);
         ?>
         <thead>
             <tr>
