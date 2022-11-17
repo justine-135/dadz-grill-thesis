@@ -56,7 +56,7 @@ if ($_SESSION["is_superuser"] == 1 or $_SESSION["is_cook"] == 1) {
     <div class="tables orders-list">
     </div>
 </div>
-<div class="alert">
+<div class="alert-div">
 
     <?php
 
@@ -64,9 +64,19 @@ if ($_SESSION["is_superuser"] == 1 or $_SESSION["is_cook"] == 1) {
         $alert = $_GET["alert"];
         $id = $_GET["id"];
         if ($alert == "order_finish") {
-            echo "<span class='query-notif success'>Order " . $id . " has been submitted!</span>";
+            ?>
+            <!-- echo "<span class='query-notif fail'>No bill request for table " . $id . "!</span>"; -->
+            <div class="alert alert-success d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
+            Order <strong class="mx-1"><?php echo $id ?></strong> is submitted successfully.
+            </div>
+            <?php        
         } elseif ($alert == "order_cancel") {
-            echo "<span class='query-notif success'>Table " . $id . " order has been cancelled!</span>";
+            ?>
+            <!-- echo "<span class='query-notif fail'>No bill request for table " . $id . "!</span>"; -->
+            <div class="alert alert-success d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
+            Order <strong class="mx-1"><?php echo $id ?></strong> is cancelled successfully.
+            </div>
+            <?php  
         } else {
             echo "<span></span>";
         }
