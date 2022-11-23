@@ -128,7 +128,7 @@ if ($_SESSION["is_superuser"] == 1 || $_SESSION["is_cleaner"] == 1) {
                     <path d="M0 96C0 60.65 28.65 32 64 32H448C483.3 32 512 60.65 512 96V416C512 451.3 483.3 480 448 480H64C28.65 480 0 451.3 0 416V96zM64 160H128V96H64V160zM448 96H192V160H448V96zM64 288H128V224H64V288zM448 224H192V288H448V224zM64 416H128V352H64V416zM448 352H192V416H448V352z" />
                 </svg>
             </div>
-            <h3>Dirty tables</h3>
+            <h4>Dirty tables</h4>
         </div>
     </nav>
     <div class="main-content tables-container">
