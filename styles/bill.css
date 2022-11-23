@@ -4,11 +4,10 @@
 }
 
 .bill-tbl-data nav {
-  position: fixed;
   background-color: white;
   width: 100%;
   border-bottom: 1px solid rgba(128, 128, 128, 0.24);
-  padding: 10px 250px 10px 20px;
+  padding: 10px;
 }
 
 .bill-tbl-data nav div:nth-child(2),
@@ -37,9 +36,9 @@
   border: 1px solid rgb(201, 201, 201);
 }
 
-.bill-order-tbl {
+/* .bill-order-tbl {
   margin-top: 77px;
-}
+} */
 
 .bill-td-submit input[type="submit"] {
   font-family: "Nunito Sans", sans-serif;

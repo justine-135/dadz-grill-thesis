@@ -28,3 +28,19 @@
   height: 40px;
   border-radius: 50%;
 }
+
+@media screen and (max-width: 820px) {
+  .form-overlay .head {
+    padding-bottom: 10px !important;
+  }
+  .insert-item-form .col1 {
+    display: block;
+    padding: 0;
+    height: 200px;
+    overflow-y: auto;
+  }
+
+  .form-overlay-footer {
+    padding-top: 10px !important;
+  }
+}
