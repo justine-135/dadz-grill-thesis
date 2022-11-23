@@ -10,7 +10,11 @@
     
     elseif (isset($_POST["process"])) {
         $id = $_POST["id"];
-        header("location: ../bill.php?id=".$id);
+
+        session_start();
+        $_SESSION["bill_id"] = $id;
+        echo $_SESSION["bill_id"];
+        header("location: ../bill.php");
     }  
 
     elseif (isset($_POST["save"])) {

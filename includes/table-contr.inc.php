@@ -74,6 +74,13 @@
         $getID->initGetId($id);
     }
 
+    elseif (isset($_POST['counter'])){
+        $counter = $_POST['counter'];
+        // echo $counter;
+        $counter = new TableContr($id);
+        $counter->initCounter($id);
+    }
+
     else{
         header("location: ../menu.php");
     }
