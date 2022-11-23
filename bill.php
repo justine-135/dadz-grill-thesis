@@ -1,10 +1,9 @@
 <?php
-if (isset($_GET['id'])) {
 
 include "header.php";
 if ($_SESSION["is_superuser"] == 1 or $_SESSION["is_cashier"] == 1) {
 ?>
-<input type="text" name="bill-id" id="bill-id" value="<?php echo $_GET['id'] ?>" hidden>
+<input type="text" name="bill-id" id="bill-id" value="<?php echo $_SESSION["bill_id"] ?>" hidden>
 <nav class="inventory-nav nav-page flex-row">
     <div class="title flex-row">
         <div class="circle-svg">
@@ -53,8 +52,4 @@ if ($_SESSION["is_superuser"] == 1 or $_SESSION["is_cashier"] == 1) {
     </div>
 
 <?php }
-}
-else{
-    header("location: transactions.php");
-}
 ?>
