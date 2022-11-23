@@ -43,6 +43,7 @@ class TableContr extends Table{
         $this->setStopTimer($id);
     }
 
+
     public function initGetId($id){
         $results = $this->setGetId($id);
         foreach ($results as $row) {
@@ -59,6 +60,10 @@ class TableContr extends Table{
                 echo "3";
             }
         }
+    }
+
+    public function initCounter($counter){
+        echo $counter;
     }
 }
 ?>
