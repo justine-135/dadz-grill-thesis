@@ -108,6 +108,14 @@ class Table extends Dbh
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
+        session_start();
+        $id = $_SESSION["uid"];
+        $sql = "INSERT INTO served (`user_id`, served)
+        VALUES ('$id', 1)";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+        $stmt = null; 
+        
         header("location: ../dirty.php?alert=dirty&id=" . $tblId);
     }
 

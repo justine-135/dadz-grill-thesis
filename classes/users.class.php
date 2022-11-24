@@ -187,6 +187,37 @@ class Users extends Dbh{
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
     }
+
+    protected function getUserCompliance($date, $date2){
+        if (empty($date) || empty($date2)) {
+            $sql = "SELECT users.id, users.username, users.is_superuser, users.is_cashier, users.is_waiter, users.is_cook, users.is_cleaner, SUM(served.served), served.date_time
+            FROM `served`, `users` 
+            WHERE users.id = served.user_id
+            GROUP BY users.username";
+    
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute();
+    
+            $results = $stmt->fetchAll();
+    
+            return $results;
+        }
+        else{
+            $sql = "SELECT users.id, users.username, users.is_superuser, users.is_cashier, users.is_waiter, users.is_cook, users.is_cleaner, SUM(served.served), served.date_time
+            FROM `served`, `users` 
+            WHERE users.id = served.user_id
+            AND DATE(date_time) BETWEEN '$date' AND '$date2'
+            GROUP BY users.username";
+    
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute();
+    
+            $results = $stmt->fetchAll();
+    
+            return $results;
+        }
+ 
+    }
 }
 
 ?>

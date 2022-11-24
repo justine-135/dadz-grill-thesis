@@ -143,20 +143,34 @@ class Transactions extends Dbh
             }
         }
 
-        $sql = "UPDATE transactions SET reg_date = reg_date, paid = true WHERE id = $id";
-        $stmt = $this->connection()->prepare($sql);
-        $stmt->execute();
-        $stmt = null;
+        foreach ($results as $row) {
+            $isPaid = $row["paid"];
+        }
 
-        $sql = "UPDATE tables SET table_status = 'Dirty', timer = 0, payment = 'Paid' WHERE id = $tbl";
-        $stmt = $this->connection()->prepare($sql);
-        $stmt->execute();
-        $stmt = null;
+        if ($isPaid != 1) {
+            $sql = "UPDATE transactions SET reg_date = reg_date, paid = true WHERE id = $id";
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute();
+            $stmt = null;
 
-        $sql = "DELETE FROM series_orders WHERE table_id=$tbl";
-        $stmt = $this->connection()->prepare($sql);
-        $stmt->execute();
-        $stmt = null;
+            session_start();
+            $id = $_SESSION["uid"];
+            $sql = "INSERT INTO served (`user_id`, served)
+            VALUES ('$id', 1)";
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute();
+            $stmt = null;  
+    
+            $sql = "UPDATE tables SET table_status = 'Dirty', timer = 0, payment = 'Paid' WHERE id = $tbl";
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute();
+            $stmt = null;
+    
+            $sql = "DELETE FROM series_orders WHERE table_id=$tbl";
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute();
+            $stmt = null;
+        }
 
         exit();
     }

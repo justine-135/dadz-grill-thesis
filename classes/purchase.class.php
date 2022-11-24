@@ -102,6 +102,14 @@ class Purchase extends Dbh{
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
+
+        session_start();
+        $id = $_SESSION["uid"];
+        $sql = "INSERT INTO served (`user_id`, served)
+        VALUES ('$id', 1)";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+        $stmt = null; 
     }
 
     protected function setCancel($oid, $tid){

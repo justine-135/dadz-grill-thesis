@@ -56,13 +56,13 @@ class TransactionsView extends Transactions{
                 ?>    
                 </td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php if ($row['paid'] == 0) {
-                    echo "Pending";
+                    echo "<span class='pending'>Pending</span>";
                 }
                 elseif($row['paid'] == 1){
-                    echo "Completed";
+                    echo "<span class='completed'>Completed</span>";
                 }
                 elseif($row['paid'] == 3){
-                    echo "Cancelled";
+                    echo "<span class='cancelled'>Cancelled</span>";
                 }?></td>
                 <td valign="top" class="action-td status-action-col pad10">
                     <form action="./includes/transactions-contr.inc.php" method="POST">
@@ -131,13 +131,13 @@ class TransactionsView extends Transactions{
                 ?>    
                 </td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php if ($row['paid'] == 0) {
-                    echo "Pending";
+                    echo "<span class='pending'>Pending</span>";
                 }
                 elseif($row['paid'] == 1){
-                    echo "Completed";
+                    echo "<span class='completed'>Completed</span>";
                 }
                 elseif($row['paid'] == 3){
-                    echo "Cancelled";
+                    echo "<span class='cancelled'>Cancelled</span>";
                 }?></td>
                 <td valign="top" class="action-td status-action-col pad10">
                     <form action="./includes/transactions-contr.inc.php" method="POST">
@@ -311,11 +311,6 @@ for ($i=0; $i < (count($result)); $i++) {
         align-items: center;
         justify-content: space-between;
     }
-    /* @media print and (width: 70cm) and (height: 11in) {
-        @page {
-            margin: 1in;
-        }
-} */
 
     </style>
     <title>Document</title>
@@ -439,7 +434,7 @@ for ($i=0; $i < (count($result)); $i++) {
                 ?>    
                 </td>
                 <td class="pad10" valign="top" style="text-align: left"><?php if ($row['paid'] == 0) {
-                    echo "Pending";
+                    echo "<span class='pending'>Pending</span>";
                 }
                 elseif($row['paid'] == 1){
                     echo "Completed";

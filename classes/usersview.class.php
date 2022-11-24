@@ -254,5 +254,43 @@ class UsersView extends Users{
         <?php
         }
     }
+
+    public function initUserCompliance($date, $date2){
+        $results = $this->getUserCompliance($date, $date2);
+
+        ?>
+        <thead>
+            <tr>
+                <th style="text-align: left; padding-left: 10px">Name</th>
+                <th style="text-align: left; padding-left: 10px">Role</th>
+                <th style="text-align: left; padding-left: 10px">Date</th>
+                <th style="text-align: left; padding-left: 10px">Served</th>
+            </tr>
+        </thead>
+        <?php
+            foreach ($results as $row) {
+        ?>
+        <tbody>
+            <tr id ="<?php echo $row['id']; ?>" >
+                <td style="text-align: left; padding-left: 10px"><?php echo $row['username']; ?></td>
+                <td style="text-align: left; padding-left: 10px"><?php if ($row["is_superuser"] == 1) {
+                    echo "Manager";
+                }elseif ($row["is_cashier"]) {
+                    echo "Cashier";
+                }elseif ($row["is_waiter"]) {
+                    echo "Waiter";
+                }elseif ($row["is_cook"]) {
+                    echo "Cook";
+                }elseif ($row["is_cleaner"]) {
+                    echo "Cleaner";
+                } ?></td>
+                <td style="text-align: left; padding-left: 10px"><?php $date=date_create($row["date_time"]);
+echo date_format($date,"Y/m/d");  ?></td>
+                <td style="text-align: left; padding-left: 10px"><?php echo $row['SUM(served.served)']; ?></td>
+            </tr>
+        </tbody>
+        <?php
+        }
+    }
 }
 ?>
