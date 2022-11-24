@@ -243,6 +243,15 @@
   font-weight: 700;
 }
 
+.cancelled {
+  display: block;
+  border-radius: 5px;
+  background-color: rgba(241, 241, 71, 0.295);
+  color: red;
+  width: 100px;
+  font-weight: 700;
+}
+
 .completed {
   display: block;
   border-radius: 5px;
