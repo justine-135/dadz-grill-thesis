@@ -127,7 +127,7 @@ window.addEventListener("load", () => {
         viewBtn[0].disabled = true;
       }
     };
-    xmlhttp.open("GET", "./includes/users-view.inc.php", true);
+    xmlhttp.open("GET", "./includes/users-view.inc.php?view=1", true);
     xmlhttp.send();
   }, 1000);
 });
