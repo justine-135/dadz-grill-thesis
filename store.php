@@ -74,6 +74,12 @@ if (!isset($_SESSION["table"])){
                         <span>Sets</span>
                     </div>
                 </button>
+                <button id="meat">
+                    <div class="image"></div>
+                    <div class="text">
+                        <span>Meat</span>
+                    </div>
+                </button>
                 <button id="sides">
                     <div class="image"></div>
                     <div class="text">
