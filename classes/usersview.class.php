@@ -10,7 +10,6 @@ class UsersView extends Users{
                 <th style="text-align: left; padding-left: 10px">Full name</th>
                 <th style="text-align: left; padding-left: 10px">Username</th>
                 <th style="text-align: left; padding-left: 10px">Email</th>
-                <th style="text-align: left; padding-left: 10px">Online</th>
                 <th style="text-align: left; padding-left: 10px">Role</th>
                 <th>Actions</th>
             </tr>
@@ -26,18 +25,6 @@ class UsersView extends Users{
                 <td class="name" style="text-align: left; padding-left: 10px"><?php echo $row['fullname']; ?></td>
                 <td style="text-align: left; padding-left: 10px"><?php echo $row['username']; ?></td>
                 <td style="text-align: left; padding-left: 10px"><?php echo $row['email']; ?></td>
-                <?php
-                    if ($row['is_active'] == 1) {
-                ?>
-                <td class="isactive_user" style="text-align: left; padding-left: 10px"> <span class="yesactive">Yes</span> </td>
-                <?php
-                    }
-                    else{
-                ?>
-                <td class="isactive_user" style="text-align: left; padding-left: 10px"> <span class="noactive">No</span> </td>
-                <?php
-                    }
-                ?>
                 <td style="text-align: left; padding-left: 10px">
                     <?php
                         if ($row['is_superuser'] == 1) {
@@ -261,9 +248,9 @@ class UsersView extends Users{
         ?>
         <thead>
             <tr>
+                <th style="text-align: left; padding-left: 10px">User #</th>
                 <th style="text-align: left; padding-left: 10px">Name</th>
                 <th style="text-align: left; padding-left: 10px">Role</th>
-                <th style="text-align: left; padding-left: 10px">Date</th>
                 <th style="text-align: left; padding-left: 10px">Served</th>
             </tr>
         </thead>
@@ -272,6 +259,7 @@ class UsersView extends Users{
         ?>
         <tbody>
             <tr id ="<?php echo $row['id']; ?>" >
+                <td style="text-align: left; padding-left: 10px"><?php echo $row['id']; ?></td>
                 <td style="text-align: left; padding-left: 10px"><?php echo $row['username']; ?></td>
                 <td style="text-align: left; padding-left: 10px"><?php if ($row["is_superuser"] == 1) {
                     echo "Manager";
@@ -284,8 +272,6 @@ class UsersView extends Users{
                 }elseif ($row["is_cleaner"]) {
                     echo "Cleaner";
                 } ?></td>
-                <td style="text-align: left; padding-left: 10px"><?php $date=date_create($row["date_time"]);
-echo date_format($date,"Y/m/d");  ?></td>
                 <td style="text-align: left; padding-left: 10px"><?php echo $row['SUM(served.served)']; ?></td>
             </tr>
         </tbody>

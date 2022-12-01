@@ -9,6 +9,7 @@ class TableView extends Table
         <thead>
             <tr>
                 <th>#</th>
+                <th>Connected</th>
                 <th class="">Status</th>
                 <th>Time</th>
                 <th>Payment</th>
@@ -22,9 +23,11 @@ class TableView extends Table
         ?>
             <tr>
                 <td><span><?php echo $row['number'] ?></span></td>
+                <td><span class="table-conn-<?php echo $row['number'] ?> connected"></span></td>
+                <td class="table-data-conn-<?php echo $row['number'] ?> hide"><?php echo $row['counter'] ?></td>
                 <td>
                     <div class="flex-row">
-                    <?php
+                    <?php   
                     if ($row['table_status'] == "Occupied") {
                     ?>
                         <span class="table-data-status red"></span>
@@ -128,6 +131,8 @@ class TableView extends Table
             ?>
         <tr class="hide">
             <td><span><?php echo $row['number'] ?></span></td>
+            <td class="table-conn-<?php echo $row['number'] ?>">No</td>
+            <td class="table-data-conn-<?php echo $row['number'] ?> hide"><?php echo $row['counter'] ?></td>
             <td>
                 <div class="flex-row">
                     <?php
@@ -230,6 +235,7 @@ class TableView extends Table
         <thead>
             <tr>
                 <th>#</th>
+                <th>Connected</th>
                 <th>Status</th>
                 <th>Time</th>
                 <th>Payment</th>
@@ -243,6 +249,8 @@ class TableView extends Table
         ?>
             <tr>
                 <td><span><?php echo $row['number'] ?></span></td>
+                <td><span class="table-conn-<?php echo $row['number'] ?> connected"></span></td>
+                <td class="table-data-conn-<?php echo $row['number'] ?> hide"><?php echo $row['counter'] ?></td>
                 <td>
                     <div class="flex-row">
                         <?php
@@ -363,6 +371,8 @@ class TableView extends Table
             ?>
         <tr class="hide">
             <td><span><?php echo $row['number'] ?></span></td>
+            <td><span class="table-conn-<?php echo $row['number'] ?> connected"></span></td>
+            <td class="table-data-conn-<?php echo $row['number'] ?> hide"><?php echo $row['counter'] ?></td>
             <td>
                 <div class="flex-row">
                     <?php
@@ -465,6 +475,7 @@ class TableView extends Table
         <thead>
             <tr>
                 <th>#</th>
+                <th>Connected</th>
                 <th class="">Status</th>
                 <th>Time</th>
                 <th>Payment</th>
@@ -479,6 +490,8 @@ class TableView extends Table
         ?>
             <tr>
                 <td><span><?php echo $row['number'] ?></span></td>
+                <td><span class="table-conn-<?php echo $row['number'] ?> connected"></span></td>
+                <td class="table-data-conn-<?php echo $row['number'] ?> hide"><?php echo $row['counter'] ?></td>
                 <td>
                     <div class="flex-row">
                         <?php
@@ -578,6 +591,8 @@ class TableView extends Table
             ?>
         <tr class="hide">
             <td><span><?php echo $row['number'] ?></span></td>
+            <td><span class="table-conn-<?php echo $row['number'] ?> connected"></span></td>
+            <td class="table-data-conn-<?php echo $row['number'] ?> hide"><?php echo $row['counter'] ?></td>
             <td>
                 <div class="flex-row">
                     <?php
@@ -680,6 +695,7 @@ class TableView extends Table
         <thead>
             <tr>
                 <th>#</th>
+                <th>Connected</th>
                 <th class="">Status</th>
                 <th>Time</th>
                 <th>Payment</th>
@@ -692,6 +708,8 @@ class TableView extends Table
                 ?>
             <tr>
                 <td><span><?php echo $row['number'] ?></span></td>
+                <td><span class="table-conn-<?php echo $row['number'] ?> connected"></span></td>
+                <td class="table-data-conn-<?php echo $row['number'] ?> hide"><?php echo $row['counter'] ?></td>
                 <td>
                     <div class="flex-row">
                         <?php
@@ -788,6 +806,8 @@ class TableView extends Table
                 ?>
             <tr class="hide">
                 <td><span><?php echo $row['number'] ?></span></td>
+                <td class="table-conn-<?php echo $row['number'] ?>">No</td>
+                <td class="table-data-conn-<?php echo $row['number'] ?> hide"><?php echo $row['counter'] ?></td>
                 <td>
                     <div class="flex-row">
                         <?php

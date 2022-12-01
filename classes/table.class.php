@@ -349,6 +349,23 @@ class Table extends Dbh
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null; 
-        header("location: ../setting.php?alert=success&id=" . $tableNumber);
+        header("location: ../setting.php?alert=deleted&id=" . $tableNumber);
+    }
+
+    protected function setCounter($id, $counter)
+    {
+        $intCounter = intval($counter);
+        $sql = "UPDATE tables SET `counter`= `counter` + 1  WHERE `number` = $id";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+        $stmt = null; 
+    }
+
+    protected function resetCounter($id)
+    {
+        $sql = "UPDATE tables SET `counter`= 0  WHERE `id` = $id";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+        $stmt = null; 
     }
 }

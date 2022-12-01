@@ -62,8 +62,12 @@ class TableContr extends Table{
         }
     }
 
-    public function initCounter($counter){
-        echo $counter;
+    public function initCounter($id, $counter){
+        $this->setCounter($id, $counter);
+    }
+
+    public function initResetCounter($id){
+        $this->resetCounter($id);
     }
 
     public function initTable ($tableNumber){

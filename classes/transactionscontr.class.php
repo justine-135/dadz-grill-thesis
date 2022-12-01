@@ -8,6 +8,12 @@ class TransactionsContr extends Transactions{
     public function initPaid($id, $tbl){
         $this->setPaid($id, $tbl);
     }
+
+    
+    public function initUnoccupy($tblId){
+        $this->setUnoccupied($tblId);
+    }
+    
 }
 
 ?>
