@@ -177,50 +177,22 @@
   width: 30%;
 }
 
-.table-timer-col.table-1-time.endtime,
-.table-timer-col.table-2-time.endtime,
-.table-timer-col.table-3-time.endtime,
-.table-timer-col.table-4-time.endtime,
-.table-timer-col.table-5-time.endtime,
-.table-timer-col.table-6-time.endtime,
-.table-timer-col.table-7-time.endtime,
-.table-timer-col.table-8-time.endtime {
+.table-timer-col.endtime {
   color: red;
   font-weight: 700;
 }
 
-.table-timer-col.table-1-time.warningtime,
-.table-timer-col.table-2-time.warningtime,
-.table-timer-col.table-3-time.warningtime,
-.table-timer-col.table-4-time.warningtime,
-.table-timer-col.table-5-time.warningtime,
-.table-timer-col.table-6-time.warningtime,
-.table-timer-col.table-7-time.warningtime,
-.table-timer-col.table-8-time.warningtime {
+.table-timer-col.warningtime {
   color: rgb(255, 115, 0);
   font-weight: 700;
 }
 
-.table-timer-col.table-1-time.runningtime,
-.table-timer-col.table-2-time.runningtime,
-.table-timer-col.table-3-time.runningtime,
-.table-timer-col.table-4-time.runningtime,
-.table-timer-col.table-5-time.runningtime,
-.table-timer-col.table-6-time.runningtime,
-.table-timer-col.table-7-time.runningtime,
-.table-timer-col.table-8-time.runningtime {
+.table-timer-col.runningtime {
   color: rgb(91, 94, 250);
   font-weight: 700;
 }
 
-.table-timer-col.table-1-time.runningtimeend,
-.table-timer-col.table-2-time.runningtimeend,
-.table-timer-col.table-3-time.runningtimeend,
-.table-timer-col.table-4-time.runningtimeend,
-.table-timer-col.table-5-time.runningtimeend,
-.table-timer-col.table-6-time.runningtimeend,
-.table-timer-col.table-7-time.runningtimeend,
-.table-timer-col.table-8-time.runningtimeend {
+.table-timer-col.runningtimeend {
   color: rgb(25, 241, 6);
 }
 

@@ -101,3 +101,41 @@
   margin-top: 10px;
   color: red !important;
 }
+
+@media screen and (max-width: 1155px) {
+  .modal-register {
+    flex-direction: column;
+  }
+  .modal-register .head {
+    width: 100%;
+  }
+  .modal-register .head h1 {
+    margin-top: 60px;
+  }
+  .modal-register .body {
+    margin: 30px 0;
+    width: 100%;
+  }
+  .admin-info,
+  .admin-contacts,
+  .admin-userpass,
+  .admin-usertype,
+  .admin-create {
+    flex-direction: column;
+  }
+  .admin-create {
+    align-items: center;
+    padding-bottom: 60px;
+  }
+  .register-input {
+    width: 80%;
+    margin-right: 0;
+  }
+  .register-input input,
+  .register-input select {
+    width: 100% !important;
+  }
+  .create-account-btn {
+    margin: 0;
+  }
+}

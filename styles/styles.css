@@ -12,6 +12,7 @@
 @import url("./receipt.css");
 @import url("./transaction.css");
 @import url("./login_history.css");
+@import url("./setting.css");
 
 * {
   margin: 0%;
