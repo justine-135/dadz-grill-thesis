@@ -13,8 +13,8 @@ if ($_SESSION["is_superuser"] == 1) {
             </svg></button>
         </div>
         <div class="body order-confirm-finish settings">
-            <span>Table number</span>
-            <input class="input-table-id" type="text" name="" id="">
+            <span>Table number:</span>
+            <input class="input-table-id" type="text" name="" id="" placeholder="max: 20">
         </div>
         <form class="flex-row form-overlay-footer" action="./includes/table-contr.inc.php" method="post" enctype="multipart/form-data">
             <input class="table-id" type="text" name="table-id" id="" hidden>
@@ -65,18 +65,23 @@ if ($_SESSION["is_superuser"] == 1) {
     if (isset($_GET["alert"]) || isset($_GET["id"])) {
         $alert = $_GET["alert"];
         $id = $_GET["id"];
+        
         if ($alert == "success") {
             ?>
-            <!-- echo "<span class='query-notif fail'>No bill request for table " . $id . "!</span>"; -->
             <div class="alert alert-success d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
             Table <strong class="mx-1"><?php echo $id ?></strong> is added.
             </div>
             <?php        
         } elseif ($alert == "fail") {
             ?>
-            <!-- echo "<span class='query-notif fail'>No bill request for table " . $id . "!</span>"; -->
             <div class="alert alert-danger d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
-            Table <strong class="mx-1"><?php echo $id ?></strong> is not added.
+            Table is not added.
+            </div>
+            <?php  
+        } elseif ($alert == "deleted") {
+            ?>
+            <div class="alert alert-success d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
+            Table <strong class="mx-1"><?php echo $id ?></strong> is deleted.
             </div>
             <?php  
         } else {
