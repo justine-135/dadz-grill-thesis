@@ -9,6 +9,10 @@
             $timer = new TableContr($id);
             $timer->initStopTableTimer($id);
         }
+        elseif ($contr == 2) {
+            $counter = new TableContr($id);
+            $counter->initResetCounter($id);
+        }
     }
 
     elseif (isset($_POST["menu"])) {
@@ -49,7 +53,7 @@
     elseif (isset($_POST['unoccupy'])) {
         $tblId = $_POST["table-id"];
 
-        $unoccupy = new TableContr();
+        $unoccupy = new TransactionsContr();
         $unoccupy->initUnoccupy($tblId);
     }
 
@@ -74,11 +78,12 @@
         $getID->initGetId($id);
     }
 
-    elseif (isset($_POST['counter'])){
-        $counter = $_POST['counter'];
-        // echo $counter;
-        $counter = new TableContr($id);
-        $counter->initCounter($id);
+    elseif (isset($_POST['cntr'])){
+        $counter = $_POST['cntr'];
+        $id = $_POST['id'];
+
+        $counter = new TableContr($id, $counter);
+        $counter->initCounter($id, $counter);
 
         echo $counter;
     }
@@ -87,7 +92,10 @@
         $tableNumber = $_POST["table-id"];
 
         if (!preg_match("/^[0-9]*$/", $tableNumber)) {
-            header("location: ../setting.php");
+            header("location: ../setting.php?alert=fail");
+        }
+        elseif ($tableNumber > 20) {
+            header("location: ../setting.php?alert=fail");
         }
         else{
             $addTable = new TableContr($tableNumber);
