@@ -20,6 +20,28 @@ window.addEventListener("load", () => {
 
       for (let i = 1; i < 120; i++) {
         let timer = document.querySelector(`.table-${i}-time`);
+
+        let connData = document.querySelector(`.table-data-conn-${i}`);
+        let connText = document.querySelector(`.table-conn-${i}`);
+
+        let counterVal = parseInt(connData.innerHTML);
+        if (counterVal > 0) {
+          connText.classList.remove("disconnected");
+          connText.innerHTML = "Yes";
+          setTimeout(() => {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open(
+              "GET",
+              `./includes/table-contr.inc.php?contr=2&id=${i}`,
+              true
+            );
+            xmlhttp.send();
+          }, 6000);
+        } else {
+          connText.classList.add("disconnected");
+          connText.innerHTML = "No";
+        }
+
         if (timer.getAttribute("started") != 1) {
           timer.innerHTML = "00:00:00";
         } else {
@@ -103,6 +125,10 @@ window.addEventListener("load", () => {
 
   loadTable();
   checkStatuses();
+
+  setTimeout(() => {
+    document.querySelector(".alert-div").classList.add("hide");
+  }, 3000);
 
   const toggleLegendBtn = document.querySelector(".legend-btn");
   const toggleLegendBtn2 = document.querySelector(".legend-btn2");

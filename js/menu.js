@@ -8,6 +8,17 @@ window.addEventListener("load", () => {
   const closeModal = document.querySelector(".action-btn-modal .head button");
   const tableId = document.querySelector("#table-id");
 
+  let data = 0;
+
+  const checkConnection = () => {
+    data = phpdata;
+    // tmp = data;
+    if (data > 0) {
+      console.log("data is connected");
+    }
+    data = 0;
+  };
+
   let statuses = [];
   const loadTable = () => {
     var xmlhttp = new XMLHttpRequest();
@@ -68,11 +79,33 @@ window.addEventListener("load", () => {
           element.addEventListener("click", () => {});
         });
 
-        for (let i = 1; i < 120; i++) {
+        for (let i = 1; i < 20; i++) {
           let timer = document.querySelector(
             `.table-timer-col.table-${i}-time`
           );
           let bool = false;
+
+          let connData = document.querySelector(`.table-data-conn-${i}`);
+          let connText = document.querySelector(`.table-conn-${i}`);
+
+          let counterVal = parseInt(connData.innerHTML);
+          console.log(connText);
+          if (counterVal > 0) {
+            connText.classList.remove("disconnected");
+            connText.innerHTML = "Yes";
+            setTimeout(() => {
+              var xmlhttp = new XMLHttpRequest();
+              xmlhttp.open(
+                "GET",
+                `./includes/table-contr.inc.php?contr=2&id=${i}`,
+                true
+              );
+              xmlhttp.send();
+            }, 6000);
+          } else {
+            connText.classList.add("disconnected");
+            connText.innerHTML = "No";
+          }
 
           if (timer.getAttribute("started") != 1) {
             timer.innerHTML = "00:00:00";

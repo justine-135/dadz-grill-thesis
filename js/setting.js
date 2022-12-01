@@ -38,8 +38,6 @@ window.addEventListener("load", () => {
     tableId.value = e.target.value;
   });
 
-  const timerFunction = () => {};
-
   const loadTable = (arr) => {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
@@ -63,11 +61,32 @@ window.addEventListener("load", () => {
         });
       });
 
-      for (let i = 1; i < 1000; i++) {
+      for (let i = 1; i < 20; i++) {
         let timer = document.querySelector(`.table-timer-col.table-${i}-time`);
         let bool = false;
+        console.log(timer.innerHTML);
 
-        console.log(timer);
+        let connData = document.querySelector(`.table-data-conn-${i}`);
+        let connText = document.querySelector(`.table-conn-${i}`);
+
+        let counterVal = parseInt(connData.innerHTML);
+        if (counterVal > 0) {
+          connText.classList.remove("disconnected");
+          connText.innerHTML = "Yes";
+          setTimeout(() => {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open(
+              "GET",
+              `./includes/table-contr.inc.php?contr=2&id=${i}`,
+              true
+            );
+            xmlhttp.send();
+          }, 6000);
+        } else {
+          connText.classList.add("disconnected");
+          connText.innerHTML = "No";
+        }
+
         if (timer.getAttribute("started") != 1) {
           timer.innerHTML = "00:00:00";
         } else {

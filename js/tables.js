@@ -9,6 +9,15 @@ window.addEventListener("load", () => {
 
   let statuses = [];
 
+  const checkConnection = () => {
+    data = phpdata;
+    // tmp = data;
+    if (data > 0) {
+      console.log("data is connected");
+    }
+    data = 0;
+  };
+
   const loadTable = () => {
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
@@ -36,8 +45,30 @@ window.addEventListener("load", () => {
           statuses.push(element.innerHTML);
         });
 
-        for (let i = 1; i < 120; i++) {
+        for (let i = 1; i < 20; i++) {
           let timer = document.querySelector(`.table-${i}-time`);
+
+          let connData = document.querySelector(`.table-data-conn-${i}`);
+          let connText = document.querySelector(`.table-conn-${i}`);
+
+          let counterVal = parseInt(connData.innerHTML);
+          if (counterVal > 0) {
+            connText.classList.remove("disconnected");
+            connText.innerHTML = "Yes";
+            setTimeout(() => {
+              var xmlhttp = new XMLHttpRequest();
+              xmlhttp.open(
+                "GET",
+                `./includes/table-contr.inc.php?contr=2&id=${i}`,
+                true
+              );
+              xmlhttp.send();
+            }, 10000);
+          } else {
+            connText.classList.add("disconnected");
+            connText.innerHTML = "No";
+          }
+
           const form = document.querySelector(`.cashier-form-${i}`);
 
           form.addEventListener("submit", (e) => {
