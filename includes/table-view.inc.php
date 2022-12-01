@@ -15,5 +15,17 @@
             $cashierTable = new TableView();
             $cashierTable->initTableCl();
         }
+        if($user == 4){
+            $cashierTable = new TableView();
+            $cashierTable->initTableCl();
+        }
+        if($user == 5){
+            $cashierTable = new TableView();
+            $cashierTable->initTableSetting();
+        }
+        if($user == 6){
+            $cashierTable = new TableView();
+            $cashierTable->initTableNumbers();
+        }
     }
 ?>

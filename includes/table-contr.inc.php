@@ -79,9 +79,30 @@
         // echo $counter;
         $counter = new TableContr($id);
         $counter->initCounter($id);
+
+        echo $counter;
     }
 
-    else{
-        header("location: ../menu.php");
+    elseif (isset($_POST['add-table'])) {
+        $tableNumber = $_POST["table-id"];
+
+        if (!preg_match("/^[0-9]*$/", $tableNumber)) {
+            header("location: ../setting.php");
+        }
+        else{
+            $addTable = new TableContr($tableNumber);
+            $addTable->initTable($tableNumber);
+        }
     }
+
+    elseif (isset($_POST['delete-table'])) {
+        $tableNumber = $_POST['table-id'];
+
+        $deleteTable = new TableContr($tableNumber);
+        $deleteTable->initDeleteTable($tableNumber);
+    }
+
+    // else{
+    //     header("location: ../menu.php");
+    // }
 ?>
