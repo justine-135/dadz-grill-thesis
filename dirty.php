@@ -86,7 +86,7 @@ if ($_SESSION["is_superuser"] == 1 || $_SESSION["is_cleaner"] == 1) {
     </div>
 </div>
 
-    <div class="alert">
+    <div class="alert-div">
 
         <?php
 
