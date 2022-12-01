@@ -104,7 +104,7 @@ class UsersView extends Users{
             </div>
             <div class="info-text flex-row">
                 <div class="span">Role: </div>
-                <input type="text" name="role" id="role" value="<?php 
+                <input hidden type="text" name="role" id="role" value="<?php 
                             if ($row["is_cashier"] == 1) {
                                 echo "Cashier";
                             } 

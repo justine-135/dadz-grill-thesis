@@ -65,5 +65,13 @@ class TableContr extends Table{
     public function initCounter($counter){
         echo $counter;
     }
+
+    public function initTable ($tableNumber){
+        $this->addTable($tableNumber);
+    }
+
+    public function initDeleteTable($tableNumber){
+        $this->deleteTable($tableNumber);
+    }
 }
 ?>

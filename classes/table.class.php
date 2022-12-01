@@ -31,7 +31,7 @@ class Table extends Dbh
         $warning_time = $res + 7200;
         $end_time = $res + 8100;
 
-        $sql = "SELECT is_started, payment FROM tables WHERE id = $id";
+        $sql = "SELECT is_started, payment FROM tables WHERE `number` = $id";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
@@ -46,7 +46,7 @@ class Table extends Dbh
 
         if ($is_started != 1) {
             if ($payment != "Requesting") {
-                $sql = "UPDATE tables SET timer = '$res', warning_time = '$warning_time', end_time = '$end_time', payment = 'Pending', done_orders = 0, is_started = true WHERE id = $id";
+                $sql = "UPDATE tables SET timer = '$res', warning_time = '$warning_time', end_time = '$end_time', payment = 'Pending', done_orders = 0, is_started = true WHERE `number` = $id";
                 $stmt = $this->connection()->prepare($sql);
                 $stmt->execute();
                 $stmt = null;
@@ -57,7 +57,7 @@ class Table extends Dbh
             }
         } 
         else{
-            $sql = "UPDATE tables SET table_status = 'Occupied', done_orders = 0 WHERE id = $id";
+            $sql = "UPDATE tables SET table_status = 'Occupied', done_orders = 0 WHERE `number` = $id";
             $stmt = $this->connection()->prepare($sql);
             $stmt->execute();
             $stmt = null;
@@ -69,7 +69,7 @@ class Table extends Dbh
     protected function has_order_request($id)
     {
         
-        $sql = "SELECT table_status FROM tables WHERE id = $id";
+        $sql = "SELECT table_status FROM tables WHERE `number` = $id";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
@@ -82,12 +82,12 @@ class Table extends Dbh
         }
 
         if ($tableStatus == "Call") {
-            $sql = "UPDATE tables SET table_status = 'Occupied', payment = 'Requesting', is_started = 0 WHERE id = $id";
+            $sql = "UPDATE tables SET table_status = 'Occupied', payment = 'Requesting', is_started = 0 WHERE `number` = $id";
             $stmt = $this->connection()->prepare($sql);
             $stmt->execute();
         }
         else{
-            $sql = "UPDATE tables SET payment = 'Requesting', is_started = 0 WHERE id = $id";
+            $sql = "UPDATE tables SET payment = 'Requesting', is_started = 0 WHERE `number` = $id";
             $stmt = $this->connection()->prepare($sql);
             $stmt->execute();
         }
@@ -104,7 +104,7 @@ class Table extends Dbh
 
     protected function is_dirty($tblId)
     {
-        $sql = "UPDATE tables SET table_status = 'Unoccupied', timer = 0, warning_time = 0, end_time = 0, payment = 'No order', pending_orders = 0, done_orders = 0 WHERE id = $tblId";
+        $sql = "UPDATE tables SET table_status = 'Unoccupied', timer = 0, warning_time = 0, end_time = 0, payment = 'No order', pending_orders = 0, done_orders = 0 WHERE `number` = $tblId";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
@@ -121,7 +121,7 @@ class Table extends Dbh
 
     protected function setAttended($tblId)
     {
-        $sql = "SELECT table_status, payment, done_orders, is_started FROM tables WHERE id = $tblId";
+        $sql = "SELECT table_status, payment, done_orders, is_started FROM tables WHERE `number` = $tblId";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
@@ -149,7 +149,7 @@ class Table extends Dbh
 
     protected function setRequest($tblId)
     {
-        $sql = "SELECT table_status, pending_orders, done_orders, is_started FROM tables WHERE id = $tblId";
+        $sql = "SELECT table_status, pending_orders, done_orders, is_started FROM tables WHERE `number` = $tblId";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
@@ -173,7 +173,7 @@ class Table extends Dbh
     {
         $tblStatus = "";
         
-        $sql = "SELECT table_status FROM tables WHERE id = $tblId";
+        $sql = "SELECT table_status FROM tables WHERE `number` = $tblId";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
@@ -195,7 +195,7 @@ class Table extends Dbh
     protected function openMenu($tblId)
     {
         $tblId2 = $tblId;
-        $sql = "SELECT table_status, payment, timer FROM tables WHERE id = $tblId";
+        $sql = "SELECT table_status, payment, timer FROM tables WHERE `number` = $tblId";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
@@ -229,7 +229,7 @@ class Table extends Dbh
 
     protected function setOccupy($tblId)
     {
-        $sql = "UPDATE tables SET table_status = 'Occupied' WHERE id = $tblId";
+        $sql = "UPDATE tables SET table_status = 'Occupied' WHERE `number` = $tblId";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         header("location: ../tables.php");
@@ -239,7 +239,7 @@ class Table extends Dbh
 
     protected function setUnoccupy($tblId)
     {
-        $sql = "UPDATE tables SET table_status = 'Unoccupied' WHERE id = $tblId";
+        $sql = "UPDATE tables SET table_status = 'Unoccupied' WHERE `number` = $tblId";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         header("location: ../tables.php");
@@ -249,7 +249,7 @@ class Table extends Dbh
 
     protected function setCall($tblId)
     {
-        $sql = "UPDATE tables SET table_status = 'Call' WHERE id = $tblId";
+        $sql = "UPDATE tables SET table_status = 'Call' WHERE `number` = $tblId";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         header("location: ../tables.php");
@@ -259,7 +259,7 @@ class Table extends Dbh
 
     protected function setNotify($id)
     {
-        $sql = "SELECT * FROM tables WHERE id = $id";
+        $sql = "SELECT * FROM tables WHERE `number` = $id";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
@@ -270,7 +270,7 @@ class Table extends Dbh
         }
 
         if ($tblStatus != 'Unoccupied' && $tblStatus != 'Dirty') {
-            $sql = "UPDATE tables SET table_status = 'Call' WHERE id = $id";
+            $sql = "UPDATE tables SET table_status = 'Call' WHERE `number` = $id";
             $stmt = $this->connection()->prepare($sql);
             $stmt->execute();
 
@@ -280,7 +280,7 @@ class Table extends Dbh
 
     protected function setStopTimer($id)
     {
-        $sql = "UPDATE tables SET is_started = false WHERE id = $id";
+        $sql = "UPDATE tables SET is_started = false WHERE `number` = $id";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
@@ -292,10 +292,63 @@ class Table extends Dbh
 
     protected function setGetId($id)
     {
-        $sql = "SELECT * FROM tables WHERE id = $id";
+        $sql = "SELECT * FROM tables WHERE `number` = $id";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $results = $stmt->fetchAll();
         return $results;
+    }
+
+    protected function addTable($tableNumber)
+    {
+        $sql = "SELECT * FROM tables";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+        $results = $stmt->fetchAll();
+
+        $result = 0;
+
+        foreach ($results as $row) {
+            if ($tableNumber == $row['number']) {
+                $existed = $row['number'];
+                if ($row['show'] == 1) {
+                    $result = 1;
+                }
+                elseif ($row['show'] == 0){
+                    $result = 2;
+                }
+                else{
+                    $result = 3;
+                }
+            }
+        }
+
+        if ($result == 1) {
+            header("location: ../setting.php?alert=fail&id=" . $tableNumber);
+        }
+        elseif ($result == 2) {
+            $sql = "UPDATE tables SET `date` = `date`, `show` = 1 WHERE `number` = $tableNumber";
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute();
+            $stmt = null; 
+            header("location: ../setting.php?alert=success&id=" . $tableNumber);
+        }
+        else{
+            $sql = "INSERT INTO tables (`number`, table_status, timer, warning_time, end_time, payment, pending_orders, done_orders, is_started, `show`)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute([$tableNumber, "Unoccupied", 0, 0, 0, "No order", 0, 0, 0, 1]);
+            $stmt = null; 
+            header("location: ../setting.php?alert=success&id=" . $tableNumber);
+        }
+    }
+
+    protected function deleteTable($tableNumber)
+    {
+        $sql = "UPDATE tables SET `date` = `date`, `show` = 0 WHERE `number` = $tableNumber";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+        $stmt = null; 
+        header("location: ../setting.php?alert=success&id=" . $tableNumber);
     }
 }

@@ -79,7 +79,7 @@ class Transactions extends Dbh
         $stmt->execute();
         $stmt = null;
 
-        $sql = "UPDATE tables SET payment = 'Bill out', is_started = false WHERE id = $id";
+        $sql = "UPDATE tables SET payment = 'Bill out', is_started = false WHERE `number` = $id";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
@@ -90,7 +90,7 @@ class Transactions extends Dbh
 
     protected function setTransactions($id)
     {
-        $sql = "SELECT * FROM tables WHERE id = $id";
+        $sql = "SELECT * FROM tables WHERE `number` = $id";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
@@ -161,7 +161,7 @@ class Transactions extends Dbh
             $stmt->execute();
             $stmt = null;  
     
-            $sql = "UPDATE tables SET table_status = 'Dirty', timer = 0, payment = 'Paid' WHERE id = $tbl";
+            $sql = "UPDATE tables SET table_status = 'Dirty', timer = 0, payment = 'Paid' WHERE `number` = $tbl";
             $stmt = $this->connection()->prepare($sql);
             $stmt->execute();
             $stmt = null;
