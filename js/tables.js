@@ -36,8 +36,16 @@ window.addEventListener("load", () => {
           statuses.push(element.innerHTML);
         });
 
-        for (let i = 1; i < 9; i++) {
+        for (let i = 1; i < 120; i++) {
           let timer = document.querySelector(`.table-${i}-time`);
+          const form = document.querySelector(`.cashier-form-${i}`);
+
+          form.addEventListener("submit", (e) => {
+            let text = "Do you want to continue?";
+            if (confirm(text) != true) {
+              e.preventDefault();
+            }
+          });
 
           if (timer.getAttribute("started") != 1) {
             timer.innerHTML = "00:00:00";
@@ -125,9 +133,26 @@ window.addEventListener("load", () => {
     statuses = [];
   };
 
+  const loadConnection = () => {
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+      if (this.readyState == 4) {
+        document.querySelector(".order-information").innerHTML =
+          this.responseText;
+      }
+    };
+    xmlhttp.open(
+      "GET",
+      "./includes/table-contr.inc.php?view=" + 1 + "&id=" + table,
+      true
+    );
+    xmlhttp.send();
+  };
+
   setInterval(() => {
     loadTable();
     checkStatuses();
+    loadConnection();
   }, 1000);
 
   loadTable();

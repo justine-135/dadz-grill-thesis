@@ -44,7 +44,9 @@ window.addEventListener("load", () => {
         element.classList == "inventory-li flex-row" ||
         element.classList == "inventory-li flex-row active" ||
         element.classList == "admin-li flex-row" ||
-        element.classList == "admin-li flex-row active"
+        element.classList == "admin-li flex-row active" ||
+        element.classList == "setting-li flex-row" ||
+        element.classList == "setting-li flex-row active"
       ) {
         if (bool != true) {
           console.log(element);

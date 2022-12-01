@@ -18,7 +18,7 @@ window.addEventListener("load", () => {
         });
       }
 
-      for (let i = 1; i < 9; i++) {
+      for (let i = 1; i < 120; i++) {
         let timer = document.querySelector(`.table-${i}-time`);
         if (timer.getAttribute("started") != 1) {
           timer.innerHTML = "00:00:00";
@@ -93,7 +93,6 @@ window.addEventListener("load", () => {
     } else {
       document.querySelector(".alert-warning-notify").classList.add("hide");
     }
-    console.log(statuses);
     statuses = [];
   };
 

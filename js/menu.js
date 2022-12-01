@@ -68,8 +68,10 @@ window.addEventListener("load", () => {
           element.addEventListener("click", () => {});
         });
 
-        for (let i = 1; i < 9; i++) {
-          let timer = document.querySelector(`.table-${i}-time`);
+        for (let i = 1; i < 120; i++) {
+          let timer = document.querySelector(
+            `.table-timer-col.table-${i}-time`
+          );
           let bool = false;
 
           if (timer.getAttribute("started") != 1) {
