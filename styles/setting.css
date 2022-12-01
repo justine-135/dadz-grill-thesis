@@ -1,0 +1,13 @@
+.body.order-confirm-finish.settings {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.body.order-confirm-finish2.settings {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 0;
+}
