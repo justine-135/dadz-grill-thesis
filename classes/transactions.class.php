@@ -110,7 +110,7 @@ class Transactions extends Dbh
                     array_push($original_prices, $row["original_price"]);
                 }
             }
-    
+
             $total = 0;
             $newItemId = "";
             $newOrder = "";
@@ -133,6 +133,34 @@ class Transactions extends Dbh
             $newQuantity = rtrim($newQuantity, "|");
             $newPrice = rtrim($newPrice, "|");
             $newOrgPrice = rtrim($newOrgPrice, "|");
+
+            foreach ($results as $row) {
+                $item_ids = explode("|",$row["item_id"]);
+                $qtys = explode("|",$row["quantity"]);
+            }
+
+            $date = date("Y/m/d");
+
+            for ($i=0; $i < count($item_ids)-1; $i++) { 
+                $sql = "SELECT * FROM sales_report WHERE date_time = '$date' AND food_id = '$item_ids[$i]' ";
+                $stmt = $this->connection()->prepare($sql);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+    
+                if (count($result) == 0) {
+                    $sql = "INSERT INTO sales_report (food_id, cancel)
+                    VALUES ('$item_ids[$i]', '$qtys[$i]')";
+                    $stmt = $this->connection()->prepare($sql);
+                    $stmt->execute();
+                    $stmt = null;
+                }
+                else{
+                    $sql = "UPDATE sales_report SET cancel = cancel + $qtys[$i] WHERE `food_id` = $item_ids[$i] AND date_time = '$date'";
+                    $stmt = $this->connection()->prepare($sql);
+                    $stmt->execute();
+                    $stmt = null;
+                }
+            }
     
             $sql = "INSERT INTO transactions (table_id, food_id, `order`, original_price, quantity, price, paid)
             VALUES ( '$id' , '$newItemId' , '$newOrder' , '$newOrgPrice' , '$newQuantity' , '$newPrice', 3)";

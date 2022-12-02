@@ -363,7 +363,7 @@ class Table extends Dbh
 
     protected function resetCounter($id)
     {
-        $sql = "UPDATE tables SET `counter`= 0  WHERE `id` = $id";
+        $sql = "UPDATE tables SET `counter`= 0 WHERE `number` = $id";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null; 

@@ -9,7 +9,7 @@ class UsersView extends Users{
                 <th style="text-align: left; padding-left: 10px">#</th>
                 <th style="text-align: left; padding-left: 10px">Full name</th>
                 <th style="text-align: left; padding-left: 10px">Username</th>
-                <th style="text-align: left; padding-left: 10px">Email</th>
+                <th style="text-align: left; padding-left: 10px">Contact</th>
                 <th style="text-align: left; padding-left: 10px">Role</th>
                 <th>Actions</th>
             </tr>
@@ -24,7 +24,7 @@ class UsersView extends Users{
                 <td style="text-align: left; padding-left: 10px"><?php echo $row['id']; ?></td>
                 <td class="name" style="text-align: left; padding-left: 10px"><?php echo $row['fullname']; ?></td>
                 <td style="text-align: left; padding-left: 10px"><?php echo $row['username']; ?></td>
-                <td style="text-align: left; padding-left: 10px"><?php echo $row['email']; ?></td>
+                <td style="text-align: left; padding-left: 10px"><?php echo $row['contact']; ?></td>
                 <td style="text-align: left; padding-left: 10px">
                     <?php
                         if ($row['is_superuser'] == 1) {

@@ -52,7 +52,7 @@ class TransactionsView extends Transactions{
                         $total += (int)$result[$i];
                     }
 
-                    echo $total;
+                    echo "₱ " . $total;
                 ?>    
                 </td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php if ($row['paid'] == 0) {
@@ -67,7 +67,18 @@ class TransactionsView extends Transactions{
                 <td valign="top" class="action-td status-action-col pad10">
                     <form action="./includes/transactions-contr.inc.php" method="POST">
                         <input type="text" name="id" value=<?php echo $row['id'] ?> id="" hidden>   
+                        <?php
+                        if ($row['paid'] != 1 && $row['paid'] != 3) {
+                            ?>
                         <input type="submit" name="process" value="Process">
+                            <?php
+                        }
+                        else{
+                        ?>
+                        <input type="submit" name="process" value="Process" disabled="disabled">
+                        <?php
+                        }
+                        ?>
                     </form>
                 </td>
             </tr>
@@ -110,14 +121,11 @@ class TransactionsView extends Transactions{
                                 $order .= $result[$i] ."(".$result2[$i]."),";  
                             }
                          ?>
-
-                         
                        <?php
                        
                         }
                         echo $order;
-                    ?>
-                                     
+                    ?>          
                 </td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px">
                 <?php 
@@ -127,7 +135,7 @@ class TransactionsView extends Transactions{
                         $total += (int)$result[$i];
                     }
 
-                    echo $total;
+                    echo "₱ " . $total;
                 ?>    
                 </td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php if ($row['paid'] == 0) {
@@ -142,7 +150,18 @@ class TransactionsView extends Transactions{
                 <td valign="top" class="action-td status-action-col pad10">
                     <form action="./includes/transactions-contr.inc.php" method="POST">
                         <input type="text" name="id" value=<?php echo $row['id'] ?> id="" hidden>   
+                        <?php
+                        if ($row['paid'] != 1 && $row['paid'] != 3) {
+                            ?>
                         <input type="submit" name="process" value="Process">
+                            <?php
+                        }
+                        else{
+                        ?>
+                        <input type="submit" name="process" value="Process" disabled="disabled">
+                        <?php
+                        }
+                        ?>
                     </form>
                 </td>
             </tr>
