@@ -49,7 +49,7 @@ if ($_SESSION["is_superuser"] == 1 || $_SESSION["is_cashier"]) {
 
     <div class="main-content tables-container">
         <div class="tables flex-row">
-            <table class="tables-table transaction-tbl-data hide"></table>
+            <table class="tables-table transaction-tbl-data table hide"></table>
             <table class="tables-table transaction-tbl-data-date table"></table>
             <table class="export-transaction-tbl hide"></table>
             <table class="export-transaction-tbl-date hide"></table>
