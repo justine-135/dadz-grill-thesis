@@ -22,9 +22,9 @@ window.addEventListener("load", () => {
       if (this.readyState == 4) {
         const totalOrders = document.querySelector(".sales-number");
 
-        totalOrders.innerHTML = this.responseText
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        totalOrders.innerHTML =
+          "₱ " +
+          this.responseText.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       }
     };
     xmlhttp.open(

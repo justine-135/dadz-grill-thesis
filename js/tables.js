@@ -9,15 +9,6 @@ window.addEventListener("load", () => {
 
   let statuses = [];
 
-  const checkConnection = () => {
-    data = phpdata;
-    // tmp = data;
-    if (data > 0) {
-      console.log("data is connected");
-    }
-    data = 0;
-  };
-
   const loadTable = () => {
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
@@ -45,31 +36,37 @@ window.addEventListener("load", () => {
           statuses.push(element.innerHTML);
         });
 
-        for (let i = 1; i < 20; i++) {
-          let timer = document.querySelector(`.table-${i}-time`);
+        let timer = document.querySelectorAll(`.table-timer-col`);
 
-          let connData = document.querySelector(`.table-data-conn-${i}`);
-          let connText = document.querySelector(`.table-conn-${i}`);
+        timer.forEach((element) => {
+          let timerVal = element;
+          let connData = timerVal.parentElement.childNodes[5];
+          let connText = timerVal.parentElement.childNodes[3].childNodes[0];
+          let tableNumber =
+            timerVal.parentElement.childNodes[1].childNodes[0].innerHTML;
 
           let counterVal = parseInt(connData.innerHTML);
           if (counterVal > 0) {
             connText.classList.remove("disconnected");
             connText.innerHTML = "Yes";
             setTimeout(() => {
+              console.log("disconnect");
               var xmlhttp = new XMLHttpRequest();
               xmlhttp.open(
                 "GET",
-                `./includes/table-contr.inc.php?contr=2&id=${i}`,
+                `./includes/table-contr.inc.php?contr=2&id=${tableNumber}`,
                 true
               );
               xmlhttp.send();
-            }, 10000);
+            }, 6000);
           } else {
             connText.classList.add("disconnected");
             connText.innerHTML = "No";
           }
 
-          const form = document.querySelector(`.cashier-form-${i}`);
+          console.log();
+
+          const form = timerVal.parentElement.childNodes[16].childNodes[1];
 
           form.addEventListener("submit", (e) => {
             let text = "Do you want to continue?";
@@ -78,22 +75,21 @@ window.addEventListener("load", () => {
             }
           });
 
-          if (timer.getAttribute("started") != 1) {
-            timer.innerHTML = "00:00:00";
+          if (timerVal.getAttribute("started") != 1) {
+            timerVal.innerHTML = "00:00:00";
           } else {
+            bool = false;
             let currentDate = new Date();
             let hour = currentDate.getHours();
             let minutes = currentDate.getMinutes();
             let second = currentDate.getSeconds();
 
             let hms = hour + ":" + minutes + ":" + second;
-            let time = hms.split(":"); // convert to array
-            // fetch
+            let time = hms.split(":");
             let fhours = Number(time[0]);
             let fminutes = Number(time[1]);
             let fseconds = Number(time[2]);
 
-            // calculate
             let timeValue;
 
             if (fhours > 0 && fhours <= 12) {
@@ -104,24 +100,23 @@ window.addEventListener("load", () => {
               timeValue = "12";
             }
 
-            timeValue += fminutes < 10 ? ":0" + fminutes : ":" + fminutes; // get minutes
-            timeValue += fseconds < 10 ? ":0" + fseconds : ":" + fseconds; // get seconds
-            // timeValue += fhours >= 12 ? " P.M." : " A.M."; // get AM/PM
+            timeValue += fminutes < 10 ? ":0" + fminutes : ":" + fminutes;
+            timeValue += fseconds < 10 ? ":0" + fseconds : ":" + fseconds;
 
-            const timeString = timeValue; // input string
+            const timeString = timeValue;
 
-            const arr = timeString.split(":"); // splitting the string by colon
+            const arr = timeString.split(":");
 
-            const seconds = arr[0] * 3600 + arr[1] * 60 + +arr[2]; // converting
-            let timeEnd = timer.getAttribute("endtime");
+            const seconds = arr[0] * 3600 + arr[1] * 60 + +arr[2];
+            let timeEnd = timerVal.getAttribute("endtime");
             let duration = timeEnd - seconds;
 
             if (duration <= 0 || seconds >= timeEnd) {
-              timer.innerHTML = "00:00:00";
+              timerVal.innerHTML = "00:00:00";
               var xmlhttp = new XMLHttpRequest();
               xmlhttp.open(
                 "GET",
-                `./includes/table-contr.inc.php?contr=1&id=${i}`,
+                `./includes/table-contr.inc.php?contr=1&id=${tableNumber}`,
                 true
               );
               xmlhttp.send();
@@ -129,10 +124,17 @@ window.addEventListener("load", () => {
               let durationValue = new Date(duration * 1000)
                 .toISOString()
                 .substring(11, 19);
-              timer.innerHTML = durationValue;
+              timerVal.innerHTML = durationValue;
+              // var xmlhttp = new XMLHttpRequest();
+              // xmlhttp.open(
+              //   "GET",
+              //   `./includes/table-contr.inc.php?contr=2&id=${tableNumber}&duration=${durationValue}`,
+              //   true
+              // );
+              // xmlhttp.send();
             }
           }
-        }
+        });
       }
     };
     xmlhttp.open("GET", "./includes/table-view.inc.php?user=" + 1, true);
