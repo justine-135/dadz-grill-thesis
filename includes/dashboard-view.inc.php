@@ -69,11 +69,6 @@
             $dirty = new DashboardView();
             $dirty->initActiveCrew();
         }
-
-        // if ($grid == 11) {
-        //     $dirty = new DashboardView();
-        //     $dirty->initTotalServed();
-        // }
         
         if ($grid == 12) {
             $dirty = new DashboardView();
@@ -87,6 +82,10 @@
                 $served = new DashboardView();
                 $served->initTotalServed($date, $date2);
             }
+        }
+        if ($grid == 13) {
+            $dirty = new DashboardView();
+            $dirty->initCrewCompliance();
         }
     }
 
