@@ -24,4 +24,8 @@ window.addEventListener("load", () => {
       thisFormDiv.classList.toggle("hide");
     });
   });
+
+  setTimeout(() => {
+    document.querySelector(".alert-div").classList.add("hide");
+  }, 3000);
 });

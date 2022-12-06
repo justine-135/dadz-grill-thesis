@@ -4,6 +4,7 @@ window.addEventListener("load", () => {
   dirtyLi.querySelector(".inactive-link").className = "active-link";
 
   let statuses = [];
+  let resetId = 0;
 
   const loadTable = () => {
     var xmlhttp = new XMLHttpRequest();
@@ -29,18 +30,28 @@ window.addEventListener("load", () => {
 
         let counterVal = parseInt(connData.innerHTML);
         if (counterVal > 0) {
-          connText.classList.remove("disconnected");
-          connText.innerHTML = "Yes";
-          setTimeout(() => {
-            console.log("disconnect");
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open(
-              "GET",
-              `./includes/table-contr.inc.php?contr=2&id=${tableNumber}`,
-              true
-            );
-            xmlhttp.send();
-          }, 6000);
+          if (resetId != tableNumber) {
+            resetId = tableNumber;
+            connText.classList.remove("disconnected");
+            connText.innerHTML = "Yes";
+            setTimeout(() => {
+              console.log(tableNumber);
+              var xmlhttp = new XMLHttpRequest();
+              xmlhttp.open(
+                "GET",
+                `./includes/table-contr.inc.php?contr=2&id=${tableNumber}`,
+                true
+              );
+              xmlhttp.send();
+              resetId = 0;
+            }, 2000);
+            setTimeout(() => {
+              resetId = 0;
+            }, 2000);
+          } else {
+            connText.classList.remove("disconnected");
+            connText.innerHTML = "Yes";
+          }
         } else {
           connText.classList.add("disconnected");
           connText.innerHTML = "No";
@@ -80,8 +91,11 @@ window.addEventListener("load", () => {
           const seconds = arr[0] * 3600 + arr[1] * 60 + +arr[2];
           let timeEnd = timerVal.getAttribute("endtime");
           let duration = timeEnd - seconds;
+          let durationValue = new Date(duration * 1000)
+            .toISOString()
+            .substring(11, 19);
 
-          if (duration <= 0 || seconds >= timeEnd) {
+          if (duration <= 0 || seconds >= timeEnd || duration > 8100) {
             timerVal.innerHTML = "00:00:00";
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.open(
@@ -91,17 +105,7 @@ window.addEventListener("load", () => {
             );
             xmlhttp.send();
           } else {
-            let durationValue = new Date(duration * 1000)
-              .toISOString()
-              .substring(11, 19);
             timerVal.innerHTML = durationValue;
-            // var xmlhttp = new XMLHttpRequest();
-            // xmlhttp.open(
-            //   "GET",
-            //   `./includes/table-contr.inc.php?contr=2&id=${tableNumber}&duration=${durationValue}`,
-            //   true
-            // );
-            // xmlhttp.send();
           }
         }
       });
