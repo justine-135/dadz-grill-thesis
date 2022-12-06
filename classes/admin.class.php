@@ -40,30 +40,42 @@ class Admin extends Dbh{
         return $results;
     }
 
-    protected function editPassword($id, $oldPwd, $newPwd, $reTypePwd){
+    protected function editPassword($id, $oldPwd, $newPwd, $reTypePwd, $isManager){
 
-        $sql = "SELECT * FROM users WHERE id=?";
-        $stmt = $this->connection()->prepare($sql);
-        $stmt->execute([$id]);
-
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        $hashedPass = substr($results[0]["pwd"], 0, 60);
-        $checkPass = password_verify($oldPwd, $hashedPass);
-
-        if ($checkPass === true) {
+        if ($isManager == 0) {
+            $sql = "SELECT * FROM users WHERE id=?";
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute([$id]);
+    
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+            $hashedPass = substr($results[0]["pwd"], 0, 60);
+            $checkPass = password_verify($oldPwd, $hashedPass);
+    
+            if ($checkPass === true) {
+                $newHashedPass = password_hash($newPwd, PASSWORD_DEFAULT);
+                $sql = "UPDATE users SET reg_date = reg_date, pwd = '$newHashedPass' WHERE id = ?";
+                $stmt = $this->connection()->prepare($sql);
+                $stmt->execute([$id]);
+                $stmt = null;
+    
+                header("location: ../profile.php?message=success");
+            }
+            else{
+                header("location: ../profile.php?message=invalid");
+    
+            }
+        }
+        else{
             $newHashedPass = password_hash($newPwd, PASSWORD_DEFAULT);
             $sql = "UPDATE users SET reg_date = reg_date, pwd = '$newHashedPass' WHERE id = ?";
             $stmt = $this->connection()->prepare($sql);
             $stmt->execute([$id]);
             $stmt = null;
 
-            header("location: ../profile.php?alert" . $id);
+            header("location: ../admins.php?alert=pwdchange&id=" . $id);
         }
-        else{
-            header("location: ../profile.php?message=invalid");
 
-        }
 
     }
 

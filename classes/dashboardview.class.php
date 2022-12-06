@@ -73,7 +73,7 @@ class DashboardView extends Dashboard{
         $total = 0;
         $total = (int)$total;
         foreach ($results as $row) {
-            if ($row["table_status"] == "Occupied") {
+            if ($row["table_status"] == "Occupied" && $row["show"] == 1) {
                 $total += 1;
             }
         }
@@ -87,7 +87,7 @@ class DashboardView extends Dashboard{
         $total = 0;
         $total = (int)$total;
         foreach ($results as $row) {
-            if ($row["table_status"] == "Unoccupied") {
+            if ($row["table_status"] == "Unoccupied" && $row["show"] == 1) {
                 $total += 1;
             }
         }
@@ -101,7 +101,7 @@ class DashboardView extends Dashboard{
         $total = 0;
         $total = (int)$total;
         foreach ($results as $row) {
-            if ($row["table_status"] == "Call") {
+            if ($row["table_status"] == "Call" && $row["show"] == 1) {
                 $total += 1;
             }
         }
@@ -115,7 +115,7 @@ class DashboardView extends Dashboard{
         $total = 0;
         $total = (int)$total;
         foreach ($results as $row) {
-            if ($row["table_status"] == "Dirty") {
+            if ($row["table_status"] == "Dirty" && $row["show"] == 1) {
                 $total += 1;
             }
         }

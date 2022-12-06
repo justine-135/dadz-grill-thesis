@@ -6,7 +6,7 @@ class Table extends Dbh
 {
     protected function getTables()
     {
-        $sql = "SELECT * FROM tables";
+        $sql = "SELECT * FROM tables ORDER BY `number` ASC";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 

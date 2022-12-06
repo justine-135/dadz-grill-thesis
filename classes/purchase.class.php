@@ -61,7 +61,7 @@ class Purchase extends Dbh{
     }
 
     protected function setFinish($oid, $tid){
-        $sql = "SELECT * FROM tables WHERE id='$tid'";
+        $sql = "SELECT * FROM tables WHERE `number`='$tid'";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
@@ -86,7 +86,7 @@ class Purchase extends Dbh{
         $stmt = null;
 
         if ($tableStatus == "Unoccupied" || $tableStatus == "Occupied") {
-            $sql = "UPDATE tables SET table_status = 'Occupied', payment = 'Pending', pending_orders = pending_orders - 1, done_orders = done_orders + 1 WHERE id = $tid";
+            $sql = "UPDATE tables SET table_status = 'Occupied', payment = 'Pending', pending_orders = pending_orders - 1, done_orders = done_orders + 1 WHERE `number` = $tid";
             $stmt = $this->connection()->prepare($sql);
             $stmt->execute();
             $stmt = null;

@@ -68,7 +68,6 @@ class UsersView extends Users{
         $results = $this->getUser($uid);
         foreach ($results as $row) {
         ?>
-            <input type="text" name="id-value" id="id-value" value="<?php echo $row['id'] ?>" hidden>
             <div class="info-text flex-row">
                 <div class="span">Name: </div>
                 <span><?php echo $row["fullname"]; ?></span>
@@ -91,41 +90,78 @@ class UsersView extends Users{
             </div>
             <div class="info-text flex-row">
                 <div class="span">Role: </div>
-                <input hidden type="text" name="role" id="role" value="<?php 
-                            if ($row["is_cashier"] == 1) {
-                                echo "Cashier";
-                            } 
-                            elseif ($row["is_waiter"] == 1) {
-                                echo "Waiter";
-                            }
-                            elseif ($row["is_cook"] == 1) {
-                                echo "Cook";
-                            }
-                            elseif ($row["is_cleaner"] == 1) {
-                                echo "Cleaner";
-                            }
-                        ?>">
+                <button type="button" class="user-edit-btn edit-show" id="edit-role">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="sidelink-svg-sm" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"/></svg>
+                    <span>Edit</span>
+                </button>
+            </div>
+            <form class="info-text flex-column role-select-div hide" action="./includes/admin-contr.inc.php" method="post" enctype="multipart/form-data">
+                <input type="text" name="id-value" id="id-value" value="<?php echo $row['id'] ?>" hidden>
+                <div>
+                    <span>New role</span>
+                    <input hidden type="text" name="role" id="role" value="<?php 
+                    if ($row["is_cashier"] == 1) {
+                        echo "Cashier";
+                    } 
+                    elseif ($row["is_waiter"] == 1) {
+                        echo "Waiter";
+                    }
+                    elseif ($row["is_cook"] == 1) {
+                        echo "Cook";
+                    }
+                    elseif ($row["is_cleaner"] == 1) {
+                        echo "Cleaner";
+                    }
+                ?>">
+                    <select class="form-select role-input" aria-label="Default select example">
+                    <option selected><?php 
+                        if ($row["is_cashier"] == 1) {
+                            echo "Cashier";
+                        } 
+                        elseif ($row["is_waiter"] == 1) {
+                            echo "Waiter";
+                        }
+                        elseif ($row["is_cook"] == 1) {
+                            echo "Cook";
+                        }
+                        elseif ($row["is_cleaner"] == 1) {
+                            echo "Cleaner";
+                        }
+                    ?></option>
+                    <option value="Cashier">Cashier</option>
+                    <option value="Waiter">Waiter</option>
+                    <option value="Cook">Cook</option>
+                    <option value="Cleaner">Cleaner</option>
+                    </select>
+                </div>
+                <button type="submit" type="submit" name="change-role" value="Change" class="save-change">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="sidelink-svg-sm" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V173.3c0-17-6.7-33.3-18.7-45.3L352 50.7C340 38.7 323.7 32 306.7 32H64zm0 96c0-17.7 14.3-32 32-32H288c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V128zM224 416c-35.3 0-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64s-28.7 64-64 64z"/></svg>    
+                    <span>Change</span>
+                </button>
+            </form>
+            <div class="info-text flex-row">
+                <div class="span">Password: </div>
+                <button type="button" class="user-edit-btn edit-show" id="edit-pwd">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="sidelink-svg-sm" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"/></svg>
+                    <span>Edit</span>
+                </button>
+            </div>
+            <form class="info-text flex-column pwd-div hide" action="./includes/admin-contr.inc.php" method="post" enctype="multipart/form-data">
+                <input type="text" name="id-value" id="id-value" value="<?php echo $row['id'] ?>" hidden>
+                <div class="flex-column">
+                    <span>New password</span>
+                    <input type="password" name="new-pwd" id="" placeholder="Enter new password">
+                </div>
+                <div class="flex-column">
+                    <span>Re-type password</span>
+                    <input type="password" name="retype-pwd" id="" placeholder="Re-type password">
+                </div>
+                <button type="submit" type="submit" name="change-pass" value="Change" class="save-change">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="sidelink-svg-sm" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V173.3c0-17-6.7-33.3-18.7-45.3L352 50.7C340 38.7 323.7 32 306.7 32H64zm0 96c0-17.7 14.3-32 32-32H288c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V128zM224 416c-35.3 0-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64s-28.7 64-64 64z"/></svg>    
+                    <span>Change</span>
+                </button>
+            </form>
 
-                <select class="form-select role-input" aria-label="Default select example">
-                <option selected><?php 
-                            if ($row["is_cashier"] == 1) {
-                                echo "Cashier";
-                            } 
-                            elseif ($row["is_waiter"] == 1) {
-                                echo "Waiter";
-                            }
-                            elseif ($row["is_cook"] == 1) {
-                                echo "Cook";
-                            }
-                            elseif ($row["is_cleaner"] == 1) {
-                                echo "Cleaner";
-                            }
-                        ?></option>
-                <option value="Cashier">Cashier</option>
-                <option value="Waiter">Waiter</option>
-                <option value="Cook">Cook</option>
-                <option value="Cleaner">Cleaner</option>
-                </select>
         <?php
         }
     }

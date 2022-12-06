@@ -98,21 +98,33 @@ class AdminContr extends Admin
 
     }
 
-    public function initEditPassword($id, $oldPwd, $newPwd, $reTypePwd)
+    public function initEditPassword($id, $oldPwd, $newPwd, $reTypePwd, $isManager)
     {
 
-        if ($this->emptyInputPwd($oldPwd, $newPwd, $reTypePwd) !== false) {
-            header("location: ../profile.php?message=emptyinput");
-            exit();
+        if ($this->emptyInputPwd($oldPwd, $newPwd, $reTypePwd, $isManager) !== false) {
+            if ($isManager == 0) {
+                header("location: ../profile.php?message=emptyinput");
+                exit();
+            }
+            else{
+                header("location: ../admins.php?alert=emptyinput");
+                exit();
+            }
         }
     
         if ($this->notMatchPwd($newPwd, $reTypePwd)!==false) {
-            header("location: ../profile.php?message=notmatch");
-            exit();
+            if ($isManager == 0) {
+                header("location: ../profile.php?message=notmatch");
+                exit();
+            }
+            else{
+                header("location: ../admins.php?alert=notmatch");
+                exit();
+            }
         }
 
         else{
-            $result = $this->editPassword($id, $oldPwd, $newPwd, $reTypePwd);
+            $result = $this->editPassword($id, $oldPwd, $newPwd, $reTypePwd, $isManager);
 
         }
 
@@ -121,7 +133,7 @@ class AdminContr extends Admin
     public function initEditRole($id, $role)
     {
         $this->editRole($id, $role);
-        header("location: ../admins.php");
+        header("location: ../admins.php?alert=editrole&id=" . $id);
     }
 
     protected function emptyInputName($fname, $lname){
@@ -163,18 +175,30 @@ class AdminContr extends Admin
         return $result;
     }
 
-    protected function emptyInputPwd($oldPwd, $newPwd, $reTypePwd){
+    protected function emptyInputPwd($oldPwd, $newPwd, $reTypePwd, $isManager){
         $result;
-        if (empty($oldPwd) || empty($newPwd) || empty($reTypePwd)) {
-            $result = true;
-        } else {
-            $result = false;
+
+        if ($isManager == 0) {
+            if (empty($oldPwd) || empty($newPwd) || empty($reTypePwd)) {
+                $result = true;
+            } else {
+                $result = false;
+            }
         }
+        else{
+            if (empty($newPwd) || empty($reTypePwd)) {
+                $result = true;
+            } else {
+                $result = false;
+            }
+        }
+
         return $result;
     }
 
     protected function notMatchPwd($newPwd, $reTypePwd){
         $result;
+
         if ($newPwd !== $reTypePwd) {
             $result = true;
         } else {

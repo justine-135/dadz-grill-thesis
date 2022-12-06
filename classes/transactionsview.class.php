@@ -9,7 +9,7 @@ class TransactionsView extends Transactions{
                 <th style="text-align: left; padding-left: 10px">#</th>
                 <th style="text-align: left; padding-left: 10px">Table #</th>
                 <th style="text-align: left; padding-left: 10px">Time</th>
-                <th>Orders</th>
+                <th style="min-width: 400px">Orders</th>
                 <th style="text-align: left; padding-left: 10px">Total</th>
                 <th style="text-align: left; padding-left: 10px">Status</th>
                 <th class="status-action-col">Action</th>
@@ -95,7 +95,7 @@ class TransactionsView extends Transactions{
                 <th style="text-align: left; padding-left: 10px">#</th>
                 <th style="text-align: left; padding-left: 10px">Table #</th>
                 <th style="text-align: left; padding-left: 10px">Time</th>
-                <th>Orders</th>
+                <th style="min-width: 400px">Orders</th>
                 <th style="text-align: left; padding-left: 10px">Total</th>
                 <th style="text-align: left; padding-left: 10px">Status</th>
                 <th class="status-action-col">Action</th>
