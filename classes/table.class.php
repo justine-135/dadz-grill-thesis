@@ -232,7 +232,7 @@ class Table extends Dbh
         $sql = "UPDATE tables SET table_status = 'Occupied' WHERE `number` = $tblId";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
-        header("location: ../tables.php");
+        header("location: ../tables.php?alert=changed&id=" . $tblId);
 
         exit();
     }
@@ -345,11 +345,33 @@ class Table extends Dbh
 
     protected function deleteTable($tableNumber)
     {
-        $sql = "UPDATE tables SET `date` = `date`, `show` = 0 WHERE `number` = $tableNumber";
+        $sql = "SELECT * FROM tables WHERE `number` = $tableNumber";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
-        $stmt = null; 
-        header("location: ../setting.php?alert=deleted&id=" . $tableNumber);
+
+        $results = $stmt->fetchAll();
+        $condition = 0;
+
+        foreach ($results as $row) {
+            if ($row['table_status'] != "Unoccupied" || $row['payment'] != "No order" || $row['pending_orders'] > 0 || $row['done_orders'] > 0 || $row['is_started'] > 0) {
+                $condition = 0;
+            }
+            else{
+                $condition = 1;
+            }
+        }
+
+        if ($condition == 1) {
+            $sql = "UPDATE tables SET `date` = `date`, `show` = 0 WHERE `number` = $tableNumber";
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute();
+            $stmt = null; 
+            header("location: ../setting.php?alert=deleted&id=" . $tableNumber);
+        }
+        else{
+            header("location: ../setting.php?alert=faildelete&id=" . $tableNumber);
+        }
+
     }
 
     protected function setCounter($id, $counter)

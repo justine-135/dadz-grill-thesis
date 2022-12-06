@@ -403,6 +403,7 @@ class TableView extends Table
                 <th style="min-width: 168px">Status</th>
                 <th>Time</th>
                 <th>Payment</th>
+                <th>Order status</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -497,6 +498,30 @@ class TableView extends Table
                     <span class="noorder text-center">No order</span>
                         <?php
                     }
+                    ?>
+                </td>
+                <td>
+                    <?php 
+                        if ($row['pending_orders'] == 0 && $row['payment'] == 'Pending' && $row['done_orders'] == 0) {
+                            ?>
+                        <span class="completed text-center">Completed</span>
+                            <?php               
+                        }
+                        elseif ($row['done_orders'] > 0) {
+                            ?>
+                        <span class="requesting text-center"><?php echo "Pick Up (" . $row['done_orders'] . ")" ?></span>
+                            <?php               
+                        }
+                        elseif ($row['pending_orders'] > 0) {
+                           ?>
+                        <span class="pending text-center"><?php echo "Pending (" . $row['pending_orders'] . ")"; ?></span>
+                           <?php
+                        }
+                        else{
+                            ?>
+                        <span class="noorder text-center">No order</span>
+                            <?php
+                        }
                     ?>
                 </td>
                 <td class="hide "><?php echo $row['is_started'] ?></td>

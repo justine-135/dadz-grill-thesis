@@ -188,6 +188,28 @@ class DashboardView extends Dashboard{
             }
         }
     }
+
+    public function initCrewCompliance(){
+        $results = $this->getTotalServed();
+
+        foreach ($results as $row) {
+            if ($row['is_superuser'] == 1) {
+                echo "Total Service";
+            }
+            elseif ($row['is_cashier'] == 1) {
+                echo "Total Billed";
+            }
+            elseif ($row['is_cook'] == 1) {
+                echo "Total Cooked";
+            }
+            elseif ($row['is_waiter'] == 1) {
+                echo "Total Served";
+            }
+            else{
+                echo "Total Cleaned";
+            }
+        }
+    }
 }
 
 ?>

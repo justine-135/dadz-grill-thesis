@@ -88,7 +88,7 @@ class Transactions extends Dbh
     }
     protected function has_request2($id, $condition)
     {
-        if ($condition == 1 || $condition == 2) {
+        if ($condition == 1 || $condition == 3) {
             $sql = "SELECT * FROM series_orders WHERE table_id = $id";
             $stmt = $this->connection()->prepare($sql);
             $stmt->execute();
@@ -179,15 +179,18 @@ class Transactions extends Dbh
             $stmt = null;
 
     
-            header("location: ../tables.php?alert=unoccupied&id=" . $id);
+            header("location: ../tables.php?alert=success&id=" . $id);
         }
-        else{
+        else if ($condition != 2){
             $sql = "UPDATE tables SET table_status = 'Unoccupied'";
             $stmt = $this->connection()->prepare($sql);
             $stmt->execute();
             $stmt = null;
 
-            header("location: ../tables.php?alert=unoccupied&id=" . $id);
+            header("location: ../tables.php?alert=changed&id=" . $id);
+        }
+        else{
+            header("location: ../tables.php?alert=fail&id=" . $id);
         }
 
         exit();
@@ -204,6 +207,10 @@ class Transactions extends Dbh
             if ($row["payment"] == "Requesting") {
                 $this->has_request($id);
             } 
+            else{
+                header("location: ../tables.php?alert=nochange&id=" . $id);
+                exit();
+            }
         }
     }
     
@@ -221,12 +228,16 @@ class Transactions extends Dbh
                 $this->has_request2($id, $condition);
             } 
             else{
-                if ($row['payment'] != "No order") {
+                if ($row['payment'] == "Requesting" || $row['payment'] == "Requested" || $row['payment'] == "Bill out") {
                     $condition = 2;
                     $this->has_request2($id, $condition);
                 }
-                else{
+                else if ($row['payment'] == "Pending"){
                     $condition = 3;
+                    $this->has_request2($id, $condition);
+                }
+                else{
+                    $condition = 4;
                     $this->has_request2($id, $condition);
                 }
             }
