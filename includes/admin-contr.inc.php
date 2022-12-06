@@ -2,6 +2,7 @@
     include 'autoload.inc.php';
 
     $id = $_POST["id-value"];
+    $isManager = 0;
 
     if (isset($_POST["delete"])) {
         $deleteAdmin = new AdminContr();
@@ -43,13 +44,25 @@
         $reTypePwd = $_POST["retype-pwd"];
 
         $editPassword = new AdminContr();
-        $editPassword->initEditPassword($id, $oldPwd, $newPwd, $reTypePwd);
+        $editPassword->initEditPassword($id, $oldPwd, $newPwd, $reTypePwd, $isManager);
     }
 
-    if (isset($_POST['edit-role'])) {
+    if (isset($_POST['change-role'])) {
         $role = $_POST["role"];
-
         $editRole = new AdminContr();
         $editRole->initEditRole($id, $role);
+    }
+
+    if (isset($_POST['change-pass'])) {
+        $oldPwd = "NANi";
+        $newPwd = $_POST["new-pwd"];
+        $reTypePwd = $_POST["retype-pwd"];
+        $isManager = 1;
+        echo $newPwd;
+        echo $reTypePwd;
+        echo $isManager;
+        echo "HAHA";
+        $editPassword = new AdminContr();
+        $editPassword->initEditPassword($id, $oldPwd, $newPwd, $reTypePwd, $isManager);
     }
 ?>

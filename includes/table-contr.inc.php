@@ -110,7 +110,7 @@
         $deleteTable->initDeleteTable($tableNumber);
     }
 
-    // else{
-    //     header("location: ../menu.php");
-    // }
+    else{
+        header("location: ../index.php");
+    }
 ?>
