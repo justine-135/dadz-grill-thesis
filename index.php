@@ -143,7 +143,7 @@ include "header.php";
                 <div class="stats cost flex-row">
 
                     <div class="label-number flex-column">
-                        <span class="label">
+                        <span class="label user-compliances">
                             Total served
                         </span>
                         <span class="total-served-number number">0</span>
