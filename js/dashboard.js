@@ -209,6 +209,28 @@ window.addEventListener("load", () => {
     };
     xmlhttp.open("GET", "./includes/dashboard-view.inc.php?grid=" + 12, true);
     xmlhttp.send();
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+      if (this.readyState == 4) {
+        const totalOrders = document.querySelector(".user-compliances");
+
+        totalOrders.innerHTML = this.responseText
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+    };
+    xmlhttp.open(
+      "GET",
+      "./includes/dashboard-view.inc.php?grid=" +
+        13 +
+        "&date=" +
+        date +
+        "&date2=" +
+        date2,
+      true
+    );
+    xmlhttp.send();
   };
 
   // Get search input

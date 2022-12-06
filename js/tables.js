@@ -61,10 +61,11 @@ window.addEventListener("load", () => {
                   true
                 );
                 xmlhttp.send();
-              }, 2000);
-              setTimeout(() => {
-                resetId = 0;
-              }, 2000);
+                console.log(tableNumber);
+              }, 4000);
+              // setTimeout(() => {
+              //   resetId = 0;
+              // }, 3000);
             } else {
               connText.classList.remove("disconnected");
               connText.innerHTML = "Yes";

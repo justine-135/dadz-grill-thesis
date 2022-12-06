@@ -34,20 +34,19 @@ window.addEventListener("load", () => {
             resetId = tableNumber;
             connText.classList.remove("disconnected");
             connText.innerHTML = "Yes";
-            setTimeout(() => {
-              console.log(tableNumber);
-              var xmlhttp = new XMLHttpRequest();
-              xmlhttp.open(
-                "GET",
-                `./includes/table-contr.inc.php?contr=2&id=${tableNumber}`,
-                true
-              );
-              xmlhttp.send();
-              resetId = 0;
-            }, 2000);
-            setTimeout(() => {
-              resetId = 0;
-            }, 2000);
+            // setTimeout(() => {
+            //   console.log(tableNumber);
+            //   var xmlhttp = new XMLHttpRequest();
+            //   xmlhttp.open(
+            //     "GET",
+            //     `./includes/table-contr.inc.php?contr=2&id=${tableNumber}`,
+            //     true
+            //   );
+            //   xmlhttp.send();
+            // }, 2000);
+            // setTimeout(() => {
+            //   resetId = 0;
+            // }, 3000);
           } else {
             connText.classList.remove("disconnected");
             connText.innerHTML = "Yes";
