@@ -84,6 +84,12 @@ if ($_SESSION["is_superuser"] == 1) {
             Table <strong class="mx-1"><?php echo $id ?></strong> is deleted.
             </div>
             <?php  
+        } elseif ($alert == "faildelete") {
+            ?>
+            <div class="alert alert-danger d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
+            Table <strong class="mx-1"><?php echo $id ?></strong> is not deleted.
+            </div>
+            <?php  
         } else {
             echo "<span></span>";
         }
