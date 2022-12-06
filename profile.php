@@ -130,33 +130,46 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="sidelink-svg-sm" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V173.3c0-17-6.7-33.3-18.7-45.3L352 50.7C340 38.7 323.7 32 306.7 32H64zm0 96c0-17.7 14.3-32 32-32H288c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V128zM224 416c-35.3 0-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64s-28.7 64-64 64z"/></svg>    
                             <span>Change</span>
                         </button>
-                        
                     </form>
                 </li>
             </ul>
         </div>
     </div>
 </div>
-<div class="alert">
 
+<div class="alert-div">
     <?php
-
     if (isset($_GET["message"])) {
         $alert = $_GET["message"];
         if ($alert == "success") {
-            echo "<span class='query-notif success'>Changes submitted.</span>";
+            ?>
+            <div class="alert alert-success d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
+            Changes submitted successfully. 
+            </div>
+                <?php
         } elseif ($alert == "emptyinput") {
-            echo "<span class='query-notif fail'>Fill up inputs.</span>";
+            ?>
+            <div class="alert alert-danger d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
+            Fill up inputs. 
+            </div>
+            <?php
         } elseif ($alert == "invalidformat") {
-            echo "<span class='query-notif fail'>Invalid format.</span>";
+            ?>
+            <div class="alert alert-danger d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
+            Invalid format. 
+            </div>
+            <?php
         } elseif ($alert == "notmatch") {
-            echo "<span class='query-notif fail'>Password not match.</span>";
+            ?>
+            <div class="alert alert-danger d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
+            Password not match. 
+            </div>
+            <?php
         } else {
             echo "<span></span>";
         }
     }
-
     ?>
-
 </div>
+
 <script src="js/profile.js"></script>
