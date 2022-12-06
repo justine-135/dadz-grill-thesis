@@ -217,7 +217,8 @@ h4 {
   position: absolute;
   top: 30%;
   left: 50%;
-  width: 350px;
+  width: 50%;
+  min-width: 387px;
   height: auto;
   transform: translate(-50%, -50%);
   background-color: rgb(255, 255, 255);
@@ -278,7 +279,9 @@ h4 {
 }
 
 .form-overlay input[type="text"],
-.form-overlay select {
+.form-overlay select,
+.form-overlay input[type="password"],
+.account-information input[type="submit"] {
   height: 30px;
   width: 160px;
   font-size: 1rem;
@@ -286,6 +289,11 @@ h4 {
   background-color: white;
   border-radius: 5px;
   border: 1px solid rgb(201, 201, 201);
+}
+
+.account-information input[type="submit"] {
+  width: auto;
+  margin-top: 5px;
 }
 
 .form-overlay input[type="file"] {

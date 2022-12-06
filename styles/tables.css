@@ -213,6 +213,7 @@
   color: rgb(255, 166, 0);
   width: 100px;
   font-weight: 700;
+  text-align: center;
 }
 
 .cancelled {
@@ -222,6 +223,7 @@
   color: red;
   width: 100px;
   font-weight: 700;
+  text-align: center;
 }
 
 .completed {
@@ -231,6 +233,7 @@
   color: rgb(5, 172, 19);
   width: 100px;
   font-weight: 700;
+  text-align: center;
 }
 
 .connected {

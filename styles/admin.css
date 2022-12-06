@@ -60,7 +60,7 @@
 
 .save-change {
   font-family: "Nunito Sans", sans-serif;
-  color: #ffffff;
+  color: #ffffff !important;
   background-color: rgb(29, 44, 255);
   text-decoration: none;
   border-radius: 5px;
@@ -70,7 +70,13 @@
   border: none;
   cursor: pointer;
 }
+.view-account-container .save-change span {
+  font-family: "Nunito Sans", sans-serif;
 
+  color: white !important;
+  font-weight: 700 !important;
+  font-size: 1rem;
+}
 .save-change svg path {
   fill: white;
 }
@@ -91,7 +97,9 @@
   margin-left: auto;
 }
 
-.profile-form {
+.profile-form,
+.pwd-div,
+.role-select-div {
   background-color: #7272721c;
   align-items: center;
   width: 100%;
@@ -99,13 +107,17 @@
   padding: 20px 0;
 }
 
-.profile-form div {
+.profile-form div,
+.pwd-div div,
+.role-select-div div {
   margin-bottom: 10px;
   max-width: 300px;
 }
 
 .profile-form input[type="text"],
-.profile-form input[type="password"] {
+.profile-form input[type="password"],
+.pwd-div input[type="password"],
+.role-select-div select {
   width: 100%;
   color: #444444;
   font-weight: 500;
@@ -162,3 +174,16 @@
   border-radius: 5px;
   margin-top: 2px;
 }
+
+.form-overlay .account-information {
+  overflow-y: auto;
+  max-height: 295px;
+}
+
+/* .role-select-div,
+.pwd-div {
+  padding: 10px;
+  background-color: #7272721c;
+  align-items: baseline !important;
+  border-radius: 10px;
+} */
