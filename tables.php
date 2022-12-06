@@ -97,7 +97,7 @@ if ($_SESSION["is_superuser"] == 1 || $_SESSION["is_cashier"]) {
     if (isset($_GET["alert"]) || isset($_GET["id"])) {
         $alert = $_GET["alert"];
         $id = $_GET["id"];
-        if ($alert == "billout") {
+        if ($alert == "billout" || $alert == "success") {
             ?>
             <!-- echo "<span class='query-notif fail'>No bill request for table " . $id . "!</span>"; -->
             <div class="alert alert-success d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
@@ -109,6 +109,27 @@ if ($_SESSION["is_superuser"] == 1 || $_SESSION["is_cashier"]) {
             <!-- echo "<span class='query-notif fail'>No bill request for table " . $id . "!</span>"; -->
             <div class="alert alert-danger d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
             No bill request for table <strong class="ms-1"><?php echo $id ?></strong>.
+            </div>
+            <?php
+        }elseif ($alert == "changed") {
+            ?>
+            <!-- echo "<span class='query-notif fail'>No bill request for table " . $id . "!</span>"; -->
+            <div class="alert alert-success d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
+            Table <strong class="mx-1"><?php echo $id ?></strong> status changed successfully.
+            </div>
+            <?php
+        }elseif ($alert == "fail") {
+            ?>
+            <!-- echo "<span class='query-notif fail'>No bill request for table " . $id . "!</span>"; -->
+            <div class="alert alert-danger d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
+            No changes for table <strong class="mx-1"><?php echo $id ?></strong>.
+            </div>
+            <?php
+        }elseif ($alert == "nochange") {
+            ?>
+            <!-- echo "<span class='query-notif fail'>No bill request for table " . $id . "!</span>"; -->
+            <div class="alert alert-danger d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
+            No changes for table <strong class="mx-1"><?php echo $id ?></strong>.
             </div>
             <?php
         } else {
