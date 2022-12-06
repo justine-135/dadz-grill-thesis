@@ -173,6 +173,7 @@ h4 {
 
 .legend-list.open {
   display: flex;
+  overflow-y: auto;
 }
 
 .legend-list.open .col1,
@@ -391,6 +392,7 @@ h4 {
 
   .legend-list {
     width: 566px;
-    top: 50%;
+    top: 30%;
+    height: 300px;
   }
 }
