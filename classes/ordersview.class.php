@@ -7,8 +7,8 @@ class OrdersView extends Orders{
 
         <table class="tables-table order-table table" style="height: 300px">
             <thead>
-                <th style="width:15%">Crew</th>
-                <th>Order</th>
+                <th>Crew</th>
+                <th style="min-width:100px">Order</th>
             </thead>
             <?php
             ?>
@@ -18,7 +18,7 @@ class OrdersView extends Orders{
                     if($row['is_ready'] == 1 ) {
 ?>
                 <tr style="overflow-y:hidden;">
-                    <td style="width:150px"><?php echo $row["waiter"]; ?></td>
+                    <td ><?php echo $row["waiter"]; ?></td>
                     <?php
                      
                         ?>
