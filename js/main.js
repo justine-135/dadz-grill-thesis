@@ -94,7 +94,6 @@ window.addEventListener("load", () => {
 
   let curr_time = parseInt(time_now.innerHTML) - parseInt(time_stamp.innerHTML);
 
-  // time() - $_SESSION['last_login_timestamp']) > 60
   setInterval(() => {
     const xhttp = new XMLHttpRequest();
     xhttp.open("POST", "./includes/user-contr.inc.php");
