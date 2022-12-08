@@ -66,7 +66,7 @@
 
 @media screen and (max-width: 560px) {
   .action-btn-modal .body {
-    flex-direction: column;
+    flex-direction: column !important;
   }
 
   .action-btn-modal .body input[type="submit"] {

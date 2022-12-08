@@ -247,7 +247,7 @@ h4 {
 }
 
 .delete-item-form {
-  width: 500px;
+  max-width: 500px;
 }
 
 .form-overlay .body {
@@ -284,12 +284,17 @@ h4 {
 .form-overlay input[type="password"],
 .account-information input[type="submit"] {
   height: 30px;
-  width: 160px;
+  width: 40%;
   font-size: 1rem;
   padding: 0 0.5rem;
   background-color: white;
   border-radius: 5px;
   border: 1px solid rgb(201, 201, 201);
+}
+
+#insert-ing,
+.update-item-form {
+  max-width: 588px;
 }
 
 .account-information input[type="submit"] {

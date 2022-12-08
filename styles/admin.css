@@ -70,6 +70,9 @@
   border: none;
   cursor: pointer;
 }
+.view-account-container {
+  max-width: 600px;
+}
 .view-account-container .save-change span {
   font-family: "Nunito Sans", sans-serif;
 

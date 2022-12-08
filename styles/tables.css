@@ -127,6 +127,7 @@
   transform: translate(-50%, 20%);
   width: 80%;
   max-width: 500px;
+  min-width: 280px;
   height: 400px;
   background-color: white;
   padding: 20px;
