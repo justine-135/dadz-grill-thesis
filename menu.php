@@ -13,7 +13,7 @@ if ($_SESSION["is_superuser"] == 1 || $_SESSION["is_waiter"] == 1) {
                         <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" />
                     </svg></button>
             </div>
-            <div class="body flex-row btn-group">
+            <div class="body flex-sm-row btn-group menu-show-action justify-content-sm-between w-100">
                 <input type="submit" value="Menu" name="menu" id="menu">
                 <input type="submit" value="Attend" id="attend" name="attended">
                 <!-- <input type="button" value="Attend" id="attend2"> -->
@@ -21,29 +21,6 @@ if ($_SESSION["is_superuser"] == 1 || $_SESSION["is_waiter"] == 1) {
                 <input class="hide" type="text" id="table-id" name="table-id">
             </div>
             <div class="series-orders-attend hide"></div>
-                        <!-- <div class="btn-group flex-column">
-                <div class="body flex-row">
-                    <input type="submit" value="Menu" name="menu">
-                    <input type="submit" value="Attended" name="attended">
-                    <input type="submit" value="Request bill" name="request">
-                    <input class="hide" type="text" id="table-id" name="table-id">
-                </div> 
-
-                <table class="tables-table">
-                    <thead>
-                        <tr>
-                            <th>Orders</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Set A(1)</td>
-                            <td><button>Attend</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>-->
         </form>
     </div>
 
