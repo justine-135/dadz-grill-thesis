@@ -84,8 +84,6 @@
 
         $counter = new TableContr($id, $counter);
         $counter->initCounter($id, $counter);
-
-        echo $counter;
     }
 
     elseif (isset($_POST['add-table'])) {
