@@ -97,7 +97,6 @@ if ($_SESSION["is_superuser"] == 1) {
 
             </div>
             <div class="form-overlay-footer flex-row">
-                <button class="form-footer-btn" type="button">Cancel</button>
                 <input type="submit" value="Submit" name="delete">
             </div>
         </form>
@@ -126,27 +125,41 @@ if ($_SESSION["is_superuser"] == 1) {
 
     </div>
 
-    <div class="alert">
-
-        <?php
-
-        if (isset($_GET["alert"]) || isset($_GET["id"])) {
-            $alert = $_GET["alert"];
-            $id = $_GET["id"];
-            if ($alert == "store") {
-                echo "<span class='query-notif success'>Food inserted successfully!</span>";
-            } elseif ($alert == "update") {
-                echo "<span class='query-notif success'>Food " . $id . " updated successfully!</span>";
-            } elseif ($alert == "delete") {
-                echo "<span class='query-notif success'>Food " . $id . " deleted successfully!</span>";
-            } else {
-                echo "<span></span>";
-            }
+    <div class="alert-div">
+    <?php
+    if (isset($_GET["alert"]) || isset($_GET["id"])) {
+        $alert = $_GET["alert"];
+        $id = $_GET["id"];
+        if ($alert == "store") {
+            ?>
+            <!-- echo "<span class='query-notif fail'>No bill request for table " . $id . "!</span>"; -->
+            <div class="alert alert-success d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
+            New food inserted.
+            </div>
+            <?php
+        } elseif ($alert == "update") {
+            ?>
+            <!-- echo "<span class='query-notif fail'>No bill request for table " . $id . "!</span>"; -->
+            <div class="alert alert-success d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
+            Food <strong class="mx-1"><?php echo $id; ?></strong> is updated.
+            </div>
+            <?php
+        }elseif ($alert == "delete") {
+            ?>
+            <!-- echo "<span class='query-notif fail'>No bill request for table " . $id . "!</span>"; -->
+            <div class="alert alert-success d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
+            Food <strong class="mx-1"><?php echo $id; ?></strong> is deleted.
+            </div>
+            <?php
+        } else {
+            echo "<span></span>";
         }
+    }
+    ?>
+</div>
 
-        ?>
 
-    </div>
+
     <script src="js/inventory.js"></script>
 
 <?php } else {
