@@ -50,7 +50,6 @@
         session_start();
         $userName = $_SESSION["username"];
         $checkTime = time() - $_SESSION["last_login_timestamp"];
-        echo $checkTime;
         if ($checkTime > 3600) {
             $logoutUser = new UserContr($userName, $pass, $confirmPass, $fname, $lname, $fullName, $email, $contact, $bDate, $address, $userType);
             $logoutUser->initLogoutUser();
