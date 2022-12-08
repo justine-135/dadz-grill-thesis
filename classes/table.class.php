@@ -252,7 +252,7 @@ class Table extends Dbh
         $sql = "UPDATE tables SET table_status = 'Call' WHERE `number` = $tblId";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
-        header("location: ../tables.php");
+        header("location: ../tables.php?alert=changed&id=" . $tblId);
 
         exit();
     }

@@ -182,7 +182,7 @@ class Transactions extends Dbh
             header("location: ../tables.php?alert=success&id=" . $id);
         }
         else if ($condition != 2){
-            $sql = "UPDATE tables SET table_status = 'Unoccupied'";
+            $sql = "UPDATE tables SET table_status = 'Unoccupied' WHERE `number` = $id";
             $stmt = $this->connection()->prepare($sql);
             $stmt->execute();
             $stmt = null;
