@@ -285,9 +285,10 @@ class UsersView extends Users{
         <thead>
             <tr>
                 <th style="text-align: left; padding-left: 10px">User #</th>
+                <th style="text-align: left; padding-left: 10px">Date</th>
                 <th style="text-align: left; padding-left: 10px">Name</th>
                 <th style="text-align: left; padding-left: 10px">Role</th>
-                <th style="text-align: left; padding-left: 10px">Served</th>
+                <th style="text-align: left; padding-left: 10px">Service</th>
             </tr>
         </thead>
         <?php
@@ -296,6 +297,9 @@ class UsersView extends Users{
         <tbody>
             <tr id ="<?php echo $row['id']; ?>" >
                 <td style="text-align: left; padding-left: 10px"><?php echo $row['id']; ?></td>
+                <td style="text-align: left; padding-left: 10px"><?php $dt = new DateTime($row['date_time']);
+echo $dt->format('Y-m-d');
+$interval = $dt->diff(new DateTime()); ?></td>
                 <td style="text-align: left; padding-left: 10px"><?php echo $row['username']; ?></td>
                 <td style="text-align: left; padding-left: 10px"><?php if ($row["is_superuser"] == 1) {
                     echo "Manager";

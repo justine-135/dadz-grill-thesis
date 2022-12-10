@@ -61,6 +61,15 @@ class Dashboard extends Dbh{
         return $results;
     }
 
+    protected function getLoginHistory(){
+        $sql = "SELECT * FROM login_history;";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll();
+        return $results;
+    }
+
     protected function getTotalServed(){
         session_start();
         $id = $_SESSION["uid"];

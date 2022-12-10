@@ -136,12 +136,12 @@ class DashboardView extends Dashboard{
     }
 
     public function initActiveCrew(){
-        $results = $this->getCrews();
+        $results = $this->getLoginHistory();
 
         $total = 0;
         $total = (int)$total;
         foreach ($results as $row) {
-            if ($row["is_active"] >= 1) {
+            if ($row["last_logout"] == null) {
                 $total += 1;
             }
         }
