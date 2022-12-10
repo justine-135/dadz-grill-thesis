@@ -115,4 +115,8 @@ window.addEventListener("load", () => {
       alertBody.innerHTML = item;
     });
   });
+
+  setTimeout(() => {
+    document.querySelector(".alert-div").classList.add("hide");
+  }, 3000);
 });

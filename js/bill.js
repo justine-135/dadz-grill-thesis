@@ -135,7 +135,7 @@ window.addEventListener("load", () => {
   );
   xmlhttp.send();
 
-  setTimeout(() => {
-    alert.classList.add("hide");
-  }, 5000);
+  // setTimeout(() => {
+  //   alert.classList.add("hide");
+  // }, 5000);
 });
