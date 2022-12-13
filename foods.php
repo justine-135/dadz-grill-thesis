@@ -20,7 +20,7 @@ if ($_SESSION["is_superuser"] == 1) {
                     <span>Item Group:</span>
                     <select class="stat-select" name="group" id="" required>
                         <option value="Sets">Main set</option>
-                        <option value="Sets">Meat</option>
+                        <option value="Meat">Meat</option>
                         <option value="Sides">Sides</option>
                         <option value="Drinks">Drinks</option>
                         <option value="Addons">Add-ons</option>
@@ -63,7 +63,7 @@ if ($_SESSION["is_superuser"] == 1) {
                     <span>Item Group:</span>
                     <select class="upd-ing-group" name="group" id="" required>
                         <option value="Sets">Main set</option>
-                        <option value="Sets">Meat</option>
+                        <option value="Meat">Meat</option>
                         <option value="Sides">Sides</option>
                         <option value="Drinks">Drinks</option>
                         <option value="Addons">Add-ons</option>
