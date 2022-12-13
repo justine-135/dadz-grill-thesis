@@ -21,7 +21,7 @@ if (!isset($_SESSION["table"])){
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Passion+One:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/styles.css">
-    <link rel="shortcut icon" href="./img/icons/cube-solid.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="./img/icons/logo.jpg" type="image/x-icon">
     <title>Dadz Grillhouse</title>
 </head>
 
@@ -118,6 +118,15 @@ if (!isset($_SESSION["table"])){
                     <?php
                     $setFoods = new FoodsView();
                     $setFoods->initReadSets();
+                    ?>
+                </div>
+            </div>
+            <div class="meats-container">
+                <h1>Meats</h1>
+                <div class="group-btn item-btn">
+                    <?php
+                    $setFoods = new FoodsView();
+                    $setFoods->initReadMeats();
                     ?>
                 </div>
             </div>
