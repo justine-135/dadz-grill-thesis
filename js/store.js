@@ -2,6 +2,7 @@ window.addEventListener("load", () => {
   const categoryBtns = document.querySelectorAll(".nav-buttons button");
   const popularContainer = document.querySelector(".popular-container");
   const setsContainer = document.querySelector(".sets-container");
+  const meatsContainer = document.querySelector(".meats-container");
   const sidesContainer = document.querySelector(".sides-container");
   const drinksContainer = document.querySelector(".drinks-container");
   const addonsContainer = document.querySelector(".addons-container");
@@ -20,6 +21,7 @@ window.addEventListener("load", () => {
       element.parentElement.childNodes[5].classList.remove("active");
       element.parentElement.childNodes[7].classList.remove("active");
       element.parentElement.childNodes[9].classList.remove("active");
+      element.parentElement.childNodes[11].classList.remove("active");
 
       element.classList.add("active");
 
@@ -29,6 +31,9 @@ window.addEventListener("load", () => {
       }
       if (element.id == "sets") {
         setsContainer.classList.add("show");
+      }
+      if (element.id == "meat") {
+        meatsContainer.classList.add("show");
       }
       if (element.id == "sides") {
         sidesContainer.classList.add("show");
@@ -45,6 +50,7 @@ window.addEventListener("load", () => {
   const hideGroupContainers = () => {
     popularContainer.classList.remove("show");
     setsContainer.classList.remove("show");
+    meatsContainer.classList.remove("show");
     sidesContainer.classList.remove("show");
     drinksContainer.classList.remove("show");
     addonsContainer.classList.remove("show");
