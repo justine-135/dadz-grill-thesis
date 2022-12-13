@@ -2,6 +2,7 @@
 include "header.php";
 
 if ($_SESSION["is_superuser"] == 1 || $_SESSION["is_cashier"]) {
+    unset($_SESSION["bill_id"]);
 
 ?>
 
