@@ -1,14 +1,14 @@
 <?php
     include 'autoload.inc.php';
 
-    session_start();
-    $userName = $_SESSION["username"];
-    $checkTime = time() - $_SESSION["last_login_timestamp"];
-    if ($checkTime > 3600) {
-        $logoutUser = new UserContr($userName, $pass, $confirmPass, $fname, $lname, $fullName, $email, $contact, $bDate, $address, $userType);
-        $logoutUser->initLogoutUser();
-    }
-    else{
+    // session_start();
+    // $userName = $_SESSION["username"];
+    // $checkTime = time() - $_SESSION["last_login_timestamp"];
+    // if ($checkTime > 3600) {
+    //     $logoutUser = new UserContr($userName, $pass, $confirmPass, $fname, $lname, $fullName, $email, $contact, $bDate, $address, $userType);
+    //     $logoutUser->initLogoutUser();
+    // }
+    // else{
         if (isset($_GET["contr"])) {
             $contr = $_GET["contr"];
             $id = $_GET["id"];
@@ -119,7 +119,7 @@
         else{
             header("location: ../index.php");
         }
-    }
+    // }
 
    
 ?>
