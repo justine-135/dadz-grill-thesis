@@ -72,8 +72,20 @@ class Transactions extends Dbh
         $newPrice = rtrim($newPrice, "|");
         $newOrgPrice = rtrim($newOrgPrice, "|");
 
-        $sql = "INSERT INTO transactions (table_id, food_id, `order`, original_price, quantity, price)
-        VALUES ( '$id' , '$newItemId' , '$newOrder' , '$newOrgPrice' , '$newQuantity' , '$newPrice')";
+        $stmt = null;
+
+        $sql = "SELECT * FROM tables WHERE `number` = $id";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll();
+
+        foreach ($results as $row) {
+            $start_time = $row['timer'];
+        }
+
+        $sql = "INSERT INTO transactions (table_id, start_time, duration, food_id, `order`, original_price, quantity, price)
+        VALUES ( '$id' , '$start_time' , 1 , '$newItemId' , '$newOrder' , '$newOrgPrice' , '$newQuantity' , '$newPrice')";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
@@ -155,18 +167,48 @@ class Transactions extends Dbh
                     $stmt = null;
                 }
                 else{
-                    $sql = "UPDATE sales_report SET cancel = cancel + $qtys[$i] WHERE `food_id` = $item_ids[$i] AND date_time = '$date'";
+                    $cancelQuantity = intval($qtys[$i]);
+                    $sql = "UPDATE sales_report SET cancel = cancel + $cancelQuantity WHERE `food_id` = $item_ids[$i] AND date_time = '$date'";
                     $stmt = $this->connection()->prepare($sql);
                     $stmt->execute();
                     $stmt = null;
                 }
             }
+
+            date_default_timezone_set("Asia/Manila");
+            $start_time = date("H:i:s");
+            $arr = explode(':', $start_time);
     
-            $sql = "INSERT INTO transactions (table_id, food_id, `order`, original_price, quantity, price, paid)
-            VALUES ( '$id' , '$newItemId' , '$newOrder' , '$newOrgPrice' , '$newQuantity' , '$newPrice', 3)";
+            if (count($arr) === 3) {
+                $start_time_second = $arr[0] * 3600 + $arr[1] * 60 + $arr[2];
+            }
+            else{
+                $start_time_second = $arr[0] * 60 + $arr[1];
+            }
+
+            $sql = "SELECT * FROM tables WHERE `number` = $id";
             $stmt = $this->connection()->prepare($sql);
             $stmt->execute();
-            $stmt = null;
+    
+            $results = $stmt->fetchAll();
+
+            foreach ($results as $row) {
+                if ($row['timer'] != 0) {
+                    $start_time = $row['timer'];
+                    $sql = "INSERT INTO transactions (table_id, start_time, duration, food_id, `order`, original_price, quantity, price, paid)
+                    VALUES ( '$id' , '$start_time' , 0 , '$newItemId' , '$newOrder' , '$newOrgPrice' , '$newQuantity' , '$newPrice', 3)";
+                    $stmt = $this->connection()->prepare($sql);
+                    $stmt->execute();
+                    $stmt = null;
+                }
+                else{
+                    $sql = "INSERT INTO transactions (table_id, start_time, duration, food_id, `order`, original_price, quantity, price, paid)
+                    VALUES ( '$id' , '$start_time_second' , 0 , '$newItemId' , '$newOrder' , '$newOrgPrice' , '$newQuantity' , '$newPrice', 3)";
+                    $stmt = $this->connection()->prepare($sql);
+                    $stmt->execute();
+                    $stmt = null;
+                }
+            }
     
             $sql = "UPDATE tables SET table_status = 'Unoccupied', timer = 0, warning_time = 0, end_time = 0, payment = 'No order', pending_orders = 0, done_orders = 0, is_started = false WHERE `number` = $id";
             $stmt = $this->connection()->prepare($sql);
@@ -177,8 +219,6 @@ class Transactions extends Dbh
             $stmt = $this->connection()->prepare($sql);
             $stmt->execute();
             $stmt = null;
-
-    
             header("location: ../tables.php?alert=success&id=" . $id);
         }
         else if ($condition != 2){
@@ -275,7 +315,8 @@ class Transactions extends Dbh
                 $stmt = null;
             }
             else{
-                $sql = "UPDATE sales_report SET success = success + $quantities[$i] WHERE food_id = $item_ids[$i] AND date_time = '$date'";
+                $successQuantity = intval($quantities[$i]);
+                $sql = "UPDATE sales_report SET success = success + $successQuantity WHERE food_id = $item_ids[$i] AND date_time = '$date'";
                 $stmt = $this->connection()->prepare($sql);
                 $stmt->execute();
                 $stmt = null;

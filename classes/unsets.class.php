@@ -69,6 +69,11 @@ class Unsets extends Dbh{
         $stmt->execute();
         $stmt = null;
 
+        $sql = "TRUNCATE served";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+        $stmt = null;
+
         $sql = "UPDATE users SET served = 0";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();

@@ -20,6 +20,15 @@ class Foods extends Dbh{
         return $results;
     }
 
+    protected function getMeats(){
+        $sql = "SELECT * FROM inventory WHERE item_group = 'Meat';";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll();
+        return $results;
+    }
+
     protected function getSides(){
         $sql = "SELECT * FROM inventory WHERE item_group = 'Sides';";
         $stmt = $this->connection()->prepare($sql);

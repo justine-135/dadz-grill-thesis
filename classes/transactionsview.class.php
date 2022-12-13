@@ -94,8 +94,10 @@ class TransactionsView extends Transactions{
             <tr>
                 <th style="text-align: left; padding-left: 10px">#</th>
                 <th style="text-align: left; padding-left: 10px">Table #</th>
-                <th style="text-align: left; padding-left: 10px">Time</th>
-                <th style="min-width: 400px">Orders</th>
+                <th style="text-align: left; padding-left: 10px">Start</th>
+                <th style="text-align: left; padding-left: 10px">End</th>
+                <th style="text-align: left; padding-left: 10px">Duration</th>
+                <th style="min-width: 300px">Orders</th>
                 <th style="text-align: left; padding-left: 10px">Total</th>
                 <th style="text-align: left; padding-left: 10px">Status</th>
                 <th class="status-action-col">Action</th>
@@ -108,7 +110,39 @@ class TransactionsView extends Transactions{
             <tr>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><span><?php echo $row['id'] ?></span></td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['table_id'] ?></td>
-                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['reg_date'] ?></td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px">
+<?php
+echo gmdate("h:i:s a", $row['start_time']);
+?>
+</td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px">
+<?php
+$date = new DateTime($row['reg_date']);
+$end_time = $date->format('h:i:s a');
+echo $end_time;
+?>
+</td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px">
+<?php
+$date = new DateTime($row['reg_date']);
+$end_time = $date->format('h:i:s');
+$start_time_second = $row['start_time'];
+$arr = explode(':', $end_time);
+
+if (count($arr) === 3) {
+    $end_time_second = $arr[0] * 3600 + $arr[1] * 60 + $arr[2];
+    $duration = intval($end_time_second) - intval($start_time_second);
+    $end_time = $date->format('h:i:s a');
+    // echo $end_time_second . "<br>";
+    // echo $start_time_second;
+    $seconds = $duration;
+    $H = floor($seconds / 3600);
+    $i = ($seconds / 60) % 60;
+    $s = $seconds % 60;
+    echo sprintf("%02d:%02d:%02d", $H, $i, $s);
+}
+
+?></td>
                 <td class="pad10" style="text-align: left; padding-left: 10px; width: 200px">
                     <?php 
                         $result = explode("|",$row['order']);

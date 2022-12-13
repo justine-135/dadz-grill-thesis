@@ -80,6 +80,29 @@ class FoodsView extends Foods{
             }
         }
     }
+    public function initReadMeats(){
+        $results = $this->getMeats();
+        foreach ($results as $row) {
+            if($row['order_status'] == "Yes"){
+        ?>
+        <button>
+            <div class="image" style='background-image: url("./img/temp/<?php echo $row['photo']; ?>")'></div>
+            <div class="text">
+                <span><?php echo $row['item_name']; ?></span>
+                <input value="<?php echo $row['fid']; ?>" type="text" name="" id="" hidden>
+
+                <div class="item-info flex-column">
+                    <div class="flex-row price">
+                        <span>P</span>
+                        <span> <?php echo $row['cost']; ?></span>
+                    </div>
+                </div>
+            </div>
+        </button>
+        <?php
+            }
+        }
+    }
     public function initReadSets(){
         $results = $this->getSets();
         foreach ($results as $row) {

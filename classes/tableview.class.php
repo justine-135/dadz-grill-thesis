@@ -183,7 +183,7 @@ class TableView extends Table
                 <?php 
                 $to_sec_warning = gmdate("H:i:s", $row['warning_time']);
                 $to_sec_end = gmdate("H:i:s", $row['end_time']);
-                $local_time = date("h:i:s");;
+                $local_time = date("h:i:s");
                 if ($row['is_started'] == 1) {
                     if ($row['timer'] > 0) {
                         if ($to_sec_end <= $local_time) {

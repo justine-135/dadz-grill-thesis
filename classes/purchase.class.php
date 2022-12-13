@@ -113,6 +113,17 @@ class Purchase extends Dbh{
     }
 
     protected function setCancel($oid, $tid){
+        date_default_timezone_set("Asia/Manila");
+        $start_time = date("H:i:s");
+        $arr = explode(':', $start_time);
+
+        if (count($arr) === 3) {
+            $start_time_second = $arr[0] * 3600 + $arr[1] * 60 + $arr[2];
+        }
+        else{
+            $start_time_second = $arr[0] * 60 + $arr[1];
+        }
+
         $sql = "SELECT * FROM submitted_orders WHERE sales_id='$oid'";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
@@ -163,9 +174,9 @@ class Purchase extends Dbh{
 
         $results = $stmt->fetchAll();
         $stmt = null;
-        
-        $sql = "INSERT INTO transactions (table_id, `order`, quantity, price, paid)
-        VALUES ( '$tid' , '$order' , '$quantities_transaction' , '$prices' , 3)";
+
+        $sql = "INSERT INTO transactions (table_id, start_time, duration, `order`, quantity, price, paid)
+        VALUES ( '$tid' , '$start_time_second' , 0 , '$order' , '$quantities_transaction' , '$prices' , 3)";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
