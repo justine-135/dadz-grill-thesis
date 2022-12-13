@@ -110,16 +110,22 @@ input[type="text"]:focus {
 }
 
 .group-btn > button:nth-child(1) .image {
-  background-image: url("../img/category/Srambled\ egg.jpg");
+  background-image: url("../img/category/logo.jpg");
 }
 .group-btn > button:nth-child(2) .image {
-  background-image: url("../img/category/Menudo.jpg");
+  background-image: url("../img/category/logo.jpg");
 }
 .group-btn > button:nth-child(3) .image {
-  background-image: url("../img/category/Rice.jpg");
+  background-image: url("../img/category/chicken.jpg");
 }
 .group-btn > button:nth-child(4) .image {
+  background-image: url("../img/category/kimchi.jpg");
+}
+.group-btn > button:nth-child(5) .image {
   background-image: url("../img/category/water.jpg");
+}
+.group-btn > button:nth-child(6) .image {
+  background-image: url("../img/category/sweetpotato.jpg");
 }
 
 .store-back-btn {
