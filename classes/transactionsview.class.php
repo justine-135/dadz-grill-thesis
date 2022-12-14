@@ -7,12 +7,14 @@ class TransactionsView extends Transactions{
         <thead>
             <tr>
                 <th style="text-align: left; padding-left: 10px">#</th>
-                <th style="text-align: left; padding-left: 10px">Table #</th>
-                <th style="text-align: left; padding-left: 10px">Time</th>
-                <th style="min-width: 400px">Orders</th>
+                <th style="text-align: left; padding-left: 10px">Table</th>
+                <th style="text-align: left; padding-left: 10px">Start</th>
+                <th style="text-align: left; padding-left: 10px">End</th>
+                <th style="text-align: left; padding-left: 10px">Duration</th>
+                <th style="min-width: 100px">Orders</th>
                 <th style="text-align: left; padding-left: 10px">Total</th>
                 <th style="text-align: left; padding-left: 10px">Status</th>
-                <th class="status-action-col">Action</th>
+                <th style="text-align: left">Action</th>
             </tr>
         </thead>
         <?php
@@ -22,7 +24,39 @@ class TransactionsView extends Transactions{
             <tr>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><span><?php echo $row['id'] ?></span></td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['table_id'] ?></td>
-                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['reg_date'] ?></td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px">
+<?php
+echo gmdate("h:i:s", $row['start_time']);
+?>
+</td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px">
+<?php
+$date = new DateTime($row['reg_date']);
+$end_time = $date->format('h:i:s');
+echo $end_time;
+?>
+</td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px">
+<?php
+$date = new DateTime($row['reg_date']);
+$end_time = $date->format('h:i:s');
+$start_time_second = $row['start_time'];
+$arr = explode(':', $end_time);
+
+if (count($arr) === 3) {
+    $end_time_second = $arr[0] * 3600 + $arr[1] * 60 + $arr[2];
+    $duration = intval($end_time_second) - intval($start_time_second);
+    $end_time = $date->format('h:i:s');
+    // echo $end_time_second . "<br>";
+    // echo $start_time_second;
+    $seconds = $duration;
+    $H = floor($seconds / 3600);
+    $i = ($seconds / 60) % 60;
+    $s = $seconds % 60;
+    echo sprintf("%02d:%02d:%02d", $H, $i, $s);
+}
+
+?></td>
                 <td class="pad10" style="text-align: left; padding-left: 10px; width: 200px">
                     <?php 
                         $result = explode("|",$row['order']);
@@ -35,14 +69,11 @@ class TransactionsView extends Transactions{
                                 $order .= $result[$i] ."(".$result2[$i]."),";  
                             }
                          ?>
-
-                         
                        <?php
                        
                         }
                         echo $order;
-                    ?>
-                                     
+                    ?>          
                 </td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px">
                 <?php 
@@ -93,11 +124,11 @@ class TransactionsView extends Transactions{
         <thead>
             <tr>
                 <th style="text-align: left; padding-left: 10px">#</th>
-                <th style="text-align: left; padding-left: 10px">Table #</th>
+                <th style="text-align: left; padding-left: 10px">Table</th>
                 <th style="text-align: left; padding-left: 10px">Start</th>
                 <th style="text-align: left; padding-left: 10px">End</th>
                 <th style="text-align: left; padding-left: 10px">Duration</th>
-                <th style="min-width: 300px">Orders</th>
+                <th style="min-width: 100px">Orders</th>
                 <th style="text-align: left; padding-left: 10px">Total</th>
                 <th style="text-align: left; padding-left: 10px">Status</th>
                 <th class="status-action-col">Action</th>
@@ -112,13 +143,13 @@ class TransactionsView extends Transactions{
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['table_id'] ?></td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px">
 <?php
-echo gmdate("h:i:s a", $row['start_time']);
+echo gmdate("h:i:s", $row['start_time']);
 ?>
 </td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px">
 <?php
 $date = new DateTime($row['reg_date']);
-$end_time = $date->format('h:i:s a');
+$end_time = $date->format('h:i:s');
 echo $end_time;
 ?>
 </td>
@@ -132,7 +163,7 @@ $arr = explode(':', $end_time);
 if (count($arr) === 3) {
     $end_time_second = $arr[0] * 3600 + $arr[1] * 60 + $arr[2];
     $duration = intval($end_time_second) - intval($start_time_second);
-    $end_time = $date->format('h:i:s a');
+    $end_time = $date->format('h:i:s');
     // echo $end_time_second . "<br>";
     // echo $start_time_second;
     $seconds = $duration;
@@ -437,80 +468,12 @@ for ($i=0; $i < (count($result)); $i++) {
         ?>
         <thead>
             <tr>
-                <th style="text-align: left">Transaction #</th>
-                <th style="text-align: left">Table #</th>
-                <th style="text-align: left">Time</th>
-                <th>Orders</th>
-                <th style="text-align: left">Total</th>
-                <th style="text-align: left">Status</th>
-            </tr>
-        </thead>
-        <?php
-        foreach ($results as $row) {
-        ?>
-        <tbody>
-            <tr>
-            <!-- (" ","/",$row["reg_date"]) -->
-                <td class="pad10" valign="top" style="text-align: left"><span><?php echo $row['id'] ?></span></td>
-                <td class="pad10" valign="top" style="text-align: left"><?php echo $row['table_id'] ?></td>
-                <td class="pad10" valign="top" style="text-align: left"><?php echo $row['reg_date'] ?></td>
-                <td style="text-align: left">
-                    <?php 
-                        $result = explode("|",$row['order']);
-                        $result2 = explode("|",$row['quantity']);
-                        $order = "";
-                    ?>
-                        <?php
-                        for ($i=0; $i < (count($result)); $i++) { 
-                            if ($result[$i] != "") {
-                                $order .= $result[$i] ."(".$result2[$i]."),";  
-                            }
-                         ?>
-
-                         
-                       <?php
-                       
-                        }
-                        echo $order;
-                    ?>
-                    </p>
-                </td>
-                <td class="pad10" valign="top" style="text-align: left">
-                <?php 
-                    $result = explode("|",$row['price']);
-                    $total = 0;
-                    for ($i=0; $i < (count($result)); $i++) { 
-                        $total += (int)$result[$i];
-                    }
-
-                    echo $total;
-                ?>    
-                </td>
-                <td class="pad10" valign="top" style="text-align: left"><?php if ($row['paid'] == 0) {
-                    echo "<span class='pending'>Pending</span>";
-                }
-                elseif($row['paid'] == 1){
-                    echo "Completed";
-                }
-                elseif($row['paid'] == 3){
-                    echo "Cancelled";
-                }?></td>
-
-            </tr>
-        </tbody>
-        <?php
-        }
-    }
-
-    public function exportTransactionsDate($date, $date2){
-        $results = $this->getTransactionsDate($date, $date2);
-        ?>
-        <thead>
-            <tr>
-                <th style="text-align: left; padding-left: 10px">Transaction #</th>
-                <th style="text-align: left; padding-left: 10px">Table #</th>
-                <th style="text-align: left; padding-left: 10px">Time</th>
-                <th>Orders</th>
+                <th style="text-align: left; padding-left: 10px">#</th>
+                <th style="text-align: left; padding-left: 10px">Table</th>
+                <th style="text-align: left; padding-left: 10px">Start</th>
+                <th style="text-align: left; padding-left: 10px">End</th>
+                <th style="text-align: left; padding-left: 10px">Duration</th>
+                <th style="min-width: 100px">Orders</th>
                 <th style="text-align: left; padding-left: 10px">Total</th>
                 <th style="text-align: left; padding-left: 10px">Status</th>
             </tr>
@@ -522,9 +485,41 @@ for ($i=0; $i < (count($result)); $i++) {
             <tr>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><span><?php echo $row['id'] ?></span></td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['table_id'] ?></td>
-                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['reg_date'] ?></td>
-                <td>
-                <?php 
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px">
+<?php
+echo gmdate("h:i:s", $row['start_time']);
+?>
+</td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px">
+<?php
+$date = new DateTime($row['reg_date']);
+$end_time = $date->format('h:i:s');
+echo $end_time;
+?>
+</td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px">
+<?php
+$date = new DateTime($row['reg_date']);
+$end_time = $date->format('h:i:s');
+$start_time_second = $row['start_time'];
+$arr = explode(':', $end_time);
+
+if (count($arr) === 3) {
+    $end_time_second = $arr[0] * 3600 + $arr[1] * 60 + $arr[2];
+    $duration = intval($end_time_second) - intval($start_time_second);
+    $end_time = $date->format('h:i:s');
+    // echo $end_time_second . "<br>";
+    // echo $start_time_second;
+    $seconds = $duration;
+    $H = floor($seconds / 3600);
+    $i = ($seconds / 60) % 60;
+    $s = $seconds % 60;
+    echo sprintf("%02d:%02d:%02d", $H, $i, $s);
+}
+
+?></td>
+                <td class="pad10" style="text-align: left; padding-left: 10px; width: 200px">
+                    <?php 
                         $result = explode("|",$row['order']);
                         $result2 = explode("|",$row['quantity']);
                         $order = "";
@@ -535,15 +530,11 @@ for ($i=0; $i < (count($result)); $i++) {
                                 $order .= $result[$i] ."(".$result2[$i]."),";  
                             }
                          ?>
-
-                         
                        <?php
                        
                         }
                         echo $order;
-                    ?>
-                    </p>
-                                     
+                    ?>          
                 </td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px">
                 <?php 
@@ -557,13 +548,113 @@ for ($i=0; $i < (count($result)); $i++) {
                 ?>    
                 </td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php if ($row['paid'] == 0) {
-                    echo "Pending";
+                    echo "<span class='pending'>Pending</span>";
                 }
                 elseif($row['paid'] == 1){
-                    echo "Completed";
+                    echo "<span class='completed'>Completed</span>";
                 }
                 elseif($row['paid'] == 3){
-                    echo "Cancelled";
+                    echo "<span class='cancelled'>Cancelled</span>";
+                }?></td>
+
+            </tr>
+        </tbody>
+        <?php
+        }
+    }
+
+    public function exportTransactionsDate($date, $date2){
+        $results = $this->getTransactionsDate($date, $date2);
+        ?>
+        <thead>
+            <tr>
+                <th style="text-align: left; padding-left: 10px">#</th>
+                <th style="text-align: left; padding-left: 10px">Table</th>
+                <th style="text-align: left; padding-left: 10px">Start</th>
+                <th style="text-align: left; padding-left: 10px">End</th>
+                <th style="text-align: left; padding-left: 10px">Duration</th>
+                <th style="min-width: 100px">Orders</th>
+                <th style="text-align: left; padding-left: 10px">Total</th>
+                <th style="text-align: left; padding-left: 10px">Status</th>
+            </tr>
+        </thead>
+        <?php
+        foreach ($results as $row) {
+        ?>
+        <tbody>
+            <tr>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><span><?php echo $row['id'] ?></span></td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php echo $row['table_id'] ?></td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px">
+<?php
+echo gmdate("h:i:s", $row['start_time']);
+?>
+</td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px">
+<?php
+$date = new DateTime($row['reg_date']);
+$end_time = $date->format('h:i:s');
+echo $end_time;
+?>
+</td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px">
+<?php
+$date = new DateTime($row['reg_date']);
+$end_time = $date->format('h:i:s');
+$start_time_second = $row['start_time'];
+$arr = explode(':', $end_time);
+
+if (count($arr) === 3) {
+    $end_time_second = $arr[0] * 3600 + $arr[1] * 60 + $arr[2];
+    $duration = intval($end_time_second) - intval($start_time_second);
+    $end_time = $date->format('h:i:s');
+    // echo $end_time_second . "<br>";
+    // echo $start_time_second;
+    $seconds = $duration;
+    $H = floor($seconds / 3600);
+    $i = ($seconds / 60) % 60;
+    $s = $seconds % 60;
+    echo sprintf("%02d:%02d:%02d", $H, $i, $s);
+}
+
+?></td>
+                <td class="pad10" style="text-align: left; padding-left: 10px; width: 200px">
+                    <?php 
+                        $result = explode("|",$row['order']);
+                        $result2 = explode("|",$row['quantity']);
+                        $order = "";
+                    ?>
+                        <?php
+                        for ($i=0; $i < (count($result)); $i++) { 
+                            if ($result[$i] != "") {
+                                $order .= $result[$i] ."(".$result2[$i]."),";  
+                            }
+                         ?>
+                       <?php
+                       
+                        }
+                        echo $order;
+                    ?>          
+                </td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px">
+                <?php 
+                    $result = explode("|",$row['price']);
+                    $total = 0;
+                    for ($i=0; $i < (count($result)); $i++) { 
+                        $total += (int)$result[$i];
+                    }
+
+                    echo $total;
+                ?>    
+                </td>
+                <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php if ($row['paid'] == 0) {
+                    echo "<span class='pending'>Pending</span>";
+                }
+                elseif($row['paid'] == 1){
+                    echo "<span class='completed'>Completed</span>";
+                }
+                elseif($row['paid'] == 3){
+                    echo "<span class='cancelled'>Cancelled</span>";
                 }?></td>
             </tr>
         </tbody>

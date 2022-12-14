@@ -73,13 +73,7 @@ class Purchase extends Dbh{
 
         $results = null;
         $stmt = null;
-
-        $sql = "SELECT * FROM submitted_orders WHERE sales_id='$oid'";
-        $stmt = $this->connection()->prepare($sql);
-        $stmt->execute();
-
-        $results = $stmt->fetchAll();
-
+        
         $sql = "UPDATE series_orders SET is_ready = 1, is_attended = 0 WHERE table_id = $tid";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
