@@ -163,4 +163,4 @@ include "header.php";
     </div>
 </div>
 
-<script src="js/dashboard.js"></script>
+<script src="js/dashboard.js?v=<?php echo time(); ?>"></script>
