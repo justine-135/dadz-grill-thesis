@@ -99,7 +99,7 @@ if ($_SESSION["is_superuser"] == 1) {
     ?>
     </div>
 
-    <script src="js/admin.js"></script>
+    <script src="js/admin.js?v=<?php echo time(); ?>"></script>
 <?php } else {
 ?>
     <nav class="inventory-nav nav-page flex-row">
