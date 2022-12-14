@@ -138,7 +138,7 @@ $_SESSION["last_login_timestamp"] = time();
 
     <span class="last_timestamp hide"><?php echo $_SESSION["last_login_timestamp"] ?></span>
     <span class="time_now hide"><?php echo time() ?></span>
-    <script src="./js/main.js"></script>
+    <script src="./js/main.js?v=<?php echo time(); ?>"></script>
 
 </body>
 
