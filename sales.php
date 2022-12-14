@@ -85,7 +85,7 @@ if ($_SESSION["is_superuser"] == 1 or $_SESSION["is_cook"] == 1) {
     ?>
 
 </div>
-<script src="js/purchases.js"></script>
+<script src="js/purchases.js?v=<?php echo time(); ?>"></script>
 
 <?php } else {
 ?>
