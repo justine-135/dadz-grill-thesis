@@ -160,8 +160,8 @@ if (!isset($_SESSION["table"])){
         </div>
     </main>
 
-    <script src="./js/store.js"></script>
-    <script src="./js/cart.js"></script>
+    <script src="./js/store.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/cart.js?v=<?php echo time(); ?>"></script>
 
 </body>
 
