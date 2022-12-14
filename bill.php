@@ -30,7 +30,7 @@ if ($_SESSION["is_superuser"] == 1 or $_SESSION["is_cashier"] == 1) {
     </div>
 </div>
 
-<script src="js/bill.js"></script>
+<script src="js/bill.js?v=<?php echo time(); ?>"></script>
 
 <?php } else {
 ?>
