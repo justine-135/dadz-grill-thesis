@@ -116,7 +116,7 @@ if ($_SESSION["is_superuser"] == 1 || $_SESSION["is_cleaner"] == 1) {
 
     </div>
 
-<script src="js/dirty.js"></script>
+<script src="js/dirty.js?v=<?php echo time(); ?>"></script>
 
 <?php } else {
 ?>
