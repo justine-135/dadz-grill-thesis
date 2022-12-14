@@ -58,7 +58,7 @@ if ($_SESSION["is_superuser"] == 1 || $_SESSION["is_cashier"]) {
             <table class="export-sales-report-tbl-date hide"></table>
         </div>
     </div>
-    <script src="js/transactions.js"></script>
+    <script src="js/transactions.js?v=<?php echo time(); ?>"></script>
 
 <?php } else {
 ?>
