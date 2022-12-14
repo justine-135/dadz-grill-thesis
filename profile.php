@@ -172,4 +172,4 @@
     ?>
 </div>
 
-<script src="js/profile.js"></script>
+<script src="js/profile.js?v=<?php echo time(); ?>"></script>
