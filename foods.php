@@ -162,7 +162,7 @@ if ($_SESSION["is_superuser"] == 1) {
 
 
 
-    <script src="js/inventory.js"></script>
+    <script src="js/inventory.js?v=<?php echo time(); ?>"></script>
 
 <?php } else {
 ?>
