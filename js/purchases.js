@@ -102,7 +102,7 @@ window.addEventListener("load", () => {
     loadOrders();
   }, 1000);
 
-  loadOrders();
+  // loadOrders();
 
   setTimeout(() => {
     document.querySelector(".alert-div").classList.add("hide");
