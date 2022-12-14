@@ -98,7 +98,7 @@ if ($_SESSION["is_superuser"] == 1) {
     ?>
 
 </div>
-<script src="js/setting.js"></script>
+<script src="js/setting.js?v=<?php echo time(); ?>"></script>
 
 <?php } else {
 ?>
