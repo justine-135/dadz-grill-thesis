@@ -139,7 +139,7 @@ if ($_SESSION["is_superuser"] == 1 || $_SESSION["is_cashier"]) {
     ?>
 </div>
 
-<script src="js/tables.js"></script>
+<script src="js/tables.js?v=<?php echo time(); ?>"></script>
 
 <?php } else {
 ?>
