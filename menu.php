@@ -141,7 +141,7 @@ if ($_SESSION["is_superuser"] == 1 || $_SESSION["is_waiter"] == 1) {
 
     </div>
 
-    <script src="js/menu.js"></script>
+    <script src="js/menu.js?v=<?php echo time(); ?>"></script>
 
 <?php } else {
 ?>
