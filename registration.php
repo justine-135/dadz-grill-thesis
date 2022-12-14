@@ -113,7 +113,7 @@
         </form>
     </div>
 
-    <script src="./js/registration.js"></script>
+    <script src="./js/registration.js?v=<?php echo time(); ?>"></script>
 </body>
 </html>
 <?php } else {
