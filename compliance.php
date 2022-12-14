@@ -59,7 +59,7 @@ if ($_SESSION["is_superuser"] == 1) {
     ?>
 
     </div>
-    <script src="js/crew_performance.js"></script>
+    <script src="js/crew_performance.js?v=<?php echo time(); ?>"></script>
 
 <?php } else {
 ?>
