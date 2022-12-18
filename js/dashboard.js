@@ -10,7 +10,7 @@ window.addEventListener("load", () => {
   dashboardLi.classList.add("active");
   dashboardLi.querySelector(".inactive-link").className = "active-link";
 
-  let interval = 800;
+  let interval = 1000;
 
   setInterval(() => {
     loadData();
