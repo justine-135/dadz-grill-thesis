@@ -132,7 +132,7 @@ class Users extends Dbh{
         elseif($checkPass === true){
             $browser = include "../includes/getbrowser.inc.php";
             date_default_timezone_set('Asia/Manila');
-            $dateNow = date("Y-m-d h:i:sa");
+            $dateNow = date("Y-m-d h:i:s");
             $savedLogin = date("Y-m-d h:i:sa");
             $sql = "UPDATE users SET reg_date = reg_date, last_login = '$dateNow', is_active = is_active + 1 WHERE username='$userName'";
             $stmt = $this->connection()->prepare($sql);
@@ -151,6 +151,9 @@ class Users extends Dbh{
 
             session_start();
             $_SESSION["last_login_datetime"] = $dateNow;
+            setcookie("last_login_cookie", $dateNow, time() + (3600), "/");
+            setcookie("last_login_tmp_cookie", $dateNow, time() + (86400 * 30), "/");
+
             $sql = "INSERT INTO login_history (`user_id`, fullname, last_login, browser) VALUES (?,?,?,?);";    
             $stmt = $this->connection()->prepare($sql);
             $stmt->execute([$user[0]["id"], $user[0]["fullname"], $dateNow, $browser]);   
@@ -164,7 +167,7 @@ class Users extends Dbh{
 
     protected function logoutUser($username){
         date_default_timezone_set('Asia/Manila');
-        $dateNow = date("Y-m-d h:i:sa");
+        $dateNow = date("Y-m-d h:i:s");
         $sql = "UPDATE users SET reg_date = reg_date, last_logout = '$dateNow', is_active = is_active - 1 WHERE username='$username'";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
@@ -181,8 +184,7 @@ class Users extends Dbh{
         }
         $stmt = null;
 
-        session_start();
-        $last_login_datetime = $_SESSION["last_login_datetime"];
+        $last_login_datetime = $_COOKIE["last_login_tmp_cookie"];
         $sql = "UPDATE login_history SET last_logout = '$dateNow' WHERE last_login='$last_login_datetime'";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
@@ -218,6 +220,7 @@ class Users extends Dbh{
         }
  
     }
+
 }
 
 ?>

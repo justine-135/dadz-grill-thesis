@@ -252,7 +252,7 @@ if (count($arr) === 3) {
             </div>
             <div class="bill-details flex-column">
                 <span>Date</span>
-                <span><?php echo $row['reg_date'] ?></span>
+                <span><?php echo $newDate = date("Y-m-d h:i:s", strtotime($row['reg_date'])); ?></span>
             </div>
             <div class="bill-details flex-column" style="margin-left: auto; align-content: flex-start;">
                 <span>Input bill</span>
@@ -265,8 +265,9 @@ if (count($arr) === 3) {
             <thead >
                 <tr>
                     <th style="width:50%; text-align:left; padding-left: 20px">Item</th>
-                    <th style="width:10%; text-align: left; padding-left: 10px">Amount</th>
                     <th style="width:20%; text-align: left; padding-left: 10px">₱ Price</th>
+                    <th style="width:10%; text-align: left; padding-left: 10px">Amount</th>
+                    <th style="width:20%; text-align: left; padding-left: 10px">₱ Total price</th>
                 </tr>
             </thead>
             <tbody>
@@ -274,6 +275,7 @@ if (count($arr) === 3) {
 $result = explode("|",$row['order']);
 $result2 = explode("|",$row['quantity']);
 $result3 = explode("|",$row['price']);
+$result4 = explode("|",$row['original_price']);
 $total = 0;
 for ($i=0; $i < (count($result)); $i++) { 
     $total += (int)$result3[$i];
@@ -282,6 +284,11 @@ for ($i=0; $i < (count($result)); $i++) {
                     <?php if ($result[$i] != "") {
                         ?>
                     <td style="text-align: left;padding-left: 20px"><?php echo $result[$i] ?></td>
+                        <?php
+                    } ?>
+                    <?php if ($result4[$i] != "") {
+                        ?>
+                    <td style="text-align: left;padding-left: 20px"><?php echo $result4[$i] ?></td>
                         <?php
                     } ?>
                     <?php if ($result2[$i] != "") {
@@ -298,15 +305,18 @@ for ($i=0; $i < (count($result)); $i++) {
                 <?php } ?>
                 <tr>
                     <td></td>
+                    <td></td>
                     <td class="bill-final-span" style="text-align: left; padding-left: 10px"><span class="bill-final-span">Total:</span></td>
                     <td style="text-align: left; padding-left: 10px">₱ <span id="amount-total"><?php echo $total; ?></span></td>
                 </tr>
                 <tr>
                     <td></td>
+                    <td></td>
                     <td style="text-align: left; padding-left: 10px"> <span class="bill-final-span" >Payment:</span></td>
                     <td style="text-align: left; padding-left: 10px">₱ <span id="amount-paid">0</span></td>
                 </tr>
                 <tr>
+                    <td></td>
                     <td></td>
                     <td class="bill-final-span" style="text-align: left; padding-left: 10px"><span class="bill-final-span">Change:</span></td>
                     <td style="text-align: left; padding-left: 10px">₱ <span id="amount-change">0</span></td>
@@ -314,10 +324,8 @@ for ($i=0; $i < (count($result)); $i++) {
                 <tr>
                     <td></td>
                     <td></td>
+                    <td></td>
                     <td class="bill-td-submit" >
-                    <!-- <form action="./includes/transactions-view.inc.php" id="form-save-receipt" method="POST">
-                        
-                    </form> -->
                         <input type="text" name="total" id="total" hidden>
                         <input type="text" name="payment" id="payment" hidden>
                         <input type="text" name="change" id="change" hidden>
