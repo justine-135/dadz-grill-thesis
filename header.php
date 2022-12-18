@@ -7,7 +7,11 @@ if (empty($_SESSION["username"])) {
     header("location: login.php?message=");
 }
 
+date_default_timezone_set('Asia/Manila');
+$dateNow = date("Y-m-d h:i:s");
+
 $_SESSION["last_login_timestamp"] = time();
+setcookie("last_login_cookie", $dateNow, time() + (3600), "/");
 ?>
 
 <!DOCTYPE html>
