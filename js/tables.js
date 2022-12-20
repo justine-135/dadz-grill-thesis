@@ -63,9 +63,9 @@ window.addEventListener("load", () => {
                 xmlhttp.send();
                 console.log(tableNumber);
               }, 4000);
-              // setTimeout(() => {
-              //   resetId = 0;
-              // }, 3000);
+              setTimeout(() => {
+                resetId = 0;
+              }, 3000);
             } else {
               connText.classList.remove("disconnected");
               connText.innerHTML = "Yes";
