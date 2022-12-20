@@ -11,7 +11,11 @@ date_default_timezone_set('Asia/Manila');
 $dateNow = date("Y-m-d h:i:s");
 
 $_SESSION["last_login_timestamp"] = time();
-setcookie("last_login_cookie", $dateNow, time() + (3600), "/");
+
+if (isset($_COOKIE['last_login_cookie'])) {
+    setcookie("last_login_cookie", $dateNow, time() + (3600), "/");
+}
+
 ?>
 
 <!DOCTYPE html>
