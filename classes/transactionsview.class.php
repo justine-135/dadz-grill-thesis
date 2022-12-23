@@ -11,8 +11,8 @@ class TransactionsView extends Transactions{
                 <th style="text-align: left; padding-left: 10px">Start</th>
                 <th style="text-align: left; padding-left: 10px">End</th>
                 <th style="text-align: left; padding-left: 10px">Duration</th>
-                <th style="min-width: 100px">Orders</th>
-                <th style="text-align: left; padding-left: 10px">Total</th>
+                <th style="max-width: 10px;">Orders</th>
+                <th style="text-align: left; padding-left: 10px; min-width: 75px">Total</th>
                 <th style="text-align: left; padding-left: 10px">Status</th>
                 <th style="text-align: left">Action</th>
             </tr>
@@ -57,7 +57,7 @@ if (count($arr) === 3) {
 }
 
 ?></td>
-                <td class="pad10" style="text-align: left; padding-left: 10px; width: 200px">
+                <td class="pad10" style="text-align: left; padding-left: 10px; min-width: 400px">
                     <?php 
                         $result = explode("|",$row['order']);
                         $result2 = explode("|",$row['quantity']);
@@ -128,8 +128,8 @@ if (count($arr) === 3) {
                 <th style="text-align: left; padding-left: 10px">Start</th>
                 <th style="text-align: left; padding-left: 10px">End</th>
                 <th style="text-align: left; padding-left: 10px">Duration</th>
-                <th style="min-width: 100px">Orders</th>
-                <th style="text-align: left; padding-left: 10px">Total</th>
+                <th style="min-width: 90px">Orders</th>
+                <th style="text-align: left; padding-left: 10px; min-width: 75px">Total</th>
                 <th style="text-align: left; padding-left: 10px">Status</th>
                 <th class="status-action-col">Action</th>
             </tr>
@@ -174,7 +174,7 @@ if (count($arr) === 3) {
 }
 
 ?></td>
-                <td class="pad10" style="text-align: left; padding-left: 10px; width: 200px">
+                <td class="pad10" style="text-align: left; padding-left: 10px; min-width: 200px">
                     <?php 
                         $result = explode("|",$row['order']);
                         $result2 = explode("|",$row['quantity']);
@@ -482,7 +482,7 @@ for ($i=0; $i < (count($result)); $i++) {
                 <th style="text-align: left; padding-left: 10px">End</th>
                 <th style="text-align: left; padding-left: 10px">Duration</th>
                 <th style="min-width: 100px">Orders</th>
-                <th style="text-align: left; padding-left: 10px">Total</th>
+                <th style="text-align: left; padding-left: 10px; min-width: 75px">Total</th>
                 <th style="text-align: left; padding-left: 10px">Status</th>
             </tr>
         </thead>
