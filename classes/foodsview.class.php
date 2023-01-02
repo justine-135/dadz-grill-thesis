@@ -21,7 +21,7 @@ class FoodsView extends Foods{
             <tr id ="<?php echo $row['fid']; ?>">
                 <td class="name" style="text-align: left; padding-left: 10px"><?php echo $row['item_name']; ?></td>
                 <td>
-                    <img name="item-img" class="tbl-img-data" src="./img/temp/<?php echo $row['photo']; ?>" alt="">    
+                    <img name="item-img" class="tbl-img-data" height="40px" width="40px" src="./img/temp/<?php echo $row['photo']; ?>" alt="">    
                 </td>
                 <td style="text-align: left; padding-left: 10px"><?php echo $row['item_group']; ?></td>
                 <td style="text-align: left; padding-left: 10px"><?php echo $row['cost']; ?></td>
@@ -63,7 +63,8 @@ class FoodsView extends Foods{
             if($row['order_status'] == "Yes"){
         ?>
         <button>
-            <div class="image" style='background-image: url("./img/temp/<?php echo $row['photo']; ?>")'></div>
+            <!-- <div class="image" style='background-image: url("./img/temp/<?php echo $row['photo']; ?>")'></div> -->
+            <img class="image" src="./img/temp/<?php echo $row['photo']; ?>" alt="">
             <div class="text">
                 <span><?php echo $row['item_name']; ?></span>
                 <input value="<?php echo $row['fid']; ?>" type="text" name="" id="" hidden>
@@ -86,7 +87,8 @@ class FoodsView extends Foods{
             if($row['order_status'] == "Yes"){
         ?>
         <button>
-            <div class="image" style='background-image: url("./img/temp/<?php echo $row['photo']; ?>")'></div>
+            <!-- <div class="image" style='background-image: url("./img/temp/<?php echo $row['photo']; ?>")'></div> -->
+            <img class="image" src="./img/temp/<?php echo $row['photo']; ?>" alt="">
             <div class="text">
                 <span><?php echo $row['item_name']; ?></span>
                 <input value="<?php echo $row['fid']; ?>" type="text" name="" id="" hidden>
@@ -109,7 +111,8 @@ class FoodsView extends Foods{
             if($row['order_status'] == "Yes"){
         ?>
         <button>
-            <div class="image" style='background-image: url("./img/temp/<?php echo $row['photo']; ?>")'></div>
+            <!-- <div class="image" style='background-image: url("./img/temp/<?php echo $row['photo']; ?>")'></div> -->
+            <img class="image" src="./img/temp/<?php echo $row['photo']; ?>" alt="">
             <div class="text">
                 <span><?php echo $row['item_name']; ?></span>
                 <input value="<?php echo $row['fid']; ?>" type="text" name="" id="" hidden>
@@ -132,7 +135,8 @@ class FoodsView extends Foods{
             if($row['order_status'] == "Yes"){
         ?>
         <button>
-            <div class="image" style='background-image: url("./img/temp/<?php echo $row['photo']; ?>")'></div>
+            <!-- <div class="image" style='background-image: url("./img/temp/<?php echo $row['photo']; ?>")'></div> -->
+            <img class="image" src="./img/temp/<?php echo $row['photo']; ?>" alt="">
             <div class="text">
                 <span><?php echo $row['item_name']; ?></span>
                 <input value="<?php echo $row['fid']; ?>" type="text" name="" id="" hidden>
@@ -155,7 +159,8 @@ class FoodsView extends Foods{
             if($row['order_status'] == "Yes"){
         ?>
         <button>
-            <div class="image" style='background-image: url("./img/temp/<?php echo $row['photo']; ?>")'></div>
+            <!-- <div class="image" style='background-image: url("./img/temp/<?php echo $row['photo']; ?>")'></div> -->
+            <img class="image" src="./img/temp/<?php echo $row['photo']; ?>" alt="">
             <div class="text">
                 <span><?php echo $row['item_name']; ?></span>
                 <input value="<?php echo $row['fid']; ?>" type="text" name="" id="" hidden>
@@ -178,7 +183,8 @@ class FoodsView extends Foods{
             if($row['order_status'] == "Yes"){
         ?>
         <button>
-            <div class="image" style='background-image: url("./img/temp/<?php echo $row['photo']; ?>")'></div>
+            <!-- <div class="image" style='background-image: url("./img/temp/<?php echo $row['photo']; ?>")'></div> -->
+            <img class="image" src="./img/temp/<?php echo $row['photo']; ?>" alt="">
             <div class="text">
                 <span><?php echo $row['item_name']; ?></span>
                 <input value="<?php echo $row['fid']; ?>" type="text" name="" id="" hidden>
