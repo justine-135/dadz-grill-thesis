@@ -53,7 +53,17 @@ if (count($arr) === 3) {
     $H = floor($seconds / 3600);
     $i = ($seconds / 60) % 60;
     $s = $seconds % 60;
-    echo sprintf("%02d:%02d:%02d", $H, $i, $s);
+
+    if ($row['paid'] == 4) {
+        echo "00:00:00";
+    }
+    else if ($row['paid'] == 1){
+        echo sprintf("%02d:%02d:%02d", $H, $i, $s);
+
+    }
+    else{
+        echo sprintf("%02d:%02d:%02d", $H, $i, $s);
+    }
 }
 
 ?></td>
@@ -94,7 +104,11 @@ if (count($arr) === 3) {
                 }
                 elseif($row['paid'] == 3){
                     echo "<span class='cancelled'>Cancelled</span>";
-                }?></td>
+                }
+                else{
+                    echo "<span class='cancelled'>Cancelled</span>";
+                }
+                ?></td>
                 <td valign="top" class="action-td status-action-col pad10">
                     <form action="./includes/transactions-contr.inc.php" method="POST">
                         <input type="text" name="id" value=<?php echo $row['id'] ?> id="" hidden>   
@@ -170,7 +184,16 @@ if (count($arr) === 3) {
     $H = floor($seconds / 3600);
     $i = ($seconds / 60) % 60;
     $s = $seconds % 60;
-    echo sprintf("%02d:%02d:%02d", $H, $i, $s);
+    if ($row['paid'] == 4) {
+        echo "00:00:00";
+    }
+    else if ($row['paid'] == 1){
+        echo sprintf("%02d:%02d:%02d", $H, $i, $s);
+
+    }
+    else{
+        echo sprintf("%02d:%02d:%02d", $H, $i, $s);
+    }
 }
 
 ?></td>
@@ -210,6 +233,9 @@ if (count($arr) === 3) {
                     echo "<span class='completed'>Completed</span>";
                 }
                 elseif($row['paid'] == 3){
+                    echo "<span class='cancelled'>Cancelled</span>";
+                }
+                else{
                     echo "<span class='cancelled'>Cancelled</span>";
                 }?></td>
                 <td valign="top" class="action-td status-action-col pad10">
@@ -572,6 +598,9 @@ if (count($arr) === 3) {
                 }
                 elseif($row['paid'] == 3){
                     echo "<span class='cancelled'>Cancelled</span>";
+                }
+                else{
+                    echo "<span class='cancelled'>Cancelled</span>";
                 }?></td>
 
             </tr>
@@ -671,6 +700,9 @@ if (count($arr) === 3) {
                     echo "<span class='completed'>Completed</span>";
                 }
                 elseif($row['paid'] == 3){
+                    echo "<span class='cancelled'>Cancelled</span>";
+                }
+                else{
                     echo "<span class='cancelled'>Cancelled</span>";
                 }?></td>
             </tr>

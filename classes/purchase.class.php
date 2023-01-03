@@ -170,7 +170,7 @@ class Purchase extends Dbh{
         $stmt = null;
 
         $sql = "INSERT INTO transactions (table_id, start_time, duration, `order`, quantity, price, paid)
-        VALUES ( '$tid' , '$start_time_second' , 0 , '$order' , '$quantities_transaction' , '$prices' , 3)";
+        VALUES ( '$tid' , '$start_time_second' , 0 , '$order' , '$quantities_transaction' , '$prices' , 4)";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
