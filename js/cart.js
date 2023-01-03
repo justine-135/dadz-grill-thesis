@@ -8,9 +8,9 @@ window.addEventListener("load", () => {
     const element = selectedItem[i];
 
     element.addEventListener("click", (e) => {
-      let url = element.childNodes[1]
-        .getAttribute("style")
-        .match(/url\(["']?([^"']*)["']?\)/)[1];
+      console.log(element.childNodes[1].src);
+
+      let url = element.childNodes[1].src;
       let name = element.childNodes[3].childNodes[1].innerHTML;
       let price =
         element.childNodes[3].childNodes[5].childNodes[1].childNodes[3]

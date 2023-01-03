@@ -9,6 +9,7 @@ window.addEventListener("load", () => {
 
   let statuses = [];
   let resetId = 0;
+  let resetCounter = 0;
 
   const loadTable = () => {
     let xmlhttp = new XMLHttpRequest();
@@ -45,6 +46,8 @@ window.addEventListener("load", () => {
           let connText = timerVal.parentElement.childNodes[3].childNodes[0];
           let tableNumber =
             timerVal.parentElement.childNodes[1].childNodes[0].innerHTML;
+          let counter = timerVal.getAttribute("counter");
+          let tableId = timerVal.getAttribute("id");
 
           let counterVal = parseInt(connData.innerHTML);
           if (counterVal > 0) {
@@ -52,23 +55,37 @@ window.addEventListener("load", () => {
               resetId = tableNumber;
               connText.classList.remove("disconnected");
               connText.innerHTML = "Yes";
-              setTimeout(() => {
-                console.log(tableNumber);
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.open(
-                  "GET",
-                  `./includes/table-contr.inc.php?contr=2&id=${tableNumber}`,
-                  true
-                );
-                xmlhttp.send();
-                console.log(tableNumber);
-              }, 4000);
+
+              let xmlhttp = new XMLHttpRequest();
+              xmlhttp.open(
+                "GET",
+                `./includes/table-contr.inc.php?contr=2&id=${tableNumber}`,
+                true
+              );
+              xmlhttp.send();
+
+              // var xmlhttp = new XMLHttpRequest();
+              // xmlhttp.open(
+              //   "POST",
+              //   `./includes/table-contr.inc.php?cntr=1&id=${tableNumber}`,
+              //   true
+              // );
+              // xmlhttp.send();
+
+              let xhttp = new XMLHttpRequest();
+              xhttp.open("POST", "./includes/table-contr.inc.php");
+              xhttp.setRequestHeader(
+                "Content-type",
+                "application/x-www-form-urlencoded"
+              );
+              xhttp.send(`&contr=2&id=${tableNumber}`);
+
               setTimeout(() => {
                 resetId = 0;
-              }, 3000);
+              }, 10000);
             } else {
-              connText.classList.remove("disconnected");
-              connText.innerHTML = "Yes";
+              connText.classList.add("disconnected");
+              connText.innerHTML = "No";
             }
           } else {
             connText.classList.add("disconnected");

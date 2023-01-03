@@ -80,6 +80,7 @@ window.addEventListener("load", () => {
             timerVal.parentElement.childNodes[1].childNodes[0].innerHTML;
 
           let counterVal = parseInt(connData.innerHTML);
+          console.log(counterVal);
           if (counterVal > 0) {
             if (resetId != tableNumber) {
               resetId = tableNumber;
