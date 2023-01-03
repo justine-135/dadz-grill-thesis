@@ -85,14 +85,7 @@
             $getID = new TableContr($id);
             $getID->initGetId($id);
         }
-    
-        elseif (isset($_POST['cntr'])){
-            $counter = $_POST['cntr'];
-            $id = $_POST['id'];
-    
-            $counter = new TableContr($id, $counter);
-            $counter->initCounter($id, $counter);
-        }
+
     
         elseif (isset($_POST['add-table'])) {
             $tableNumber = $_POST["table-id"];
@@ -121,5 +114,22 @@
         }
     // }
 
+
+    if (isset($_POST['cntr'])){
+        $counter = $_POST['cntr'];
+        $id = $_POST['id'];
+
+        $counter = new TableContr($id, $counter);
+        $counter->initCounter($id, $counter);
+    }
+
+    // else{
+    //     for ($i=0; $i < 20; $i++) { 
+    //         if ($id != null) {
+    //             $counter = new TableContr($i);
+    //             $counter->initResetCounter($i);
+    //         }
+    //     }
+    // }
    
 ?>
