@@ -63,7 +63,6 @@ class FoodsView extends Foods{
             if($row['order_status'] == "Yes"){
         ?>
         <button>
-            <!-- <div class="image" style='background-image: url("./img/temp/<?php echo $row['photo']; ?>")'></div> -->
             <img class="image" src="./img/temp/<?php echo $row['photo']; ?>" alt="">
             <div class="text">
                 <span><?php echo $row['item_name']; ?></span>
@@ -87,7 +86,6 @@ class FoodsView extends Foods{
             if($row['order_status'] == "Yes"){
         ?>
         <button>
-            <!-- <div class="image" style='background-image: url("./img/temp/<?php echo $row['photo']; ?>")'></div> -->
             <img class="image" src="./img/temp/<?php echo $row['photo']; ?>" alt="">
             <div class="text">
                 <span><?php echo $row['item_name']; ?></span>
@@ -111,7 +109,6 @@ class FoodsView extends Foods{
             if($row['order_status'] == "Yes"){
         ?>
         <button>
-            <!-- <div class="image" style='background-image: url("./img/temp/<?php echo $row['photo']; ?>")'></div> -->
             <img class="image" src="./img/temp/<?php echo $row['photo']; ?>" alt="">
             <div class="text">
                 <span><?php echo $row['item_name']; ?></span>
@@ -135,7 +132,6 @@ class FoodsView extends Foods{
             if($row['order_status'] == "Yes"){
         ?>
         <button>
-            <!-- <div class="image" style='background-image: url("./img/temp/<?php echo $row['photo']; ?>")'></div> -->
             <img class="image" src="./img/temp/<?php echo $row['photo']; ?>" alt="">
             <div class="text">
                 <span><?php echo $row['item_name']; ?></span>
@@ -159,7 +155,6 @@ class FoodsView extends Foods{
             if($row['order_status'] == "Yes"){
         ?>
         <button>
-            <!-- <div class="image" style='background-image: url("./img/temp/<?php echo $row['photo']; ?>")'></div> -->
             <img class="image" src="./img/temp/<?php echo $row['photo']; ?>" alt="">
             <div class="text">
                 <span><?php echo $row['item_name']; ?></span>
@@ -183,7 +178,6 @@ class FoodsView extends Foods{
             if($row['order_status'] == "Yes"){
         ?>
         <button>
-            <!-- <div class="image" style='background-image: url("./img/temp/<?php echo $row['photo']; ?>")'></div> -->
             <img class="image" src="./img/temp/<?php echo $row['photo']; ?>" alt="">
             <div class="text">
                 <span><?php echo $row['item_name']; ?></span>

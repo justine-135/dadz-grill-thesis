@@ -60,17 +60,17 @@ class TableView extends Table
                     if ($row['timer'] > 0) {
                         if ($to_sec_end <= $local_time) {
                             ?>
-                            <td class="table-timer-col table-<?php echo $row['number'] ?>-time endtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                            <td class="table-timer-col table-<?php echo $row['number'] ?>-time endtime" id="<?php echo $row['number'] ?>" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?> counter=<?php echo $row['counter']; ?>>
                             <?php
                         }
                         elseif($to_sec_warning <= $local_time){
                             ?>
-                            <td class="table-timer-col table-<?php echo $row['number'] ?>-time warningtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                            <td class="table-timer-col table-<?php echo $row['number'] ?>-time warningtime" id="<?php echo $row['number'] ?>" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?> counter=<?php echo $row['counter']; ?>>
                             <?php
                         }
                         else{
                             ?>
-                            <td class="table-timer-col table-<?php echo $row['number'] ?>-time runningtime" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                            <td class="table-timer-col table-<?php echo $row['number'] ?>-time runningtime" id="<?php echo $row['number'] ?>" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?> counter=<?php echo $row['counter']; ?>>
                             <?php
                         }
                     }
@@ -78,12 +78,12 @@ class TableView extends Table
                 else{
                     if ($row['timer'] == 0) {
                         ?>
-                        <td class="table-timer-col table-<?php echo $row['number'] ?>-time" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                        <td class="table-timer-col table-<?php echo $row['number'] ?>-time" id="<?php echo $row['number'] ?>" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?> counter=<?php echo $row['counter']; ?>>
                         <?php
                     }
                     elseif ($row['timer'] > 0){
                         ?>
-                        <td class="table-timer-col table-<?php echo $row['number'] ?>-time runningtimeend" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?>>
+                        <td class="table-timer-col table-<?php echo $row['number'] ?>-time runningtimeend" id="<?php echo $row['number'] ?>" started=<?php echo $row['is_started'] ?> starttime=<?php echo $row['timer'] ?> endtime=<?php echo $row['end_time'] ?> counter=<?php echo $row['counter']; ?>>
                         <?php
                     }
                 }

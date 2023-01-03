@@ -386,6 +386,15 @@ for ($i=0; $i < (count($result)); $i++) {
     padding: 10px;
     }
 
+    .receipt-header{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .receipt-header img{
+        border-radius: 50%;
+        margin-left: 10px;
+    }
     .text-center{
         text-align: center;
     }
@@ -411,7 +420,7 @@ for ($i=0; $i < (count($result)); $i++) {
         <div class="receipt-container">
             <div class="receipt-header receipt-padding">
                 <h1 class="text-center">Dad'z Grillhouse</h1>
-                <span class="text-center">Address: </span>
+                <img src="./img/icons/logo.jpg" height="50px" width="50px" alt="">
             </div>
             <hr>
             <span class="receipt-padding text-center">CASH RECEIPT</span>
