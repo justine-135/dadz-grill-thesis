@@ -72,7 +72,7 @@
                     </div>
                     <form class="flex-column profile-form hide" action="includes/admin-contr.inc.php" method="POST">
                         <div>
-                            <span>Contact</span>
+                            <span>Email</span>
                             <input type="text" name="email" id="" placeholder="Enter new email">
                         </div>
                         <input type="text" name="id-value" id="id-value" value="<?php echo $_SESSION["uid"] ?>" hidden>
