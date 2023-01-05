@@ -293,6 +293,10 @@ h4 {
   border: 1px solid rgb(201, 201, 201);
 }
 
+.form-overlay input[type="password"] {
+  width: 100%;
+}
+
 .form-overlay select {
   min-width: 120px;
 }
@@ -393,7 +397,7 @@ h4 {
   }
 
   .form-overlay.open {
-    top: 40%;
+    top: 45%;
   }
 
   h4 {

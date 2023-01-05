@@ -36,6 +36,16 @@
   border: 1px solid rgb(201, 201, 201);
 }
 
+.discount-quantity {
+  height: 38px;
+  width: 40px;
+  font-size: 1rem;
+  padding: 0 0.5rem;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid rgb(201, 201, 201);
+}
+
 /* .bill-order-tbl {
   margin-top: 77px;
 } */
