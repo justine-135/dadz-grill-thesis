@@ -282,17 +282,16 @@ if (count($arr) === 3) {
             </div>
             <div class="bill-details flex-column" style="margin-left: auto; align-content: flex-start;">
                 <span>Input bill</span>
-                
-                <input type="text" name="" id="bill-input">
-
+                <input type="text" name="" id="bill-input" style="height: 38px">
             </div>
         </nav>
         <table class="tables-table bill-order-tbl table">
             <thead >
                 <tr>
-                    <th style="width:50%; text-align:left; padding-left: 20px">Item</th>
-                    <th style="width:20%; text-align: left; padding-left: 10px">₱ Price</th>
-                    <th style="width:10%; text-align: left; padding-left: 10px">Amount</th>
+                    <th style="width:20%; text-align:left; padding-left: 20px">Item</th>
+                    <th style="width:15%; text-align: left; padding-left: 10px">₱ Price</th>
+                    <th style="width:15%; text-align: left; padding-left: 10px">Amount</th>
+                    <th style="width:22%; text-align: left; padding-left: 10px">Discount</th>
                     <th style="width:20%; text-align: left; padding-left: 10px">₱ Total price</th>
                 </tr>
             </thead>
@@ -319,12 +318,73 @@ for ($i=0; $i < (count($result)); $i++) {
                     } ?>
                     <?php if ($result2[$i] != "") {
                         ?>
-                    <td style="text-align: left; padding-left: 10px"><?php echo $result2[$i]; ?> </td>
+                    <td class="quantity" style="text-align: left; padding-left: 10px"><?php echo $result2[$i]; ?> </td>
+                        <?php
+                    } ?>
+
+                    <?php if ($result[$i] != "") {
+                        ?>
+                    <td style="text-align: left; padding-left: 10px">
+
+                    <?php 
+                    $set = "Set";
+                    if (strpos($result[$i], $set) !== false) {
+                        ?>
+                    <div>
+                        <div class="discount-div">
+                            <div class="flex-row">
+                                <select class="form-select form-select select-discount select-discount-0 mb-1" name="" id="0">
+                                    <option value="0">None</option>
+                                    <option value="1">Person with disability</option>
+                                    <option value="2">Senior</option>
+                                    <?php
+                                    if (strpos($result[$i], "Set C") !== false) {
+                                    ?>
+                                    <option value="3">Birthday celebrant</option>
+                                    <?php } ?>
+                                    <option value="4">3 yrs old below</option>
+                                    <option value="5">4-6 yrs old</option>
+                                </select>
+                                <input class="new-price new-price-0" type="text" name="" id="" value=<?php echo $result4[$i] ?> hidden>
+                                <!-- <input class="discount-quantity" type="text"> -->
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary add-discount">Add discount</button>
+                    </div>
+                        <?php
+                    }
+                    else{
+                        echo "Not applicable";
+                    }
+                    ?>
+                    </td>
+                        <?php
+                    } ?>
+
+                    <?php if ($result3[$i] != "") {
+                        ?>
+                    <td style="text-align: left; padding-left: 10px">
+                    ₱ <span class="item-prices"><?php echo $result3[$i]; ?> </span>
+                    </td>
                         <?php
                     } ?>
                     <?php if ($result3[$i] != "") {
                         ?>
-                    <td style="text-align: left; padding-left: 10px">₱ <?php echo $result3[$i]; ?> </td>
+                    <td class="hide" style="text-align: left; padding-left: 10px"><span class="item-prices2"><?php echo $result4[$i]; ?> </span></td>
+                        <?php
+                    } ?>
+                    <?php if ($result3[$i] != "") {
+                        ?>
+                    <td class="hide" style="text-align: left; padding-left: 10px">
+                    <?php
+                    for ($j=0; $j < $result2[$i]; $j++) { 
+                        ?>
+                    <input class="price-input-tmp price-input-tmp-<?php echo $j?>" type="text" value=<?php echo $result4[$i] ?>>
+                        <?php
+                    }
+                    ?>
+                    </td>
                         <?php
                     } ?>
                 </tr>
@@ -332,16 +392,19 @@ for ($i=0; $i < (count($result)); $i++) {
                 <tr>
                     <td></td>
                     <td></td>
+                    <td></td>
                     <td class="bill-final-span" style="text-align: left; padding-left: 10px"><span class="bill-final-span">Total:</span></td>
-                    <td style="text-align: left; padding-left: 10px">₱ <span id="amount-total"><?php echo $total; ?></span></td>
+                    <td style="text-align: left; padding-left: 10px">₱ <span id="amount-total"></span></td>
                 </tr>
                 <tr>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td style="text-align: left; padding-left: 10px"> <span class="bill-final-span" >Payment:</span></td>
                     <td style="text-align: left; padding-left: 10px">₱ <span id="amount-paid">0</span></td>
                 </tr>
                 <tr>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td class="bill-final-span" style="text-align: left; padding-left: 10px"><span class="bill-final-span">Change:</span></td>
@@ -351,7 +414,9 @@ for ($i=0; $i < (count($result)); $i++) {
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
                     <td class="bill-td-submit" >
+                        <input type="text" name="discount" id="discount" hidden>
                         <input type="text" name="total" id="total" hidden>
                         <input type="text" name="payment" id="payment" hidden>
                         <input type="text" name="change" id="change" hidden>
@@ -486,15 +551,15 @@ for ($i=0; $i < (count($result)); $i++) {
                 <div class="payment-section receipt-padding">
                     <div class="total-div flex-row payment-div">
                         <h3>Total</h3>
-                        <span><?php echo $totalNumeric ?></span>
+                        <span><?php echo $totalNumeric . ".00" ?></span>
                     </div>
                     <div class="cash-div flex-row payment-div">
                         <span>Received payment of</span>
-                        <span><?php echo $paymentNumeric ?></span>
+                        <span><?php echo $paymentNumeric . ".00" ?></span>
                     </div>
                     <div class="change-div flex-row payment-div">
                         <span>Change</span>
-                        <span><?php echo $changeNumeric ?></span>
+                        <span><?php echo $changeNumeric . ".00"?></span>
                     </div>
                 </div>
                 <hr>

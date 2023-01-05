@@ -9,7 +9,8 @@ class FoodsView extends Foods{
                 <th style="text-align: left; padding-left: 10px">Name</th>
                 <th>Image</th>
                 <th style="text-align: left; padding-left: 10px">Group</th>
-                <th style="text-align: left; padding-left: 10px">Price</th>
+                <th style="text-align: left; padding-left: 10px">Price (₱)</th>
+                <th style="text-align: left; padding-left: 10px">Grams (g)</th>
                 <th style="text-align: left; padding-left: 10px">Show</th>
                 <th>Actions</th>
             </tr>
@@ -25,6 +26,7 @@ class FoodsView extends Foods{
                 </td>
                 <td style="text-align: left; padding-left: 10px"><?php echo $row['item_group']; ?></td>
                 <td style="text-align: left; padding-left: 10px"><?php echo $row['cost']; ?></td>
+                <td style="text-align: left; padding-left: 10px"><?php echo $row['grams']; ?></td>
                 <?php
                     if($row['order_status'] == 'Active'){
                 ?>

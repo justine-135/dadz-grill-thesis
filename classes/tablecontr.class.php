@@ -41,18 +41,21 @@ class TableContr extends Table{
     public function initGetId($id){
         $results = $this->setGetId($id);
         foreach ($results as $row) {
-            if ($row['table_status'] == 'Occupied') {
-                echo "0";
+            if ($row['show'] == 1) {
+                if ($row['table_status'] == 'Occupied') {
+                    echo "0";
+                }
+                elseif($row['table_status'] == 'Unoccupied'){
+                    echo "1";
+                }
+                elseif($row['table_status'] == 'Call'){
+                    echo "2";
+                }
+                else{
+                    echo "3";
+                }
             }
-            elseif($row['table_status'] == 'Unoccupied'){
-                echo "1";
-            }
-            elseif($row['table_status'] == 'Call'){
-                echo "2";
-            }
-            else{
-                echo "3";
-            }
+
         }
     }
 

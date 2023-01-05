@@ -16,6 +16,8 @@ class Purchase extends Dbh{
             $item_ids .= $item_id[$i]."|";
         }
 
+        echo $total_names . "<br>" . $quantities . "<br>" . $prices . "<br>" . $original_price . "<br>" . $item_ids;
+
         $sql = "INSERT INTO submitted_orders (table_id, item_id, item_name, quantity, original_price, total_purchase, order_status, waiter)
         VALUES ('$tableId', '$item_ids', '$total_names', '$quantities', '$original_price' ,'$prices', 'Pending', '$waiter')";
         $stmt = $this->connection()->prepare($sql);
