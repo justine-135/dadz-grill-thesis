@@ -13,22 +13,37 @@ window.addEventListener("load", () => {
       let amountPaid = document.querySelector("#amount-paid");
       let amountChange = document.querySelector("#amount-change");
       let amountTotal = document.querySelector("#amount-total");
-
       let id = document.querySelector("#id");
       let tableId = document.querySelector("#table").value;
-
       let totalInput = document.querySelector("#total");
       let changeInput = document.querySelector("#change");
       let paymentInput = document.querySelector("#payment");
+      let totalPriceValue;
+      let priceValue;
+      let itemPrices2;
+      // let priceInputTmps = document.querySelectorAll(".price-input-tmp");
+      let quantity;
 
-      let totalPriceValue = parseFloat(amountTotal.innerHTML)
-        .toFixed(2)
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      const calculateTotalBill = () => {
+        totalPriceValue = 0;
+        let itemPrices = document.querySelectorAll(".item-prices");
 
-      amountTotal.innerHTML = totalPriceValue;
+        itemPrices.forEach((e) => {
+          let prices = parseFloat(e.innerHTML);
+          // let fixprices = prices.toFixed(2);
+
+          totalPriceValue = parseFloat(totalPriceValue) + parseFloat(prices);
+        });
+
+        amountTotal.innerHTML = totalPriceValue
+          .toFixed(2)
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      };
+
+      calculateTotalBill();
+
       totalInput.value = totalPriceValue;
-      console.log(parseFloat(amountTotal.innerHTML));
 
       let sub = 0;
 
@@ -55,7 +70,6 @@ window.addEventListener("load", () => {
         sub =
           parseFloat(e.target.value) -
           parseFloat(amountTotal.innerHTML.replace(",", ""));
-        console.log(parseFloat(amountTotal.innerHTML));
 
         if (isNaN(sub)) {
           amountChange.innerHTML = 0;
@@ -125,6 +139,162 @@ window.addEventListener("load", () => {
           alert.classList.add("alert-danger");
           alert.innerHTML = "Payment process failed.";
         }
+      });
+
+      let priceAfterDiscount;
+      const loadSelect = () => {
+        let selectDiscount = document.querySelectorAll(".select-discount");
+        selectDiscount.forEach((element) => {
+          let discount = element;
+
+          discount.addEventListener("change", (e) => {
+            let discountLvl = parseInt(discount.value);
+            priceAfterDiscount =
+              discount.parentElement.parentElement.parentElement.parentElement
+                .parentElement.childNodes[9].childNodes[1];
+
+            // let tmpPrice =
+            //   discount.parentElement.parentElement.parentElement.parentElement
+            //     .parentElement.childNodes[11].childNodes[1].innerHTML;
+
+            let tmpPrice =
+              discount.parentElement.parentElement.parentElement.parentElement
+                .parentElement.childNodes[3].innerHTML;
+
+            let priceInputTmps =
+              discount.parentElement.parentElement.parentElement.parentElement
+                .parentElement.childNodes[13];
+
+            console.log(priceInputTmps);
+
+            let selectInputPrice = discount.nextElementSibling.value;
+
+            let selectDiscountId = discount.getAttribute("id");
+
+            // 1 = disabled
+            // 2 = senior
+            // 3 = bday celebrant
+            // 4 = 3yrs old below
+            // 5 = 4-6 yrs old
+
+            let calculate = 0;
+            switch (discountLvl) {
+              case 0:
+                discount.nextElementSibling.value = tmpPrice;
+                priceInputTmps.querySelector(
+                  `.price-input-tmp-${selectDiscountId}`
+                ).value = tmpPrice;
+                break;
+              case 1:
+                calculate = parseFloat(tmpPrice) * 0.2;
+                discount.nextElementSibling.value =
+                  parseFloat(tmpPrice) - calculate.toFixed(2);
+                priceInputTmps.querySelector(
+                  `.price-input-tmp-${selectDiscountId}`
+                ).value = parseFloat(tmpPrice) - calculate.toFixed(2);
+                break;
+              case 2:
+                calculate = parseFloat(tmpPrice) * 0.2;
+                discount.nextElementSibling.value =
+                  parseFloat(tmpPrice) - calculate.toFixed(2);
+                priceInputTmps.querySelector(
+                  `.price-input-tmp-${selectDiscountId}`
+                ).value = parseFloat(tmpPrice) - calculate.toFixed(2);
+                break;
+              case 3:
+                discount.nextElementSibling.value = 0;
+                priceInputTmps.querySelector(
+                  `.price-input-tmp-${selectDiscountId}`
+                ).value = 0;
+                break;
+              case 4:
+                discount.nextElementSibling.value = 0;
+                priceInputTmps.querySelector(
+                  `.price-input-tmp-${selectDiscountId}`
+                ).value = 0;
+                break;
+              case 5:
+                discount.nextElementSibling.value = parseFloat(tmpPrice) / 2;
+                priceInputTmps.querySelector(
+                  `.price-input-tmp-${selectDiscountId}`
+                ).value = parseFloat(tmpPrice) / 2;
+                break;
+
+              default:
+                break;
+            }
+
+            priceValue = 0;
+            priceInputTmps.childNodes.forEach((element) => {
+              let priceValues = element;
+
+              if (priceValues.value != undefined) {
+                priceValue =
+                  parseFloat(priceValue) + parseFloat(priceValues.value);
+              }
+
+              console.log(priceValues.value);
+            });
+
+            priceAfterDiscount.innerHTML = priceValue
+              .toFixed(2)
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+            calculateTotalBill();
+          });
+        });
+      };
+
+      loadSelect();
+
+      const addDiscountBtn = document.querySelectorAll(".add-discount");
+
+      let selectId = 0;
+      addDiscountBtn.forEach((element) => {
+        element.addEventListener("click", () => {
+          itemPrices2 =
+            element.parentElement.parentElement.parentElement.childNodes[11]
+              .childNodes[0].innerHTML;
+
+          quantity =
+            element.parentElement.parentElement.parentElement.childNodes[5]
+              .innerHTML;
+
+          console.log(itemPrices2);
+
+          let allSelectDiv = element.previousElementSibling;
+          let selectDiv = element.previousElementSibling.childNodes[1];
+
+          if (allSelectDiv.childElementCount >= quantity) {
+            window.alert("Reached max discount");
+          } else {
+            selectId += 1;
+            const clone = selectDiv.cloneNode(true);
+            const createSelect = document.createElement("div");
+            createSelect.setAttribute("class", "flex-row");
+            const createSelectContent = `
+                <select class="form-select form-select select-discount select-discount-${selectId} mb-1" name="" id="${selectId}">
+                    <option value="0">None</option>
+                    <option value="1">Person with disability</option>
+                    <option value="2">Senior</option>
+                    <?php
+                    if (strpos($result[$i], "Set C") !== false) {
+                    ?>
+                    <option value="3">Birthday celebrant</option>
+                    <?php } ?>
+                    <option value="4">3 yrs old below</option>
+                    <option value="5">4-6 yrs old</option>
+                </select>
+                <input class="new-price new-price-${selectId}" type="text" name="" id="" value=${itemPrices2} hidden>
+            `;
+            createSelect.innerHTML = createSelectContent;
+
+            allSelectDiv.appendChild(createSelect);
+
+            loadSelect();
+          }
+        });
       });
     }
   };
