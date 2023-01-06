@@ -39,11 +39,11 @@ window.addEventListener("load", () => {
           .toFixed(2)
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        totalInput.value = totalPriceValue;
       };
 
       calculateTotalBill();
-
-      totalInput.value = totalPriceValue;
 
       let sub = 0;
 

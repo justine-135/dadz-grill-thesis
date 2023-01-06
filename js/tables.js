@@ -47,10 +47,10 @@ window.addEventListener("load", () => {
           let tableNumber =
             timerVal.parentElement.childNodes[1].childNodes[0].innerHTML;
           let counter = timerVal.getAttribute("counter");
-          let tableId = timerVal.getAttribute("id");
+          let show = timerVal.getAttribute("show");
 
           let counterVal = parseInt(connData.innerHTML);
-          if (counterVal > 0) {
+          if (counterVal > 0 && show == 1) {
             if (resetId != tableNumber) {
               resetId = tableNumber;
               connText.classList.remove("disconnected");

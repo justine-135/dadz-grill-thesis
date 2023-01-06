@@ -8,13 +8,20 @@ window.addEventListener("load", () => {
     const element = selectedItem[i];
 
     element.addEventListener("click", (e) => {
-      console.log(element.childNodes[1].src);
-
       let url = element.childNodes[1].src;
       let name = element.childNodes[3].childNodes[1].innerHTML;
-      let price =
-        element.childNodes[3].childNodes[5].childNodes[1].childNodes[3]
-          .innerHTML;
+      // console.log(element.childNodes[3].childNodes[5]);
+      let price;
+      try {
+        price =
+          element.childNodes[3].childNodes[5].childNodes[1].childNodes[3]
+            .innerHTML;
+      } catch (error) {
+        console.log("it is undefined");
+        price =
+          element.childNodes[3].childNodes[7].childNodes[1].childNodes[3]
+            .innerHTML;
+      }
 
       let id = element.childNodes[3].childNodes[3].value;
       let quantity = 0;
