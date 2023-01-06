@@ -28,7 +28,11 @@ if ($_SESSION["is_superuser"] == 1) {
                 </div>
                 <div class="add-code flex-row">
                     <span>Cost:</span>
-                    <input type="text" name="cost" id="num" required>
+                    <input type="text" name="cost" id="num" placeholder="₱" required>
+                </div>
+                <div class="add-code flex-row">
+                    <span>Grams:</span>
+                    <input type="text" name="grams" id="grams" placeholder="g" required>
                 </div>
                 <div class="add-code flex-row">
                     <span>Show:</span>
@@ -72,6 +76,10 @@ if ($_SESSION["is_superuser"] == 1) {
                 <div class="add-code flex-row">
                     <span>Cost:</span>
                     <input class="upd-ing-cost" type="text" name="cost" id="num" required>
+                </div>
+                <div class="add-code flex-row">
+                    <span>Add Grams:</span>
+                    <input class="upd-ing-grams" type="text" name="grams" required>
                 </div>
                 <div class="add-code flex-row">
                     <span>Show:</span>
