@@ -4,6 +4,7 @@
     $name;
     $group;
     $cost;
+    $grams;
     $stats;
     $file;
     $fileName;
@@ -31,7 +32,9 @@
             $name = ucfirst($_POST['name']);
             $group = ucfirst($_POST['group']);
             $cost = $_POST['cost'];
-            $cost = (int)$cost;
+            $cost = (float)$cost;
+            $grams = $_POST['grams'];
+            $grams = (float)$grams;
             $stats = ucfirst($_POST['stats']);
         
             $file = $_FILES['photo'];
@@ -48,9 +51,12 @@
             $fileActualExt = strtolower(end($fileExt));
         
             $allowed = array('jpg', 'jpeg', 'png', 'gif');
-            $fid = $_POST['upd-ing-id'];
+            $fid = 0;
+            $img = null;
+
+            echo $grams;
     
-            $foodItem = new FoodContr($name, $group, $cost, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img);
+            $foodItem = new FoodContr($name, $group, $cost, $grams, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img);
             $foodItem->initSetFood();
         }
     
@@ -58,11 +64,13 @@
             $name = ucfirst($_POST['name']);
             $group = ucfirst($_POST['group']);
             $cost = $_POST['cost'];
-            $cost = (int)$cost;
+            $cost = (float)$cost;
+            $grams = $_POST['grams'];
+            $grams = (float)$grams;
             $stats = ucfirst($_POST['stats']);
             $fid = $_POST['upd-ing-id'];
     
-            $foodItem = new FoodContr($name, $group, $cost, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img);
+            $foodItem = new FoodContr($name, $group, $cost, $grams, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img);
             $foodItem->initUpdateFood();
         }
     
@@ -71,7 +79,7 @@
             $img = $_POST['img-value'];
             $img = '.'.$img;
     
-            $foodItem = new FoodContr($name, $group, $cost, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img);
+            $foodItem = new FoodContr($name, $group, $cost, $grams, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img);
             $foodItem->initDeleteFood();
         }
     
