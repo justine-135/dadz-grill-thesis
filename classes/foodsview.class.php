@@ -25,8 +25,25 @@ class FoodsView extends Foods{
                     <img name="item-img" class="tbl-img-data" height="40px" width="40px" src="./img/temp/<?php echo $row['photo']; ?>" alt="">    
                 </td>
                 <td style="text-align: left; padding-left: 10px"><?php echo $row['item_group']; ?></td>
-                <td style="text-align: left; padding-left: 10px"><?php echo $row['cost']; ?></td>
-                <td style="text-align: left; padding-left: 10px"><?php echo $row['grams']; ?></td>
+                <td style="text-align: left; padding-left: 10px">
+                <?php echo "<span class='prices'>" . $row['cost'] . "</span>"; ?>
+                </td>
+                <td style="text-align: left; padding-left: 10px">
+                <?php
+                if (strpos($row['item_name'], "Beef") !== false) {
+                    echo "<span class='grams'>" . $row['grams'] . "</span>" . "g";
+                }
+                else if (strpos($row['item_name'], "Pork") !== false){
+                    echo "<span class='grams'>" . $row['grams'] . "</span>" . "g";
+                }
+                else if (strpos($row['item_name'], "Chicken") !== false){
+                    echo "<span class='grams'>" . $row['grams'] . "</span>" . "g";
+                }
+                else{
+                    echo "<span class='grams'>" . $row['grams'] . "</span>";
+                }
+                ?>
+                </td>
                 <?php
                     if($row['order_status'] == 'Active'){
                 ?>
@@ -76,6 +93,46 @@ class FoodsView extends Foods{
                         <span> <?php echo $row['cost']; ?></span>
                     </div>
                 </div>
+                <?php
+                        if (strpos($row['item_name'], "Set A") !== false) {
+                            ?>
+                        <ul style="font-size: 10px; text-align: left; margin: 5px 0 5px 0">
+                            <li>Unlimited Pork, Rice, Lettuce</li>
+                            <li>Unlimited Potato Marbles</li>
+                            <li>Unlimited Colsaw</li>
+                            <li>Unlimited Cucumber</li>
+                            <li>Unlimited White Onion</li>
+                        </ul>
+                            <?php
+                        } elseif (strpos($row['item_name'], "Set B") !== false) {
+                            ?>
+                        <ul style="font-size: 10px; text-align: left; margin: 5px 0 5px 0">
+                            <li>Unlimited Pork, Beef, Chicken</li>
+                            <li>Unlimited Rice, Lettuce</li>
+                            <li>Unlimited Potato Marbles</li>
+                            <li>Unlimited Potato Kimchi</li>
+                            <li>Unlimited Colsaw</li>
+                            <li>Unlimited Cucumber</li>
+                            <li>Unlimited White Onion</li>
+                            <li>Unlimited Red Iced Tea</li>
+                        </ul>
+                            <?php
+                        } elseif (strpos($row['item_name'], "Set C") !== false) {
+                            ?>
+                        <ul style="font-size: 10px; text-align: left; margin: 5px 0 5px 0">
+                            <li>Unlimited Pork, Beef, Chicken</li>
+                            <li>Unlimited Rice, Lettuce</li>
+                            <li>Unlimited Shabu-shabu</li>
+                            <li>Unlimited Potato Marbles</li>
+                            <li>Unlimited Potato Kimchi</li>
+                            <li>Unlimited Colsaw</li>
+                            <li>Unlimited Cucumber</li>
+                            <li>Unlimited White Onion</li>
+                            <li>Unlimited Red Iced Tea</li>
+                        </ul>
+                            <?php
+                        }
+                        ?>
             </div>
         </button>
         <?php

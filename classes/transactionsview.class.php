@@ -350,7 +350,7 @@ for ($i=0; $i < (count($result)); $i++) {
                             </div>
                         </div>
 
-                        <button class="btn btn-primary add-discount">Add discount</button>
+                        <button class="btn btn-primary add-discount">Add more discount</button>
                     </div>
                         <?php
                     }
