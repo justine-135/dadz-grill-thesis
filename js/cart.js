@@ -30,14 +30,18 @@ window.addEventListener("load", () => {
         element.childNodes[3].childNodes[5].childNodes[1].childNodes[3]
           .innerHTML;
 
-      addCart(url, name, price, quantity, id, origPrice);
+      let serving =
+        element.childNodes[3].childNodes[5].childNodes[1].childNodes[5].value;
+      console.log(serving);
+
+      addCart(url, name, price, quantity, id, origPrice, serving);
     });
   }
 
   // add item to cart
   let exec = 0;
 
-  const addCart = (url, name, price, quantity, id, origPrice) => {
+  const addCart = (url, name, price, quantity, id, origPrice, serving) => {
     const createItem = document.createElement("div");
 
     // do not allow duplicate items
@@ -60,6 +64,7 @@ window.addEventListener("load", () => {
                 <input type="text" value="${price}" name="prices[]" id="" hidden>
                 <input type="text" value="${origPrice}" name="orig_price[]" id="" hidden>
                 <input type="text" value="${id}" name="item_id[]" id="" hidden>
+                <input type="text" value="${serving}" name="servings[]" id="" hidden>
             </div>
             <div class="control flex-row">
                 <button class="decrement" type="button">-</button>
@@ -88,6 +93,11 @@ window.addEventListener("load", () => {
 
     // multiply quantity to price
     let price;
+    let itemServing = document.querySelectorAll(".serving");
+    let itemServings;
+    let tmpItemServings;
+    let tmpTotalServing;
+
     incBtn.addEventListener("click", (e) => {
       const button = e.target;
       let value = parseFloat(button.parentElement.childNodes[3].value);
@@ -109,6 +119,25 @@ window.addEventListener("load", () => {
         incremented;
       button.parentElement.parentElement.childNodes[3].childNodes[3].value =
         incremented;
+
+      // Initial serving
+      itemServings =
+        button.parentElement.parentElement.childNodes[3].childNodes[9].value;
+
+      if (value <= 2) {
+        tmpItemServings = itemServings;
+      }
+      console.log("--- increment ---");
+
+      console.log("input value: ", itemServings);
+      console.log("initial value: ", tmpItemServings);
+
+      let totalServing = parseFloat(itemServings) + parseFloat(tmpItemServings);
+      button.parentElement.parentElement.childNodes[3].childNodes[9].value =
+        totalServing;
+
+      console.log("incremented value: ", totalServing);
+      tmpTotalServing = totalServing;
 
       calcTotal();
     });
@@ -141,6 +170,18 @@ window.addEventListener("load", () => {
       let decremented = price * value;
       button.parentElement.parentElement.childNodes[3].childNodes[1].innerHTML =
         decremented;
+
+      let totalServing =
+        parseFloat(tmpTotalServing) - parseFloat(tmpItemServings);
+      button.parentElement.parentElement.childNodes[3].childNodes[9].value =
+        totalServing;
+
+      tmpTotalServing = totalServing;
+
+      console.log("--- decrement ---");
+      console.log("input value: ", itemServings);
+      console.log("initial value: ", tmpItemServings);
+      console.log("decremented value: ", totalServing);
 
       calcTotal();
     });

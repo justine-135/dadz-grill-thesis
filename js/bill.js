@@ -23,16 +23,26 @@ window.addEventListener("load", () => {
       let itemPrices2;
       // let priceInputTmps = document.querySelectorAll(".price-input-tmp");
       let quantity;
+      let itemPrices = document.querySelectorAll(".item-prices");
+
+      itemPrices.forEach((element) => {
+        let e = parseFloat(element.innerHTML);
+        element.innerHTML = e
+          .toFixed(2)
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      });
 
       const calculateTotalBill = () => {
         totalPriceValue = 0;
-        let itemPrices = document.querySelectorAll(".item-prices");
 
         itemPrices.forEach((e) => {
-          let prices = parseFloat(e.innerHTML);
+          let prices = parseFloat(e.innerHTML.replace(",", ""));
           // let fixprices = prices.toFixed(2);
 
           totalPriceValue = parseFloat(totalPriceValue) + parseFloat(prices);
+          // console.log(totalPriceValue);
+          console.log(prices);
         });
 
         amountTotal.innerHTML = totalPriceValue
@@ -115,6 +125,24 @@ window.addEventListener("load", () => {
       });
 
       saveBtn.addEventListener("click", () => {
+        let itemPrices = document.querySelectorAll(".item-prices");
+
+        let arrItemPrices = [];
+
+        itemPrices.forEach((element) => {
+          let removedCommaValue = element.innerHTML.replace(",", "");
+          arrItemPrices.push(removedCommaValue);
+        });
+
+        console.log(arrItemPrices);
+
+        let discountedPrices = [];
+        let discountedPriceInputs =
+          document.querySelectorAll(".price-input-tmp");
+        discountedPriceInputs.forEach((element) => {
+          discountedPrices.push(element.value);
+        });
+
         if (
           parseFloat(paymentInput.value.replace(",", "")) >=
           parseFloat(totalInput.value.replace(",", ""))
@@ -131,7 +159,7 @@ window.addEventListener("load", () => {
             "application/x-www-form-urlencoded"
           );
           xhttp.send(
-            `&save=save&table_id=${tableId}&id=${id.value}&change=${changeInput.value}&payment=${paymentInput.value}&total=${totalInput.value}`
+            `&save=save&table_id=${tableId}&id=${id.value}&change=${changeInput.value}&payment=${paymentInput.value}&total=${totalInput.value}&discounted=${discountedPrices}&discountedArr=${arrItemPrices}`
           );
         } else {
           alert.classList.remove("hide");
@@ -164,8 +192,6 @@ window.addEventListener("load", () => {
             let priceInputTmps =
               discount.parentElement.parentElement.parentElement.parentElement
                 .parentElement.childNodes[13];
-
-            console.log(priceInputTmps);
 
             let selectInputPrice = discount.nextElementSibling.value;
 
@@ -232,8 +258,6 @@ window.addEventListener("load", () => {
                 priceValue =
                   parseFloat(priceValue) + parseFloat(priceValues.value);
               }
-
-              console.log(priceValues.value);
             });
 
             priceAfterDiscount.innerHTML = priceValue
@@ -260,8 +284,6 @@ window.addEventListener("load", () => {
           quantity =
             element.parentElement.parentElement.parentElement.childNodes[5]
               .innerHTML;
-
-          console.log(itemPrices2);
 
           let allSelectDiv = element.previousElementSibling;
           let selectDiv = element.previousElementSibling.childNodes[1];

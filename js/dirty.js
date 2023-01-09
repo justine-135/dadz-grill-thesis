@@ -94,18 +94,18 @@ window.addEventListener("load", () => {
             .toISOString()
             .substring(11, 19);
 
-          if (duration <= 0 || seconds >= timeEnd || duration > 8100) {
-            timerVal.innerHTML = "00:00:00";
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open(
-              "GET",
-              `./includes/table-contr.inc.php?contr=1&id=${tableNumber}`,
-              true
-            );
-            xmlhttp.send();
-          } else {
-            timerVal.innerHTML = durationValue;
-          }
+          // if (duration <= 0 || seconds >= timeEnd || duration > 8100) {
+          //   timerVal.innerHTML = "00:00:00";
+          //   var xmlhttp = new XMLHttpRequest();
+          //   xmlhttp.open(
+          //     "GET",
+          //     `./includes/table-contr.inc.php?contr=1&id=${tableNumber}`,
+          //     true
+          //   );
+          //   xmlhttp.send();
+          // } else {
+          //   timerVal.innerHTML = durationValue;
+          // }
         }
       });
     };
