@@ -94,60 +94,24 @@ class FoodsView extends Foods{
                         <input class="serving" type="text" value=<?php echo $row['serving'] ?> hidden>
                     </div>
                 </div>
+                <ul style="font-size: 10px; text-align: left; margin: 5px 0 5px 0">
                 <?php
-                        if (strpos($row['item_name'], "Set A") !== false) {
+                    $results2 = $this->getInclusions();   
+                    foreach ($results2 as $row2) {
+                        if ($row['item_name'] == $row2['foreign_name']) {
                             ?>
-                        <ul style="font-size: 10px; text-align: left; margin: 5px 0 5px 0">
-                            <li>Unlimited Pork, Rice, Lettuce</li>
-                            <li>Unlimited Potato Marbles</li>
-                            <li>Unlimited Colsaw</li>
-                            <li>Unlimited Cucumber</li>
-                            <li>Unlimited White Onion</li>
-                        </ul>
-                            <?php
-                        } elseif (strpos($row['item_name'], "Set B") !== false) {
-                            ?>
-                        <ul style="font-size: 10px; text-align: left; margin: 5px 0 5px 0">
-                            <li>Unlimited Pork, Beef, Chicken</li>
-                            <li>Unlimited Rice, Lettuce</li>
-                            <li>Unlimited Potato Marbles</li>
-                            <li>Unlimited Potato Kimchi</li>
-                            <li>Unlimited Colsaw</li>
-                            <li>Unlimited Cucumber</li>
-                            <li>Unlimited White Onion</li>
-                            <li>Unlimited Red Iced Tea</li>
-                        </ul>
-                            <?php
-                        } elseif (strpos($row['item_name'], "Set C") !== false) {
-                            ?>
-                        <ul style="font-size: 10px; text-align: left; margin: 5px 0 5px 0">
-                            <li>Unlimited Pork, Beef, Chicken</li>
-                            <li>Unlimited Rice, Lettuce</li>
-                            <li>Unlimited Shabu-shabu</li>
-                            <li>Unlimited Potato Marbles</li>
-                            <li>Unlimited Potato Kimchi</li>
-                            <li>Unlimited Colsaw</li>
-                            <li>Unlimited Cucumber</li>
-                            <li>Unlimited White Onion</li>
-                            <li>Unlimited Red Iced Tea</li>
-                        </ul>
-                            <?php
-                        
-                        } elseif (strpos($row['item_name'], "Set D") !== false) {
-                            ?>
-                        <ul style="font-size: 10px; text-align: left; margin: 5px 0 5px 0">
-                            <li>Unlimited Chicken</li>
-                            <li>Unlimited Rice, Lettuce</li>
-                            <li>Unlimited Potato Marbles</li>
-                            <li>Unlimited Potato Kimchi</li>
-                            <li>Unlimited Colsaw</li>
-                            <li>Unlimited Cucumber</li>
-                            <li>Unlimited White Onion</li>
-                        </ul>
+                            <li>
+                                <?php echo "Unlimited " . $row2['name'] ?>
+                                <input type="text" name="inclusion_name[]" value="<?php echo $row2['name'] ?>">
+                                <input type="text" name="inclusion_id[]" value=<?php echo $row2['id'] ?>>
+                                <input type="text" name="inclusion_serving[]" value=<?php echo $row2['servings'] ?>>
+                            </li>
                             <?php
                         }
-                        ?>
-                        <input type="text" value=<?php echo $row['grams'] ?> hidden>
+                    }
+                ?>
+                </ul>
+                <input type="text" value=<?php echo $row['grams'] ?> hidden>
             </div>
         </button>
         <?php
@@ -169,7 +133,7 @@ class FoodsView extends Foods{
                     <div class="flex-row price">
                         <span>P</span>
                         <span> <?php echo $row['cost']; ?></span>
-                        <input class="serving" type="text" value=<?php echo $row['serving'] ?> hidden>
+                        <input class="serving" type="text" value=<?php echo $row['serving'] ?> >
                     </div>
                 </div>
                 
@@ -197,59 +161,23 @@ class FoodsView extends Foods{
                         <input class="serving" type="text" value=<?php echo $row['serving'] ?> hidden>
                     </div>
                 </div>
+                <ul style="font-size: 10px; text-align: left; margin: 5px 0 5px 0">
                 <?php
-                        if (strpos($row['item_name'], "Set A") !== false) {
+                    $results2 = $this->getInclusions();   
+                    foreach ($results2 as $row2) {
+                        if ($row['item_name'] == $row2['foreign_name']) {
                             ?>
-                        <ul style="font-size: 10px; text-align: left; margin: 5px 0 5px 0">
-                            <li>Unlimited Pork, Rice, Lettuce</li>
-                            <li>Unlimited Potato Marbles</li>
-                            <li>Unlimited Colsaw</li>
-                            <li>Unlimited Cucumber</li>
-                            <li>Unlimited White Onion</li>
-                        </ul>
-                            <?php
-                        } elseif (strpos($row['item_name'], "Set B") !== false) {
-                            ?>
-                        <ul style="font-size: 10px; text-align: left; margin: 5px 0 5px 0">
-                            <li>Unlimited Pork, Beef, Chicken</li>
-                            <li>Unlimited Rice, Lettuce</li>
-                            <li>Unlimited Potato Marbles</li>
-                            <li>Unlimited Potato Kimchi</li>
-                            <li>Unlimited Colsaw</li>
-                            <li>Unlimited Cucumber</li>
-                            <li>Unlimited White Onion</li>
-                            <li>Unlimited Red Iced Tea</li>
-                        </ul>
-                            <?php
-                        } elseif (strpos($row['item_name'], "Set C") !== false) {
-                            ?>
-                        <ul style="font-size: 10px; text-align: left; margin: 5px 0 5px 0">
-                            <li>Unlimited Pork, Beef, Chicken</li>
-                            <li>Unlimited Rice, Lettuce</li>
-                            <li>Unlimited Shabu-shabu</li>
-                            <li>Unlimited Potato Marbles</li>
-                            <li>Unlimited Potato Kimchi</li>
-                            <li>Unlimited Colsaw</li>
-                            <li>Unlimited Cucumber</li>
-                            <li>Unlimited White Onion</li>
-                            <li>Unlimited Red Iced Tea</li>
-                        </ul>
-                            <?php
-                        
-                        } elseif (strpos($row['item_name'], "Set D") !== false) {
-                            ?>
-                        <ul style="font-size: 10px; text-align: left; margin: 5px 0 5px 0">
-                            <li>Unlimited Chicken</li>
-                            <li>Unlimited Rice, Lettuce</li>
-                            <li>Unlimited Potato Marbles</li>
-                            <li>Unlimited Potato Kimchi</li>
-                            <li>Unlimited Colsaw</li>
-                            <li>Unlimited Cucumber</li>
-                            <li>Unlimited White Onion</li>
-                        </ul>
+                            <li>
+                                <?php echo "Unlimited " . $row2['name'] ?>
+                                <input class="inclusion-info" type="text" name="inclusion_name[]" value="<?php echo $row2['name'] ?>">
+                                <input class="inclusion-info" type="text" name="inclusion_id[]" value=<?php echo $row2['id'] ?>>
+                                <input class="inclusion-info" type="text" name="inclusion_serving[]" value=<?php echo $row2['servings'] ?>>
+                            </li>
                             <?php
                         }
-                        ?>
+                    }
+                ?>
+                </ul>
             </div>
         </button>
         <?php
@@ -326,6 +254,24 @@ class FoodsView extends Foods{
         <?php
             }
         }
+    }
+
+    public function initReadSelect(){
+        $results = $this->getFoods();
+        ?>
+        <select name="inclusions[]" class="form-select orig-select inclusion-select">
+        <?php
+        foreach ($results as $row) {
+            if ($row['item_group'] != "Sets" && $row['item_group'] == "Meat") {            
+            ?>
+              <option disabled selected value>Select </option>
+        <option value=<?php echo $row['fid']; ?> id="<?php echo $row['item_name'] ?>"> <?php echo $row['item_name'] ?></option>
+            <?php
+            }
+        }
+        ?>
+        </select>
+        <?php
     }
 
 }

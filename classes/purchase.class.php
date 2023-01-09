@@ -17,53 +17,33 @@ class Purchase extends Dbh{
             $item_ids .= $item_id[$i]."|";
             $total_servings .= $servings[$i]."|";
 
-        }
+            $sql = "SELECT * FROM inclusions WHERE foreign_name = '$names[$i]'";
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute();
+    
+            $results = $stmt->fetchAll();
 
-        for ($i=0; $i < count($names); $i++) { 
-            if (strpos($names[$i], "Set A") !== false) {
-                $sql = "UPDATE inventory SET grams = grams - $servings[$i] WHERE item_name = 'Pork'";
-                $stmt = $this->connection()->prepare($sql);
-                $stmt->execute();    
-                $stmt = null;
-            }elseif (strpos($names[$i], "Set B") !== false) {
-                $sql = "UPDATE inventory SET grams = grams - $servings[$i] WHERE item_name = 'Pork'";
-                $stmt = $this->connection()->prepare($sql);
-                $stmt->execute();    
-                $stmt = null;
-                $sql = "UPDATE inventory SET grams = grams - $servings[$i] WHERE item_name = 'Beef'";
-                $stmt = $this->connection()->prepare($sql);
-                $stmt->execute();    
-                $stmt = null;
-                $sql = "UPDATE inventory SET grams = grams - $servings[$i] WHERE item_name = 'Chicken'";
-                $stmt = $this->connection()->prepare($sql);
-                $stmt->execute();    
-                $stmt = null;
-            }elseif (strpos($names[$i], "Set C") !== false) {
-                $sql = "UPDATE inventory SET grams = grams - $servings[$i] WHERE item_name = 'Pork'";
-                $stmt = $this->connection()->prepare($sql);
-                $stmt->execute();    
-                $stmt = null;
-                $sql = "UPDATE inventory SET grams = grams - $servings[$i] WHERE item_name = 'Beef'";
-                $stmt = $this->connection()->prepare($sql);
-                $stmt->execute();    
-                $stmt = null;
-                $sql = "UPDATE inventory SET grams = grams - $servings[$i] WHERE item_name = 'Chicken'";
-                $stmt = $this->connection()->prepare($sql);
-                $stmt->execute();    
-                $stmt = null;
-            }elseif (strpos($names[$i], "Set D") !== false) {
-                $sql = "UPDATE inventory SET grams = grams - $servings[$i] WHERE item_name = 'Chicken'";
+            if (count($results) > 0) {
+                foreach ($results as $row) {
+                    $inclusion_id = $row['fid'];
+                    $inclusion_name = $row['name'];
+                    $inclusion_serving = $row['servings'];
+                    $inclusion_new_serving = $inclusion_serving * floatval($qty[$i]);
+    
+                    $sql = "UPDATE inventory SET grams = grams - $inclusion_new_serving WHERE item_name = '$inclusion_name'";
+                    $stmt = $this->connection()->prepare($sql);
+                    $stmt->execute();    
+                    $stmt = null;    
+                }
+            }else{
+                $sql = "UPDATE inventory SET grams = grams - $servings[$i] WHERE item_name = '$names[$i]'";
                 $stmt = $this->connection()->prepare($sql);
                 $stmt->execute();    
                 $stmt = null;
             }
-            else{
-
-            }
         }
 
-        // echo $total_servings . "<br>";
-        // echo $total_names;
+        $stmt = null;
 
         $sql = "INSERT INTO submitted_orders (table_id, item_id, item_name, quantity, original_price, total_purchase, order_status, waiter)
         VALUES ('$tableId', '$item_ids', '$total_names', '$quantities', '$original_price' ,'$prices', 'Pending', '$waiter')";
