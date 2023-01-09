@@ -32,7 +32,28 @@ window.addEventListener("load", () => {
 
       let serving =
         element.childNodes[3].childNodes[5].childNodes[1].childNodes[5].value;
-      console.log(serving);
+
+      //      let incInfo = element.childNodes[3].childNodes[7].childNodes;
+
+      let incInfos = element.querySelectorAll(".inclusion-info");
+
+      let arrInclusionId = [];
+      let arrInclusionName = [];
+      let arrInclusionServing = [];
+
+      incInfos.forEach((element) => {
+        if (element.name == "inclusion_name[]") {
+          arrInclusionName.push(element.value);
+        } else if (element.name == "inclusion_id[]") {
+          arrInclusionId.push(element.value);
+        } else {
+          arrInclusionServing.push(element.value);
+        }
+      });
+
+      console.log(arrInclusionId);
+      console.log(arrInclusionId);
+      console.log(arrInclusionId);
 
       addCart(url, name, price, quantity, id, origPrice, serving);
     });

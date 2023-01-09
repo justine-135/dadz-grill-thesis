@@ -151,4 +151,77 @@ window.addEventListener("load", () => {
   setTimeout(() => {
     document.querySelector(".alert-div").classList.add("hide");
   }, 3000);
+
+  const inclusionsDiv = document.querySelector(".add-inclusion");
+  const inclusionsBtnDiv = document.querySelector(".add-remove-inclusions-div");
+  const addGroup = document.querySelector(".add-select-group");
+  const addServings = document.querySelector(".servings-input");
+  const gramsServings = document.querySelector(".grams-input");
+
+  addGroup.addEventListener("change", (e) => {
+    console.log(e.target.value);
+    if (e.target.value != "Sets") {
+      addServings.classList.remove("hide");
+      gramsServings.classList.remove("hide");
+      inclusionsDiv.classList.add("hide");
+      inclusionsBtnDiv.classList.add("hide");
+    } else {
+      addServings.classList.add("hide");
+      gramsServings.classList.add("hide");
+      inclusionsDiv.classList.remove("hide");
+      inclusionsBtnDiv.classList.remove("hide");
+    }
+  });
+
+  const loadInclusionSelects = () => {
+    const inclusionSelects = document.querySelectorAll(".inclusion-select");
+
+    inclusionSelects.forEach((element) => {
+      let inclusion = element;
+
+      inclusion.addEventListener("change", (e) => {
+        let itemName = inclusion.options[inclusion.selectedIndex].id;
+        inclusion.nextElementSibling.value = itemName;
+      });
+    });
+  };
+
+  loadInclusionSelects();
+
+  const addInclusion = document.querySelector(".add-inclusion-btn");
+  const origInclusion = document.querySelector(".orig-select");
+  const clone = origInclusion.cloneNode(true);
+
+  let count = 1;
+
+  addInclusion.addEventListener("click", (e) => {
+    count++;
+    const createSelect = document.createElement("div");
+    createSelect.setAttribute("class", "flex-row add-code");
+    const createSelectContent = `
+    <span>Inclusions ${count}: </span>
+    <div>
+        <div class="flex-row"  style="width: 70%; margin-left: auto">
+        <select class="form-select inclusion-select" name="inclusions[]">
+        ${clone.innerHTML}
+        </select>
+        <input hidden type="text" name="inclusion_name[]">
+        <input style="width: 100%" name="serving[]" type="text" placeholder="g" />
+        </div>
+    </div>
+    `;
+    createSelect.innerHTML = createSelectContent;
+
+    inclusionsDiv.appendChild(createSelect);
+    loadInclusionSelects();
+  });
+
+  const delInclusions = document.querySelector(".delete-inclusion-btn");
+
+  delInclusions.addEventListener("click", (e) => {
+    count--;
+    console.log();
+    e.target.parentElement.previousSibling.previousSibling.lastChild.remove();
+    loadInclusionSelects();
+  });
 });
