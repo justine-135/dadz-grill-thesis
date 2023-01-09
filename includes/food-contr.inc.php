@@ -5,6 +5,7 @@
     $group;
     $cost;
     $grams;
+    $servings;
     $stats;
     $file;
     $fileName;
@@ -35,6 +36,8 @@
             $cost = (float)$cost;
             $grams = $_POST['grams'];
             $grams = (float)$grams;
+            $servings = $_POST['servings'];
+            $servings = (float)$servings;
             $stats = ucfirst($_POST['stats']);
         
             $file = $_FILES['photo'];
@@ -56,7 +59,7 @@
 
             echo $grams;
     
-            $foodItem = new FoodContr($name, $group, $cost, $grams, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img);
+            $foodItem = new FoodContr($name, $group, $cost, $grams, $servings, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img);
             $foodItem->initSetFood();
         }
     
@@ -67,10 +70,12 @@
             $cost = (float)$cost;
             $grams = $_POST['grams'];
             $grams = (float)$grams;
+            $servings = $_POST['servings'];
+            $servings = (float)$servings;
             $stats = ucfirst($_POST['stats']);
             $fid = $_POST['upd-ing-id'];
     
-            $foodItem = new FoodContr($name, $group, $cost, $grams, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img);
+            $foodItem = new FoodContr($name, $group, $cost, $grams, $servings, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img);
             $foodItem->initUpdateFood();
         }
     
@@ -79,7 +84,7 @@
             $img = $_POST['img-value'];
             $img = '.'.$img;
     
-            $foodItem = new FoodContr($name, $group, $cost, $grams, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img);
+            $foodItem = new FoodContr($name, $group, $cost, $grams, $servings, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img);
             $foodItem->initDeleteFood();
         }
     

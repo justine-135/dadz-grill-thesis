@@ -19,9 +19,10 @@
             $uid = $_POST["uid"];
             $item_id = $_POST["item_id"];
             $orgPrc = $_POST["orig_price"];
+            $servings = $_POST['servings'];
     
             $purchase = new PurchaseContr();
-            $purchase->initPurchase($names, $tableId, $orgPrc, $total, $waiter, $qty, $prc, $uid, $item_id);
+            $purchase->initPurchase($names, $tableId, $orgPrc, $total, $waiter, $qty, $prc, $uid, $item_id, $servings);
         }
     
         if (isset($_POST["finish"])) {

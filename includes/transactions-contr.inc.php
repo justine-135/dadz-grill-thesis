@@ -28,10 +28,13 @@
         elseif (isset($_POST["save"])) {
             $id = $_POST["id"];
             $tbl = $_POST["table_id"];
+            $discounted = $_POST['discounted'];
+            $discountedArr = $_POST['discountedArr'];
             
             $paid = new TransactionsContr();
-            $paid->initPaid($id, $tbl);
-            header("location: ../index.php");
+            $paid->initPaid($id, $tbl, $discounted, $discountedArr);
+            // header("location: ../index.php");
+            // echo $discounted;
     
         }
     
