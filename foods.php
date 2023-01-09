@@ -18,7 +18,7 @@ if ($_SESSION["is_superuser"] == 1) {
                 </div>
                 <div class="add-code flex-row">
                     <span>Item Group:</span>
-                    <select class="stat-select" name="group" id="" required>
+                    <select class="stat-select add-select-group" name="group" id="" required>
                         <option value="Sets">Main set</option>
                         <option value="Meat">Meat</option>
                         <option value="Sides">Sides</option>
@@ -27,16 +27,16 @@ if ($_SESSION["is_superuser"] == 1) {
                     </select>
                 </div>
                 <div class="add-code flex-row">
-                    <span>Cost:</span>
+                    <span>Price:</span>
                     <input type="text" name="cost" id="num" placeholder="₱" required>
                 </div>
-                <div class="add-code flex-row">
+                <div class="add-code flex-row grams-input hide">
                     <span>Grams:</span>
-                    <input type="text" name="grams" id="grams" placeholder="g" required>
+                    <input type="text" name="grams" id="grams" placeholder="g">
                 </div>
-                <div class="add-code flex-row">
+                <div class="add-code flex-row servings-input hide">
                     <span>Serving:</span>
-                    <input type="text" name="servings" id="servings" placeholder="g" required>
+                    <input type="text" name="servings" id="servings" placeholder="g">
                 </div>
                 <div class="add-code flex-row">
                     <span>Show:</span>
@@ -48,6 +48,22 @@ if ($_SESSION["is_superuser"] == 1) {
                 <div class="flex-row add-file add-code">
                     <span>Image:</span>
                     <input type="file" name="photo" id="" accept="image/png, image/gif, image/jpeg" required>
+                </div>
+                <div class="add-inclusion">
+                    <div class="flex-row add-code">
+                        <span>Inclusions 1: </span>
+                        <div >
+                            <div class="flex-row"  style="width: 70%; margin-left: auto">
+                            <?php include "includes/foods-view-select.inc.php"; ?>
+                            <input hidden  type="text" name="inclusion_name[]">
+                            <input style="width: 100%" name="serving[]" type="text" placeholder="g" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-row add-remove-inclusions-div add-code">
+                    <button class="btn btn-primary add-inclusion-btn" type="button" style="margin-left: auto">Add more</button>
+                    <button class="btn btn-danger delete-inclusion-btn" type="button" style="margin-left: 5px">Remove</button>
                 </div>
             </div>
             <div class="form-overlay-footer flex-row">
@@ -78,7 +94,7 @@ if ($_SESSION["is_superuser"] == 1) {
                     </select>
                 </div>
                 <div class="add-code flex-row">
-                    <span>Cost:</span>
+                    <span>Price:</span>
                     <input class="upd-ing-cost" type="text" name="cost" id="num" required>
                 </div>
                 <div class="add-code flex-row">
