@@ -46,6 +46,7 @@ class Transactions extends Dbh
                 array_push($qtys, $row["quantity"]);
                 array_push($prices, $row["price"]);
                 array_push($original_prices, $row["original_price"]);
+                $prices2 = $row['price'];
             }
         }
 
@@ -58,12 +59,18 @@ class Transactions extends Dbh
 
         for ($i = 0; $i < count($orders); $i++) {
             $price = (int)$prices[$i];
-            $total += $price;
+            // $total += (float)$price
             $newItemId .= $item_ids[$i];
             $newOrder .= $orders[$i] . "";
             $newQuantity .= $qtys[$i] . "";
             $newPrice .= $prices[$i] . "";
             $newOrgPrice .= $original_prices[$i] . "";
+        }
+
+        $prices2 = explode("|", $prices2);
+
+        for ($i=0; $i < count($prices2); $i++) { 
+            $total += (float)$prices2[$i];
         }
 
         $newItemId = rtrim($newItemId, "|");
@@ -84,8 +91,8 @@ class Transactions extends Dbh
             $start_time = $row['timer'];
         }
 
-        $sql = "INSERT INTO transactions (table_id, start_time, duration, food_id, `order`, original_price, quantity, price)
-        VALUES ( '$id' , '$start_time' , 1 , '$newItemId' , '$newOrder' , '$newOrgPrice' , '$newQuantity' , '$newPrice')";
+        $sql = "INSERT INTO transactions (table_id, start_time, duration, food_id, `order`, original_price, quantity, price, total)
+        VALUES ( '$id' , '$start_time' , 1 , '$newItemId' , '$newOrder' , '$newOrgPrice' , '$newQuantity' , '$newPrice', '$total')";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
@@ -284,7 +291,7 @@ class Transactions extends Dbh
         }      
     }
 
-    protected function setPaid($id, $tbl)
+    protected function setPaid($id, $tbl, $discounted, $discountedArr)
     {
         $sql = "SELECT * FROM transactions WHERE id = ?";
         $stmt = $this->connection()->prepare($sql);
@@ -298,6 +305,25 @@ class Transactions extends Dbh
             $original_prices = explode("|",$row["original_price"]);
             $prices = explode("|",$row["price"]);
         }
+
+        
+        $discountedPrices = explode(",",$discounted);
+        $newDiscountedPrices = "";
+        for ($i=0; $i < count($discountedPrices); $i++) { 
+            $newDiscountedPrices .= $discountedPrices[$i] . "|";
+        }
+
+        $discountedPricesArr = explode(",",$discountedArr);
+        $newDiscountedPricesArr = "";
+        for ($i=0; $i < count($discountedPricesArr); $i++) { 
+            $newDiscountedPricesArr .= $discountedPricesArr[$i] . "|";
+        }
+        echo $newDiscountedPricesArr;
+
+        $sql = "UPDATE transactions SET `price` = '$newDiscountedPricesArr' WHERE id = $id";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+        $stmt = null;
 
         $date = date("Y/m/d");
         for ($i=0; $i < count($item_ids); $i++) { 

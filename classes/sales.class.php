@@ -24,4 +24,24 @@ class Sales extends Dbh
         $results = $stmt->fetchAll();
         return $results;
     }
+
+    protected function getTransactions($date, $date2){
+        if (empty($date) || empty($date2)) {
+            $sql = "SELECT * FROM transactions;";
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute();
+    
+            $results2 = $stmt->fetchAll();
+            return $results2;
+        }
+        else{
+            $sql = "SELECT * FROM transactions WHERE DATE(reg_date) BETWEEN '$date' AND '$date2'";
+            $stmt = $this->connection()->prepare($sql);
+            $stmt->execute();
+    
+            $results2 = $stmt->fetchAll();
+            return $results2;
+        }
+
+    }
 }

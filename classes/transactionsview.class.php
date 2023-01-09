@@ -220,7 +220,7 @@ if (count($arr) === 3) {
                     $result = explode("|",$row['price']);
                     $total = 0;
                     for ($i=0; $i < (count($result)); $i++) { 
-                        $total += (int)$result[$i];
+                        $total += (float)$result[$i];
                     }
 
                     echo "₱ " . $total;
@@ -303,7 +303,7 @@ $result3 = explode("|",$row['price']);
 $result4 = explode("|",$row['original_price']);
 $total = 0;
 for ($i=0; $i < (count($result)); $i++) { 
-    $total += (int)$result3[$i];
+    $total += (float)$result3[$i];
                 ?>
                 <tr>
                     <?php if ($result[$i] != "") {
@@ -376,7 +376,7 @@ for ($i=0; $i < (count($result)); $i++) {
                     } ?>
                     <?php if ($result3[$i] != "") {
                         ?>
-                    <td class="hide" style="text-align: left; padding-left: 10px">
+                    <td style="text-align: left; padding-left: 10px">
                     <?php
                     for ($j=0; $j < $result2[$i]; $j++) { 
                         ?>
@@ -649,7 +649,7 @@ if (count($arr) === 3) {
                     $result = explode("|",$row['price']);
                     $total = 0;
                     for ($i=0; $i < (count($result)); $i++) { 
-                        $total += (int)$result[$i];
+                        $total += (float)$result[$i];
                     }
 
                     echo $total;
@@ -752,7 +752,7 @@ if (count($arr) === 3) {
                     $result = explode("|",$row['price']);
                     $total = 0;
                     for ($i=0; $i < (count($result)); $i++) { 
-                        $total += (int)$result[$i];
+                        $total += (float)$result[$i];
                     }
 
                     echo $total;

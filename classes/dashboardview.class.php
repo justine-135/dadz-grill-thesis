@@ -33,7 +33,7 @@ class DashboardView extends Dashboard{
 
         $total = 0;
         for ($i=0; $i < count($arrtotal); $i++) { 
-            $total += (int)$arrtotal[$i];
+            $total += (float)$arrtotal[$i];
         }
         echo $total;
     }

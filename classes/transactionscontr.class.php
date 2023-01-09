@@ -5,8 +5,8 @@ class TransactionsContr extends Transactions{
         $this->setTransactions($id);
     }
 
-    public function initPaid($id, $tbl){
-        $this->setPaid($id, $tbl);
+    public function initPaid($id, $tbl, $discounted, $discountedArr){
+        $this->setPaid($id, $tbl, $discounted, $discountedArr);
     }
 
     

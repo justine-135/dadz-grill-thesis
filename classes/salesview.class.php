@@ -3,6 +3,7 @@
 class SalesView extends Sales{
     public function initSalesReport(){
         $results = $this->getSalesReport();
+        $results2 = $this->getTransactions();
         ?>
         <thead>
             <tr>
@@ -16,12 +17,12 @@ class SalesView extends Sales{
             </tr>
         </thead>
         <?php
-        $total = 0;
+        // $total = 0;
         foreach ($results as $row) {
-            $tmp = 0;
+            // $tmp = 0;
 
             $tmp += $row['success'] * $row['cost']; 
-            $total += $tmp;
+            // $total += $tmp;
         ?>
         <tbody>
             <tr>
@@ -35,6 +36,26 @@ class SalesView extends Sales{
             </tr>
         </tbody>
         <?php
+        }
+        $total = 0;
+        $arrtotals = array();
+        foreach ($results2 as $row) {
+            if ($row["paid"] == 1) {
+                if ($row['price'] != "") {
+                    array_push($arrtotals, $row["price"] . "|");
+                }
+            }
+        }
+
+        $val = "";
+        for ($i=0; $i < count($arrtotals); $i++) { 
+            $arrval = $arrtotals[$i];
+            $val .= $arrval;
+        }
+        $arrtotal = explode("|",$val);
+
+        for ($i=0; $i < count($arrtotal); $i++) { 
+            $total += (float)$arrtotal[$i];
         }
         ?>
         <tfoot>
@@ -105,6 +126,7 @@ class SalesView extends Sales{
     }
     public function initSalesReportDate($date, $date2){
         $results = $this->getSalesReportDate($date, $date2);
+        $results2 = $this->getTransactions($date, $date2);
         ?>
         <thead>
             <tr>
@@ -118,12 +140,12 @@ class SalesView extends Sales{
             </tr>
         </thead>
         <?php
-        $total = 0;
+        // $total = 0;
         foreach ($results as $row) {
             $tmp = 0;
 
             $tmp += $row['success'] * $row['cost']; 
-            $total += $tmp;
+            // $total += $tmp;
         ?>
         <tbody>
             <tr>
@@ -138,6 +160,27 @@ class SalesView extends Sales{
         </tbody>
         <?php
         }
+        $total = 0;
+        $arrtotals = array();
+        foreach ($results2 as $row) {
+            if ($row["paid"] == 1) {
+                if ($row['price'] != "") {
+                    array_push($arrtotals, $row["price"] . "|");
+                }
+            }
+        }
+
+        $val = "";
+        for ($i=0; $i < count($arrtotals); $i++) { 
+            $arrval = $arrtotals[$i];
+            $val .= $arrval;
+        }
+        $arrtotal = explode("|",$val);
+
+        for ($i=0; $i < count($arrtotal); $i++) { 
+            $total += (float)$arrtotal[$i];
+        }
+        echo $total;
         ?>
         <tfoot>
         <tr>

@@ -10,7 +10,7 @@ class FoodsView extends Foods{
                 <th>Image</th>
                 <th style="text-align: left; padding-left: 10px">Group</th>
                 <th style="text-align: left; padding-left: 10px">Price (₱)</th>
-                <th style="text-align: left; padding-left: 10px">Grams (g)</th>
+                <th style="text-align: left; padding-left: 10px">Quantity</th>
                 <th style="text-align: left; padding-left: 10px">Show</th>
                 <th>Actions</th>
             </tr>
@@ -91,6 +91,7 @@ class FoodsView extends Foods{
                     <div class="flex-row price">
                         <span>P</span>
                         <span> <?php echo $row['cost']; ?></span>
+                        <input class="serving" type="text" value=<?php echo $row['serving'] ?> hidden>
                     </div>
                 </div>
                 <?php
@@ -131,8 +132,22 @@ class FoodsView extends Foods{
                             <li>Unlimited Red Iced Tea</li>
                         </ul>
                             <?php
+                        
+                        } elseif (strpos($row['item_name'], "Set D") !== false) {
+                            ?>
+                        <ul style="font-size: 10px; text-align: left; margin: 5px 0 5px 0">
+                            <li>Unlimited Chicken</li>
+                            <li>Unlimited Rice, Lettuce</li>
+                            <li>Unlimited Potato Marbles</li>
+                            <li>Unlimited Potato Kimchi</li>
+                            <li>Unlimited Colsaw</li>
+                            <li>Unlimited Cucumber</li>
+                            <li>Unlimited White Onion</li>
+                        </ul>
+                            <?php
                         }
                         ?>
+                        <input type="text" value=<?php echo $row['grams'] ?> hidden>
             </div>
         </button>
         <?php
@@ -154,8 +169,10 @@ class FoodsView extends Foods{
                     <div class="flex-row price">
                         <span>P</span>
                         <span> <?php echo $row['cost']; ?></span>
+                        <input class="serving" type="text" value=<?php echo $row['serving'] ?> hidden>
                     </div>
                 </div>
+                
             </div>
         </button>
         <?php
@@ -177,8 +194,62 @@ class FoodsView extends Foods{
                     <div class="flex-row price">
                         <span>P</span>
                         <span> <?php echo $row['cost']; ?></span>
+                        <input class="serving" type="text" value=<?php echo $row['serving'] ?> hidden>
                     </div>
                 </div>
+                <?php
+                        if (strpos($row['item_name'], "Set A") !== false) {
+                            ?>
+                        <ul style="font-size: 10px; text-align: left; margin: 5px 0 5px 0">
+                            <li>Unlimited Pork, Rice, Lettuce</li>
+                            <li>Unlimited Potato Marbles</li>
+                            <li>Unlimited Colsaw</li>
+                            <li>Unlimited Cucumber</li>
+                            <li>Unlimited White Onion</li>
+                        </ul>
+                            <?php
+                        } elseif (strpos($row['item_name'], "Set B") !== false) {
+                            ?>
+                        <ul style="font-size: 10px; text-align: left; margin: 5px 0 5px 0">
+                            <li>Unlimited Pork, Beef, Chicken</li>
+                            <li>Unlimited Rice, Lettuce</li>
+                            <li>Unlimited Potato Marbles</li>
+                            <li>Unlimited Potato Kimchi</li>
+                            <li>Unlimited Colsaw</li>
+                            <li>Unlimited Cucumber</li>
+                            <li>Unlimited White Onion</li>
+                            <li>Unlimited Red Iced Tea</li>
+                        </ul>
+                            <?php
+                        } elseif (strpos($row['item_name'], "Set C") !== false) {
+                            ?>
+                        <ul style="font-size: 10px; text-align: left; margin: 5px 0 5px 0">
+                            <li>Unlimited Pork, Beef, Chicken</li>
+                            <li>Unlimited Rice, Lettuce</li>
+                            <li>Unlimited Shabu-shabu</li>
+                            <li>Unlimited Potato Marbles</li>
+                            <li>Unlimited Potato Kimchi</li>
+                            <li>Unlimited Colsaw</li>
+                            <li>Unlimited Cucumber</li>
+                            <li>Unlimited White Onion</li>
+                            <li>Unlimited Red Iced Tea</li>
+                        </ul>
+                            <?php
+                        
+                        } elseif (strpos($row['item_name'], "Set D") !== false) {
+                            ?>
+                        <ul style="font-size: 10px; text-align: left; margin: 5px 0 5px 0">
+                            <li>Unlimited Chicken</li>
+                            <li>Unlimited Rice, Lettuce</li>
+                            <li>Unlimited Potato Marbles</li>
+                            <li>Unlimited Potato Kimchi</li>
+                            <li>Unlimited Colsaw</li>
+                            <li>Unlimited Cucumber</li>
+                            <li>Unlimited White Onion</li>
+                        </ul>
+                            <?php
+                        }
+                        ?>
             </div>
         </button>
         <?php
@@ -200,6 +271,7 @@ class FoodsView extends Foods{
                     <div class="flex-row price">
                         <span>P</span>
                         <span> <?php echo $row['cost']; ?></span>
+                        <input class="serving" type="text" value=<?php echo $row['serving'] ?> hidden>
                     </div>
                 </div>
             </div>
@@ -223,6 +295,7 @@ class FoodsView extends Foods{
                     <div class="flex-row price">
                         <span>P</span>
                         <span> <?php echo $row['cost']; ?></span>
+                        <input class="serving" type="text" value=<?php echo $row['serving'] ?> hidden>
                     </div>
                 </div>
             </div>

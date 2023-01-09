@@ -1,12 +1,13 @@
 <?php
 
 class Purchase extends Dbh{
-    protected function setPurchase($names, $tableId, $orgPrc, $total, $waiter, $qty, $prc, $uid, $item_id){
+    protected function setPurchase($names, $tableId, $orgPrc, $total, $waiter, $qty, $prc, $uid, $item_id, $servings){
         $total_names='';
         $quantities='';
         $prices='';
         $original_price='';
         $item_ids = '';
+        $total_servings = '';
 
         for ($i=0; $i < count($names); $i++) { 
             $total_names .= $names[$i]."|";
@@ -14,9 +15,55 @@ class Purchase extends Dbh{
             $prices .= $prc[$i]."|";
             $original_price .= $orgPrc[$i]."|";
             $item_ids .= $item_id[$i]."|";
+            $total_servings .= $servings[$i]."|";
+
         }
 
-        echo $total_names . "<br>" . $quantities . "<br>" . $prices . "<br>" . $original_price . "<br>" . $item_ids;
+        for ($i=0; $i < count($names); $i++) { 
+            if (strpos($names[$i], "Set A") !== false) {
+                $sql = "UPDATE inventory SET grams = grams - $servings[$i] WHERE item_name = 'Pork'";
+                $stmt = $this->connection()->prepare($sql);
+                $stmt->execute();    
+                $stmt = null;
+            }elseif (strpos($names[$i], "Set B") !== false) {
+                $sql = "UPDATE inventory SET grams = grams - $servings[$i] WHERE item_name = 'Pork'";
+                $stmt = $this->connection()->prepare($sql);
+                $stmt->execute();    
+                $stmt = null;
+                $sql = "UPDATE inventory SET grams = grams - $servings[$i] WHERE item_name = 'Beef'";
+                $stmt = $this->connection()->prepare($sql);
+                $stmt->execute();    
+                $stmt = null;
+                $sql = "UPDATE inventory SET grams = grams - $servings[$i] WHERE item_name = 'Chicken'";
+                $stmt = $this->connection()->prepare($sql);
+                $stmt->execute();    
+                $stmt = null;
+            }elseif (strpos($names[$i], "Set C") !== false) {
+                $sql = "UPDATE inventory SET grams = grams - $servings[$i] WHERE item_name = 'Pork'";
+                $stmt = $this->connection()->prepare($sql);
+                $stmt->execute();    
+                $stmt = null;
+                $sql = "UPDATE inventory SET grams = grams - $servings[$i] WHERE item_name = 'Beef'";
+                $stmt = $this->connection()->prepare($sql);
+                $stmt->execute();    
+                $stmt = null;
+                $sql = "UPDATE inventory SET grams = grams - $servings[$i] WHERE item_name = 'Chicken'";
+                $stmt = $this->connection()->prepare($sql);
+                $stmt->execute();    
+                $stmt = null;
+            }elseif (strpos($names[$i], "Set D") !== false) {
+                $sql = "UPDATE inventory SET grams = grams - $servings[$i] WHERE item_name = 'Chicken'";
+                $stmt = $this->connection()->prepare($sql);
+                $stmt->execute();    
+                $stmt = null;
+            }
+            else{
+
+            }
+        }
+
+        // echo $total_servings . "<br>";
+        // echo $total_names;
 
         $sql = "INSERT INTO submitted_orders (table_id, item_id, item_name, quantity, original_price, total_purchase, order_status, waiter)
         VALUES ('$tableId', '$item_ids', '$total_names', '$quantities', '$original_price' ,'$prices', 'Pending', '$waiter')";
@@ -35,7 +82,6 @@ class Purchase extends Dbh{
         $stmt->execute();    
         $stmt = null;
 
-        session_start();
         $id = $_SESSION["uid"];
         $sql = "INSERT INTO served (`user_id`, served)
         VALUES ('$id', 1)";
