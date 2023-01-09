@@ -1,25 +1,28 @@
 <?php
     include 'autoload.inc.php';
 
-    $name;
-    $group;
-    $cost;
-    $grams;
-    $servings;
-    $stats;
-    $file;
-    $fileName;
-    $fileTempLoc;
-    $fileType;
-    $fileError;
-    $fileSize;
-    $fileNameTime;
-    $target;
-    $fileExt;
-    $fileActualExt;
-    $allowed;
-    $fid;
-    $img;
+    $name = "";
+    $group = "";
+    $cost = 0;
+    $grams = 0;
+    $servings = 0;
+    $serving = "";
+    $stats = "";
+    $file = "";
+    $fileName = "";
+    $fileTempLoc = "";
+    $fileType = "";
+    $fileError = "";
+    $fileSize = "";
+    $fileNameTime = "";
+    $target = "";
+    $fileExt = "";
+    $fileActualExt = "";
+    $allowed = "";
+    $fid = "";
+    $img = "";
+    $inclusions = "";
+    $inclusions_name = "";
 
     session_start();
     $userName = $_SESSION["username"];
@@ -37,8 +40,13 @@
             $grams = $_POST['grams'];
             $grams = (float)$grams;
             $servings = $_POST['servings'];
-            $servings = (float)$servings;
+            $serving = $_POST['serving'];
             $stats = ucfirst($_POST['stats']);
+            $inclusions_name = $_POST['inclusion_name'];
+            
+            if (isset($_POST['inclusions'])) {
+                $inclusions = $_POST['inclusions'];
+            }
         
             $file = $_FILES['photo'];
             $fileName = $file['name'];
@@ -56,10 +64,8 @@
             $allowed = array('jpg', 'jpeg', 'png', 'gif');
             $fid = 0;
             $img = null;
-
-            echo $grams;
     
-            $foodItem = new FoodContr($name, $group, $cost, $grams, $servings, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img);
+            $foodItem = new FoodContr($name, $group, $cost, $grams, $servings, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img, $inclusions, $serving, $inclusions_name);
             $foodItem->initSetFood();
         }
     
@@ -84,7 +90,7 @@
             $img = $_POST['img-value'];
             $img = '.'.$img;
     
-            $foodItem = new FoodContr($name, $group, $cost, $grams, $servings, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img);
+            $foodItem = new FoodContr($name, $group, $cost, $grams, $servings, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img, $inclusions, $serving, $inclusions_name);
             $foodItem->initDeleteFood();
         }
     
