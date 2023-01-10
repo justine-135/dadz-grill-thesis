@@ -49,7 +49,17 @@ window.addEventListener("load", () => {
   const updateFormBtn = document.querySelectorAll(".update-item-btn");
   updateFormBtn.forEach((element) => {
     element.addEventListener("click", () => {
-      console.log(element.parentElement.parentElement.childNodes);
+      if (
+        element.parentElement.parentElement.childNodes[5].innerHTML != "Sets"
+      ) {
+        document.querySelector(".edit-servings-div").classList.remove("hide");
+        document.querySelector(".edit-grams-div").classList.remove("hide");
+        document.querySelector(".edit-inclusions").classList.add("hide");
+      } else {
+        document.querySelector(".edit-servings-div").classList.add("hide");
+        document.querySelector(".edit-grams-div").classList.add("hide");
+        document.querySelector(".edit-inclusions").classList.remove("hide");
+      }
       overlay.classList.add("open");
       updateItemForm.classList.add("open");
       insertItemForm.classList.add("remove");
@@ -61,6 +71,7 @@ window.addEventListener("load", () => {
       const id = document.querySelector(".upd-ing-id");
       const grams = document.querySelector(".upd-ing-grams");
       const img = document.querySelector(".upd-ing-img");
+      let name2 = "";
 
       name.value = element.parentElement.parentElement.childNodes[1].innerHTML;
       group.value = element.parentElement.parentElement.childNodes[5].innerHTML;
@@ -71,6 +82,22 @@ window.addEventListener("load", () => {
       status.value =
         element.parentElement.parentElement.childNodes[11].firstChild.innerHTML;
       id.value = element.parentElement.parentElement.id;
+
+      name2 = element.parentElement.parentElement.childNodes[15];
+      console.log(name2.innerHTML);
+      let xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4) {
+          document.querySelector(".inclusions-table").innerHTML =
+            this.responseText;
+        }
+      };
+      xmlhttp.open(
+        "GET",
+        "./includes/foods-view-edit-inc.inc.php?name=" + name2.innerHTML,
+        true
+      );
+      xmlhttp.send();
     });
   });
 
@@ -206,7 +233,7 @@ window.addEventListener("load", () => {
         ${clone.innerHTML}
         </select>
         <input hidden type="text" name="inclusion_name[]">
-        <input style="width: 100%" name="serving[]" type="text" placeholder="g" />
+        <input style="width: 100%" name="serving[]" type="number" placeholder="g" />
         </div>
     </div>
     `;

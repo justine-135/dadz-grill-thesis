@@ -7,6 +7,8 @@ window.addEventListener("load", () => {
   const drinksContainer = document.querySelector(".drinks-container");
   const addonsContainer = document.querySelector(".addons-container");
 
+  console.log(setsContainer);
+
   // initially show popular foods
   popularContainer.classList.add("show");
 

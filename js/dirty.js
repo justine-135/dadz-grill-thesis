@@ -104,7 +104,7 @@ window.addEventListener("load", () => {
           //   );
           //   xmlhttp.send();
           // } else {
-          //   timerVal.innerHTML = durationValue;
+          timerVal.innerHTML = durationValue;
           // }
         }
       });

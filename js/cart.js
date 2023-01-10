@@ -1,4 +1,5 @@
 window.addEventListener("load", () => {
+  console.log("load");
   const selectedItem = document.querySelectorAll(".item-btn button");
   const cartList = document.querySelector(".cart-list");
   const formPurchase = document.querySelector(".submit-sale");

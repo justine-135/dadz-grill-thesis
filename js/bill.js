@@ -41,8 +41,6 @@ window.addEventListener("load", () => {
           // let fixprices = prices.toFixed(2);
 
           totalPriceValue = parseFloat(totalPriceValue) + parseFloat(prices);
-          // console.log(totalPriceValue);
-          console.log(prices);
         });
 
         amountTotal.innerHTML = totalPriceValue
@@ -105,6 +103,17 @@ window.addEventListener("load", () => {
           parseFloat(paymentInput.value.replace(",", "")) >=
           parseFloat(totalInput.value.replace(",", ""))
         ) {
+          const selectDiscounts = document.querySelectorAll(".select-discount");
+
+          let discountsArr = [];
+          selectDiscounts.forEach((element) => {
+            if (element.value != 0) {
+              discountsArr.push(element.value);
+            }
+          });
+
+          console.log(typeof discountsArr);
+
           const xhttp = new XMLHttpRequest();
           xhttp.onload = function () {
             let receiptPaper = document.createElement("div");
@@ -119,7 +128,7 @@ window.addEventListener("load", () => {
             "application/x-www-form-urlencoded"
           );
           xhttp.send(
-            `&print=print&id=${id.value}&change=${changeInput.value}&payment=${paymentInput.value}&total=${totalInput.value}`
+            `&print=print&id=${id.value}&change=${changeInput.value}&payment=${paymentInput.value}&total=${totalInput.value}&discounts=${discountsArr}`
           );
         }
       });
@@ -151,7 +160,16 @@ window.addEventListener("load", () => {
           alert.classList.remove("alert-danger");
           alert.classList.add("alert-success");
           alert.innerHTML = "Order has been paid.";
+          const selectDiscounts = document.querySelectorAll(".select-discount");
 
+          let discountsArr = [];
+          selectDiscounts.forEach((element) => {
+            if (element.value != 0) {
+              discountsArr.push(element.value);
+            }
+          });
+
+          console.log(discountsArr);
           const xhttp = new XMLHttpRequest();
           xhttp.open("POST", "./includes/transactions-contr.inc.php");
           xhttp.setRequestHeader(
@@ -176,6 +194,16 @@ window.addEventListener("load", () => {
           let discount = element;
 
           discount.addEventListener("change", (e) => {
+            billInput.value = 0;
+            amountChange.innerHTML = 0;
+            changeInput.value = 0;
+            amountPaid.innerHTML = 0;
+            paymentInput.value = 0;
+            amountTotal.innerHTML = 0;
+
+            console.log(totalInput.value);
+            console.log(paymentInput.value);
+            console.log(changeInput.value);
             let discountLvl = parseInt(discount.value);
             priceAfterDiscount =
               discount.parentElement.parentElement.parentElement.parentElement
@@ -296,7 +324,7 @@ window.addEventListener("load", () => {
             const createSelect = document.createElement("div");
             createSelect.setAttribute("class", "flex-row");
             const createSelectContent = `
-                <select class="form-select form-select select-discount select-discount-${selectId} mb-1" name="" id="${selectId}">
+                <select class="form-select form-select select-discount select-discount-${selectId} mb-1" name="discount-select[]" id="${selectId}">
                     <option value="0">None</option>
                     <option value="1">Person with disability</option>
                     <option value="2">Senior</option>
