@@ -55,6 +55,6 @@ class FoodContr extends Foods
     public function initDeleteFood()
     {
         $this->deleteFood($this->img, $this->fid);
-        // header("location: ../foods.php?alert=delete&id=" . $this->fid);
+        header("location: ../foods.php?alert=delete&id=" . $this->fid);
     }
 }

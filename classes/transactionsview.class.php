@@ -282,7 +282,7 @@ if (count($arr) === 3) {
             </div>
             <div class="bill-details flex-column" style="margin-left: auto; align-content: flex-start;">
                 <span>Input bill</span>
-                <input type="text" name="" id="bill-input" style="height: 38px">
+                <input type="text" name="" id="bill-input" value=0 style="height: 38px">
             </div>
         </nav>
         <table class="tables-table bill-order-tbl table">
@@ -333,7 +333,7 @@ for ($i=0; $i < (count($result)); $i++) {
                     <div>
                         <div class="discount-div">
                             <div class="flex-row">
-                                <select class="form-select form-select select-discount select-discount-0 mb-1" name="" id="0">
+                                <select class="form-select form-select select-discount select-discount-0 mb-1" name="discount-select[]" id="0">
                                     <option value="0">None</option>
                                     <option value="1">Person with disability</option>
                                     <option value="2">Senior</option>
@@ -435,7 +435,7 @@ for ($i=0; $i < (count($result)); $i++) {
         }
     }   
 
-    public function initReceipt($id, $changeNumeric, $paymentNumeric, $totalNumeric){
+    public function initReceipt($id, $changeNumeric, $paymentNumeric, $totalNumeric, $discounts){
         $results = $this->getInvoice($id);
         ?>
         <!DOCTYPE html>
@@ -527,7 +527,10 @@ for ($i=0; $i < (count($result)); $i++) {
                                 Quantity
                             </th>
                             <th class="text-right">
-                                Price
+                                Price (₱)
+                            </th>
+                            <th class="text-right">
+                                Total (₱)
                             </th>
                         </tr>
                     </thead>
@@ -537,35 +540,115 @@ for ($i=0; $i < (count($result)); $i++) {
 $result = explode("|",$row['order']);
 $result2 = explode("|",$row['quantity']);
 $result3 = explode("|",$row['original_price']);
+$origPrice = 0;
 for ($i=0; $i < (count($result)); $i++) { 
                     ?>
                     <tr>
                         <td><?php echo $result[$i] ?></td>
                         <td class="text-right"><?php echo $result2[$i] ?></td>
-                        <td class="text-right"><?php echo $result3[$i] ?></td>
+                        <td class="text-right">
+                            <span class="s-to-float"><?php echo $result3[$i] ?></span>
+                        </td>
+                        <td class="text-right">
+                            <?php
+                             $origPrice += $result3[$i] * $result2[$i]; 
+                             ?>
+                             <span class="s-to-float"><?php echo $result3[$i] * $result2[$i]; ?></span>
+                             <?php
+                             ?>
+                        </td>
                     </tr>
                     <?php }} ?>
                     </tbody>
                 </table>
                 <hr>
+                <?php 
+                    $d1 = 0;
+                    $d2 = 0;
+                    $d3 = 0;
+                    $d4 = 0;
+                    $d5 = 0;
+                    foreach ($discounts as $discount) {
+                        if ($discount == 1) {
+                            $d1 += 1;
+                        }if ($discount == 2) {
+                            $d2 += 1;
+                        }if ($discount == 3) {
+                            $d3 += 1;
+                        }if ($discount == 4) {
+                            $d4 += 1;
+                        }if ($discount == 5) {
+                            $d5 += 1;
+                        }
+                    }
+                    ?>
                 <div class="payment-section receipt-padding">
                     <div class="total-div flex-row payment-div">
                         <h3>Total</h3>
-                        <span><?php echo $totalNumeric . ".00" ?></span>
+                        <h2>₱ <span class="s-to-float"><?php echo $totalNumeric ?></span></h2>
                     </div>
+                    <?php
+                    if ($d1 > 0 || $d2 > 0 || $d3 > 0 || $d4 > 0 || $d5 > 0) {
+                    ?>
+                    <div class="total-div flex-row payment-div">
+                        <h3></h3>
+                        <span style="-webkit-text-decoration-line: line-through; text-decoration-line: line-through;"><?php echo $origPrice ?></span>
+                    </div>
+                    <?php } ?>
+                    <?php
+                    if ($d1 > 0 || $d2 > 0 || $d3 > 0 || $d4 > 0 || $d5 > 0) {
+                    ?>
+                    <div class="total-div flex-row payment-div" style="align-items: flex-start">
+                        <span>Discounts</span>
+                        <?php 
+                         ?>
+                        <ul>
+                            <?php
+                            if ($d1 != 0) {
+                                echo "<li>" . "Person with disability (" . $d1 . ")</li>";
+                            }
+                            if ($d2 != 0) {
+                                echo "<li>" . "Senior (" . $d2 . ")</li>";
+                            }
+                            if ($d3 != 0) {
+                                echo "<li>" . "Birthday celebrant (" . $d3 . ")</li>";
+                            }
+                            if ($d4 != 0) {
+                                echo "<li>" . "3 years old below (" . $d4 . ")</li>";
+                            }
+                            if ($d5 != 0) {
+                                echo "<li>" . "4-6 years old below (" . $d5 . ")</li>";
+                            }
+                            ?>
+                        </ul>
+                    </div>
+                    <?php
+                    }
+                    ?>
                     <div class="cash-div flex-row payment-div">
                         <span>Received payment of</span>
-                        <span><?php echo $paymentNumeric . ".00" ?></span>
+                        <span>₱ <span class="s-to-float"><?php echo $paymentNumeric ?></span></span>
                     </div>
                     <div class="change-div flex-row payment-div">
                         <span>Change</span>
-                        <span><?php echo $changeNumeric . ".00"?></span>
+                        <span>₱ <span class="s-to-float"><?php echo $changeNumeric ?></span></span>
                     </div>
                 </div>
                 <hr>
                 <h2 class="receipt-padding" style="text-align: center">Thank you!</h2>
             </div>
         </div>
+        <script>
+            const toNumbers = document.querySelectorAll(".s-to-float");
+            console.log(toNumbers);
+            toNumbers.forEach(element => {
+                let toFloat = parseFloat(element.innerHTML).toFixed(2)
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          element.innerHTML = toFloat;
+
+            });
+        </script>
         </body>
 </html>
         <?php

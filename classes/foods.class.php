@@ -12,7 +12,7 @@ class Foods extends Dbh{
     }
 
     protected function getSets(){
-        $sql = "SELECT * FROM inventory WHERE item_group = 'Sets';";
+        $sql = "SELECT * FROM inventory WHERE item_group = 'Sets' ORDER BY item_name;";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
@@ -21,7 +21,7 @@ class Foods extends Dbh{
     }
 
     protected function getMeats(){
-        $sql = "SELECT * FROM inventory WHERE item_group = 'Meat';";
+        $sql = "SELECT * FROM inventory WHERE item_group = 'Meat' ORDER BY item_name;";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
@@ -30,7 +30,7 @@ class Foods extends Dbh{
     }
 
     protected function getSides(){
-        $sql = "SELECT * FROM inventory WHERE item_group = 'Sides';";
+        $sql = "SELECT * FROM inventory WHERE item_group = 'Sides' ORDER BY item_name;";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
@@ -39,7 +39,7 @@ class Foods extends Dbh{
     }
 
     protected function getDrinks(){
-        $sql = "SELECT * FROM inventory WHERE item_group = 'Drinks';";
+        $sql = "SELECT * FROM inventory WHERE item_group = 'Drinks' ORDER BY item_name;";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
@@ -48,7 +48,7 @@ class Foods extends Dbh{
     }
 
     protected function getAddons(){
-        $sql = "SELECT * FROM inventory WHERE item_group = 'Addons';";
+        $sql = "SELECT * FROM inventory WHERE item_group = 'Addons' ORDER BY item_name;";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
@@ -65,26 +65,28 @@ class Foods extends Dbh{
                 $stmt->execute();
         
                 $results = $stmt->fetchAll();
+                echo count($results);
+                if (count($results) == 0) {
+                    $sql = "INSERT INTO inventory (item_name, item_Name2, item_group, cost, grams, serving, photo, order_status)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-                if (count($results) > 0) {
-                    $sql = "INSERT INTO inventory (item_name, item_group, cost, grams, serving, photo, order_status)
-                    VALUES (?, ?, ?, ?, ?, ?, ?)";
-                    
                     $stmt = $this->connection()->prepare($sql);
-                    $stmt->execute([$name, $group, $cost, $grams, $servings, $fileNameTime, $stats]);
+                    $stmt->execute([$name, $name, $group, $cost, $grams, $servings, $fileNameTime, $stats]);
                     $stmt = null;
     
                     if ($inclusions != "") {
                         for ($i=0; $i < count($inclusions); $i++) { 
-                            $sql = "INSERT INTO inclusions (fid, `name`, foreign_name, servings)
-                            VALUES (?, ?, ?, ?)";
+                            $sql = "INSERT INTO inclusions (fid, `name`, foreign_name, foreign_name2, servings)
+                            VALUES (?, ?, ?, ?, ?)";
                             
                             $stmt = $this->connection()->prepare($sql);
-                            $stmt->execute([$inclusions[$i], $inclusions_name[$i], $name, $serving[$i]]);
+                            $stmt->execute([$inclusions[$i], $inclusions_name[$i], $name, $name, $serving[$i]]);
                             $stmt = null;
                             echo $inclusions[$i];
                         }
                     }
+                }else{
+                    header("location: ../foods.php");
                 }
 
             }
@@ -107,11 +109,11 @@ class Foods extends Dbh{
         $results = $stmt->fetchAll();
 
         foreach ($results as $row) {
-            $name = $row['item_name'];
+            $name = $row['item_name2'];
         }
 
 
-        $sql = "DELETE FROM inclusions WHERE foreign_name='$name'";
+        $sql = "DELETE FROM inclusions WHERE foreign_name2='$name'";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
         $stmt = null;
@@ -126,6 +128,15 @@ class Foods extends Dbh{
 
     protected function getInclusions(){
         $sql = "SELECT * FROM inclusions;";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+
+        $results2 = $stmt->fetchAll();
+        return $results2;
+    }
+
+    protected function getEditInclusions($name){
+        $sql = "SELECT * FROM inclusions WHERE foreign_name = '$name';";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 

@@ -13,6 +13,7 @@ class FoodsView extends Foods{
                 <th style="text-align: left; padding-left: 10px">Quantity</th>
                 <th style="text-align: left; padding-left: 10px">Show</th>
                 <th>Actions</th>
+                <th class="hide" style="text-align: left; padding-left: 10px">Name 2</th>
             </tr>
         </thead>
         <tbody>
@@ -30,13 +31,7 @@ class FoodsView extends Foods{
                 </td>
                 <td style="text-align: left; padding-left: 10px">
                 <?php
-                if (strpos($row['item_name'], "Beef") !== false) {
-                    echo "<span class='grams'>" . $row['grams'] . "</span>" . "g";
-                }
-                else if (strpos($row['item_name'], "Pork") !== false){
-                    echo "<span class='grams'>" . $row['grams'] . "</span>" . "g";
-                }
-                else if (strpos($row['item_name'], "Chicken") !== false){
+                if ($row['item_group'] == "Meat") {
                     echo "<span class='grams'>" . $row['grams'] . "</span>" . "g";
                 }
                 else{
@@ -66,6 +61,8 @@ class FoodsView extends Foods{
                     <button class="update-item-btn" type="button">Edit</button>
                     <button class="delete-item-btn" type="button">Delete</button>
                 </td>
+                <td class="name2 hide" style="text-align: left; padding-left: 10px"><?php echo $row['item_name2']; ?></td>
+
             </tr>
         
 <?php
@@ -98,13 +95,13 @@ class FoodsView extends Foods{
                 <?php
                     $results2 = $this->getInclusions();   
                     foreach ($results2 as $row2) {
-                        if ($row['item_name'] == $row2['foreign_name']) {
+                        if ($row['item_name2'] == $row2['foreign_name']) {
                             ?>
                             <li>
                                 <?php echo "Unlimited " . $row2['name'] ?>
-                                <input type="text" name="inclusion_name[]" value="<?php echo $row2['name'] ?>">
-                                <input type="text" name="inclusion_id[]" value=<?php echo $row2['id'] ?>>
-                                <input type="text" name="inclusion_serving[]" value=<?php echo $row2['servings'] ?>>
+                                <input type="text" name="inclusion_name[]" value="<?php echo $row2['name'] ?>" hidden>
+                                <input type="text" name="inclusion_id[]" value=<?php echo $row2['id'] ?> hidden>
+                                <input type="text" name="inclusion_serving[]" value=<?php echo $row2['servings'] ?> hidden>
                             </li>
                             <?php
                         }
@@ -133,7 +130,7 @@ class FoodsView extends Foods{
                     <div class="flex-row price">
                         <span>P</span>
                         <span> <?php echo $row['cost']; ?></span>
-                        <input class="serving" type="text" value=<?php echo $row['serving'] ?> >
+                        <input class="serving" type="text" value=<?php echo $row['serving'] ?> hidden>
                     </div>
                 </div>
                 
@@ -169,9 +166,9 @@ class FoodsView extends Foods{
                             ?>
                             <li>
                                 <?php echo "Unlimited " . $row2['name'] ?>
-                                <input class="inclusion-info" type="text" name="inclusion_name[]" value="<?php echo $row2['name'] ?>">
-                                <input class="inclusion-info" type="text" name="inclusion_id[]" value=<?php echo $row2['id'] ?>>
-                                <input class="inclusion-info" type="text" name="inclusion_serving[]" value=<?php echo $row2['servings'] ?>>
+                                <input class="inclusion-info" type="text" name="inclusion_name[]" value="<?php echo $row2['name'] ?>" hidden>
+                                <input class="inclusion-info" type="text" name="inclusion_id[]" value=<?php echo $row2['id'] ?> hidden>
+                                <input class="inclusion-info" type="text" name="inclusion_serving[]" value=<?php echo $row2['servings'] ?> hidden>
                             </li>
                             <?php
                         }
@@ -262,7 +259,7 @@ class FoodsView extends Foods{
         <select name="inclusions[]" class="form-select orig-select inclusion-select">
         <?php
         foreach ($results as $row) {
-            if ($row['item_group'] != "Sets" && $row['item_group'] == "Meat") {            
+            if ($row['item_group'] != "Sets") {            
             ?>
               <option disabled selected value>Select </option>
         <option value=<?php echo $row['fid']; ?> id="<?php echo $row['item_name'] ?>"> <?php echo $row['item_name'] ?></option>
@@ -274,6 +271,31 @@ class FoodsView extends Foods{
         <?php
     }
 
+    public function initEditInclusions($name){
+        $results = $this->getEditInclusions($name);
+        ?>
+        <table class="table">
+            <thead>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Servings</th>
+            </thead>
+            <tbody>
+                <?php
+            foreach ($results as $row) {
+                ?>
+                <tr>
+                    <td><?php echo $row['id'] ?></td>
+                    <td><?php echo $row['name'] ?></td>
+                    <td><?php echo $row['servings'] ?></td>
+                </tr>
+                <?php
+            }
+                ?>
+            </tbody>
+        </table>
+        <?php
+    }
 }
 ?>
 
