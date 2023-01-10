@@ -56,7 +56,7 @@ if ($_SESSION["is_superuser"] == 1) {
                             <div class="flex-row"  style="width: 70%; margin-left: auto">
                             <?php include "includes/foods-view-select.inc.php"; ?>
                             <input hidden  type="text" name="inclusion_name[]">
-                            <input style="width: 100%" name="serving[]" type="text" placeholder="g" />
+                            <input style="width: 100%" name="serving[]" type="number" placeholder="g" />
                             </div>
                         </div>
                     </div>
@@ -78,7 +78,7 @@ if ($_SESSION["is_superuser"] == 1) {
                         <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" />
                     </svg></button>
             </div>
-            <div class="col1">
+            <div class="col1 edit-item-div">
                 <div class="add-code flex-row">
                     <span>Item Name:</span>
                     <input class="upd-ing-name" type="text" name="name" id="insert-name-val" required>
@@ -97,13 +97,13 @@ if ($_SESSION["is_superuser"] == 1) {
                     <span>Price:</span>
                     <input class="upd-ing-cost" type="text" name="cost" id="num" required>
                 </div>
-                <div class="add-code flex-row">
+                <div class="add-code flex-row edit-grams-div hide">
                     <span>Add Grams:</span>
-                    <input class="upd-ing-grams" type="text" name="grams" required>
+                    <input class="upd-ing-grams" type="text" name="grams">
                 </div>
-                <div class="add-code flex-row">
+                <div class="add-code flex-row edit-servings-div hide">
                     <span>Serving:</span>
-                    <input type="text" name="servings" id="servings" placeholder="g" required>
+                    <input type="text" name="servings" id="servings" placeholder="g">
                 </div>
                 <div class="add-code flex-row">
                     <span>Show:</span>
@@ -111,6 +111,10 @@ if ($_SESSION["is_superuser"] == 1) {
                         <option value="No">No</option>
                         <option value="Yes">Yes</option>
                     </select>
+                </div>
+                <div class="edit-inclusions hide">
+                    <span>Inclusions</span>
+                    <div class="inclusions-table"></div>
                 </div>
                 <input class="upd-ing-id hide" type="text" name="upd-ing-id" id="">
             </div>
@@ -178,7 +182,14 @@ if ($_SESSION["is_superuser"] == 1) {
             Food <strong class="mx-1"><?php echo $id; ?></strong> is updated.
             </div>
             <?php
-        }elseif ($alert == "delete") {
+        } elseif ($alert == "store_no") {
+            ?>
+            <!-- echo "<span class='query-notif fail'>No bill request for table " . $id . "!</span>"; -->
+            <div class="alert alert-danger d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
+            No food is stored.
+            </div>
+            <?php
+        } elseif ($alert == "delete") {
             ?>
             <!-- echo "<span class='query-notif fail'>No bill request for table " . $id . "!</span>"; -->
             <div class="alert alert-success d-flex align-items-center position-fixed top-0 start-50 translate-middle-x" style="z-index: 5; height: 10px" role="alert">
