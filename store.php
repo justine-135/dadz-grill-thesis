@@ -22,6 +22,8 @@ if (!isset($_SESSION["table"])){
     <link href="https://fonts.googleapis.com/css2?family=Passion+One:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/styles.css">
     <link rel="shortcut icon" href="./img/icons/logo.jpg" type="image/x-icon">
+        <script src="./js/store.js?v=<?php echo time(); ?>"></script>
+    <script src="./js/cart.js?v=<?php echo time(); ?>"></script>
     <title>Dadz Grillhouse</title>
 </head>
 
@@ -116,6 +118,7 @@ if (!isset($_SESSION["table"])){
                 <h1>Main sets</h1>
                 <div class="group-btn item-btn">
                     <?php
+
                     $setFoods = new FoodsView();
                     $setFoods->initReadSets();
                     ?>
@@ -125,6 +128,7 @@ if (!isset($_SESSION["table"])){
                 <h1>Meats</h1>
                 <div class="group-btn item-btn">
                     <?php
+
                     $setFoods = new FoodsView();
                     $setFoods->initReadMeats();
                     ?>
@@ -134,6 +138,7 @@ if (!isset($_SESSION["table"])){
                 <h1>Sides</h1>
                 <div class="group-btn item-btn">
                     <?php
+
                     $sideFoods = new FoodsView();
                     $sideFoods->initReadSides();
                     ?>
@@ -143,6 +148,7 @@ if (!isset($_SESSION["table"])){
                 <h1>Drinks</h1>
                 <div class="group-btn item-btn">
                     <?php
+
                     $drinkFoods = new FoodsView();
                     $drinkFoods->initReadDrinks();
                     ?>
@@ -152,6 +158,7 @@ if (!isset($_SESSION["table"])){
                 <h1>Addons</h1>
                 <div class="group-btn item-btn">
                     <?php
+
                     $drinkFoods = new FoodsView();
                     $drinkFoods->initReadAddons();
                     ?>
@@ -159,9 +166,6 @@ if (!isset($_SESSION["table"])){
             </div>
         </div>
     </main>
-
-    <script src="./js/store.js?v=<?php echo time(); ?>"></script>
-    <script src="./js/cart.js?v=<?php echo time(); ?>"></script>
 
 </body>
 
