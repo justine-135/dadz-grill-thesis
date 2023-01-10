@@ -237,7 +237,8 @@ h4 {
   top: 45%;
 }
 
-.add-item-div {
+.add-item-div,
+.edit-item-div {
   overflow: auto;
   max-height: 50vh;
 }
