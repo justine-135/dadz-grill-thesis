@@ -64,6 +64,17 @@
             $allowed = array('jpg', 'jpeg', 'png', 'gif');
             $fid = 0;
             $img = null;
+
+            // foreach ($serving as $s) {
+            //     if (strlen($s) < 0) {
+            //         header("location: ../foods.php?alert=store_no&id=0");
+            //         exit();
+            //         echo "dont store food";
+            //     }
+            //     else{
+            //         echo "Storefood";
+            //     }
+            // }
     
             $foodItem = new FoodContr($name, $group, $cost, $grams, $servings, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img, $inclusions, $serving, $inclusions_name);
             $foodItem->initSetFood();
@@ -81,7 +92,7 @@
             $stats = ucfirst($_POST['stats']);
             $fid = $_POST['upd-ing-id'];
     
-            $foodItem = new FoodContr($name, $group, $cost, $grams, $servings, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img);
+            $foodItem = new FoodContr($name, $group, $cost, $grams, $servings, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img, $inclusions, $serving, $inclusions_name);
             $foodItem->initUpdateFood();
         }
     
