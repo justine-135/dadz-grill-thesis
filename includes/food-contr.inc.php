@@ -65,17 +65,6 @@
             $fid = 0;
             $img = null;
 
-            // foreach ($serving as $s) {
-            //     if (strlen($s) < 0) {
-            //         header("location: ../foods.php?alert=store_no&id=0");
-            //         exit();
-            //         echo "dont store food";
-            //     }
-            //     else{
-            //         echo "Storefood";
-            //     }
-            // }
-    
             $foodItem = new FoodContr($name, $group, $cost, $grams, $servings, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img, $inclusions, $serving, $inclusions_name);
             $foodItem->initSetFood();
         }
@@ -87,13 +76,21 @@
             $cost = (float)$cost;
             $grams = $_POST['grams'];
             $grams = (float)$grams;
+            $grams2 = $_POST['grams2'];
+            $grams2 = (float)$grams2;
             $servings = $_POST['servings'];
             $servings = (float)$servings;
             $stats = ucfirst($_POST['stats']);
             $fid = $_POST['upd-ing-id'];
-    
-            $foodItem = new FoodContr($name, $group, $cost, $grams, $servings, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img, $inclusions, $serving, $inclusions_name);
-            $foodItem->initUpdateFood();
+
+            if ($grams2 > $servings) {
+                $foodItem = new FoodContr($name, $group, $cost, $grams, $servings, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img, $inclusions, $serving, $inclusions_name);
+                $foodItem->initUpdateFood();
+            }
+            else{
+                header("location: ../foods.php?alert=no_update&id=" . $fid);
+            }
+            
         }
     
         elseif (isset($_POST["delete"])) {
