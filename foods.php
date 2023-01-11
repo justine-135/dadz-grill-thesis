@@ -83,7 +83,7 @@ if ($_SESSION["is_superuser"] == 1) {
                     <span>Item Name:</span>
                     <input class="upd-ing-name" type="text" name="name" id="insert-name-val" required>
                 </div>
-                <div class="add-code flex-row">
+                <div class="add-code flex-row hide">
                     <span>Item Group:</span>
                     <select class="upd-ing-group" name="group" id="" required>
                         <option value="Sets">Main set</option>
@@ -100,10 +100,11 @@ if ($_SESSION["is_superuser"] == 1) {
                 <div class="add-code flex-row edit-grams-div hide">
                     <span>Add Grams:</span>
                     <input class="upd-ing-grams" type="text" name="grams">
+                    <input class="upd-ing-grams2" type="text" name="grams2" hidden>
                 </div>
                 <div class="add-code flex-row edit-servings-div hide">
                     <span>Serving:</span>
-                    <input type="text" name="servings" id="servings" placeholder="g">
+                    <input class="upd-ing-servings" type="text" name="servings" id="servings" placeholder="g">
                 </div>
                 <div class="add-code flex-row">
                     <span>Show:</span>
@@ -113,7 +114,7 @@ if ($_SESSION["is_superuser"] == 1) {
                     </select>
                 </div>
                 <div class="edit-inclusions hide">
-                    <span>Inclusions</span>
+                    <span>Inclusions:</span>
                     <div class="inclusions-table"></div>
                 </div>
                 <input class="upd-ing-id hide" type="text" name="upd-ing-id" id="">
