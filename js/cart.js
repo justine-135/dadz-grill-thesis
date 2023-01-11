@@ -11,7 +11,7 @@ window.addEventListener("load", () => {
     element.addEventListener("click", (e) => {
       let url = element.childNodes[1].src;
       let name = element.childNodes[3].childNodes[1].innerHTML;
-      // console.log(element.childNodes[3].childNodes[5]);
+
       let price;
       try {
         price =
@@ -34,8 +34,6 @@ window.addEventListener("load", () => {
       let serving =
         element.childNodes[3].childNodes[5].childNodes[1].childNodes[5].value;
 
-      //      let incInfo = element.childNodes[3].childNodes[7].childNodes;
-
       let incInfos = element.querySelectorAll(".inclusion-info");
 
       let arrInclusionId = [];
@@ -52,11 +50,22 @@ window.addEventListener("load", () => {
         }
       });
 
-      console.log(arrInclusionId);
-      console.log(arrInclusionId);
-      console.log(arrInclusionId);
+      let grams =
+        element.childNodes[3].childNodes[7].querySelectorAll(".inventory-gram");
 
-      addCart(url, name, price, quantity, id, origPrice, serving);
+      let notadd = 0;
+      grams.forEach((element) => {
+        console.log(element.previousElementSibling);
+        let gram = element.value;
+        let incServing = element.previousElementSibling.value;
+        if (incServing > gram) {
+          notadd = 1;
+        }
+      });
+      if (notadd == 0) {
+        addCart(url, name, price, quantity, id, origPrice, serving);
+      }
+      console.log(notadd);
     });
   }
 
@@ -74,6 +83,18 @@ window.addEventListener("load", () => {
         return;
       }
     }
+
+    let inventoryGrams = document.querySelectorAll(".inventory-gram");
+    // let notAdd = 0;
+    // inventoryGrams.forEach((element) => {
+    //   let gram = element.value;
+    //   let serving = element.previousElementSibling.value;
+    //   // if (serving > gram) {
+    //   //   notAdd = 1;
+    //   // }
+    //   console.log(gram);
+    //   console.log(serving);
+    // });
     createItem.setAttribute("class", "flex-row cart-item");
     let inner = `
             <div class="item-img-name flex-column">
@@ -96,7 +117,10 @@ window.addEventListener("load", () => {
     `;
 
     createItem.innerHTML = inner;
+    // if (notAdd == 0) {
+    // }
     cartList.appendChild(createItem);
+
     calcTotal();
     adjustQuantity();
     exec++;

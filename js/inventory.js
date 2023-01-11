@@ -70,21 +70,33 @@ window.addEventListener("load", () => {
       const status = document.querySelector(".upd-ing-stat");
       const id = document.querySelector(".upd-ing-id");
       const grams = document.querySelector(".upd-ing-grams");
+      const grams2 = document.querySelector(".upd-ing-grams2");
+      const servings = document.querySelector(".upd-ing-servings");
       const img = document.querySelector(".upd-ing-img");
       let name2 = "";
+      console.log();
 
+      grams2.value =
+        element.parentElement.parentElement.childNodes[9].childNodes[1].innerHTML.replace(
+          ",",
+          ""
+        );
+      console.log(grams2.value);
       name.value = element.parentElement.parentElement.childNodes[1].innerHTML;
       group.value = element.parentElement.parentElement.childNodes[5].innerHTML;
 
       cost.value =
         element.parentElement.parentElement.childNodes[7].childNodes[1].innerHTML;
       grams.value = 0;
+      servings.value =
+        element.parentElement.parentElement.childNodes[11].childNodes[1].innerHTML;
       status.value =
-        element.parentElement.parentElement.childNodes[11].firstChild.innerHTML;
+        element.parentElement.parentElement.childNodes[13].firstChild.innerHTML;
       id.value = element.parentElement.parentElement.id;
 
       name2 = element.parentElement.parentElement.childNodes[15];
       console.log(name2.innerHTML);
+      console.log(status.value);
       let xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
