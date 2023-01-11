@@ -55,8 +55,7 @@ if ($_SESSION["is_superuser"] == 1) {
                         <div >
                             <div class="flex-row"  style="width: 70%; margin-left: auto">
                             <?php include "includes/foods-view-select.inc.php"; ?>
-                            <input hidden  type="text" name="inclusion_name[]">
-                            <input style="width: 100%" name="serving[]" type="number" placeholder="g" />
+                            <input style="width: 100%" name="serving[]" type="number" placeholder="g" min=0 max=500 />
                             </div>
                         </div>
                     </div>
