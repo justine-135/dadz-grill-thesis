@@ -94,9 +94,8 @@ window.addEventListener("load", () => {
         element.parentElement.parentElement.childNodes[13].firstChild.innerHTML;
       id.value = element.parentElement.parentElement.id;
 
-      name2 = element.parentElement.parentElement.childNodes[15];
-      console.log(name2.innerHTML);
-      console.log(status.value);
+      name2 = element.parentElement.parentElement.childNodes[17];
+      console.log(name2);
       let xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
@@ -220,7 +219,11 @@ window.addEventListener("load", () => {
 
       inclusion.addEventListener("change", (e) => {
         let itemName = inclusion.options[inclusion.selectedIndex].id;
+        let value2value = inclusion.options[inclusion.selectedIndex];
         inclusion.nextElementSibling.value = itemName;
+
+        console.log(value2value);
+        console.log(inclusion.value);
       });
     });
   };
