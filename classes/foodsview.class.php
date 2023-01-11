@@ -343,20 +343,21 @@ class FoodsView extends Foods{
         <select name="inclusions[]" class="form-select orig-select inclusion-select">
         <?php
         foreach ($results as $row) {
-            if ($row['item_group'] == "Meat") {            
+            if ($row['item_group'] == "Meat" && $row['grams'] >= 1000) {            
             ?>
-              <option disabled selected value>Select </option>
-        <option value=<?php echo $row['fid']; ?> id="<?php echo $row['item_name'] ?>"> <?php echo $row['item_name'] ?></option>
+            <option disabled selected value>Select </option>
+            <option value=<?php echo $row['fid']; ?> value2=<?php echo $row['grams'] ?> id="<?php echo $row['item_name'] ?>"> <?php echo $row['item_name'] ?></option>
             <?php
             }
         }
         ?>
         </select>
+        <input hidden  type="text" name="inclusion_name[]">
         <?php
     }
 
     public function initEditInclusions($name){
-        $results = $this->getEditInclusions($name);
+        $results2 = $this->getEditInclusions($name);
         ?>
         <table class="table">
             <thead>
@@ -366,7 +367,7 @@ class FoodsView extends Foods{
             </thead>
             <tbody>
                 <?php
-            foreach ($results as $row) {
+            foreach ($results2 as $row) {
                 ?>
                 <tr>
                     <td><?php echo $row['id'] ?></td>
