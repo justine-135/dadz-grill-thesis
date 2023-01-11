@@ -376,7 +376,7 @@ for ($i=0; $i < (count($result)); $i++) {
                     } ?>
                     <?php if ($result3[$i] != "") {
                         ?>
-                    <td style="text-align: left; padding-left: 10px">
+                    <td class="hide" style="text-align: left; padding-left: 10px">
                     <?php
                     for ($j=0; $j < $result2[$i]; $j++) { 
                         ?>

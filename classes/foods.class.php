@@ -95,7 +95,7 @@ class Foods extends Dbh{
     }
 
     protected function updateFood($name, $group, $cost, $grams, $servings, $stats, $fid){
-        $sql = "UPDATE inventory SET item_name = '$name', item_group = '$group', cost = $cost, grams = grams + $grams, serving = $servings, order_status = '$stats' WHERE fid = $fid";
+        $sql = "UPDATE inventory SET item_name = '$name', item_group = '$group', cost = $cost, grams = grams + $grams, serving = '$servings', order_status = '$stats' WHERE fid = '$fid'";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
     }
@@ -112,6 +112,11 @@ class Foods extends Dbh{
             $name = $row['item_name2'];
         }
 
+        $sql = "DELETE FROM inclusions WHERE foreign_name2='$name'";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+        $stmt = null;
+
 
         $sql = "DELETE FROM inclusions WHERE foreign_name2='$name'";
         $stmt = $this->connection()->prepare($sql);
@@ -123,17 +128,34 @@ class Foods extends Dbh{
         $stmt->execute();
         $stmt = null;
 
+        $sql = "DELETE FROM inclusions WHERE fid='$fid'";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute();
+        $stmt = null;
 
+        echo $fid;
     }
 
     protected function getInclusions(){
-        $sql = "SELECT * FROM inclusions;";
+        $sql = "SELECT inventory.grams, inventory.item_name2, inclusions.id, inclusions.fid, inclusions.name, inclusions.foreign_name, inclusions.foreign_name2, inclusions.servings 
+        FROM inventory, inclusions
+        WHERE inventory.item_name2 = inclusions.name 
+        ;";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();
 
         $results2 = $stmt->fetchAll();
         return $results2;
     }
+
+    // protected function getInclusions(){
+    //     $sql = "SELECT * FROM inclusions;";
+    //     $stmt = $this->connection()->prepare($sql);
+    //     $stmt->execute();
+
+    //     $results2 = $stmt->fetchAll();
+    //     return $results2;
+    // }
 
     protected function getEditInclusions($name){
         $sql = "SELECT * FROM inclusions WHERE foreign_name = '$name';";
