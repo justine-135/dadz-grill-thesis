@@ -12,7 +12,7 @@ class TransactionsView extends Transactions{
                 <th style="text-align: left; padding-left: 10px">End</th>
                 <th style="text-align: left; padding-left: 10px">Duration</th>
                 <th style="max-width: 10px;">Orders</th>
-                <th style="text-align: left; padding-left: 10px; min-width: 75px">Total</th>
+                <th style="text-align: left; padding-left: 10px; min-width: 75px">Total ₱ </th>
                 <th style="text-align: left; padding-left: 10px">Status</th>
                 <th style="text-align: left">Action</th>
             </tr>
@@ -92,8 +92,14 @@ if (count($arr) === 3) {
                     for ($i=0; $i < (count($result)); $i++) { 
                         $total += (int)$result[$i];
                     }
-
-                    echo "₱ " . $total;
+                    ?>
+                    <span class="add-zero">
+                        <?php
+                         echo number_format($total, 2)
+                         ?>
+                    
+                    </span>
+                    <?php
                 ?>    
                 </td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php if ($row['paid'] == 0) {
@@ -143,7 +149,7 @@ if (count($arr) === 3) {
                 <th style="text-align: left; padding-left: 10px">End</th>
                 <th style="text-align: left; padding-left: 10px">Duration</th>
                 <th style="min-width: 90px">Orders</th>
-                <th style="text-align: left; padding-left: 10px; min-width: 75px">Total</th>
+                <th style="text-align: left; padding-left: 10px; min-width: 75px">Total ₱ </th>
                 <th style="text-align: left; padding-left: 10px">Status</th>
                 <th class="status-action-col">Action</th>
             </tr>
@@ -223,7 +229,14 @@ if (count($arr) === 3) {
                         $total += (float)$result[$i];
                     }
 
-                    echo "₱ " . $total;
+                    ?>
+                    <span class="add-zero">
+                        <?php
+                         echo number_format($total, 2)
+                         ?>
+                    
+                    </span>
+                    <?php
                 ?>    
                 </td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php if ($row['paid'] == 0) {
@@ -293,6 +306,7 @@ if (count($arr) === 3) {
                     <th style="width:15%; text-align: left; padding-left: 10px">Amount</th>
                     <th style="width:22%; text-align: left; padding-left: 10px">Discount</th>
                     <th style="width:20%; text-align: left; padding-left: 10px">₱ Total price</th>
+                    <th style=" text-align: left; padding-left: 10px">₱ Discounts</th>
                 </tr>
             </thead>
             <tbody>
@@ -313,7 +327,9 @@ for ($i=0; $i < (count($result)); $i++) {
                     } ?>
                     <?php if ($result4[$i] != "") {
                         ?>
-                    <td style="text-align: left;padding-left: 20px"><?php echo $result4[$i] ?></td>
+                    <td style="text-align: left;padding-left: 20px">
+                    <input style="border:none; color: black;" disabled class="ms-1 add-zero" type="text" value=<?php echo $result4[$i] ?>>
+                    </td>
                         <?php
                     } ?>
                     <?php if ($result2[$i] != "") {
@@ -365,7 +381,7 @@ for ($i=0; $i < (count($result)); $i++) {
                     <?php if ($result3[$i] != "") {
                         ?>
                     <td style="text-align: left; padding-left: 10px">
-                    ₱ <span class="item-prices"><?php echo $result3[$i]; ?> </span>
+                    <span class="item-prices"><?php echo $result3[$i]; ?> </span>
                     </td>
                         <?php
                     } ?>
@@ -376,11 +392,12 @@ for ($i=0; $i < (count($result)); $i++) {
                     } ?>
                     <?php if ($result3[$i] != "") {
                         ?>
-                    <td class="hide" style="text-align: left; padding-left: 10px">
+                    <td class="" style="text-align: left; padding-left: 10px">
                     <?php
                     for ($j=0; $j < $result2[$i]; $j++) { 
                         ?>
-                    <input class="price-input-tmp price-input-tmp-<?php echo $j?>" type="text" value=<?php echo $result4[$i] ?>>
+                        <input style="border:none; color: black;" disabled class="ms-1 add-zero price-input-tmp price-input-tmp-<?php echo $j?>" type="text" value=<?php echo $result4[$i] ?>>
+                    
                         <?php
                     }
                     ?>
@@ -395,6 +412,7 @@ for ($i=0; $i < (count($result)); $i++) {
                     <td></td>
                     <td class="bill-final-span" style="text-align: left; padding-left: 10px"><span class="bill-final-span">Total:</span></td>
                     <td style="text-align: left; padding-left: 10px">₱ <span id="amount-total"></span></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -402,6 +420,7 @@ for ($i=0; $i < (count($result)); $i++) {
                     <td></td>
                     <td style="text-align: left; padding-left: 10px"> <span class="bill-final-span" >Payment:</span></td>
                     <td style="text-align: left; padding-left: 10px">₱ <span id="amount-paid">0</span></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -409,6 +428,7 @@ for ($i=0; $i < (count($result)); $i++) {
                     <td></td>
                     <td class="bill-final-span" style="text-align: left; padding-left: 10px"><span class="bill-final-span">Change:</span></td>
                     <td style="text-align: left; padding-left: 10px">₱ <span id="amount-change">0</span></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -425,6 +445,7 @@ for ($i=0; $i < (count($result)); $i++) {
                         <button class="btn btn-primary" id="print">Print</button>
                         <input class="btn btn-primary" type="button" name="save" id="save" value="Save">  
                     </td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>

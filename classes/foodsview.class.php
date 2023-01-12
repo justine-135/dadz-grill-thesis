@@ -97,8 +97,8 @@ class FoodsView extends Foods{
 
                 <div class="item-info flex-column">
                     <div class="flex-row price">
-                        <span>P</span>
-                        <span> <?php echo $row['cost']; ?></span>
+                        <span>₱</span>
+                        <span class="add-zero"> <?php echo $row['cost']; ?></span>
                         <input class="serving" type="text" value=<?php echo $row['serving'] ?> hidden>
                     </div>
                 </div>
@@ -140,8 +140,8 @@ class FoodsView extends Foods{
 
                 <div class="item-info flex-column">
                     <div class="flex-row price">
-                        <span>P</span>
-                        <span> <?php echo $row['cost']; ?></span>
+                        <span>₱</span>
+                        <span class="add-zero"> <?php echo $row['cost']; ?></span>
                         <input class="serving" type="text" value=<?php echo $row['serving'] ?> hidden>
                     </div>
                 </div>
@@ -182,8 +182,8 @@ class FoodsView extends Foods{
 
                 <div class="item-info flex-column">
                     <div class="flex-row price">
-                        <span>P</span>
-                        <span> <?php echo $row['cost']; ?></span>
+                        <span>₱</span>
+                        <span class="add-zero"> <?php echo $row['cost']; ?></span>
                         <input class="serving" type="text" value=<?php echo $row['serving'] ?> hidden>
                     </div>
                 </div>
@@ -224,8 +224,8 @@ class FoodsView extends Foods{
 
                 <div class="item-info flex-column">
                     <div class="flex-row price">
-                        <span>P</span>
-                        <span> <?php echo $row['cost']; ?></span>
+                        <span>₱</span>
+                        <span class="add-zero"> <?php echo $row['cost']; ?></span>
                         <input class="serving" type="text" value=<?php echo $row['serving'] ?> hidden>
                     </div>
                 </div>
@@ -266,8 +266,8 @@ class FoodsView extends Foods{
 
                 <div class="item-info flex-column">
                     <div class="flex-row price">
-                        <span>P</span>
-                        <span> <?php echo $row['cost']; ?></span>
+                        <span>₱</span>
+                        <span class="add-zero"> <?php echo $row['cost']; ?></span>
                         <input class="serving" type="text" value=<?php echo $row['serving'] ?> hidden>
                     </div>
                 </div>
@@ -308,8 +308,8 @@ class FoodsView extends Foods{
 
                 <div class="item-info flex-column">
                     <div class="flex-row price">
-                        <span>P</span>
-                        <span> <?php echo $row['cost']; ?></span>
+                        <span>₱</span>
+                        <span class="add-zero"> <?php echo $row['cost']; ?></span>
                     </div>
                 </div>
                 <ul style="font-size: 10px; text-align: left; margin: 5px 0 5px 0">

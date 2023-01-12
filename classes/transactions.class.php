@@ -318,7 +318,6 @@ class Transactions extends Dbh
         for ($i=0; $i < count($discountedPricesArr); $i++) { 
             $newDiscountedPricesArr .= $discountedPricesArr[$i] . "|";
         }
-        echo $newDiscountedPricesArr;
 
         $sql = "UPDATE transactions SET `price` = '$newDiscountedPricesArr' WHERE id = $id";
         $stmt = $this->connection()->prepare($sql);
@@ -377,7 +376,6 @@ class Transactions extends Dbh
             $stmt->execute();
             $stmt = null;
         }
-
         exit();
     }
 
