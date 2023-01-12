@@ -262,7 +262,7 @@ window.addEventListener("load", () => {
 
   delInclusions.addEventListener("click", (e) => {
     count--;
-    console.log();
+    console.log(count);
     e.target.parentElement.previousSibling.previousSibling.lastChild.remove();
     loadInclusionSelects();
   });

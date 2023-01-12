@@ -57,4 +57,15 @@ window.addEventListener("load", () => {
     drinksContainer.classList.remove("show");
     addonsContainer.classList.remove("show");
   };
+
+  const addZeros = document.querySelectorAll(".add-zero");
+  console.log(addZeros);
+  addZeros.forEach((element) => {
+    let spanPrice = parseFloat(element.innerHTML);
+    console.log(spanPrice);
+    element.innerHTML = spanPrice
+      .toFixed(2)
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  });
 });

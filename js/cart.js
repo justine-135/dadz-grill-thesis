@@ -63,9 +63,9 @@ window.addEventListener("load", () => {
         }
       });
       if (notadd == 0) {
-        addCart(url, name, price, quantity, id, origPrice, serving);
+        console.log(notadd);
       }
-      console.log(notadd);
+      addCart(url, name, price, quantity, id, origPrice, serving);
     });
   }
 
@@ -243,7 +243,10 @@ window.addEventListener("load", () => {
     }
 
     let totalPrice = document.querySelector(".total-text .price input");
-    totalPrice.value = total;
+    totalPrice.value = total
+      .toFixed(2)
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
   formPurchase.addEventListener("submit", (e) => {

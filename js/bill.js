@@ -169,7 +169,6 @@ window.addEventListener("load", () => {
             }
           });
 
-          console.log(discountsArr);
           const xhttp = new XMLHttpRequest();
           xhttp.open("POST", "./includes/transactions-contr.inc.php");
           xhttp.setRequestHeader(
@@ -201,21 +200,14 @@ window.addEventListener("load", () => {
             paymentInput.value = 0;
             amountTotal.innerHTML = 0;
 
-            console.log(totalInput.value);
-            console.log(paymentInput.value);
-            console.log(changeInput.value);
             let discountLvl = parseInt(discount.value);
             priceAfterDiscount =
               discount.parentElement.parentElement.parentElement.parentElement
                 .parentElement.childNodes[9].childNodes[1];
 
-            // let tmpPrice =
-            //   discount.parentElement.parentElement.parentElement.parentElement
-            //     .parentElement.childNodes[11].childNodes[1].innerHTML;
-
             let tmpPrice =
               discount.parentElement.parentElement.parentElement.parentElement
-                .parentElement.childNodes[3].innerHTML;
+                .parentElement.childNodes[3].childNodes[1].value;
 
             let priceInputTmps =
               discount.parentElement.parentElement.parentElement.parentElement
@@ -231,6 +223,7 @@ window.addEventListener("load", () => {
             // 4 = 3yrs old below
             // 5 = 4-6 yrs old
 
+            console.log(tmpPrice);
             let calculate = 0;
             switch (discountLvl) {
               case 0:
@@ -256,13 +249,13 @@ window.addEventListener("load", () => {
                 ).value = parseFloat(tmpPrice) - calculate.toFixed(2);
                 break;
               case 3:
-                discount.nextElementSibling.value = 0;
+                discount.nextElementSibling.value = 0.0;
                 priceInputTmps.querySelector(
                   `.price-input-tmp-${selectDiscountId}`
                 ).value = 0;
                 break;
               case 4:
-                discount.nextElementSibling.value = 0;
+                discount.nextElementSibling.value = 0.0;
                 priceInputTmps.querySelector(
                   `.price-input-tmp-${selectDiscountId}`
                 ).value = 0;
@@ -299,6 +292,15 @@ window.addEventListener("load", () => {
       };
 
       loadSelect();
+
+      const addZeros = document.querySelectorAll(".add-zero");
+      addZeros.forEach((element) => {
+        let inputPrice = parseFloat(element.value);
+        element.value = inputPrice
+          .toFixed(2)
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      });
 
       const addDiscountBtn = document.querySelectorAll(".add-discount");
 
