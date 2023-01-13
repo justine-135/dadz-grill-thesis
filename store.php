@@ -49,7 +49,7 @@ if (!isset($_SESSION["table"])){
                 <div class="total-text">
                     <span>Total</span>
                     <div class="price">
-                        <span>P</span>
+                        <span>₱</span>
                         <input type="text" value="0" name="total" id="" readonly>
                     </div>
                 </div>
