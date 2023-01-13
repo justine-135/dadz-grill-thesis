@@ -7,8 +7,6 @@ window.addEventListener("load", () => {
   const drinksContainer = document.querySelector(".drinks-container");
   const addonsContainer = document.querySelector(".addons-container");
 
-  console.log(setsContainer);
-
   // initially show popular foods
   popularContainer.classList.add("show");
 
@@ -59,10 +57,8 @@ window.addEventListener("load", () => {
   };
 
   const addZeros = document.querySelectorAll(".add-zero");
-  console.log(addZeros);
   addZeros.forEach((element) => {
     let spanPrice = parseFloat(element.innerHTML);
-    console.log(spanPrice);
     element.innerHTML = spanPrice
       .toFixed(2)
       .toString()

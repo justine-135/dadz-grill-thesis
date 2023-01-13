@@ -1,5 +1,4 @@
 window.addEventListener("load", () => {
-  console.log("load");
   const selectedItem = document.querySelectorAll(".item-btn button");
   const cartList = document.querySelector(".cart-list");
   const formPurchase = document.querySelector(".submit-sale");
@@ -18,7 +17,6 @@ window.addEventListener("load", () => {
           element.childNodes[3].childNodes[5].childNodes[1].childNodes[3]
             .innerHTML;
       } catch (error) {
-        console.log("it is undefined");
         price =
           element.childNodes[3].childNodes[7].childNodes[1].childNodes[3]
             .innerHTML;
@@ -54,25 +52,54 @@ window.addEventListener("load", () => {
         element.childNodes[3].childNodes[7].querySelectorAll(".inventory-gram");
 
       let notadd = 0;
+
+      let servingArrValue = [];
+      let gramArrValue = [];
       grams.forEach((element) => {
-        console.log(element.previousElementSibling);
         let gram = element.value;
         let incServing = element.previousElementSibling.value;
-        if (incServing > gram) {
+
+        servingArrValue.push(incServing);
+        gramArrValue.push(gram);
+        if (parseFloat(incServing) > parseFloat(gram)) {
           notadd = 1;
         }
+
+        console.log(incServing, gram);
       });
-      if (notadd == 0) {
-        console.log(notadd);
+
+      if (notadd != 1) {
+        addCart(
+          url,
+          name,
+          price,
+          quantity,
+          id,
+          origPrice,
+          serving,
+          servingArrValue,
+          gramArrValue
+        );
       }
-      addCart(url, name, price, quantity, id, origPrice, serving);
+
+      notadd = 0;
     });
   }
 
   // add item to cart
   let exec = 0;
 
-  const addCart = (url, name, price, quantity, id, origPrice, serving) => {
+  const addCart = (
+    url,
+    name,
+    price,
+    quantity,
+    id,
+    origPrice,
+    serving,
+    servingArrValue,
+    gramArrValue
+  ) => {
     const createItem = document.createElement("div");
 
     // do not allow duplicate items
@@ -84,17 +111,6 @@ window.addEventListener("load", () => {
       }
     }
 
-    let inventoryGrams = document.querySelectorAll(".inventory-gram");
-    // let notAdd = 0;
-    // inventoryGrams.forEach((element) => {
-    //   let gram = element.value;
-    //   let serving = element.previousElementSibling.value;
-    //   // if (serving > gram) {
-    //   //   notAdd = 1;
-    //   // }
-    //   console.log(gram);
-    //   console.log(serving);
-    // });
     createItem.setAttribute("class", "flex-row cart-item");
     let inner = `
             <div class="item-img-name flex-column">
@@ -117,17 +133,17 @@ window.addEventListener("load", () => {
     `;
 
     createItem.innerHTML = inner;
-    // if (notAdd == 0) {
-    // }
+
     cartList.appendChild(createItem);
 
     calcTotal();
-    adjustQuantity();
+    adjustQuantity(servingArrValue, gramArrValue);
     exec++;
+    formatPrices();
   };
 
   // increase, decrease quantity of each item
-  const adjustQuantity = () => {
+  const adjustQuantity = (servingArrValue, gramArrValue) => {
     const incBtns = document.querySelectorAll(".increment");
 
     // initialize increment button
@@ -148,44 +164,57 @@ window.addEventListener("load", () => {
       const button = e.target;
       let value = parseFloat(button.parentElement.childNodes[3].value);
 
-      // value cannot surpass maximum quantity stored
-      if (button.parentElement.childNodes[3].getAttribute("max") == value) {
-        value = button.parentElement.childNodes[3].getAttribute("max");
-        return;
+      let notAdd = 0;
+      for (let i = 0; i < servingArrValue.length; i++) {
+        let servingValue = parseFloat(servingArrValue[i]);
+        let gramValue = gramArrValue[i];
+
+        if (servingValue > gramValue) {
+          notAdd = 1;
+        }
+
+        servingValue[i] += servingValue;
+        console.log(servingValue, gramValue);
       }
-      value++;
-      button.parentElement.childNodes[3].value = value;
 
-      price = parseFloat(
-        button.parentElement.parentElement.childNodes[3].childNodes[1].id
-      );
+      console.log(notAdd);
+      if (notAdd != 1) {
+        // value cannot surpass maximum quantity stored
+        if (button.parentElement.childNodes[3].getAttribute("max") == value) {
+          value = button.parentElement.childNodes[3].getAttribute("max");
+          return;
+        }
+        value++;
+        button.parentElement.childNodes[3].value = value;
 
-      let incremented = price * value;
-      button.parentElement.parentElement.childNodes[3].childNodes[1].innerHTML =
-        incremented;
-      button.parentElement.parentElement.childNodes[3].childNodes[3].value =
-        incremented;
+        price = parseFloat(
+          button.parentElement.parentElement.childNodes[3].childNodes[1].id
+        );
 
-      // Initial serving
-      itemServings =
-        button.parentElement.parentElement.childNodes[3].childNodes[9].value;
+        let incremented = price * value;
+        button.parentElement.parentElement.childNodes[3].childNodes[1].innerHTML =
+          incremented;
+        button.parentElement.parentElement.childNodes[3].childNodes[3].value =
+          incremented;
 
-      if (value <= 2) {
-        tmpItemServings = itemServings;
+        // Initial serving
+        itemServings =
+          button.parentElement.parentElement.childNodes[3].childNodes[9].value;
+
+        if (value <= 2) {
+          tmpItemServings = itemServings;
+        }
+
+        let totalServing =
+          parseFloat(itemServings) + parseFloat(tmpItemServings);
+        button.parentElement.parentElement.childNodes[3].childNodes[9].value =
+          totalServing;
+
+        tmpTotalServing = totalServing;
+
+        calcTotal();
+        formatPrices();
       }
-      console.log("--- increment ---");
-
-      console.log("input value: ", itemServings);
-      console.log("initial value: ", tmpItemServings);
-
-      let totalServing = parseFloat(itemServings) + parseFloat(tmpItemServings);
-      button.parentElement.parentElement.childNodes[3].childNodes[9].value =
-        totalServing;
-
-      console.log("incremented value: ", totalServing);
-      tmpTotalServing = totalServing;
-
-      calcTotal();
     });
 
     const decBtns = document.querySelectorAll(".decrement");
@@ -223,13 +252,8 @@ window.addEventListener("load", () => {
         totalServing;
 
       tmpTotalServing = totalServing;
-
-      console.log("--- decrement ---");
-      console.log("input value: ", itemServings);
-      console.log("initial value: ", tmpItemServings);
-      console.log("decremented value: ", totalServing);
-
       calcTotal();
+      formatPrices();
     });
   };
 
@@ -254,4 +278,14 @@ window.addEventListener("load", () => {
       e.preventDefault();
     }
   });
+
+  const formatPrices = () => {
+    let cartItemPrices = document.querySelectorAll(".cart-item-price");
+
+    cartItemPrices.forEach((element) => {
+      let cartItemPrice = parseFloat(element.innerHTML);
+      element.innerHTML = cartItemPrice.toFixed(2).toString();
+      console.log(element.innerHTML);
+    });
+  };
 });
