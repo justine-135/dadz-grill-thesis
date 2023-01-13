@@ -10,7 +10,7 @@ class PurchaseView extends Purchase{
                     <th>#</th>
                     <th>Table #</th>
                     <th>Orders</th>
-                    <th>Total</th>
+                    <th>Total ₱</th>
                     <th>Waiter</th>
                     <th>Action</th>
                 </tr>
@@ -62,7 +62,7 @@ class PurchaseView extends Purchase{
                                     $total += $result[$i];
                                 }
 
-                                echo $total;
+                                echo number_format( $total , 2 , '.' , ',' );
                             ?>
                         </td>
                         <td class="pad10" valign="top"><?php echo $row['waiter']; ?></td>

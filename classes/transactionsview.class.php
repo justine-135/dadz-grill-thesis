@@ -90,14 +90,13 @@ if (count($arr) === 3) {
                     $result = explode("|",$row['price']);
                     $total = 0;
                     for ($i=0; $i < (count($result)); $i++) { 
-                        $total += (int)$result[$i];
+                        $total += (float)$result[$i];
                     }
                     ?>
-                    <span class="add-zero">
-                        <?php
-                         echo number_format($total, 2)
-                         ?>
-                    
+                    <span>
+                    <?php
+                    echo number_format($total, 2);
+                    ?>
                     </span>
                     <?php
                 ?>    
@@ -756,7 +755,7 @@ if (count($arr) === 3) {
                         $total += (float)$result[$i];
                     }
 
-                    echo $total;
+                    echo number_format($total, 2);
                 ?>    
                 </td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php if ($row['paid'] == 0) {
@@ -859,7 +858,7 @@ if (count($arr) === 3) {
                         $total += (float)$result[$i];
                     }
 
-                    echo $total;
+                    echo number_format($total, 2);
                 ?>    
                 </td>
                 <td class="pad10" valign="top" style="text-align: left; padding-left: 10px"><?php if ($row['paid'] == 0) {
