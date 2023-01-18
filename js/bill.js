@@ -112,8 +112,6 @@ window.addEventListener("load", () => {
             }
           });
 
-          console.log(typeof discountsArr);
-
           const xhttp = new XMLHttpRequest();
           xhttp.onload = function () {
             let receiptPaper = document.createElement("div");
@@ -142,8 +140,6 @@ window.addEventListener("load", () => {
           let removedCommaValue = element.innerHTML.replace(",", "");
           arrItemPrices.push(removedCommaValue);
         });
-
-        console.log(arrItemPrices);
 
         let discountedPrices = [];
         let discountedPriceInputs =
@@ -223,48 +219,98 @@ window.addEventListener("load", () => {
             // 4 = 3yrs old below
             // 5 = 4-6 yrs old
 
-            console.log(tmpPrice);
+            let discountInput = priceInputTmps.querySelector(
+              `.price-input-tmp-${selectDiscountId}`
+            );
+
+            let discountInputArr =
+              document.querySelectorAll(".price-input-tmp");
+
             let calculate = 0;
+            let value;
             switch (discountLvl) {
               case 0:
                 discount.nextElementSibling.value = tmpPrice;
-                priceInputTmps.querySelector(
-                  `.price-input-tmp-${selectDiscountId}`
-                ).value = tmpPrice;
+                discountInput.value = parseFloat(tmpPrice)
+                  .toFixed(2)
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                discountInput.nextElementSibling.value = "(0.00)";
                 break;
               case 1:
                 calculate = parseFloat(tmpPrice) * 0.2;
                 discount.nextElementSibling.value =
                   parseFloat(tmpPrice) - calculate.toFixed(2);
-                priceInputTmps.querySelector(
-                  `.price-input-tmp-${selectDiscountId}`
-                ).value = parseFloat(tmpPrice) - calculate.toFixed(2);
+
+                value = parseFloat(tmpPrice) - calculate.toFixed(2);
+                discountInput.value = parseFloat(value)
+                  .toFixed(2)
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                discountInput.nextElementSibling.value = `(-${calculate
+                  .toFixed(2)
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")})`;
+
                 break;
               case 2:
                 calculate = parseFloat(tmpPrice) * 0.2;
                 discount.nextElementSibling.value =
                   parseFloat(tmpPrice) - calculate.toFixed(2);
-                priceInputTmps.querySelector(
-                  `.price-input-tmp-${selectDiscountId}`
-                ).value = parseFloat(tmpPrice) - calculate.toFixed(2);
+                value = parseFloat(tmpPrice) - calculate.toFixed(2);
+
+                discountInput.value = parseFloat(value)
+                  .toFixed(2)
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                discountInput.nextElementSibling.value = `(-${calculate
+                  .toFixed(2)
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")})`;
+
                 break;
               case 3:
                 discount.nextElementSibling.value = 0.0;
-                priceInputTmps.querySelector(
-                  `.price-input-tmp-${selectDiscountId}`
-                ).value = 0;
+                discountInput.value = (0)
+                  .toFixed(2)
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                discountInput.nextElementSibling.value = `(-${parseFloat(
+                  tmpPrice
+                )
+                  .toFixed(2)
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")})`;
+
                 break;
               case 4:
                 discount.nextElementSibling.value = 0.0;
-                priceInputTmps.querySelector(
-                  `.price-input-tmp-${selectDiscountId}`
-                ).value = 0;
+                discountInput.value = (0)
+                  .toFixed(2)
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                discountInput.nextElementSibling.value = `(-${parseFloat(
+                  tmpPrice
+                )
+                  .toFixed(2)
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")})`;
                 break;
               case 5:
                 discount.nextElementSibling.value = parseFloat(tmpPrice) / 2;
-                priceInputTmps.querySelector(
-                  `.price-input-tmp-${selectDiscountId}`
-                ).value = parseFloat(tmpPrice) / 2;
+                value = parseFloat(tmpPrice) / 2;
+                discountInput.value = parseFloat(value)
+                  .toFixed(2)
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                discountInput.nextElementSibling.value = `(-${parseFloat(
+                  discount.nextElementSibling.value
+                )
+                  .toFixed(2)
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")})`;
                 break;
 
               default:
@@ -273,11 +319,14 @@ window.addEventListener("load", () => {
 
             priceValue = 0;
             priceInputTmps.childNodes.forEach((element) => {
-              let priceValues = element;
-
-              if (priceValues.value != undefined) {
-                priceValue =
-                  parseFloat(priceValue) + parseFloat(priceValues.value);
+              let priceValues;
+              if (element.childNodes[1] != undefined) {
+                priceValues = element.childNodes[1].value;
+              } else {
+                priceValues = 0;
+              }
+              if (priceValues != undefined) {
+                priceValue = parseFloat(priceValue) + parseFloat(priceValues);
               }
             });
 
@@ -318,6 +367,10 @@ window.addEventListener("load", () => {
           let allSelectDiv = element.previousElementSibling;
           let selectDiv = element.previousElementSibling.childNodes[1];
 
+          let setC =
+            allSelectDiv.childNodes[1].childNodes[1].getAttribute("name2");
+
+          let createSelectContent;
           if (allSelectDiv.childElementCount >= quantity) {
             window.alert("Reached max discount");
           } else {
@@ -325,21 +378,32 @@ window.addEventListener("load", () => {
             const clone = selectDiv.cloneNode(true);
             const createSelect = document.createElement("div");
             createSelect.setAttribute("class", "flex-row");
-            const createSelectContent = `
-                <select class="form-select form-select select-discount select-discount-${selectId} mb-1" name="discount-select[]" id="${selectId}">
-                    <option value="0">None</option>
-                    <option value="1">Person with disability</option>
-                    <option value="2">Senior</option>
-                    <?php
-                    if (strpos($result[$i], "Set C") !== false) {
-                    ?>
-                    <option value="3">Birthday celebrant</option>
-                    <?php } ?>
-                    <option value="4">3 yrs old below</option>
-                    <option value="5">4-6 yrs old</option>
-                </select>
-                <input class="new-price new-price-${selectId}" type="text" name="" id="" value=${itemPrices2} hidden>
-            `;
+            if (setC.includes("Set C")) {
+              createSelectContent = `
+              <select class="form-select form-select select-discount select-discount-${selectId} mb-1" name="discount-select[]" id="${selectId}">
+                  <option value="0">None</option>
+                  <option value="1">Person with disability</option>
+                  <option value="2">Senior</option>
+                  <option value="3">Birthday celebrant</option>
+                  <option value="4">3 yrs old below</option>
+                  <option value="5">4-6 yrs old</option>
+              </select>
+              <input class="new-price new-price-${selectId}" type="text" name="" id="" value=${itemPrices2} hidden>
+          `;
+            } else {
+              createSelectContent = `
+              <select class="form-select form-select select-discount select-discount-${selectId} mb-1" name="discount-select[]" id="${selectId}">
+                  <option value="0">None</option>
+                  <option value="1">Person with disability</option>
+                  <option value="2">Senior</option>
+                  <option value="4">3 yrs old below</option>
+                  <option value="5">4-6 yrs old</option>
+              </select>
+              <input class="new-price new-price-${selectId}" type="text" name="" id="" value=${itemPrices2} hidden>
+          `;
+            }
+
+            console.log(clone);
             createSelect.innerHTML = createSelectContent;
 
             allSelectDiv.appendChild(createSelect);
