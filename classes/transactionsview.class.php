@@ -300,12 +300,12 @@ if (count($arr) === 3) {
         <table class="tables-table bill-order-tbl table">
             <thead >
                 <tr>
-                    <th style="width:20%; text-align:left; padding-left: 20px">Item</th>
-                    <th style="width:15%; text-align: left; padding-left: 10px">₱ Price</th>
-                    <th style="width:15%; text-align: left; padding-left: 10px">Amount</th>
-                    <th style="width:22%; text-align: left; padding-left: 10px">Discount</th>
-                    <th style="width:20%; text-align: left; padding-left: 10px">₱ Total price</th>
-                    <th style=" text-align: left; padding-left: 10px">₱ Discounts</th>
+                    <th style="text-align:left; padding-left: 20px">Item</th>
+                    <th style="width: 100px;text-align: left; padding-left: 10px">₱ Price</th>
+                    <th style="text-align: left; padding-left: 10px">Amount</th>
+                    <th style="width: 180px; text-align: left; padding-left: 10px">Discount</th>
+                    <th style="min-width: 145px; text-align: left; padding-left: 10px">₱ Total price</th>
+                    <th style="text-align: left; padding-left: 10px">₱ Discounts</th>
                 </tr>
             </thead>
             <tbody>
@@ -348,7 +348,7 @@ for ($i=0; $i < (count($result)); $i++) {
                     <div>
                         <div class="discount-div">
                             <div class="flex-row">
-                                <select class="form-select form-select select-discount select-discount-0 mb-1" name="discount-select[]" id="0">
+                                <select class="form-select form-select select-discount select-discount-0 mb-1" name2="<?php echo $result[$i] ?>" name="discount-select[]" id="0">
                                     <option value="0">None</option>
                                     <option value="1">Person with disability</option>
                                     <option value="2">Senior</option>
@@ -361,7 +361,6 @@ for ($i=0; $i < (count($result)); $i++) {
                                     <option value="5">4-6 yrs old</option>
                                 </select>
                                 <input class="new-price new-price-0" type="text" name="" id="" value=<?php echo $result4[$i] ?> hidden>
-                                <!-- <input class="discount-quantity" type="text"> -->
                             </div>
                         </div>
 
@@ -393,11 +392,11 @@ for ($i=0; $i < (count($result)); $i++) {
                         ?>
                     <td class="" style="text-align: left; padding-left: 10px">
                     <?php
-                    for ($j=0; $j < $result2[$i]; $j++) { 
-                        ?>
-                        <input style="border:none; color: black;" disabled class="ms-1 add-zero price-input-tmp price-input-tmp-<?php echo $j?>" type="text" value=<?php echo $result4[$i] ?>>
-                    
-                        <?php
+                    for ($j=0; $j < $result2[$i]; $j++) { ?>
+                    <div class="d-flex">
+                    <input style="border:none; color: black; width: 80px;" disabled class="ms-1 add-zero price-input-tmp price-input-tmp-<?php echo $j?>" id="<?php echo $j; ?>" type="text" value=<?php echo $result4[$i] ?>>
+                    <input style="border:none; color: grey;width: 80px;" type="text" name="" id="" value="(0.00)" disabled>
+                    </div><?php
                     }
                     ?>
                     </td>
