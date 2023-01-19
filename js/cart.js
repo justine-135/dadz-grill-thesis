@@ -51,7 +51,19 @@ window.addEventListener("load", () => {
       let grams =
         element.childNodes[3].childNodes[7].querySelectorAll(".inventory-gram");
 
+      let thisItemGram = element.childNodes[3].childNodes[7].querySelector(
+        ".this-inventory-gram"
+      );
+      let thisItemServing = element.childNodes[3].childNodes[7].querySelector(
+        ".this-inventory-serving"
+      );
       let notadd = 0;
+
+      if (parseFloat(thisItemServing.value) > parseFloat(thisItemGram.value)) {
+        notadd = 1;
+      }
+
+      console.log("serving", thisItemServing.value, "gram", thisItemGram.value);
 
       let servingArrValue = [];
       let gramArrValue = [];
@@ -285,7 +297,6 @@ window.addEventListener("load", () => {
     cartItemPrices.forEach((element) => {
       let cartItemPrice = parseFloat(element.innerHTML);
       element.innerHTML = cartItemPrice.toFixed(2).toString();
-      console.log(element.innerHTML);
     });
   };
 });

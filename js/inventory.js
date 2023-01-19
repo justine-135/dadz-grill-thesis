@@ -243,12 +243,12 @@ window.addEventListener("load", () => {
     const createSelectContent = `
     <span>Inclusions ${count}: </span>
     <div>
-        <div class="flex-row"  style="width: 70%; margin-left: auto">
+        <div class="flex-row"  style="width: 70%; ">
         <select class="form-select inclusion-select" name="inclusions[]">
         ${clone.innerHTML}
         </select>
         <input hidden type="text" name="inclusion_name[]">
-        <input style="width: 100%" name="serving[]" type="number" placeholder="g" />
+        <input class="ms-1" style="width: 50px" name="serving[]" type="number" placeholder="g" />
         </div>
     </div>
     `;
