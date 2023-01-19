@@ -66,6 +66,7 @@
             $img = null;
 
             foreach ($serving as $s) {
+                echo $s;
                 if ($s < 0) {
                     header("location: ../foods.php?alert=store_no&id=0");
                 }
@@ -88,7 +89,7 @@
             $stats = ucfirst($_POST['stats']);
             $fid = $_POST['upd-ing-id'];
 
-            if ($grams2 > $servings || $grams2 == $servings) {
+            if ($grams2 > $servings || $grams2 == $servings || $grams > $servings || $grams == $servings) {
                 $foodItem = new FoodContr($name, $group, $cost, $grams, $servings, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img, $inclusions, $serving, $inclusions_name);
                 $foodItem->initUpdateFood();
             }
