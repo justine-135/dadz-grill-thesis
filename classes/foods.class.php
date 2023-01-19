@@ -86,15 +86,22 @@ class Foods extends Dbh{
                         }
                     }
                 }else{
-                    header("location: ../foods.php");
+                    header("location: ../foods.php?alert=store_no&id=0");
+                    exit();
                 }
-
             }
             }
         }
+
+        header("location: ../foods.php?alert=store&id=0");
+
     }
 
     protected function updateFood($name, $group, $cost, $grams, $servings, $stats, $fid){
+        if ($grams < 0 || $cost < 0 || $servings < 0) {
+            header("location: ../foods.php?alert=no_update&id=" . $fid);
+            exit();
+        }
         $sql = "UPDATE inventory SET item_name = '$name', item_group = '$group', cost = $cost, grams = grams + $grams, serving = '$servings', order_status = '$stats' WHERE fid = '$fid'";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute();

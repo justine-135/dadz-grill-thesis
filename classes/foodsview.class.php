@@ -119,6 +119,8 @@ class FoodsView extends Foods{
                         }
                     }
                 ?>
+                <li class="hide"><input class="this-inventory-gram" type="text"  value=<?php echo $row['grams'] ?> hidden></li>
+                <li class="hide"><input class="this-inventory-serving" type="text" value=<?php echo $row['serving'] ?> hidden></li>
                 </ul>
                 <input type="text" value=<?php echo $row['grams'] ?> hidden>
             </div>
@@ -162,6 +164,8 @@ class FoodsView extends Foods{
                         }
                     }
                 ?>
+                <li class="hide"><input class="this-inventory-gram" type="text"  value=<?php echo $row['grams'] ?> hidden></li>
+                <li class="hide"><input class="this-inventory-serving" type="text" value=<?php echo $row['serving'] ?> hidden></li>
                 </ul>
             </div>
         </button>
@@ -204,6 +208,8 @@ class FoodsView extends Foods{
                         }
                     }
                 ?>
+                <li class="hide"><input class="this-inventory-gram" type="text"  value=<?php echo $row['grams'] ?> hidden></li>
+                <li class="hide"><input class="this-inventory-serving" type="text" value=<?php echo $row['serving'] ?> hidden></li>
                 </ul>
             </div>
         </button>
@@ -246,6 +252,8 @@ class FoodsView extends Foods{
                         }
                     }
                 ?>
+                <li class="hide"><input class="this-inventory-gram" type="text"  value=<?php echo $row['grams'] ?> hidden></li>
+                <li class="hide"><input class="this-inventory-serving" type="text" value=<?php echo $row['serving'] ?> hidden></li>
                 </ul>
             </div>
         </button>
@@ -288,6 +296,8 @@ class FoodsView extends Foods{
                         }
                     }
                 ?>
+                <li class="hide"><input class="this-inventory-gram" type="text"  value=<?php echo $row['grams'] ?> hidden></li>
+                <li class="hide"><input class="this-inventory-serving" type="text" value=<?php echo $row['serving'] ?> hidden></li>
                 </ul>
             </div>
         </button>
@@ -329,6 +339,8 @@ class FoodsView extends Foods{
                         }
                     }
                 ?>
+                <li class="hide"><input class="this-inventory-gram" type="text"  value=<?php echo $row['grams'] ?> hidden></li>
+                <li class="hide"><input class="this-inventory-serving" type="text" value=<?php echo $row['serving'] ?> hidden></li>
                 </ul>
             </div>
         </button>

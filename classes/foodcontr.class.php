@@ -43,7 +43,6 @@ class FoodContr extends Foods
     public function initSetFood()
     {
         $this->setFood($this->name, $this->group, $this->cost, $this->grams, $this->servings, $this->stats, $this->fileActualExt, $this->fileTempLoc, $this->target, $this->fileError, $this->fileNameTime, $this->allowed, $this->inclusions, $this->serving, $this->inclusions_name);
-        header("location: ../foods.php?alert=store&id=0");
     }
 
     public function initUpdateFood()

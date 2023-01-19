@@ -327,7 +327,7 @@ for ($i=0; $i < (count($result)); $i++) {
                     <?php if ($result4[$i] != "") {
                         ?>
                     <td style="text-align: left;padding-left: 20px">
-                    <input style="border:none; color: black;" disabled class="ms-1 add-zero" type="text" value=<?php echo $result4[$i] ?>>
+                    <input style="border:none; color: black; background: white" disabled class="ms-1 add-zero" type="text" value=<?php echo $result4[$i] ?>>
                     </td>
                         <?php
                     } ?>
@@ -394,8 +394,8 @@ for ($i=0; $i < (count($result)); $i++) {
                     <?php
                     for ($j=0; $j < $result2[$i]; $j++) { ?>
                     <div class="d-flex">
-                    <input style="border:none; color: black; width: 80px;" disabled class="ms-1 add-zero price-input-tmp price-input-tmp-<?php echo $j?>" id="<?php echo $j; ?>" type="text" value=<?php echo $result4[$i] ?>>
-                    <input style="border:none; color: grey;width: 80px;" type="text" name="" id="" value="(0.00)" disabled>
+                    <input style="border:none; color: black; width: 80px;  background: white" disabled class="ms-1 add-zero price-input-tmp price-input-tmp-<?php echo $j?>" id="<?php echo $j; ?>" type="text" value=<?php echo $result4[$i] ?>>
+                    <input style="border:none; color: grey;width: 80px; background: white" type="text" name="" id="" value="(0.00)" disabled>
                     </div><?php
                     }
                     ?>
