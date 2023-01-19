@@ -24,7 +24,10 @@ window.addEventListener("load", () => {
 
         totalOrders.innerHTML =
           "₱ " +
-          this.responseText.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          parseFloat(this.responseText)
+            .toFixed(2)
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       }
     };
     xmlhttp.open(
