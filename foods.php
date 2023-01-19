@@ -53,9 +53,9 @@ if ($_SESSION["is_superuser"] == 1) {
                     <div class="flex-row add-code">
                         <span>Inclusions 1: </span>
                         <div >
-                            <div class="flex-row"  style="width: 70%; margin-left: auto">
+                            <div class="flex-row"  style="width: 70%;">
                             <?php include "includes/foods-view-select.inc.php"; ?>
-                            <input style="width: 100%" name="serving[]" type="number" placeholder="g" min=0 max=500 />
+                            <input class="ms-1" style="width: 50px" name="serving[]" type="number" placeholder="g" min=0 max=500 />
                             </div>
                         </div>
                     </div>
