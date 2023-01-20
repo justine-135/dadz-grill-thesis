@@ -71,6 +71,7 @@
                     header("location: ../foods.php?alert=store_no&id=0");
                 }
             }
+            
             $foodItem = new FoodContr($name, $group, $cost, $grams, $servings, $stats, $fileActualExt, $fileTempLoc, $target, $fileError, $fileNameTime, $allowed, $fid, $img, $inclusions, $serving, $inclusions_name);
             $foodItem->initSetFood();
         }
