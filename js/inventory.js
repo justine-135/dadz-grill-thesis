@@ -236,6 +236,7 @@ window.addEventListener("load", () => {
 
   let count = 1;
 
+  console.log(count);
   addInclusion.addEventListener("click", (e) => {
     count++;
     const createSelect = document.createElement("div");
@@ -261,9 +262,11 @@ window.addEventListener("load", () => {
   const delInclusions = document.querySelector(".delete-inclusion-btn");
 
   delInclusions.addEventListener("click", (e) => {
-    count--;
-    console.log(count);
-    e.target.parentElement.previousSibling.previousSibling.lastChild.remove();
-    loadInclusionSelects();
+    if (count != 1) {
+      count--;
+      console.log(count);
+      e.target.parentElement.previousSibling.previousSibling.lastChild.remove();
+      loadInclusionSelects();
+    }
   });
 });
