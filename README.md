@@ -11,7 +11,7 @@ Research final project for Computer Engineering Technology
   - PHP
   - MySQL
  
-# Instruction
+## Instruction
 1. Download or clone the files
 2. Start the server. e,g: xampp - Start Apache and MySQL
 3. Type browser url: localhost/[foldername]
