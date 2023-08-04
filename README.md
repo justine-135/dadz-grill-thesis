@@ -2,7 +2,7 @@
 Restaurant ordering system using web application for Dadz-grill restaurant.
 Research final project for Computer Engineering Technology
 
-# Languages
+## Languages
 - ### Frontend
   - HTML
   - CSS
@@ -19,7 +19,7 @@ Research final project for Computer Engineering Technology
    - Username: manager
    - password: manager
 
- # Features
+ ## Features
  - ### Table monitoring system
    - Display table status.
      - Red - Occupied
