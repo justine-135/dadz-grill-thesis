@@ -31,11 +31,15 @@ Research final project for Computer Engineering Technology
    - Table timer.
    - Record series of orders.
    - Bill out.
+     - Save transactions.
+     - Billing summary.
    - Add and deleting of tables.
 - ### Menu
   - Food POS ordering system.
+    - Selecting food.
+    - Updating quantity.
+    - Display total cost.
   - Adding, updating, deleting food items.
-  - Updating food quantity.
 - ### Cook
   - Display submitted orders from menu.
   - Mark orders finished or cancel.
